@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RDX — The AI That Lives On Your Machine</title>
+<meta name="description" content="RDX Workspace, Ghvst Browser and RDX Mobile. Local-first AI agents that actually do work on your machine. Every action visible. Every release verified.">
+<style>
+:root{
+  --bg:#0a0612;--bg2:#120a1e;--panel:#160e26;--border:#2a1b45;
+  --txt:#e9e4f8;--dim:#a08ec9;--vio:#a78bfa;--vio2:#7c3aed;--mag:#f0abfc;
+  --red:#ef4444;--glow:rgba(124,58,237,.35);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans-serif;overflow-x:hidden}
+#dots{position:fixed;inset:0;z-index:0;pointer-events:none}
+.wrap{position:relative;z-index:1;max-width:1120px;margin:0 auto;padding:0 24px}
+nav{display:flex;justify-content:space-between;align-items:center;padding:26px 0}
+.logo{font-size:26px;font-weight:800;letter-spacing:2px;color:#fff;text-decoration:none;display:flex;gap:10px;align-items:center}
+.logo .star{color:var(--red);font-size:30px;filter:drop-shadow(0 0 8px rgba(239,68,68,.8))}
+nav .links{display:flex;gap:28px}
+nav .links a{color:var(--dim);text-decoration:none;font-size:14px;transition:color .2s}
+nav .links a:hover{color:var(--mag)}
+.hero{text-align:center;padding:90px 0 70px}
+.hero h1{font-size:clamp(52px,9vw,110px);font-weight:900;letter-spacing:-2px;line-height:1;
+  background:linear-gradient(135deg,#fff 20%,var(--vio) 55%,var(--mag));-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 30px var(--glow))}
+.hero p{color:var(--dim);font-size:20px;margin:26px auto 8px;max-width:640px;line-height:1.6}
+.hero .sub{font-size:14px;color:#6b5a95}
+.cta{display:inline-flex;gap:14px;margin-top:34px}
+.btn{padding:14px 30px;border-radius:12px;font-weight:700;font-size:15px;text-decoration:none;transition:transform .2s,box-shadow .2s}
+.btn.p{background:linear-gradient(135deg,var(--vio2),var(--vio));color:#fff;box-shadow:0 8px 30px var(--glow)}
+.btn.p:hover{transform:translateY(-3px);box-shadow:0 14px 40px var(--glow)}
+.btn.g{border:1px solid var(--border);color:var(--txt);background:rgba(255,255,255,.03)}
+.btn.g:hover{transform:translateY(-3px);border-color:var(--vio)}
+.stats{display:flex;justify-content:center;gap:44px;margin-top:64px;flex-wrap:wrap}
+.stat b{display:block;font-size:32px;color:#fff}
+.stat span{font-size:12px;color:var(--dim);letter-spacing:1px;text-transform:uppercase}
+h2{font-size:clamp(30px,4vw,44px);font-weight:800;text-align:center;margin:90px 0 14px;letter-spacing:-1px}
+h2 .em{background:linear-gradient(90deg,var(--vio),var(--mag));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{text-align:center;color:var(--dim);max-width:560px;margin:0 auto 50px;line-height:1.6}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px;perspective:1200px}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:30px 26px;position:relative;overflow:hidden;
+  transition:transform .25s ease,border-color .25s,box-shadow .25s;transform-style:preserve-3d}
+.card:hover{transform:translateY(-8px) rotateX(3deg);border-color:var(--vio);box-shadow:0 20px 50px rgba(0,0,0,.5),0 0 40px var(--glow)}
+.card .icon{font-size:34px;margin-bottom:16px}
+.card h3{font-size:20px;margin-bottom:8px;color:#fff}
+.card .tag{position:absolute;top:20px;right:20px;font-size:10px;letter-spacing:1px;padding:4px 10px;border-radius:20px;
+  background:rgba(167,139,250,.12);color:var(--vio);border:1px solid rgba(167,139,250,.25)}
+.card p{color:var(--dim);font-size:14px;line-height:1.65;margin-bottom:18px}
+.card ul{list-style:none}
+.card li{font-size:13px;color:#c9bde8;padding:5px 0 5px 22px;position:relative}
+.card li::before{content:"✦";position:absolute;left:0;color:var(--vio);font-size:11px}
+.powers{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.power{background:linear-gradient(180deg,var(--panel),transparent);border:1px solid var(--border);border-radius:14px;padding:22px;transition:border-color .2s,transform .2s}
+.power:hover{border-color:var(--mag);transform:translateY(-4px)}
+.power b{display:block;color:#fff;margin-bottom:6px;font-size:15px}
+.power span{font-size:13px;color:var(--dim);line-height:1.55}
+.snake{margin:100px 0;padding:44px 30px;border-radius:24px;text-align:center;position:relative;
+  background:radial-gradient(ellipse at center,rgba(124,58,237,.16),transparent 70%);border:1px solid var(--border)}
+.snake h2{margin:0 0 12px}
+.snake p{color:var(--dim);max-width:620px;margin:0 auto;line-height:1.65;font-size:15px}
+.snake .eyes{font-size:40px;letter-spacing:18px;margin-bottom:18px;filter:drop-shadow(0 0 14px var(--glow))}
+footer{border-top:1px solid var(--border);margin-top:100px;padding:44px 0;text-align:center}
+footer .f{display:flex;justify-content:center;gap:26px;margin-bottom:20px}
+footer .f a{color:var(--dim);text-decoration:none;font-size:13px}
+footer .f a:hover{color:var(--mag)}
+footer p{color:#5a4a82;font-size:12px;line-height:1.8}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
+.reveal.on{opacity:1;transform:none}
+@media(max-width:720px){nav .links{display:none}.stats{gap:26px}}
+</style>
+</head>
+<body>
+<canvas id="dots"></canvas>
+<div class="wrap">
+<nav>
+  <a class="logo" href="#top"><span class="star">✦</span>RDX</a>
+  <div class="links">
+    <a href="#products">Products</a><a href="#powers">Capabilities</a><a href="#serpent">The Serpent</a><a href="#get">Get Access</a>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <h1>RDX</h1>
+  <p>The AI that lives on your machine. Not a chat box — a working agent that edits real files, runs real builds, reads real pages and shows you every action it takes.</p>
+  <div class="sub">LOCAL-FIRST · PRIVATE BY DESIGN · EVERY RELEASE VERIFIED</div>
+  <div class="cta">
+    <a class="btn p" href="#products">See What It Does</a>
+    <a class="btn g" href="#powers">Capabilities</a>
+  </div>
+  <div class="stats">
+    <div class="stat"><b>240+</b><span>automated checks</span></div>
+    <div class="stat"><b>0</b><span>keys shipped</span></div>
+    <div class="stat"><b>0</b><span>telemetry</span></div>
+    <div class="stat"><b>100%</b><span>on your machine</span></div>
+  </div>
+</section>
+
+<h2 id="products" class="reveal">Built to <span class="em">do the work</span></h2>
+<p class="lead reveal">Three products, one bloodline. Every one runs on your hardware, keeps its memory locally, and never phones home.</p>
+<div class="cards">
+  <div class="card reveal">
+    <span class="tag">WINDOWS</span>
+    <div class="icon">✦</div>
+    <h3>RDX Workspace</h3>
+    <p>The full agent on your PC — it plans, edits, builds and verifies while you watch every step.</p>
+    <ul>
+      <li>Real file editing with approvals — nothing touches your disk unseen</li>
+      <li>Runs your builds and tests, reads the results, fixes what breaks</li>
+      <li>Brain Vault memory — it remembers past work in every workspace</li>
+      <li>Integrated terminal for every CLI you already use</li>
+      <li>Live work log — every action, every file, visible in real time</li>
+    </ul>
+  </div>
+  <div class="card reveal">
+    <span class="tag">PC · ANDROID</span>
+    <div class="icon">◉</div>
+    <h3>Ghvst Browser</h3>
+    <p>A browser that remembers what you read and tells you when the world changes.</p>
+    <ul>
+      <li>Watch mode — pin any page, get alerted the moment it moves</li>
+      <li>Page memory — ask questions answered only from pages you've read</li>
+      <li>Every answer cited — it says so when the answer isn't in your history</li>
+      <li>Ghost-grade tracking protection with sign-in mode when you need it</li>
+      <li>The Serpent feeds here — the cursor creature eats the gravity dots</li>
+    </ul>
+  </div>
+  <div class="card reveal">
+    <span class="tag">ANDROID</span>
+    <div class="icon">◈</div>
+    <h3>RDX Mobile</h3>
+    <p>The agent in your pocket — the same loop, the same tools, on your phone.</p>
+    <ul>
+      <li>Drives your device — apps, screens, installs, end to end</li>
+      <li>Queued prompts survive interruptions and restarts</li>
+      <li>Multiple providers — bring your own key, nothing baked in</li>
+      <li>Voice that reads answers aloud, hands kept free</li>
+      <li>Personal build carries your key; retail ships clean</li>
+    </ul>
+  </div>
+</div>
+
+<h2 id="powers" class="reveal">What an agent <span class="em">should do</span></h2>
+<p class="lead reveal">The capabilities that separate a worker from a chat box.</p>
+<div class="powers">
+  <div class="power reveal"><b>Acts, then proves</b><span>Every claim is verified against real output — builds, tests, files. No fake success, ever.</span></div>
+  <div class="power reveal"><b>Remembers your work</b><span>Episodic memory per workspace. Ask what you already tried — it knows.</span></div>
+  <div class="power reveal"><b>Reads, cites, refuses</b><span>Grounded answers from pages you actually read, with citations — and it refuses to invent.</span></div>
+  <div class="power reveal"><b>Shows its thinking</b><span>Live reasoning streams next to the answer. Nothing hidden, nothing faked.</span></div>
+  <div class="power reveal"><b>Asks before it breaks</b><span>Write a file, run a command — every consequential action asks first. Fail-closed by design.</span></div>
+  <div class="power reveal"><b>Measures itself</b><span>A built-in evaluation suite scores the agent against its own baseline and flags regressions.</span></div>
+  <div class="power reveal"><b>One turn, many tools</b><span>Code mode runs loops and conditionals over real tools in a single step — the way senior engineers work.</span></div>
+  <div class="power reveal"><b>Delegates</b><span>Sub-agents take scoped, read-only tasks and report back with evidence.</span></div>
+</div>
+
+<section class="snake reveal" id="serpent">
+  <div class="eyes">👁 🌀 👁</div>
+  <h2>The <span class="em">Serpent Cursor</span></h2>
+  <p>A living creature replaces the mouse itself — native, weightless, rendered above every window. It moves like a real serpent, carries the three great eyes, and it <b>eats</b>: your workspace publishes gravity dots and the serpent devours them, growing longer with every kill. Its size persists. It remembers you.<br><br><b style="color:#c4b5fd">Nothing like this has shipped on any desktop. Ever.</b></p>
+</section>
+
+<h2 id="get" class="reveal">Get <span class="em">RDX</span></h2>
+<p class="lead reveal">Direct distribution only. Clean retail builds — no keys inside, no telemetry, no accounts required. Personal builds carry your own provider key and nothing else.</p>
+<div class="cta" style="padding-bottom:90px">
+  <a class="btn p" href="#top">Available Direct</a>
+  <a class="btn g" href="#products">Review the Line</a>
+</div>
+
+<footer>
+  <div class="f"><a href="#products">Products</a><a href="#powers">Capabilities</a><a href="#serpent">The Serpent</a><a href="#top">Top</a></div>
+  <p>RDX · Ghvst · Built for people who do real work.<br>© 2026 — all rights reserved.</p>
+</footer>
+</div>
+
+<script>
+// === interactive gravity dots — the serpent's feeding ground ===
+const c=document.getElementById('dots'),x=c.getContext('2d');
+let W,H,pts=[],mouse={x:-9e3,y:-9e3};
+function size(){W=c.width=innerWidth;H=c.height=innerHeight}
+size();addEventListener('resize',size);
+addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY});
+addEventListener('mouseleave',()=>{mouse.x=-9e3});
+const N=Math.min(120,Math.floor(innerWidth/12));
+for(let i=0;i<N;i++)pts.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,
+  vx:0,vy:0,r:1.2+Math.random()*2.2,h:Math.random()*60+260});
+function tick(){
+  x.clearRect(0,0,W,H);
+  for(const p of pts){
+    const dx=p.x-mouse.x,dy=p.y-mouse.y,d=Math.hypot(dx,dy)||1;
+    if(d<140){const f=(140-d)/140*.9;p.vx+=dx/d*f;p.vy+=dy/d*f}
+    p.vx*=.94;p.vy*=.94;p.x+=p.vx;p.y+=p.vy;
+    if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;
+    const g=x.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*3.2);
+    g.addColorStop(0,'rgba(192,181,253,.75)');g.addColorStop(1,'rgba(124,58,237,0)');
+    x.fillStyle=g;x.beginPath();x.arc(p.x,p.y,p.r*3.2,0,7);x.fill();
+  }
+  x.lineWidth=.5;
+  for(let i=0;i<N;i++)for(let j=i+1;j<N;j++){
+    const a=pts[i],b=pts[j],d=Math.hypot(a.x-b.x,a.y-b.y);
+    if(d<110){x.strokeStyle=`rgba(167,139,250,${(1-d/110)*.16})`;
+      x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()}
+  }
+  requestAnimationFrame(tick);
+}
+tick();
+// === reveal on scroll ===
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+// === 3D tilt on cards ===
+document.querySelectorAll('.card').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect(),
+      rx=((e.clientY-r.top)/r.height-.5)*-7,ry=((e.clientX-r.left)/r.width-.5)*7;
+    card.style.transform=`translateY(-8px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+  });
+  card.addEventListener('mouseleave',()=>card.style.transform='');
+});
+</script>
+</body>
+</html>
