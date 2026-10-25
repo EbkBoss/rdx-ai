@@ -187,7 +187,13 @@ for(let i=0;i<N;i++)pts.push({x:Math.random()*innerWidth,y:Math.random()*innerHe
   vx:0,vy:0,r:1.2+Math.random()*2.2,h:Math.random()*60+260});
 function tick(){
   x.clearRect(0,0,W,H);
+  const now=performance.now();
+  window.__snakeFood=[];
   for(const p of pts){
+    if(p.eatenUntil){
+      if(now<p.eatenUntil){continue}
+      p.eatenUntil=0;p.x=Math.random()*W;p.y=Math.random()*H;p.vx=0;p.vy=0;
+    }
     const dx=p.x-mouse.x,dy=p.y-mouse.y,d=Math.hypot(dx,dy)||1;
     if(d<140){const f=(140-d)/140*.9;p.vx+=dx/d*f;p.vy+=dy/d*f}
     p.vx*=.94;p.vy*=.94;p.x+=p.vx;p.y+=p.vy;
@@ -195,15 +201,21 @@ function tick(){
     const g=x.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*3.2);
     g.addColorStop(0,'rgba(192,181,253,.75)');g.addColorStop(1,'rgba(124,58,237,0)');
     x.fillStyle=g;x.beginPath();x.arc(p.x,p.y,p.r*3.2,0,7);x.fill();
+    window.__snakeFood.push({id:p.fid,x:Math.round(p.x),y:Math.round(p.y)});
   }
   x.lineWidth=.5;
   for(let i=0;i<N;i++)for(let j=i+1;j<N;j++){
-    const a=pts[i],b=pts[j],d=Math.hypot(a.x-b.x,a.y-b.y);
+    const a=pts[i],b=pts[j];
+    if(a.eatenUntil||b.eatenUntil)continue;
+    const d=Math.hypot(a.x-b.x,a.y-b.y);
     if(d<110){x.strokeStyle=`rgba(167,139,250,${(1-d/110)*.16})`;
       x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()}
   }
   requestAnimationFrame(tick);
 }
+// THE SERPENT EATS THIS SITE: the Ghvst Browser bridge reads window.__snakeFood
+// and the daemon devours the dots — each one grows the living cursor.
+window.__snakeEat=id=>{const p=pts.find(q=>q.fid===id);if(p)p.eatenUntil=performance.now()+20000+Math.random()*20000};
 tick();
 // === reveal on scroll ===
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')}),{threshold:.12});
