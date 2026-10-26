@@ -188,7 +188,7 @@ for(let i=0;i<N;i++)pts.push({x:Math.random()*innerWidth,y:Math.random()*innerHe
 function tick(){
   x.clearRect(0,0,W,H);
   const now=performance.now();
-  window.__snakeFood=[];
+  // web food removed
   for(const p of pts){
     if(p.eatenUntil){
       if(now<p.eatenUntil){continue}
@@ -201,7 +201,7 @@ function tick(){
     const g=x.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*3.2);
     g.addColorStop(0,'rgba(192,181,253,.75)');g.addColorStop(1,'rgba(124,58,237,0)');
     x.fillStyle=g;x.beginPath();x.arc(p.x,p.y,p.r*3.2,0,7);x.fill();
-    window.__snakeFood.push({id:p.fid,x:Math.round(p.x),y:Math.round(p.y)});
+    
   }
   x.lineWidth=.5;
   for(let i=0;i<N;i++)for(let j=i+1;j<N;j++){
@@ -215,7 +215,7 @@ function tick(){
 }
 // THE SERPENT EATS THIS SITE: the Ghvst Browser bridge reads window.__snakeFood
 // and the daemon devours the dots — each one grows the living cursor.
-window.__snakeEat=id=>{const p=pts.find(q=>q.fid===id);if(p)p.eatenUntil=performance.now()+20000+Math.random()*20000};
+
 tick();
 // === reveal on scroll ===
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')}),{threshold:.12});
