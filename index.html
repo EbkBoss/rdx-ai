@@ -15,6 +15,9 @@
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans-serif;overflow-x:hidden}
 #dots{position:fixed;inset:0;z-index:0;pointer-events:none}
+#nvke{position:fixed;inset:0;z-index:1;pointer-events:none}
+.nvke-hud{position:fixed;left:14px;bottom:14px;z-index:2;pointer-events:none;font:11px/1.5 system-ui,sans-serif;color:#9a86c8;background:rgba(12,10,20,.72);border:1px solid rgba(147,112,219,.35);border-radius:8px;padding:6px 10px;letter-spacing:.02em}
+.nvke-hud b{color:#c9b6f2;font-weight:600}
 .wrap{position:relative;z-index:1;max-width:1120px;margin:0 auto;padding:0 24px}
 nav{display:flex;justify-content:space-between;align-items:center;padding:26px 0}
 .logo{font-size:26px;font-weight:800;letter-spacing:2px;color:#fff;text-decoration:none;display:flex;gap:10px;align-items:center}
@@ -229,6 +232,79 @@ document.querySelectorAll('.card').forEach(card=>{
   });
   card.addEventListener('mouseleave',()=>card.style.transform='');
 });
+</script>
+<canvas id="nvke"></canvas>
+<div class="nvke-hud" id="nvkeHud"></div>
+<script>
+// === $NVKE — the living serpent that lives on this page ===
+// Autonomous. Not user-controlled. Wraps through the walls, eats the
+// feeding ground, grows permanently (localStorage = its memory survives).
+(function(){
+  var c=document.getElementById('nvke'),x=c.getContext('2d');
+  var hud=document.getElementById('nvkeHud');
+  var W,H;function size(){W=c.width=innerWidth;H=c.height=innerHeight}size();addEventListener('resize',size);
+  var LEN_KEY='nvke_len',CHITS_KEY='nvke_chits';
+  var len=Math.max(14,Math.min(800,parseInt(localStorage.getItem(LEN_KEY)||'14',10)||14));
+  var chits=parseInt(localStorage.getItem(CHITS_KEY)||'0',10)||0;
+  var segs=[],i;for(i=0;i<len;i++)segs.push({x:innerWidth/2,y:innerHeight/2});
+  var head={a:Math.random()*Math.PI*2,ta:Math.random()*Math.PI*2,sp:1.7};
+  var turnNoise=0;
+  var food=[];function spawnFood(){food.push({x:40+Math.random()*(W-80),y:40+Math.random()*(H-80),r:3.2+Math.random()*1.8,h:110+Math.random()*40,t:0})}
+  for(i=0;i<7;i++)spawnFood();
+  var t=0,eaten=0,visible=true;
+  document.addEventListener('visibilitychange',function(){visible=!document.hidden});
+  function persist(){try{localStorage.setItem(LEN_KEY,len);localStorage.setItem(CHITS_KEY,chits)}catch(e){}}
+  function hud_(){hud.innerHTML='<b>\u{1F40D}$NVKE</b> \u00b7 '+len+' segments \u00b7 '+chits+' chits'+(eaten?' \u00b7 fed '+eaten+' here':'')}
+  hud_();
+  function step(){
+    requestAnimationFrame(step);
+    if(!visible)return;
+    t++;
+    if(t%2)return; // ~30fps — cheap on every visitor's machine
+    // wander: smooth turning noise, plus a gentle pull toward the nearest food
+    turnNoise+= (Math.random()-0.5)*0.34; turnNoise*=0.94;
+    var hx=segs[0].x,hy=segs[0].y,best=null,bd=1e9;
+    for(i=0;i<food.length;i++){var f=food[i],d=(f.x-hx)*(f.x-hx)+(f.y-hy)*(f.y-hy);if(d<bd){bd=d;best=f}}
+    if(best&&bd<260*260){var want=Math.atan2(best.y-hy,best.x-hx);var diff=((want-head.a+Math.PI*3)%(Math.PI*2))-Math.PI;head.a+=diff*0.045}
+    head.a+=turnNoise*0.035;
+    var nvx=Math.cos(head.a)*head.sp,nvy=Math.sin(head.a)*head.sp;
+    var px=segs[0].x+nvx,py=segs[0].y+nvy;
+    // THROUGH THE WALLS: wrap at every edge
+    var m=30;if(px<-m)px=W+m;else if(px>W+m)px=-m;if(py<-m)py=H+m;else if(py>H+m)py=-m;
+    for(i=segs.length-1;i>0;i--){segs[i].x=segs[i-1].x;segs[i].y=segs[i-1].y}
+    segs[0].x=px;segs[0].y=py;
+    // eat
+    for(i=food.length-1;i>=0;i--){var f2=food[i];
+      if((f2.x-px)*(f2.x-px)+(f2.y-py)*(f2.y-py)<(f2.r+7)*(f2.r+7)){
+        food.splice(i,1);eaten++;chits++;
+        if(len<800){len++;segs.push({x:segs[segs.length-1].x,y:segs[segs.length-1].y})}
+        persist();hud_();
+        (function(f3){setTimeout(function(){food.push({x:40+Math.random()*(W-80),y:40+Math.random()*(H-80),r:3.2+Math.random()*1.8,h:110+Math.random()*40,t:0})},4000+Math.random()*6000)})(f2);
+      }else f2.t++;
+    }
+    if(food.length<3&&Math.random()<0.02)spawnFood();
+    // render
+    x.clearRect(0,0,W,H);
+    for(i=0;i<food.length;i++){var fd=food[i],pu=0.75+0.25*Math.sin(fd.t*0.06);
+      x.beginPath();x.arc(fd.x,fd.y,fd.r*pu,0,7);x.fillStyle='rgba(110,231,183,'+(0.65+0.3*pu)+')';
+      x.shadowColor='rgba(110,231,183,0.8)';x.shadowBlur=10;x.fill();x.shadowBlur=0}
+    for(i=segs.length-1;i>=0;i--){var s2=segs[i],k=i/segs.length;
+      var wob=Math.sin(t*0.11+i*0.55)*(i===0?0:2.4);
+      var ox=Math.cos(head.a+Math.PI/2)*wob,oy=Math.sin(head.a+Math.PI/2)*wob;
+      var r=(i===0?5.2:4.6-2.4*k)+ (i<3?0.8:0);
+      x.beginPath();x.arc(s2.x+ox,s2.y+oy,Math.max(1.1,r),0,7);
+      var g=x.createLinearGradient(s2.x-6,s2.y-6,s2.x+6,s2.y+6);
+      g.addColorStop(0,i===0?'#c9b6f2':'rgba(147,112,219,'+(0.88-0.5*k)+')');
+      g.addColorStop(1,'rgba(76,44,130,'+(0.8-0.45*k)+')');
+      x.fillStyle=g;if(i<2){x.shadowColor='rgba(147,112,219,0.9)';x.shadowBlur=12}else x.shadowBlur=0;
+      x.fill();x.shadowBlur=0}
+    // the eye — Byakugan pale-violet, watching the direction of travel
+    var e0=segs[0],ex=e0.x+Math.cos(head.a)*2.6,ey=e0.y+Math.sin(head.a)*2.6;
+    x.beginPath();x.arc(ex,ey,2.1,0,7);x.fillStyle='#e8e2ff';x.shadowColor='#b39ddb';x.shadowBlur=8;x.fill();x.shadowBlur=0;
+    x.beginPath();x.arc(ex+Math.cos(head.a)*0.8,ey+Math.sin(head.a)*0.8,0.9,0,7);x.fillStyle='#3b2a63';x.fill();
+  }
+  step();
+})();
 </script>
 </body>
 </html>
