@@ -15,7 +15,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26' fill='%23ef4444'>%E2%9C%A6</text></svg>">
 <!-- Structured data: every price below is the real, live price shown on this page. -->
-<script type="application/ld+json">
+<script type="application/ld+json" id="ldjson">
 {
   "@context": "https://schema.org",
   "@graph": [
@@ -179,6 +179,27 @@
   ]
 }
 </script>
+<script>
+/* ============================================================
+   CONTACT NUMBER — THE ONE PLACE TO CHANGE IT. Edit only these
+   two lines; every link, label and the JSON-LD below all read
+   from here.
+   WA_DIGITS = wa.me digits only (no +, no spaces, no dashes)
+   WA_HUMAN  = the text a human reads on the page
+   ============================================================ */
+var WA_DIGITS = '18684357698';
+var WA_HUMAN  = '+1 (868) 435-7698';
+var WA_URL    = 'https://wa.me/' + WA_DIGITS;
+(function () {
+  var ld = document.getElementById('ldjson');
+  if (ld) {
+    ld.textContent = ld.textContent
+      .replace(/wa\.me\/\d+/g, WA_URL)
+      .replace(/"telephone"\s*:\s*"[^"]*"/,
+        '"telephone": "+1-' + WA_DIGITS.slice(1, 4) + '-' + WA_DIGITS.slice(4, 7) + '-' + WA_DIGITS.slice(7) + '"');
+  }
+})();
+</script>
 <style>
 :root{
   --bg:#08050f;--bg2:#0e0920;--panel:#120c20;--panel2:#171029;--line:#291b46;
@@ -201,6 +222,16 @@ a{color:inherit}
 
 /* ---------- background field ---------- */
 #field{position:fixed;inset:0;z-index:0;pointer-events:none}
+/* THE CREATURE'S COUNTER - appears only once it has actually eaten something */
+.nvke-hud{position:fixed;left:16px;bottom:16px;z-index:6;pointer-events:none;
+  display:inline-flex;align-items:center;gap:9px;padding:7px 13px;border-radius:999px;
+  border:1px solid rgba(167,139,250,.26);background:rgba(12,8,22,.72);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  color:#cbb8f2;font-size:11px;letter-spacing:.07em;font-weight:700;text-transform:uppercase;
+  opacity:0;transition:opacity .6s ease;box-shadow:0 10px 30px rgba(0,0,0,.45)}
+.nvke-hud.on{opacity:1}
+.nvke-hud b{color:#e8e2ff;letter-spacing:.1em}
+.nvke-hud .n{color:#6ee7b7}
 #aurora{position:fixed;inset:0;z-index:0;pointer-events:none;
   background:
     radial-gradient(ellipse 60% 45% at 18% 8%,rgba(124,58,237,.16),transparent 60%),
@@ -267,8 +298,8 @@ h2 .em{background:linear-gradient(100deg,var(--vio),var(--mag));-webkit-backgrou
 
 /* ---------- 3D doors ---------- */
 #door-stage{position:relative;height:clamp(320px,46vh,460px);border-radius:22px;overflow:hidden;
-  border:1px solid var(--line);background:radial-gradient(ellipse at 50% 120%,rgba(124,58,237,.18),rgba(8,5,15,.2) 60%);
-  box-shadow:var(--shadow)}
+  border:1px solid var(--line);background:radial-gradient(ellipse at 50% 120%,rgba(124,58,237,.20),rgba(8,5,15,.28) 62%);
+  box-shadow:var(--shadow),0 0 110px -30px rgba(124,58,237,.65),inset 0 0 0 1px rgba(167,139,250,.07)}
 #doorfx{position:absolute;inset:0;width:100%;height:100%;display:block}
 /* THE STARE REVEAL - the reward for actually looking at a door */
 .stare{
@@ -424,6 +455,7 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
 </head>
 <body>
 <canvas id="field" aria-hidden="true"></canvas>
+<div class="nvke-hud" id="nvkeHud" aria-hidden="true"></div>
 <div id="aurora" aria-hidden="true"></div>
 <div id="grain" aria-hidden="true"></div>
 <div class="wrap">
@@ -469,8 +501,9 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
   <div class="sec-head reveal">
     <div class="sec-kicker">The showroom</div>
     <h2>Four doors. <span class="em">Walk in.</span></h2>
-    <p class="sec-sub">Each door opens a real product. Click one — the detail card below carries the
-      honest version: what it does, what it costs, and how you get it.</p>
+    <p class="sec-sub">Each door is a real product. Rest your eyes on one — the fog parts, the door cracks
+      open and the price appears where you are already looking. Click it and the card below carries the
+      honest version: what it does, what it costs and how you get it.</p>
   </div>
 
   <div id="door-stage" class="reveal">
@@ -796,9 +829,9 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
   </div>
 
   <div class="contact">
-    <a class="cc wa reveal" href="https://wa.me/18682593398" target="_blank" rel="noopener noreferrer">
+    <a class="cc wa reveal" data-wa href="https://wa.me/18684357698" target="_blank" rel="noopener noreferrer">
       <span class="ci">◔</span>
-      <span><b>WhatsApp</b><span>+1 868 259 3398 · fastest reply</span></span>
+      <span><b>WhatsApp</b><span><span data-wa-tel>+1 (868) 435-7698</span> · fastest reply</span></span>
       <span class="ar">→</span>
     </a>
   </div>
@@ -860,8 +893,26 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
   var fieldW = 0, fieldH = 0, fieldDPR = 1;
   var DOT_COUNT = 54;
 
-  function seedDots() {
-    dots = [];
+  var DOT_SPRITES = null;
+  function buildDotSprites() {
+    DOT_SPRITES = [];
+    var tints = ['167,139,250', '240,171,252'];
+    for (var i = 0; i < tints.length; i++) {
+      var c = document.createElement('canvas');
+      c.width = 64; c.height = 64;
+      var g = c.getContext('2d');
+      var gr = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+      gr.addColorStop(0, 'rgba(' + tints[i] + ',1)');
+      gr.addColorStop(0.16, 'rgba(' + tints[i] + ',0.62)');
+      gr.addColorStop(0.5, 'rgba(' + tints[i] + ',0.16)');
+      gr.addColorStop(1, 'rgba(' + tints[i] + ',0)');
+      g.fillStyle = gr;
+      g.fillRect(0, 0, 64, 64);
+      DOT_SPRITES.push(c);
+    }
+  }
+
+  function seedDots() {    dots = [];
     for (var i = 0; i < DOT_COUNT; i++) {
       dots.push({
         id: 'dot-' + i,
@@ -886,6 +937,8 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     field.height = Math.round(fieldH * fieldDPR);
     fctx.setTransform(fieldDPR, 0, 0, fieldDPR, 0, 0);
     seedDots();
+    seedFeed();
+    snakeSeed();
   }
 
   function stepDots() {
@@ -901,40 +954,301 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
 
   function drawDots() {
     if (!fctx) return;
-    fctx.clearRect(0, 0, fieldW, fieldH);
+    if (!DOT_SPRITES) buildDotSprites();
     for (var i = 0; i < dots.length; i++) {
       var d = dots[i];
-      var g = fctx.createRadialGradient(d.x, d.y, 0, d.x, d.y, d.r * 5);
-      if (d.hue) {
-        g.addColorStop(0, 'rgba(240,171,252,' + d.a + ')');
-        g.addColorStop(1, 'rgba(240,171,252,0)');
-      } else {
-        g.addColorStop(0, 'rgba(167,139,250,' + d.a + ')');
-        g.addColorStop(1, 'rgba(167,139,250,0)');
-      }
-      fctx.fillStyle = g;
+      // One drawImage off a pre-rendered sprite instead of a fresh radial gradient
+      // per dot per frame - 54 gradients a frame was the most expensive thing on
+      // this page and it bought nothing a sprite cannot do.
+      var sz = d.r * 10;
+      fctx.globalAlpha = d.a;
+      fctx.drawImage(DOT_SPRITES[d.hue ? 1 : 0], d.x - sz / 2, d.y - sz / 2, sz, sz);
+      fctx.globalAlpha = Math.min(1, d.a * 1.6);
       fctx.beginPath();
-      fctx.arc(d.x, d.y, d.r * 5, 0, Math.PI * 2);
+      fctx.arc(d.x, d.y, d.r * 0.75, 0, 6.2832);
+      fctx.fillStyle = '#ffffff';
       fctx.fill();
-      fctx.fillStyle = 'rgba(255,255,255,' + (d.a * 0.75) + ')';
+    }
+    fctx.globalAlpha = 1;
+  }
+
+  /* ------------------------------------------------------------
+     1b. THE FEEDING GROUND
+     The gravity dots are scenery. THIS is food: bright mint pellets that pulse,
+     drift and get eaten. Visible on purpose - the last version hid the feed inside
+     the decorative dots and nobody could see what the creature was eating.
+     ------------------------------------------------------------ */
+  var feed = [];
+  var feedSeq = 0;
+  var FEED_TARGET = 8;
+
+  function spawnFeed(x, y) {
+    feedSeq++;
+    feed.push({
+      id: 'f' + feedSeq,
+      x: (x === undefined) ? 70 + Math.random() * Math.max(60, fieldW - 140) : x,
+      y: (y === undefined) ? 70 + Math.random() * Math.max(60, fieldH - 140) : y,
+      r: 3.4 + Math.random() * 1.9,
+      ph: Math.random() * 6.2832,
+      vx: (Math.random() - 0.5) * 0.05,
+      vy: -0.05 - Math.random() * 0.11
+    });
+  }
+
+  function seedFeed() {
+    feed = [];
+    feedSeq = 0;
+    for (var i = 0; i < FEED_TARGET; i++) spawnFeed();
+  }
+
+  function stepFeed() {
+    for (var i = 0; i < feed.length; i++) {
+      var f = feed[i];
+      f.x += f.vx; f.y += f.vy;
+      if (f.y < -12) f.y = fieldH + 12;
+      if (f.x < -12) f.x = fieldW + 12;
+      if (f.x > fieldW + 12) f.x = -12;
+    }
+  }
+
+  function drawFeed() {
+    if (!fctx) return;
+    for (var i = 0; i < feed.length; i++) {
+      var f = feed[i];
+      var pu = 0.74 + 0.26 * Math.sin(f.ph + snake.tick * 0.055);
+      var gr = fctx.createRadialGradient(f.x, f.y, 0, f.x, f.y, f.r * 6.5);
+      gr.addColorStop(0, 'rgba(110,231,183,' + (0.30 * pu).toFixed(3) + ')');
+      gr.addColorStop(0.42, 'rgba(110,231,183,' + (0.11 * pu).toFixed(3) + ')');
+      gr.addColorStop(1, 'rgba(110,231,183,0)');
+      fctx.fillStyle = gr;
+      fctx.beginPath(); fctx.arc(f.x, f.y, f.r * 6.5, 0, 6.2832); fctx.fill();
+      fctx.beginPath(); fctx.arc(f.x, f.y, f.r * pu, 0, 6.2832);
+      fctx.fillStyle = 'rgba(122,238,192,' + (0.62 + 0.3 * pu).toFixed(3) + ')';
+      fctx.fill();
+      // the wet highlight that makes it read as something edible
       fctx.beginPath();
-      fctx.arc(d.x, d.y, d.r * 0.75, 0, Math.PI * 2);
+      fctx.arc(f.x - f.r * 0.32, f.y - f.r * 0.34, Math.max(0.6, f.r * 0.30), 0, 6.2832);
+      fctx.fillStyle = 'rgba(240,255,250,0.92)';
       fctx.fill();
     }
   }
 
-  /* The desktop browser reads these dots and lets the local creature eat them.
-     The bridge is invisible on the page — no copy, no mascot, no HUD. */
+  /* ------------------------------------------------------------
+     1c. THE SERPENT
+     Autonomous - nobody drives it. It hunts the nearest pellet, wraps through the
+     walls, eats, grows one segment per meal and REMEMBERS how big it got
+     (localStorage). Its counter only ever appears after it has actually eaten,
+     so a first-time visitor is not told a creature exists - they just watch one.
+     ------------------------------------------------------------ */
+  var LEN_KEY = 'nvke_len', CHITS_KEY = 'nvke_chits';
+  var nvkeHud = document.getElementById('nvkeHud');
+  var snake = {
+    segs: [], len: 26, chits: 0, fx: [], tick: 0,
+    head: { a: 0, sp: 1.7, turn: 0 }
+  };
+
+  function snakeLoad() {
+    var L = 26, C = 0;
+    try {
+      L = parseInt(localStorage.getItem(LEN_KEY) || '26', 10) || 26;
+      C = parseInt(localStorage.getItem(CHITS_KEY) || '0', 10) || 0;
+    } catch (e) {}
+    snake.len = Math.max(20, Math.min(420, L));
+    snake.chits = Math.max(0, C);
+  }
+
+  function snakePersist() {
+    try {
+      localStorage.setItem(LEN_KEY, String(snake.len));
+      localStorage.setItem(CHITS_KEY, String(snake.chits));
+    } catch (e) {}
+  }
+
+  function snakeHud() {
+    if (!nvkeHud) return;
+    nvkeHud.innerHTML = '<b>$NVKE</b><span>' + snake.len + ' segments</span>'
+      + '<span class="n">' + snake.chits + ' eaten</span>';
+    if (snake.chits > 0) nvkeHud.classList.add('on');
+  }
+
+  function snakeSeed() {
+    snakeLoad();
+    snake.segs = [];
+    for (var i = 0; i < snake.len; i++) {
+      snake.segs.push({ x: fieldW * 0.55 - i * 2, y: fieldH * 0.40 });
+    }
+    snake.head.a = Math.random() * 6.2832;
+    snake.head.sp = 1.7;
+    snake.head.turn = 0;
+  }
+
+  function stepSnake() {
+    var segs = snake.segs;
+    if (segs.length < 2) return;
+    snake.tick++;
+    if (snake.tick % 2) return;   // ~30fps - the creature costs one frame in two
+    var hx = segs[0].x, hy = segs[0].y, best = null, bd = 1e18, i;
+    for (i = 0; i < feed.length; i++) {
+      var f = feed[i];
+      var dx = f.x - hx, dy = f.y - hy, d2 = dx * dx + dy * dy;
+      if (d2 < bd) { bd = d2; best = f; }
+    }
+    var dist = best ? Math.sqrt(bd) : 1e9;
+    if (best && dist < 430) {
+      // real hunt: drive at the pellet with a capped turn, and slow on approach
+      // so it never overshoots and circles - the defect the old build had.
+      var want = Math.atan2(best.y - hy, best.x - hx);
+      var diff = ((want - snake.head.a + Math.PI * 3) % 6.2832) - Math.PI;
+      snake.head.a += Math.max(-0.26, Math.min(0.26, diff));
+      snake.head.sp = dist < 80 ? 0.9 : (dist < 190 ? 1.5 : 2.4);
+    } else {
+      snake.head.turn += (Math.random() - 0.5) * 0.30;
+      snake.head.turn *= 0.93;
+      snake.head.a += snake.head.turn * 0.05;
+      snake.head.sp = 1.5;
+    }
+    var px = hx + Math.cos(snake.head.a) * snake.head.sp;
+    var py = hy + Math.sin(snake.head.a) * snake.head.sp;
+    var m = 34;
+    if (px < -m) px = fieldW + m; else if (px > fieldW + m) px = -m;
+    if (py < -m) py = fieldH + m; else if (py > fieldH + m) py = -m;
+    for (i = segs.length - 1; i > 0; i--) { segs[i].x = segs[i - 1].x; segs[i].y = segs[i - 1].y; }
+    segs[0].x = px; segs[0].y = py;
+    // EAT
+    for (i = feed.length - 1; i >= 0; i--) {
+      var fp = feed[i];
+      var ex = fp.x - px, ey = fp.y - py;
+      var reach = fp.r + 11;
+      if (ex * ex + ey * ey < reach * reach) {
+        snake.fx.push({ x: fp.x, y: fp.y, t: 0, r: fp.r });
+        feed.splice(i, 1);
+        snake.chits++;
+        if (snake.len < 420) {
+          snake.len++;
+          segs.push({ x: segs[segs.length - 1].x, y: segs[segs.length - 1].y });
+        }
+        snakePersist();
+        snakeHud();
+      }
+    }
+    if (feed.length < FEED_TARGET && Math.random() < 0.06) spawnFeed();
+    for (i = snake.fx.length - 1; i >= 0; i--) {
+      snake.fx[i].t++;
+      if (snake.fx[i].t > 26) snake.fx.splice(i, 1);
+    }
+  }
+
+  function drawSnake() {
+    var segs = snake.segs;
+    if (!fctx || segs.length < 2) return;
+    var i;
+    // THE BITE - a ring where the pellet was. This is the moment worth rewatching.
+    for (i = 0; i < snake.fx.length; i++) {
+      var fx = snake.fx[i], p = fx.t / 26;
+      fctx.beginPath();
+      fctx.arc(fx.x, fx.y, fx.r + p * 30, 0, 6.2832);
+      fctx.strokeStyle = 'rgba(110,231,183,' + (0.55 * (1 - p)).toFixed(3) + ')';
+      fctx.lineWidth = 2.2 * (1 - p) + 0.4;
+      fctx.stroke();
+      fctx.beginPath();
+      fctx.arc(fx.x, fx.y, Math.max(0, fx.r * (1 - p * 1.6)), 0, 6.2832);
+      fctx.fillStyle = 'rgba(180,255,225,' + (0.7 * (1 - p)).toFixed(3) + ')';
+      fctx.fill();
+    }
+    // BODY - one polyline, three passes (glow, body, highlight). Cheaper than one
+    // gradient per segment and smoother than a chain of circles.
+    function bodyPath() {
+      fctx.beginPath();
+      var started = false, lx = 0;
+      for (var s = 0; s < segs.length; s++) {
+        var q = segs[s];
+        // break the path at a wall wrap so it never draws a line across the screen
+        if (started && Math.abs(q.x - lx) > 60) started = false;
+        if (!started) { fctx.moveTo(q.x, q.y); started = true; }
+        else fctx.lineTo(q.x, q.y);
+        lx = q.x;
+      }
+    }
+    fctx.lineCap = 'round';
+    fctx.lineJoin = 'round';
+    bodyPath();
+    fctx.strokeStyle = 'rgba(147,112,219,0.15)';
+    fctx.lineWidth = 17;
+    fctx.stroke();
+    bodyPath();
+    var hg = fctx.createLinearGradient(segs[0].x - 50, segs[0].y - 50, segs[0].x + 50, segs[0].y + 50);
+    hg.addColorStop(0, 'rgba(203,184,242,0.95)');
+    hg.addColorStop(1, 'rgba(92,54,162,0.80)');
+    fctx.strokeStyle = hg;
+    fctx.lineWidth = 8;
+    fctx.stroke();
+    bodyPath();
+    fctx.strokeStyle = 'rgba(232,226,255,0.42)';
+    fctx.lineWidth = 2.3;
+    fctx.stroke();
+    // HEAD + EYE (pale Byakugan violet, looking where it is going)
+    var e0 = segs[0];
+    fctx.beginPath();
+    fctx.arc(e0.x, e0.y, 6.2, 0, 6.2832);
+    fctx.fillStyle = '#c9b6f2';
+    fctx.shadowColor = 'rgba(167,139,250,0.9)';
+    fctx.shadowBlur = 15;
+    fctx.fill();
+    fctx.shadowBlur = 0;
+    var ex2 = e0.x + Math.cos(snake.head.a) * 2.6;
+    var ey2 = e0.y + Math.sin(snake.head.a) * 2.6;
+    fctx.beginPath(); fctx.arc(ex2, ey2, 2.2, 0, 6.2832);
+    fctx.fillStyle = '#f4f0ff'; fctx.fill();
+    fctx.beginPath();
+    fctx.arc(ex2 + Math.cos(snake.head.a) * 0.9, ey2 + Math.sin(snake.head.a) * 0.9, 1.0, 0, 6.2832);
+    fctx.fillStyle = '#3b2a63'; fctx.fill();
+  }
+
+  function stepField() {
+    stepDots();
+    stepFeed();
+    stepSnake();
+    publishFood();
+  }
+
+  function drawField() {
+    if (!fctx) return;
+    fctx.clearRect(0, 0, fieldW, fieldH);
+    drawDots();
+    drawFeed();
+    drawSnake();
+  }
+
+  /* THE BRIDGE. The desktop Ghvst creature reads these pellet positions and eats
+     them through window.__nvkeEat(id). Same contract as before, but now it is
+     pointing at visible food instead of invisible decorative dots. */
   function publishFood() {
     var list = [];
-    for (var i = 0; i < dots.length; i++) {
-      list.push({ id: dots[i].id, x: Math.round(dots[i].x), y: Math.round(dots[i].y) });
+    for (var i = 0; i < feed.length; i++) {
+      list.push({
+        id: feed[i].id,
+        x: Math.round(feed[i].x),
+        y: Math.round(feed[i].y),
+        r: Math.round(feed[i].r)
+      });
     }
     window.__nvkeFood = list;
   }
   window.__nvkeEat = function (id) {
-    for (var i = 0; i < dots.length; i++) {
-      if (dots[i].id === id) { dots.splice(i, 1); publishFood(); return true; }
+    for (var i = 0; i < feed.length; i++) {
+      if (feed[i].id === id) {
+        snake.fx.push({ x: feed[i].x, y: feed[i].y, t: 0, r: feed[i].r });
+        feed.splice(i, 1);
+        snake.chits++;
+        if (snake.len < 420) {
+          snake.len++;
+          snake.segs.push({ x: snake.segs[snake.segs.length - 1].x, y: snake.segs[snake.segs.length - 1].y });
+        }
+        snakePersist();
+        snakeHud();
+        publishFood();
+        return true;
+      }
     }
     return false;
   };
@@ -967,7 +1281,7 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
       facts: ['Runs real tasks from a phone', 'Same engine as the desktop workspace',
         '$29 for 30 days, activated on receipt', 'Delivered as an installable build after payment'],
       buyLabel: 'Pay $29', buyHref: '#', buyPay: '29',
-      secondaryLabel: 'Message to activate', secondaryHref: 'https://wa.me/18682593398',
+      secondaryLabel: 'Message to activate', secondaryHref: WA_URL,
       note: 'PayPal takes the 30 days; message the receipt and the build is delivered straight to you.'
     },
     {
@@ -976,7 +1290,7 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
       facts: ['Nothing leaves your machine — no account, no sync', 'One vault: extension and native panel stay in step',
         'Lifetime, no renewal fee, no seat count', 'Unlocked inside Ghvst Browser out of the box'],
       buyLabel: 'Pay $800', buyHref: '#', buyPay: '800',
-      secondaryLabel: 'Ask a question first', secondaryHref: 'https://wa.me/18682593398',
+      secondaryLabel: 'Ask a question first', secondaryHref: WA_URL,
       note: 'Lifetime means lifetime. Delivery follows confirmed payment — no subscription, ever.'
     }
   ];
@@ -1068,6 +1382,41 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
     FOCAL = Math.max(360, H * 2.0);
     cam.y = (H * 0.90 - H * 0.56) / (FOCAL / ROW_Z);
+    // the fog buffer
+    if (!mistCv) {
+      mistCv = document.createElement('canvas');
+      mistCtx = mistCv.getContext('2d');
+    }
+    mistCv.width = Math.max(64, Math.round(W * MIST_SCALE));
+    mistCv.height = Math.max(64, Math.round(H * MIST_SCALE));
+    if (mistCtx) mistCtx.imageSmoothingEnabled = true;
+    buildOverlays();
+  }
+
+  /* The haze bed and the vignette never change between frames, so they are painted
+     once per resize instead of twice per frame. */
+  var hazeCv = null, vigCv = null;
+  function buildOverlays() {
+    var w = Math.max(1, Math.round(W * 0.5)), h = Math.max(1, Math.round(H * 0.5));
+    hazeCv = document.createElement('canvas');
+    hazeCv.width = w; hazeCv.height = h;
+    var hz = hazeCv.getContext('2d');
+    hz.setTransform(w / W, 0, 0, h / H, 0, 0);
+    var hg = hz.createRadialGradient(W / 2, H * 1.04, 0, W / 2, H * 1.04, Math.max(W, H) * 0.64);
+    hg.addColorStop(0, 'rgba(150,92,255,0.22)');
+    hg.addColorStop(0.42, 'rgba(112,62,224,0.08)');
+    hg.addColorStop(1, 'rgba(124,58,237,0)');
+    hz.fillStyle = hg;
+    hz.fillRect(0, 0, W, H);
+    vigCv = document.createElement('canvas');
+    vigCv.width = w; vigCv.height = h;
+    var vgx = vigCv.getContext('2d');
+    vgx.setTransform(w / W, 0, 0, h / H, 0, 0);
+    var vg = vgx.createRadialGradient(W / 2, H / 2, Math.min(W, H) * 0.20, W / 2, H / 2, Math.max(W, H) * 0.70);
+    vg.addColorStop(0, 'rgba(0,0,0,0)');
+    vg.addColorStop(1, 'rgba(3,1,7,0.86)');
+    vgx.fillStyle = vg;
+    vgx.fillRect(0, 0, W, H);
   }
 
   function project(X, Y, Z, yaw, pitch) {
@@ -1245,70 +1594,295 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
 
   var WINDOW_STARS = null;
 
-  function drawScene() {
-    if (!ctx) return;
-    ctx.clearRect(0, 0, W, H);
+  /* ---- THE HIDDEN MIST ------------------------------------------------
+     The showroom is fogged, and the fog has DEPTH. Three planes of vapour sit at
+     different distances from the camera and each one drags a different amount when
+     the visitor turns - the mist behind the doors barely moves, the mist in front of
+     them swings wide. That difference is parallax; without it fog is just haze.
 
-    // THE CONSTELLATION AND THE FOG.
-    //
-    // The showroom has to feel like a PLACE, not a diagram. A slow field of stars
-    // sits behind the doors and three bands of haze drift across the floor, so the
-    // room breathes even when nobody touches it. Cheap: one canvas, no images, no
-    // libraries, nothing to download.
-    if (!WINDOW_STARS) {
-      WINDOW_STARS = [];
-      for (var st0 = 0; st0 < 90; st0++) {
-        WINDOW_STARS.push({
-          x: Math.random(), y: Math.random(),
-          r: Math.random() * 1.3 + 0.25,
-          a: Math.random() * 0.7 + 0.12,
-          tw: Math.random() * 6.283
+     Cost control: every puff is a pre-rendered soft sprite drawn with one drawImage.
+     No per-frame gradients, no images to download, no libraries. Built once at boot.
+     ------------------------------------------------------------------- */
+  var MIST_SPRITES = [];
+  var MIST_BANKS = [];
+  var MIST_WISPS = [];
+  var MIST_READY = false;
+  var mistCv = null;
+  var mistCtx = null;
+  var MIST_SCALE = 0.34;   // quarter-size fog buffer, stretched back up in one blit
+
+  function buildMistSprite(size, tint, core) {
+    var c = document.createElement('canvas');
+    c.width = size; c.height = size;
+    var g = c.getContext('2d');
+    var r = size / 2;
+    var grad = g.createRadialGradient(r, r, 0, r, r, r);
+    grad.addColorStop(0, 'rgba(' + tint + ',' + core + ')');
+    grad.addColorStop(0.34, 'rgba(' + tint + ',' + (core * 0.56) + ')');
+    grad.addColorStop(0.67, 'rgba(' + tint + ',' + (core * 0.21) + ')');
+    grad.addColorStop(1, 'rgba(' + tint + ',0)');
+    g.fillStyle = grad;
+    g.beginPath(); g.arc(r, r, r, 0, 6.2832); g.fill();
+    // A perfect circle reads as a spotlight. Nine soft lumps pushed toward the rim
+    // break the edge so each puff has the torn shape of real vapour.
+    for (var i = 0; i < 9; i++) {
+      var ang = (i / 9) * 6.2832 + Math.random() * 0.7;
+      var dist = r * (0.30 + Math.random() * 0.27);
+      var bx = r + Math.cos(ang) * dist;
+      var by = r + Math.sin(ang) * dist;
+      var br = r * (0.33 + Math.random() * 0.27);
+      var bg = g.createRadialGradient(bx, by, 0, bx, by, br);
+      bg.addColorStop(0, 'rgba(' + tint + ',' + (core * 0.40) + ')');
+      bg.addColorStop(1, 'rgba(' + tint + ',0)');
+      g.fillStyle = bg;
+      g.beginPath(); g.arc(bx, by, br, 0, 6.2832); g.fill();
+    }
+    return c;
+  }
+
+  function seedMist() {
+    if (MIST_READY || !ctx) return;
+    MIST_READY = true;
+    MIST_SPRITES = [
+      buildMistSprite(256, '208,198,255', 0.55),
+      buildMistSprite(256, '168,214,255', 0.48),
+      buildMistSprite(256, '236,214,255', 0.60)
+    ];
+    var planes = [
+      { n: 11, d: 0.16, sc: 0.95, a: 0.135, v: 0.0052, spr: 0 },  // far - hangs behind the doors
+      { n: 9,  d: 0.50, sc: 1.35, a: 0.150, v: 0.0102, spr: 1 },  // mid - wraps the door row
+      { n: 7,  d: 0.94, sc: 1.85, a: 0.100, v: 0.0174, spr: 2 }   // near - drifts IN FRONT of the doors
+    ];
+    MIST_BANKS = [];
+    for (var p = 0; p < planes.length; p++) {
+      var pl = planes[p];
+      for (var i = 0; i < pl.n; i++) {
+        MIST_BANKS.push({
+          x: Math.random(),
+          y: 0.22 + Math.random() * 0.70,
+          d: pl.d,
+          sc: pl.sc * (0.68 + Math.random() * 0.72),
+          a: pl.a * (0.55 + Math.random() * 0.78),
+          v: pl.v * (0.55 + Math.random() * 0.95) * (Math.random() < 0.5 ? -1 : 1),
+          wob: Math.random() * 6.2832,
+          spr: pl.spr
         });
       }
     }
-    var tNow = (window.performance && performance.now) ? performance.now() : Date.now();
+    MIST_WISPS = [];
+    for (var w = 0; w < 10; w++) {
+      MIST_WISPS.push({
+        x: Math.random(),
+        y: 0.30 + Math.random() * 0.60,
+        w: 0.34 + Math.random() * 0.58,
+        h: 0.042 + Math.random() * 0.080,
+        a: 0.045 + Math.random() * 0.065,
+        v: (0.011 + Math.random() * 0.021) * (Math.random() < 0.5 ? -1 : 1),
+        d: 0.28 + Math.random() * 0.72,
+        rot: (Math.random() - 0.5) * 0.26,
+        ph: Math.random() * 6.2832
+      });
+    }
+  }
+
+  // THE PARTING. The door being stared at has its fog knocked down around it, so
+  // looking longer literally clears the air. This is the retention loop: the visitor
+  // is rewarded for the exact behaviour a page normally ignores.
+  function mistHole() {
+    var best = -1, bestV = 0.22;
+    for (var i = 0; i < doorState.length; i++) {
+      if (doorState[i].stare > bestV) { bestV = doorState[i].stare; best = i; }
+    }
+    if (best < 0 || !lastHits[best]) return null;
+    return {
+      x: lastHits[best].cx,
+      y: lastHits[best].cy,
+      r: Math.max(150, lastHits[best].rad * 2.0),
+      amt: bestV
+    };
+  }
+
+  function drawStars(tSec) {
+    if (!WINDOW_STARS) {
+      WINDOW_STARS = [];
+      for (var st0 = 0; st0 < 110; st0++) {
+        WINDOW_STARS.push({
+          x: Math.random(), y: Math.random(),
+          r: Math.random() * 1.35 + 0.22,
+          a: Math.random() * 0.68 + 0.12,
+          tw: Math.random() * 6.283,
+          d: 0.15 + Math.random() * 0.85   // depth: near stars swing further
+        });
+      }
+    }
+    var yawPx = cam.yaw * W * 1.05;
+    var pitchPx = cam.pitch * H * 0.60;
     for (var st1 = 0; st1 < WINDOW_STARS.length; st1++) {
       var s2 = WINDOW_STARS[st1];
-      var tw2 = 0.45 + 0.55 * Math.sin(tNow * 0.0009 + s2.tw);
+      var sx2 = (s2.x * W + tSec * 3.2 * s2.d - yawPx * s2.d) % W;
+      if (sx2 < 0) sx2 += W;
+      var sy2 = s2.y * H * 0.94 - pitchPx * s2.d;
+      var tw2 = 0.45 + 0.55 * Math.sin(tSec * 0.9 + s2.tw);
       ctx.fillStyle = 'rgba(226,214,255,' + (s2.a * tw2 * 0.75).toFixed(3) + ')';
       ctx.beginPath();
-      ctx.arc(s2.x * W, s2.y * H * 0.92, s2.r, 0, 6.2832);
+      ctx.arc(sx2, sy2, s2.r * (0.7 + 0.5 * s2.d), 0, 6.2832);
       ctx.fill();
     }
-    for (var fg = 0; fg < 3; fg++) {
-      var fx = ((tNow * 0.006 * (1 + fg * 0.4) + fg * W * 0.41) % (W * 1.7)) - W * 0.35;
-      var fy = H * (0.66 + fg * 0.09);
-      var fgr = ctx.createRadialGradient(fx, fy, 0, fx, fy, W * 0.42);
-      fgr.addColorStop(0, 'rgba(146,116,222,0.11)');
-      fgr.addColorStop(1, 'rgba(146,116,222,0)');
-      ctx.fillStyle = fgr;
-      ctx.fillRect(0, 0, W, H);
-    }
+  }
 
-    // floor haze
-    var hz = ctx.createRadialGradient(W / 2, H * 0.92, 0, W / 2, H * 0.92, W * 0.6);
-    hz.addColorStop(0, 'rgba(124,58,237,0.16)');
-    hz.addColorStop(1, 'rgba(124,58,237,0)');
-    ctx.fillStyle = hz;
-    ctx.fillRect(0, 0, W, H);
+  function drawMist(inFront, tSec) {
+    var g = mistCtx;
+    if (!g || !MIST_BANKS.length) return;
+    var yawPx = cam.yaw * W * 1.75;
+    var pitchPx = cam.pitch * H * 0.95;
+    var hole = mistHole();
+    var base = Math.max(W, H) * 0.46;
+    var thin = W < 760 ? 5 : 0;   // phones carry one lane fewer of fog
+    // Normal alpha blending, NOT 'lighter'. Additive fog saturates the moment two
+    // puffs overlap and the doors turn into a milky rectangle - the veil has to
+    // veil, not erase.
+    g.save();
+    g.globalCompositeOperation = 'source-over';
+    for (var i = 0; i < MIST_BANKS.length; i++) {
+      var b = MIST_BANKS[i];
+      if ((b.d > 0.75) !== !!inFront) continue;
+      if (thin && i % thin === 0) continue;
+      var px = (b.x + tSec * b.v) % 1;
+      if (px < 0) px += 1;
+      var size = base * b.sc;
+      var sx = px * (W + size * 1.4) - size * 0.7;
+      var sy = b.y * H + Math.sin(tSec * 0.27 + b.wob) * (6 + b.d * 18);
+      // THE PARALLAX: nearer vapour travels further against the camera turn.
+      sx -= yawPx * (0.22 + b.d * 1.30);
+      sy -= pitchPx * (0.18 + b.d * 0.95);
+      var a = b.a;
+      if (hole) {
+        var dx = sx - hole.x, dy = sy - hole.y;
+        var reach = hole.r + size * 0.20;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < reach) {
+          var k = 1 - dist / reach;
+          a *= 1 - 0.94 * hole.amt * k * k;
+        }
+      }
+      if (a <= 0.004) continue;
+      g.globalAlpha = a > 0.98 ? 0.98 : a;
+      g.drawImage(MIST_SPRITES[b.spr], sx - size / 2, sy - size / 2, size, size);
+    }
+    g.restore();
+  }
+
+  // THE POOL. Mist settles: a wide, low band of vapour that sits ON the floor and
+  // swallows the bottom of every door. This is the layer that makes the stage read
+  // as ground rather than as a picture of four rectangles.
+  function drawFloorFog(tSec) {
+    var g = mistCtx;
+    if (!g || !MIST_SPRITES.length) return;
+    var base = Math.max(W, H);
+    var yawPx = cam.yaw * W * 1.75;
+    g.save();
+    g.globalCompositeOperation = 'source-over';
+    for (var i = 0; i < 4; i++) {
+      var px = (i * 0.29 + tSec * 0.0055) % 1;
+      if (px < 0) px += 1;
+      var w = base * (1.05 + i * 0.16);
+      var h = base * 0.26;
+      var sx = px * (W + w) - w * 0.5 - yawPx * (1.30 + i * 0.10);
+      var sy = H * (0.92 + i * 0.018);
+      g.globalAlpha = 0.11 + i * 0.015;
+      g.drawImage(MIST_SPRITES[1], sx - w / 2, sy - h / 2, w, h);
+    }
+    g.restore();
+  }
+
+  function drawWisps(tSec) {
+    var g = mistCtx;
+    if (!g || !MIST_WISPS.length) return;
+    var yawPx = cam.yaw * W * 1.75;
+    var hole = mistHole();
+    var thin = W < 760 ? 3 : 0;
+    for (var i = 0; i < MIST_WISPS.length; i++) {
+      if (thin && i % thin === 0) continue;
+      var wv = MIST_WISPS[i];
+      var px = (wv.x + tSec * wv.v) % 1;
+      if (px < 0) px += 1;
+      var ww = W * wv.w, wh = H * wv.h;
+      var sx = px * (W + ww) - ww * 0.5 - yawPx * (0.30 + wv.d * 1.15);
+      var sy = wv.y * H + Math.sin(tSec * 0.21 + wv.ph) * 11 - cam.pitch * H * 0.55 * wv.d;
+      var a = wv.a;
+      if (hole) {
+        var dx = sx - hole.x, dy = sy - hole.y;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < hole.r) {
+          var k = 1 - dist / hole.r;
+          a *= 1 - 0.90 * hole.amt * k * k;
+        }
+      }
+      if (a <= 0.003) continue;
+      g.save();
+      g.globalCompositeOperation = 'lighter';
+      g.globalAlpha = a;
+      g.translate(sx, sy);
+      g.rotate(wv.rot + Math.sin(tSec * 0.17 + wv.ph) * 0.06);
+      g.drawImage(MIST_SPRITES[2], -ww / 2, -wh / 2, ww, wh);
+      g.restore();
+    }
+  }
+
+  // THE MIST LAYER. Fog is low-frequency, so it is drawn into a quarter-size buffer
+  // and stretched back up in ONE composite. Same picture, a fraction of the fill:
+  // 40 full-size sprite blits per frame is what made the stage expensive.
+  function renderMistLayer(inFront, tSec) {
+    if (!mistCtx) { return; }
+    mistCtx.setTransform(1, 0, 0, 1, 0, 0);
+    mistCtx.clearRect(0, 0, mistCv.width, mistCv.height);
+    mistCtx.setTransform(MIST_SCALE, 0, 0, MIST_SCALE, 0, 0);
+    if (inFront) {
+      drawMist(true, tSec);
+      drawFloorFog(tSec);
+      drawWisps(tSec);
+    } else {
+      drawMist(false, tSec);
+    }
+    ctx.drawImage(mistCv, 0, 0, W, H);
+  }
+
+  function drawScene() {
+    if (!ctx) return;
+    ctx.clearRect(0, 0, W, H);
+    // THE CONSTELLATION AND THE MIST.
+    //
+    // The showroom has to feel like a PLACE, not a diagram. A depth-sorted starfield
+    // sits behind the doors, three planes of vapour drift through the room, and the
+    // mist in the NEAR plane is drawn after the doors so the fog passes in front of
+    // the products. That single ordering decision is what turns a 2D canvas into a
+    // room with air in it.
+    var tSec = ((window.performance && performance.now) ? performance.now() : Date.now()) * 0.001;
+    drawStars(tSec);
+    renderMistLayer(false, tSec);
+
+    // floor haze - a low violet bed of light so the doors stand IN something.
+    // Pre-rendered at resize: two full-canvas gradient fills per frame was pure
+    // waste, and a gradient looks identical every frame anyway.
+    if (hazeCv) ctx.drawImage(hazeCv, 0, 0, W, H);
 
     var hits = [];
     for (var i = 0; i < DOORS.length; i++) {
       hits.push(drawDoor(DOORS[i], STATE_BY_ID[DOORS[i].id], i));
     }
 
-    // vignette
-    var vg = ctx.createRadialGradient(W / 2, H / 2, Math.min(W, H) * 0.25, W / 2, H / 2, Math.max(W, H) * 0.72);
-    vg.addColorStop(0, 'rgba(0,0,0,0)');
-    vg.addColorStop(1, 'rgba(4,2,8,0.72)');
-    ctx.fillStyle = vg;
-    ctx.fillRect(0, 0, W, H);
+    // the near fog and the wisps go OVER the doors - Hidden Mist, not a background
+    renderMistLayer(true, tSec);
+
+    // vignette (pre-rendered with the haze)
+    if (vigCv) ctx.drawImage(vigCv, 0, 0, W, H);
 
     return hits;
   }
 
   var lastHits = [];
   var lastFrame = 0;
+  var fieldPhase = 0;
 
   function frame(ts) {
     requestAnimationFrame(frame);
@@ -1318,9 +1892,16 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     if (!fieldRunning && ts - lastFrame < 200) return;
     lastFrame = ts;
 
-    // smooth camera parallax
-    cam.yaw += (targetYaw - cam.yaw) * 0.06;
-    cam.pitch += (targetPitch - cam.pitch) * 0.06;
+    // smooth camera parallax. The camera reads the pointer, and when nobody is
+    // pointing it breathes on its own - a room that stops moving looks like a
+    // screenshot, and a screenshot gets one glance, not a stare.
+    if (!pointer.inside) {
+      var idleT = ts * 0.00021;
+      targetYaw = Math.sin(idleT) * 0.058;
+      targetPitch = Math.sin(idleT * 0.72 + 1.1) * 0.030;
+    }
+    cam.yaw += (targetYaw - cam.yaw) * 0.055;
+    cam.pitch += (targetPitch - cam.pitch) * 0.055;
 
     // door state easing
     for (var i = 0; i < doorState.length; i++) {
@@ -1360,7 +1941,13 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
       }
     }
 
-    if (fieldRunning) { stepDots(); drawDots(); publishFood(); }
+    if (fieldRunning) {
+      // The background field only needs half the frames - its motion is glacial and
+      // the serpent self-throttles to 30fps anyway. The door scene keeps all 60.
+      stepField();
+      fieldPhase = (fieldPhase + 1) & 1;
+      if (!fieldPhase) drawField();
+    }
     lastHits = drawScene() || [];
   }
 
@@ -1370,8 +1957,8 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     pointer.x = ev.clientX - r.left;
     pointer.y = ev.clientY - r.top;
     pointer.inside = true;
-    targetYaw = ((pointer.x / Math.max(1, r.width)) - 0.5) * 0.22;
-    targetPitch = ((pointer.y / Math.max(1, r.height)) - 0.5) * 0.12;
+    targetYaw = ((pointer.x / Math.max(1, r.width)) - 0.5) * 0.34;
+    targetPitch = ((pointer.y / Math.max(1, r.height)) - 0.5) * 0.20;
 
     var best = -1, bestD = 1e9;
     for (var i = 0; i < lastHits.length; i++) {
@@ -1483,8 +2070,17 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
   function onResize() { sizeField(); sizeCanvas(); }
   window.addEventListener('resize', onResize);
   window.addEventListener('orientationchange', onResize);
+  // Wire every WhatsApp link + label to the single contact block in <head>
+  // (WA_DIGITS / WA_HUMAN). Change the number there, nowhere else.
+  var waLinks = document.querySelectorAll('a[data-wa]');
+  for (var wi = 0; wi < waLinks.length; wi++) waLinks[wi].href = WA_URL;
+  var waTels = document.querySelectorAll('[data-wa-tel]');
+  for (var ti = 0; ti < waTels.length; ti++) waTels[ti].textContent = WA_HUMAN;
+
   sizeField();
   sizeCanvas();
+  seedMist();
+  snakeHud();
   publishFood();
   requestAnimationFrame(frame);
 
