@@ -221,7 +221,11 @@ a{color:inherit}
 :focus-visible{outline:2px solid var(--vio);outline-offset:3px;border-radius:6px}
 
 /* ---------- background field ---------- */
-#field{position:fixed;inset:0;z-index:0;pointer-events:none}
+#field{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+/* THE CREATURE LAYER - above the page, below the HUD. Never intercepts a click.
+   width/height are mandatory: a canvas is a replaced element, so `inset:0` alone
+   leaves it at its intrinsic 300x150 and every drawing is squashed into it. */
+#nvke{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:5;pointer-events:none}
 /* THE CREATURE'S COUNTER - appears only once it has actually eaten something */
 .nvke-hud{position:fixed;left:16px;bottom:16px;z-index:6;pointer-events:none;
   display:inline-flex;align-items:center;gap:9px;padding:7px 13px;border-radius:999px;
@@ -455,6 +459,7 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
 </head>
 <body>
 <canvas id="field" aria-hidden="true"></canvas>
+<canvas id="nvke" aria-hidden="true"></canvas>
 <div class="nvke-hud" id="nvkeHud" aria-hidden="true"></div>
 <div id="aurora" aria-hidden="true"></div>
 <div id="grain" aria-hidden="true"></div>
@@ -888,6 +893,11 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
      ------------------------------------------------------------ */
   var field = document.getElementById('field');
   var fctx = field ? field.getContext('2d') : null;
+  // The creature gets its own canvas ABOVE the page content. Living on the same
+  // layer as the decorative dots meant the serpent disappeared behind every
+  // panel - the "only half of it shows" defect.
+  var nvkeCv = document.getElementById('nvke');
+  var nctx = nvkeCv ? nvkeCv.getContext('2d') : null;
   var dots = [];
   var fieldRunning = true;
   var fieldW = 0, fieldH = 0, fieldDPR = 1;
@@ -928,14 +938,26 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
   }
 
   function sizeField() {
-    if (!field) return;
-    var r = field.getBoundingClientRect();
+    // Measured from the VIEWPORT, never from getBoundingClientRect(): the canvas
+    // is a replaced element and its box can disagree with the viewport size.
     fieldDPR = Math.min(2, window.devicePixelRatio || 1);
-    fieldW = Math.max(1, r.width);
-    fieldH = Math.max(1, r.height);
-    field.width = Math.round(fieldW * fieldDPR);
-    field.height = Math.round(fieldH * fieldDPR);
-    fctx.setTransform(fieldDPR, 0, 0, fieldDPR, 0, 0);
+    fieldW = Math.max(1, window.innerWidth);
+    fieldH = Math.max(1, window.innerHeight);
+    // Phones: the creature layer runs at 1.5x and 30fps. A full-screen canvas at
+    // 2x on a 390px phone is 1.3M pixels to clear and blend EVERY frame - that is
+    // the difference between 60fps and a slideshow.
+    CREATURE_HALF = fieldW < 760;
+    var cdpr = CREATURE_HALF ? Math.min(1.5, fieldDPR) : fieldDPR;
+    if (field) {
+      field.width = Math.round(fieldW * fieldDPR);
+      field.height = Math.round(fieldH * fieldDPR);
+      fctx.setTransform(fieldDPR, 0, 0, fieldDPR, 0, 0);
+    }
+    if (nvkeCv) {
+      nvkeCv.width = Math.round(fieldW * cdpr);
+      nvkeCv.height = Math.round(fieldH * cdpr);
+      nctx.setTransform(cdpr, 0, 0, cdpr, 0, 0);
+    }
     seedDots();
     seedFeed();
     snakeSeed();
@@ -980,18 +1002,47 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
      ------------------------------------------------------------ */
   var feed = [];
   var feedSeq = 0;
-  var FEED_TARGET = 8;
+  var FEED_TARGET = 10;
+  var FEED_SPRITE = null;
+
+  // One pre-rendered mint glow, blitted per pellet. A radial gradient per pellet
+  // per frame was pure cost and looked identical.
+  function feedSprite() {
+    if (FEED_SPRITE) return FEED_SPRITE;
+    var c = document.createElement('canvas');
+    c.width = 96; c.height = 96;
+    var g = c.getContext('2d');
+    var gr = g.createRadialGradient(48, 48, 0, 48, 48, 48);
+    gr.addColorStop(0, 'rgba(160,255,218,0.80)');
+    gr.addColorStop(0.15, 'rgba(110,231,183,0.40)');
+    gr.addColorStop(0.45, 'rgba(110,231,183,0.12)');
+    gr.addColorStop(1, 'rgba(110,231,183,0)');
+    g.fillStyle = gr;
+    g.fillRect(0, 0, 96, 96);
+    FEED_SPRITE = c;
+    return c;
+  }
 
   function spawnFeed(x, y) {
     feedSeq++;
+    if (x === undefined) {
+      var pad = 54;
+      x = pad + Math.random() * Math.max(40, fieldW - pad * 2);
+      y = pad + Math.random() * Math.max(40, fieldH - pad * 2);
+      // never drop food straight onto the creature's head
+      if (snake.head && Math.abs(x - snake.head.x) < 110 && Math.abs(y - snake.head.y) < 110) {
+        x = pad + Math.random() * Math.max(40, fieldW - pad * 2);
+        y = pad + Math.random() * Math.max(40, fieldH - pad * 2);
+      }
+    }
     feed.push({
       id: 'f' + feedSeq,
-      x: (x === undefined) ? 70 + Math.random() * Math.max(60, fieldW - 140) : x,
-      y: (y === undefined) ? 70 + Math.random() * Math.max(60, fieldH - 140) : y,
-      r: 3.4 + Math.random() * 1.9,
+      x: x, y: y,
+      r: 5.0 + Math.random() * 2.0,
       ph: Math.random() * 6.2832,
-      vx: (Math.random() - 0.5) * 0.05,
-      vy: -0.05 - Math.random() * 0.11
+      vx: (Math.random() - 0.5) * 0.10,
+      vy: -0.04 - Math.random() * 0.10,
+      born: 0
     });
   }
 
@@ -1004,32 +1055,34 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
   function stepFeed() {
     for (var i = 0; i < feed.length; i++) {
       var f = feed[i];
+      f.born++;
       f.x += f.vx; f.y += f.vy;
-      if (f.y < -12) f.y = fieldH + 12;
-      if (f.x < -12) f.x = fieldW + 12;
-      if (f.x > fieldW + 12) f.x = -12;
+      if (f.y < -14) { f.y = fieldH + 14; f.x = Math.random() * fieldW; }
+      if (f.x < -14) f.x = fieldW + 14;
+      if (f.x > fieldW + 14) f.x = -14;
     }
   }
 
   function drawFeed() {
-    if (!fctx) return;
+    if (!nctx) return;
+    var sp = feedSprite();
+    var t = performance.now();
     for (var i = 0; i < feed.length; i++) {
       var f = feed[i];
-      var pu = 0.74 + 0.26 * Math.sin(f.ph + snake.tick * 0.055);
-      var gr = fctx.createRadialGradient(f.x, f.y, 0, f.x, f.y, f.r * 6.5);
-      gr.addColorStop(0, 'rgba(110,231,183,' + (0.30 * pu).toFixed(3) + ')');
-      gr.addColorStop(0.42, 'rgba(110,231,183,' + (0.11 * pu).toFixed(3) + ')');
-      gr.addColorStop(1, 'rgba(110,231,183,0)');
-      fctx.fillStyle = gr;
-      fctx.beginPath(); fctx.arc(f.x, f.y, f.r * 6.5, 0, 6.2832); fctx.fill();
-      fctx.beginPath(); fctx.arc(f.x, f.y, f.r * pu, 0, 6.2832);
-      fctx.fillStyle = 'rgba(122,238,192,' + (0.62 + 0.3 * pu).toFixed(3) + ')';
-      fctx.fill();
+      var pu = 0.72 + 0.28 * Math.sin(f.ph + t * 0.004);
+      var sz = f.r * 9.5;
+      nctx.globalAlpha = (0.55 + 0.35 * pu) * Math.min(1, f.born / 16);
+      nctx.drawImage(sp, f.x - sz / 2, f.y - sz / 2, sz, sz);
+      nctx.globalAlpha = 1;
+      nctx.beginPath();
+      nctx.arc(f.x, f.y, f.r * (0.86 + 0.14 * pu), 0, 6.2832);
+      nctx.fillStyle = 'rgba(122,238,192,0.94)';
+      nctx.fill();
       // the wet highlight that makes it read as something edible
-      fctx.beginPath();
-      fctx.arc(f.x - f.r * 0.32, f.y - f.r * 0.34, Math.max(0.6, f.r * 0.30), 0, 6.2832);
-      fctx.fillStyle = 'rgba(240,255,250,0.92)';
-      fctx.fill();
+      nctx.beginPath();
+      nctx.arc(f.x - f.r * 0.30, f.y - f.r * 0.32, Math.max(0.7, f.r * 0.32), 0, 6.2832);
+      nctx.fillStyle = 'rgba(240,255,250,0.95)';
+      nctx.fill();
     }
   }
 
@@ -1041,19 +1094,22 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
      so a first-time visitor is not told a creature exists - they just watch one.
      ------------------------------------------------------------ */
   var LEN_KEY = 'nvke_len', CHITS_KEY = 'nvke_chits';
+  var MAX_LEN = 220;          // hard ceiling: a longer body is a smear, not a creature
+  var START_LEN = 40;
+  var CREATURE_HALF = false;  // phones run the creature at 30fps
   var nvkeHud = document.getElementById('nvkeHud');
   var snake = {
-    segs: [], len: 26, chits: 0, fx: [], tick: 0,
-    head: { a: 0, sp: 1.7, turn: 0 }
+    segs: [], len: START_LEN, chits: 0, fx: [], tick: 0,
+    head: { x: 0, y: 0, a: 0, sp: 6, turn: 0, tongue: 0, tongueCd: 90 }
   };
 
   function snakeLoad() {
-    var L = 26, C = 0;
+    var L = START_LEN, C = 0;
     try {
-      L = parseInt(localStorage.getItem(LEN_KEY) || '26', 10) || 26;
+      L = parseInt(localStorage.getItem(LEN_KEY) || String(START_LEN), 10) || START_LEN;
       C = parseInt(localStorage.getItem(CHITS_KEY) || '0', 10) || 0;
     } catch (e) {}
-    snake.len = Math.max(20, Math.min(420, L));
+    snake.len = Math.max(30, Math.min(MAX_LEN, L));
     snake.chits = Math.max(0, C);
   }
 
@@ -1073,148 +1129,257 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
 
   function snakeSeed() {
     snakeLoad();
+    var h = snake.head;
+    h.x = fieldW * 0.52;
+    h.y = fieldH * 0.36;
+    h.a = 0.35;
+    h.sp = 6;
+    h.turn = 0;
+    h.tongue = 0;
+    h.tongueCd = 90 + Math.floor(Math.random() * 200);
     snake.segs = [];
     for (var i = 0; i < snake.len; i++) {
-      snake.segs.push({ x: fieldW * 0.55 - i * 2, y: fieldH * 0.40 });
+      snake.segs.push({ x: h.x - i * 6, y: h.y });
     }
-    snake.head.a = Math.random() * 6.2832;
-    snake.head.sp = 1.7;
-    snake.head.turn = 0;
+  }
+
+  // ONE MEAL = one segment + one bite burst + the counter moving.
+  function snakeGrow() {
+    snake.chits++;
+    if (snake.len < MAX_LEN) {
+      snake.len++;
+      var tail = snake.segs[snake.segs.length - 1];
+      snake.segs.push({ x: tail.x, y: tail.y });
+    }
+    snakePersist();
+    snakeHud();
+    publishFood();
+  }
+
+  function snakeBite(x, y, r) {
+    var p = [];
+    for (var i = 0; i < 7; i++) {
+      var a = Math.random() * 6.2832, sp = 0.6 + Math.random() * 1.9;
+      p.push({ x: x, y: y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp });
+    }
+    snake.fx.push({ x: x, y: y, t: 0, r: r, p: p });
   }
 
   function stepSnake() {
-    var segs = snake.segs;
-    if (segs.length < 2) return;
+    var segs = snake.segs, h = snake.head;
+    if (segs.length < 2) return false;
     snake.tick++;
-    if (snake.tick % 2) return;   // ~30fps - the creature costs one frame in two
-    var hx = segs[0].x, hy = segs[0].y, best = null, bd = 1e18, i;
+    if (CREATURE_HALF && (snake.tick % 2)) return false;   // phones: 30fps creature
+    var hx = h.x, hy = h.y, best = null, bd = 1e18, i;
     for (i = 0; i < feed.length; i++) {
       var f = feed[i];
       var dx = f.x - hx, dy = f.y - hy, d2 = dx * dx + dy * dy;
       if (d2 < bd) { bd = d2; best = f; }
     }
     var dist = best ? Math.sqrt(bd) : 1e9;
-    if (best && dist < 430) {
-      // real hunt: drive at the pellet with a capped turn, and slow on approach
-      // so it never overshoots and circles - the defect the old build had.
+    if (best && dist < 560) {
+      // REAL HUNT: steer at the pellet with a capped turn and ease off on
+      // approach so it never overshoots and circles - the old defect.
       var want = Math.atan2(best.y - hy, best.x - hx);
-      var diff = ((want - snake.head.a + Math.PI * 3) % 6.2832) - Math.PI;
-      snake.head.a += Math.max(-0.26, Math.min(0.26, diff));
-      snake.head.sp = dist < 80 ? 0.9 : (dist < 190 ? 1.5 : 2.4);
+      var diff = ((want - h.a + Math.PI * 3) % 6.2832) - Math.PI;
+      var cap = 0.17 + (dist < 140 ? 0.13 : 0);
+      h.a += Math.max(-cap, Math.min(cap, diff));
+      h.sp = dist < 90 ? 3.4 : (dist < 260 ? 6.0 : 7.6);
     } else {
-      snake.head.turn += (Math.random() - 0.5) * 0.30;
-      snake.head.turn *= 0.93;
-      snake.head.a += snake.head.turn * 0.05;
-      snake.head.sp = 1.5;
+      h.turn += (Math.random() - 0.5) * 0.22;
+      h.turn = Math.max(-0.14, Math.min(0.14, h.turn));
+      h.a += h.turn;
+      h.sp = 6.0;
     }
-    var px = hx + Math.cos(snake.head.a) * snake.head.sp;
-    var py = hy + Math.sin(snake.head.a) * snake.head.sp;
-    var m = 34;
-    if (px < -m) px = fieldW + m; else if (px > fieldW + m) px = -m;
-    if (py < -m) py = fieldH + m; else if (py > fieldH + m) py = -m;
-    for (i = segs.length - 1; i > 0; i--) { segs[i].x = segs[i - 1].x; segs[i].y = segs[i - 1].y; }
-    segs[0].x = px; segs[0].y = py;
+    h.tongueCd--;
+    if (h.tongueCd <= 0) { h.tongue = 10; h.tongueCd = 140 + Math.floor(Math.random() * 240); }
+    if (h.tongue > 0) h.tongue--;
+
+    var nx = hx + Math.cos(h.a) * h.sp;
+    var ny = hy + Math.sin(h.a) * h.sp;
+    var m = 28, dxw = 0, dyw = 0;
+    if (nx < -m) { nx = fieldW + m; dxw = fieldW + 2 * m; }
+    else if (nx > fieldW + m) { nx = -m; dxw = -(fieldW + 2 * m); }
+    if (ny < -m) { ny = fieldH + m; dyw = fieldH + 2 * m; }
+    else if (ny > fieldH + m) { ny = -m; dyw = -(fieldH + 2 * m); }
+    h.x = nx; h.y = ny;
+    // THE WRAP: the WHOLE body shifts by the same delta, so crossing an edge
+    // never tears the body into disconnected pieces across the screen.
+    if (dxw || dyw) {
+      for (i = 0; i < segs.length; i++) { segs[i].x += dxw; segs[i].y += dyw; }
+    }
+    // THE BODY FOLLOWS: every segment slides toward the one in front of it with
+    // an even spacing. This is what makes it read as ONE creature instead of a
+    // chain of separate dots.
+    segs[0].x = nx; segs[0].y = ny;
+    for (i = 1; i < segs.length; i++) {
+      var px = segs[i - 1].x, py = segs[i - 1].y;
+      var vx = segs[i].x - px, vy = segs[i].y - py;
+      var d = Math.sqrt(vx * vx + vy * vy);
+      if (d > 0.001) {
+        var step = Math.min(d, h.sp);
+        segs[i].x = px + (vx / d) * step;
+        segs[i].y = py + (vy / d) * step;
+      }
+    }
     // EAT
     for (i = feed.length - 1; i >= 0; i--) {
       var fp = feed[i];
-      var ex = fp.x - px, ey = fp.y - py;
-      var reach = fp.r + 11;
+      var ex = fp.x - nx, ey = fp.y - ny;
+      var reach = fp.r + 14;
       if (ex * ex + ey * ey < reach * reach) {
-        snake.fx.push({ x: fp.x, y: fp.y, t: 0, r: fp.r });
+        snakeBite(fp.x, fp.y, fp.r);
         feed.splice(i, 1);
-        snake.chits++;
-        if (snake.len < 420) {
-          snake.len++;
-          segs.push({ x: segs[segs.length - 1].x, y: segs[segs.length - 1].y });
-        }
-        snakePersist();
-        snakeHud();
+        snakeGrow();
       }
     }
-    if (feed.length < FEED_TARGET && Math.random() < 0.06) spawnFeed();
+    while (feed.length < FEED_TARGET) spawnFeed();
+    // BITE FX
     for (i = snake.fx.length - 1; i >= 0; i--) {
-      snake.fx[i].t++;
-      if (snake.fx[i].t > 26) snake.fx.splice(i, 1);
+      var fx = snake.fx[i];
+      fx.t++;
+      if (fx.t > 34) { snake.fx.splice(i, 1); continue; }
+      if (fx.p) {
+        for (var q = 0; q < fx.p.length; q++) {
+          var pt = fx.p[q];
+          pt.x += pt.vx; pt.y += pt.vy;
+          pt.vx *= 0.93; pt.vy *= 0.93;
+        }
+      }
     }
+    return true;
   }
 
   function drawSnake() {
-    var segs = snake.segs;
-    if (!fctx || segs.length < 2) return;
+    var segs = snake.segs, h = snake.head;
+    if (!nctx || segs.length < 2) return;
     var i;
-    // THE BITE - a ring where the pellet was. This is the moment worth rewatching.
+    // THE BITE - a ring where the pellet was, plus the crumbs it burst into.
     for (i = 0; i < snake.fx.length; i++) {
-      var fx = snake.fx[i], p = fx.t / 26;
-      fctx.beginPath();
-      fctx.arc(fx.x, fx.y, fx.r + p * 30, 0, 6.2832);
-      fctx.strokeStyle = 'rgba(110,231,183,' + (0.55 * (1 - p)).toFixed(3) + ')';
-      fctx.lineWidth = 2.2 * (1 - p) + 0.4;
-      fctx.stroke();
-      fctx.beginPath();
-      fctx.arc(fx.x, fx.y, Math.max(0, fx.r * (1 - p * 1.6)), 0, 6.2832);
-      fctx.fillStyle = 'rgba(180,255,225,' + (0.7 * (1 - p)).toFixed(3) + ')';
-      fctx.fill();
-    }
-    // BODY - one polyline, three passes (glow, body, highlight). Cheaper than one
-    // gradient per segment and smoother than a chain of circles.
-    function bodyPath() {
-      fctx.beginPath();
-      var started = false, lx = 0;
-      for (var s = 0; s < segs.length; s++) {
-        var q = segs[s];
-        // break the path at a wall wrap so it never draws a line across the screen
-        if (started && Math.abs(q.x - lx) > 60) started = false;
-        if (!started) { fctx.moveTo(q.x, q.y); started = true; }
-        else fctx.lineTo(q.x, q.y);
-        lx = q.x;
+      var fx = snake.fx[i], p = fx.t / 34;
+      nctx.beginPath();
+      nctx.arc(fx.x, fx.y, fx.r + p * 36, 0, 6.2832);
+      nctx.strokeStyle = 'rgba(110,231,183,' + (0.55 * (1 - p)).toFixed(3) + ')';
+      nctx.lineWidth = 2.4 * (1 - p) + 0.4;
+      nctx.stroke();
+      if (fx.p) {
+        nctx.fillStyle = 'rgba(180,255,225,' + (0.85 * (1 - p)).toFixed(3) + ')';
+        for (var q = 0; q < fx.p.length; q++) {
+          nctx.beginPath();
+          nctx.arc(fx.p[q].x, fx.p[q].y, 1.8 * (1 - p) + 0.4, 0, 6.2832);
+          nctx.fill();
+        }
       }
     }
-    fctx.lineCap = 'round';
-    fctx.lineJoin = 'round';
-    bodyPath();
-    fctx.strokeStyle = 'rgba(147,112,219,0.15)';
-    fctx.lineWidth = 17;
-    fctx.stroke();
-    bodyPath();
-    var hg = fctx.createLinearGradient(segs[0].x - 50, segs[0].y - 50, segs[0].x + 50, segs[0].y + 50);
-    hg.addColorStop(0, 'rgba(203,184,242,0.95)');
-    hg.addColorStop(1, 'rgba(92,54,162,0.80)');
-    fctx.strokeStyle = hg;
-    fctx.lineWidth = 8;
-    fctx.stroke();
-    bodyPath();
-    fctx.strokeStyle = 'rgba(232,226,255,0.42)';
-    fctx.lineWidth = 2.3;
-    fctx.stroke();
-    // HEAD + EYE (pale Byakugan violet, looking where it is going)
-    var e0 = segs[0];
-    fctx.beginPath();
-    fctx.arc(e0.x, e0.y, 6.2, 0, 6.2832);
-    fctx.fillStyle = '#c9b6f2';
-    fctx.shadowColor = 'rgba(167,139,250,0.9)';
-    fctx.shadowBlur = 15;
-    fctx.fill();
-    fctx.shadowBlur = 0;
-    var ex2 = e0.x + Math.cos(snake.head.a) * 2.6;
-    var ey2 = e0.y + Math.sin(snake.head.a) * 2.6;
-    fctx.beginPath(); fctx.arc(ex2, ey2, 2.2, 0, 6.2832);
-    fctx.fillStyle = '#f4f0ff'; fctx.fill();
-    fctx.beginPath();
-    fctx.arc(ex2 + Math.cos(snake.head.a) * 0.9, ey2 + Math.sin(snake.head.a) * 0.9, 1.0, 0, 6.2832);
-    fctx.fillStyle = '#3b2a63'; fctx.fill();
+
+    var n = segs.length;
+    var GRP = 5;   // segments per stroke run: enough for a smooth taper, few enough ops
+    nctx.lineCap = 'round';
+    nctx.lineJoin = 'round';
+    function ribbon(from, to, width, style, alpha) {
+      if (to <= from) return;
+      nctx.beginPath();
+      nctx.moveTo(segs[from].x, segs[from].y);
+      for (var s = from + 1; s <= to; s++) nctx.lineTo(segs[s].x, segs[s].y);
+      nctx.strokeStyle = style;
+      nctx.globalAlpha = alpha;
+      nctx.lineWidth = width;
+      nctx.stroke();
+      nctx.globalAlpha = 1;
+    }
+    function widthAt(idx) {
+      var t = idx / n;                       // 0 = tail, 1 = head
+      return 0.9 + 15.5 * Math.pow(t, 0.95); // tapers to a point, not a blunt cut
+    }
+    // GLOW - only the front 60% glows, so the head reads as the hot end.
+    for (var g = Math.floor(n * 0.40); g < n - 1; g += GRP) {
+      var ge = Math.min(g + GRP, n - 1);
+      ribbon(g, ge, widthAt(g) + 8, 'rgba(150,112,225,0.10)', 1);
+    }
+    // BODY - one gradient from the pale head to the deep violet tail.
+    var grd = nctx.createLinearGradient(segs[0].x, segs[0].y, segs[n - 1].x, segs[n - 1].y);
+    grd.addColorStop(0, '#e6dcff');
+    grd.addColorStop(0.32, '#b79aef');
+    grd.addColorStop(1, '#553394');
+    for (var g2 = 0; g2 < n - 1; g2 += GRP) {
+      var ge2 = Math.min(g2 + GRP, n - 1);
+      ribbon(g2, ge2, widthAt(g2), grd, 1);
+    }
+    // SPINE - a thin wet highlight along the front half.
+    for (var g3 = Math.floor(n * 0.55); g3 < n - 1; g3 += GRP) {
+      var ge3 = Math.min(g3 + GRP, n - 1);
+      ribbon(g3, ge3, Math.max(0.7, 0.9 + 2.1 * (g3 / n)), 'rgba(255,250,255,0.32)', 1);
+    }
+    // SCALES - faint marks that give the body texture.
+    nctx.fillStyle = 'rgba(72,40,138,0.26)';
+    for (var s2 = 6; s2 < n - 3; s2 += 7) {
+      var q2 = segs[s2], r2 = segs[s2 + 2];
+      var ang = Math.atan2(r2.y - q2.y, r2.x - q2.x);
+      var ww = 1.3 + 3.0 * (s2 / n);
+      nctx.beginPath();
+      nctx.ellipse(q2.x, q2.y, ww * 0.95, ww * 0.40, ang, 0, 6.2832);
+      nctx.fill();
+    }
+    // HEAD - a real head: snout, two eyes, nostrils, and a tongue flick.
+    var hx = h.x, hy = h.y, ha = h.a;
+    nctx.save();
+    nctx.translate(hx, hy);
+    nctx.rotate(ha);
+    nctx.shadowColor = 'rgba(167,139,250,0.95)';
+    nctx.shadowBlur = 28;
+    nctx.beginPath();
+    nctx.ellipse(0, 0, 16.5, 12.4, 0, 0, 6.2832);
+    nctx.fillStyle = '#cdb9f7';
+    nctx.fill();
+    nctx.shadowBlur = 0;
+    nctx.beginPath();
+    nctx.ellipse(4.6, 0, 9.4, 7.4, 0, 0, 6.2832);
+    nctx.fillStyle = 'rgba(236,228,255,0.5)';
+    nctx.fill();
+    nctx.fillStyle = '#1b1033';
+    nctx.beginPath(); nctx.ellipse(4.6, -6.2, 3.5, 2.9, 0, 0, 6.2832); nctx.fill();
+    nctx.beginPath(); nctx.ellipse(4.6, 6.2, 3.5, 2.9, 0, 0, 6.2832); nctx.fill();
+    nctx.fillStyle = '#fdfbff';
+    nctx.beginPath(); nctx.arc(6.0, -6.8, 1.55, 0, 6.2832); nctx.fill();
+    nctx.beginPath(); nctx.arc(6.0, 6.8, 1.55, 0, 6.2832); nctx.fill();
+    nctx.fillStyle = 'rgba(56,30,100,0.55)';
+    nctx.beginPath(); nctx.arc(13.8, -2.8, 1.1, 0, 6.2832); nctx.fill();
+    nctx.beginPath(); nctx.arc(13.8, 2.8, 1.1, 0, 6.2832); nctx.fill();
+    nctx.restore();
+    if (h.tongue > 0) {
+      var tk = Math.min(1, h.tongue / 10);
+      var tx = hx + Math.cos(ha) * 15, ty = hy + Math.sin(ha) * 15;
+      var tipx = tx + Math.cos(ha) * 10 * tk, tipy = ty + Math.sin(ha) * 10 * tk;
+      nctx.strokeStyle = 'rgba(244,114,182,' + (0.85 * tk).toFixed(2) + ')';
+      nctx.lineWidth = 1.7;
+      nctx.beginPath();
+      nctx.moveTo(tx, ty); nctx.lineTo(tipx, tipy);
+      nctx.moveTo(tipx, tipy);
+      nctx.lineTo(tipx + Math.cos(ha + 0.55) * 4.5, tipy + Math.sin(ha + 0.55) * 4.5);
+      nctx.moveTo(tipx, tipy);
+      nctx.lineTo(tipx + Math.cos(ha - 0.55) * 4.5, tipy + Math.sin(ha - 0.55) * 4.5);
+      nctx.stroke();
+    }
   }
 
   function stepField() {
     stepDots();
     stepFeed();
-    stepSnake();
-    publishFood();
+    var stepped = stepSnake();
+    if ((snake.tick % 5) === 0) publishFood();
+    return stepped;
   }
 
   function drawField() {
     if (!fctx) return;
     fctx.clearRect(0, 0, fieldW, fieldH);
     drawDots();
+  }
+
+  // THE CREATURE - its own layer, above the page, drawn every frame.
+  function drawCreature() {
+    if (!nctx) return;
+    nctx.clearRect(0, 0, fieldW, fieldH);
     drawFeed();
     drawSnake();
   }
@@ -1237,16 +1402,9 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
   window.__nvkeEat = function (id) {
     for (var i = 0; i < feed.length; i++) {
       if (feed[i].id === id) {
-        snake.fx.push({ x: feed[i].x, y: feed[i].y, t: 0, r: feed[i].r });
+        snakeBite(feed[i].x, feed[i].y, feed[i].r);
         feed.splice(i, 1);
-        snake.chits++;
-        if (snake.len < 420) {
-          snake.len++;
-          snake.segs.push({ x: snake.segs[snake.segs.length - 1].x, y: snake.segs[snake.segs.length - 1].y });
-        }
-        snakePersist();
-        snakeHud();
-        publishFood();
+        snakeGrow();
         return true;
       }
     }
@@ -1355,6 +1513,21 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
   /* ---- canvas 3D ---- */
   var canvas = document.getElementById('doorfx');
   var ctx = canvas ? canvas.getContext('2d') : null;
+  // The 3D stage only renders while it is actually on screen. Drawing a full
+  // 3D scene for an off-screen section is pure waste and it was costing the
+  // whole page its frame budget on the hero view.
+  var stageVisible = true;
+  var stageEl = document.getElementById('door-stage');
+  if (stageEl && window.IntersectionObserver) {
+    try {
+      var stageIO = new IntersectionObserver(function (entries) {
+        for (var i = 0; i < entries.length; i++) {
+          if (entries[i].target === stageEl) stageVisible = entries[i].isIntersecting;
+        }
+      }, { rootMargin: '160px 0px' });
+      stageIO.observe(stageEl);
+    } catch (e) { stageVisible = true; }
+  }
   var W = 0, H = 0, DPR = 1;
   var cam = { x: 0, y: 1.70, z: 0, yaw: 0, pitch: 0 };
   var FOCAL = 920;      // set from the canvas height in sizeCanvas()
@@ -1904,6 +2077,7 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     cam.pitch += (targetPitch - cam.pitch) * 0.055;
 
     // door state easing
+    if (!stageVisible) activeHover = -1;   // an off-screen stage cannot be stared at
     for (var i = 0; i < doorState.length; i++) {
       var st = doorState[i];
       // THE STARE CLOCK. The door under the pointer accrues time whether or not the
@@ -1942,13 +2116,14 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     }
 
     if (fieldRunning) {
-      // The background field only needs half the frames - its motion is glacial and
-      // the serpent self-throttles to 30fps anyway. The door scene keeps all 60.
-      stepField();
+      // The background dot field only needs half the frames - its motion is
+      // glacial. The creature and the door scene both keep all 60.
+      var stepped = stepField();
       fieldPhase = (fieldPhase + 1) & 1;
       if (!fieldPhase) drawField();
+      if (stepped) drawCreature();
     }
-    lastHits = drawScene() || [];
+    lastHits = stageVisible ? (drawScene() || []) : [];
   }
 
   function pointerMove(ev) {
@@ -2058,6 +2233,7 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
       ambBtn.textContent = 'Ambient: ' + (fieldRunning ? 'On' : 'Off');
       if (field && !fieldRunning) {
         fctx.clearRect(0, 0, fieldW, fieldH);
+        if (nctx) nctx.clearRect(0, 0, fieldW, fieldH);
       } else {
         publishFood();
       }
