@@ -1111,14 +1111,10 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
   }
 
   function stepDots() {
-    for (var i = 0; i < dots.length; i++) {
-      var d = dots[i];
-      d.x += d.vx;
-      d.y += d.vy;
-      if (d.y < -6) { d.y = fieldH + 6; d.x = Math.random() * fieldW; }
-      if (d.x < -6) d.x = fieldW + 6;
-      if (d.x > fieldW + 6) d.x = -6;
-    }
+    // THE SCENERY DOES NOT DRIFT. The dots are a static starfield behind the page.
+    // They used to creep upward forever, which put a slow drift of moving pixels
+    // behind every section of the site - including the showroom, where a still
+    // product row has to sit on a still background.
   }
 
   function drawDots() {
@@ -1200,20 +1196,19 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
   }
 
   function stepFeed() {
+    // THE FOOD HOLDS STILL. Pellets are placed once and stay where they are until
+    // they are eaten. The old version made them drift up the viewport and pulse on
+    // a live clock - ten pulsing dots crawling across the page at all times.
     for (var i = 0; i < feed.length; i++) {
-      var f = feed[i];
-      f.born++;
-      f.x += f.vx; f.y += f.vy;
-      if (f.y < -14) { f.y = fieldH + 14; f.x = Math.random() * fieldW; }
-      if (f.x < -14) f.x = fieldW + 14;
-      if (f.x > fieldW + 14) f.x = -14;
+      feed[i].born++;
     }
   }
 
   function drawFeed() {
     if (!nctx) return;
     var sp = feedSprite();
-    var t = performance.now();
+    // No live clock: the glow is static, each pellet keeps its own phase.
+    var t = 0;
     for (var i = 0; i < feed.length; i++) {
       var f = feed[i];
       var pu = 0.72 + 0.28 * Math.sin(f.ph + t * 0.004);
@@ -1336,14 +1331,14 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
       // approach so it never overshoots and circles - the old defect.
       var want = Math.atan2(best.y - hy, best.x - hx);
       var diff = ((want - h.a + Math.PI * 3) % 6.2832) - Math.PI;
-      var cap = 0.17 + (dist < 140 ? 0.13 : 0);
+      var cap = 0.09 + (dist < 140 ? 0.06 : 0);
       h.a += Math.max(-cap, Math.min(cap, diff));
-      h.sp = dist < 90 ? 3.4 : (dist < 260 ? 6.0 : 7.6);
+      h.sp = dist < 90 ? 1.6 : (dist < 260 ? 2.4 : 3.0);
     } else {
-      h.turn += (Math.random() - 0.5) * 0.22;
-      h.turn = Math.max(-0.14, Math.min(0.14, h.turn));
+      h.turn += (Math.random() - 0.5) * 0.10;
+      h.turn = Math.max(-0.06, Math.min(0.06, h.turn));
       h.a += h.turn;
-      h.sp = 6.0;
+      h.sp = 2.4;
     }
     h.tongueCd--;
     if (h.tongueCd <= 0) { h.tongue = 10; h.tongueCd = 140 + Math.floor(Math.random() * 240); }
@@ -1684,7 +1679,12 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
   function stepField() {
     stepDots();
     stepFeed();
-    var stepped = stepSnake();
+    // THE SERPENT ONLY ROAMS OUTSIDE THE SHOWROOM. While the visitor is looking at
+    // the door row the creature holds its position - a bright body sliding across
+    // the viewport at 400+ px/s is the same shake the Director is complaining
+    // about, wearing a different hat.
+    var stepped = false;
+    if (!showroomFocus) stepped = stepSnake();
     if ((snake.tick % 5) === 0) publishFood();
     return stepped;
   }
@@ -1875,7 +1875,6 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
   var cam = { x: 0, y: 1.70, z: 0, yaw: 0, pitch: 0 };
   var FOCAL = 920;      // set from the canvas height in sizeCanvas()
   var ROW_Z = 10;       // world distance of the door row from the camera
-  var targetYaw = 0, targetPitch = 0;
   var pointer = { x: -9999, y: -9999, inside: false };
   var activeHover = -1;   // index of the door currently under the pointer (-1 = none)
   var doorState = [];
@@ -2624,13 +2623,16 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     // mist in the NEAR plane is drawn after the doors so the fog passes in front of
     // the products. That single ordering decision is what turns a 2D canvas into a
     // room with air in it.
-    var tSec = ((window.performance && performance.now) ? performance.now() : Date.now()) * 0.001;
-    // THE STAGE CLOCK. While the visitor is not interacting, the stage renders from
-    // a held clock: stars, fog and doors all draw from the same frozen instant, so
-    // an idle door row is pixel-still (measured 0 changed px/frame). The moment the
-    // pointer enters the canvas, the clock resumes at real time.
-    if (pointer.inside || activeHover >= 0) stageT = tSec;   // interacting: live clock
-    drawStars(stageT);                                        // idle: held clock
+    // THE STAGE CLOCK IS FROZEN - PERMANENTLY.
+    //
+    // First attempt held it only while the pointer was OUTSIDE the canvas. That was
+    // the wrong condition: the instant the cursor touched the scene the clock went
+    // live and the whole room started moving again (measured on the live site: the
+    // door canvas changed 20% of its pixels over 4 s with the cursor parked on the
+    // stage). The showroom is a still room. Stars, fog and door dust all draw from
+    // ONE frozen instant - always. The only motion left in this scene is the
+    // deliberate answer to a visitor's own action (hover/click opens a door).
+    drawStars(stageT);
     renderMistLayer(false, stageT);
 
     // floor haze - a low violet bed of light so the doors stand IN something.
@@ -2655,8 +2657,8 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
 
   var lastHits = [];
   var lastFrame = 0;
-  var fieldPhase = 0;
-  var stageT = 0;   // the stage's own clock - held still while the visitor is idle
+  var stageT = 0;        // the stage's frozen clock - it never advances
+  var showroomFocus = false;   // true while the showroom section is on screen
 
   function frame(ts) {
     requestAnimationFrame(frame);
@@ -2666,15 +2668,15 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     if (!fieldRunning && ts - lastFrame < 200) return;
     lastFrame = ts;
 
-    // smooth camera parallax. The camera reads the pointer only. There is NO
-    // idle self-sway: a door row that wobbles on its own reads as a shake bug,
-    // not as a room - the fog, stars and door swings keep the scene alive.
-    if (!pointer.inside) {
-      targetYaw = 0;
-      targetPitch = 0;
-    }
-    cam.yaw += (targetYaw - cam.yaw) * 0.055;
-    cam.pitch += (targetPitch - cam.pitch) * 0.055;
+    // THE CAMERA NEVER MOVES.
+    //
+    // Pointer parallax was the other half of the shake: the camera yawed toward the
+    // cursor (+-0.34 rad) and pitched with it (+-0.20 rad), so ANY mouse movement
+    // dragged the entire door row across the screen - measured: 4% of the door
+    // canvas changed within 2 s of a 4 px mouse move. A showroom that lurches when
+    // you move your hand reads as broken, not as alive. The camera is bolted down.
+    cam.yaw = 0;
+    cam.pitch = 0;
 
     // door state easing
     if (!stageVisible) activeHover = -1;   // an off-screen stage cannot be stared at
@@ -2721,12 +2723,15 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     }
 
     if (fieldRunning) {
-      // The background dot field only needs half the frames - its motion is
-      // glacial. The creature and the door scene both keep all 60.
-      var stepped = stepField();
-      fieldPhase = (fieldPhase + 1) & 1;
-      if (!fieldPhase) drawField();
-      if (stepped) drawCreature();
+      // The scenery is still. The dots do not drift, the food does not pulse and the
+      // serpent only roams when the visitor is somewhere OTHER than the showroom -
+      // a mascot sprinting across the screen while you are reading the products is
+      // the same shake by another name.
+      var dr = doorsSecEl ? doorsSecEl.getBoundingClientRect() : null;
+      showroomFocus = !!(dr && dr.bottom > -24 && dr.top < fieldH + 24 && dr.right > -24 && dr.left < fieldW + 24);
+      stepField();
+      drawField();
+      drawCreature();
     }
     lastHits = stageVisible ? (drawScene() || []) : [];
   }
@@ -2737,8 +2742,9 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     pointer.x = ev.clientX - r.left;
     pointer.y = ev.clientY - r.top;
     pointer.inside = true;
-    targetYaw = ((pointer.x / Math.max(1, r.width)) - 0.5) * 0.34;
-    targetPitch = ((pointer.y / Math.max(1, r.height)) - 0.5) * 0.20;
+    // NOTE: the camera used to yaw/pitch toward this point. It does not any more -
+    // the showroom is bolted to the viewport. The pointer is read for HIT-TESTING
+    // only: which door the visitor is pointing at.
 
     var best = -1, bestD = 1e9;
     for (var i = 0; i < lastHits.length; i++) {
@@ -2766,7 +2772,6 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
 
   function pointerLeave() {
     pointer.inside = false;
-    targetYaw = 0; targetPitch = 0;
     activeHover = -1;
     for (var j = 0; j < doorState.length; j++) {
       doorState[j].hoverTarget = 0;
