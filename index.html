@@ -309,8 +309,12 @@ h2 .em{background:linear-gradient(100deg,var(--vio),var(--mag));-webkit-backgrou
 .sec-sub{color:var(--dim);margin-top:14px;font-size:15px}
 
 /* ---------- 3D doors ---------- */
+/* The stage background is OPAQUE on purpose: the ambient dot field (#field, z-0)
+   sits behind the page, and a translucent stage let its drifting dots show through
+   the door row - motion where the visitor expects stillness. */
 #door-stage{position:relative;height:clamp(320px,46vh,460px);border-radius:22px;overflow:hidden;
-  border:1px solid var(--line);background:radial-gradient(ellipse at 50% 120%,rgba(124,58,237,.20),rgba(8,5,15,.28) 62%);
+  border:1px solid var(--line);background-color:#0a0714;
+  background-image:radial-gradient(ellipse at 50% 120%,rgba(124,58,237,.34),rgba(8,5,15,.97) 62%);
   box-shadow:var(--shadow),0 0 110px -30px rgba(124,58,237,.65),inset 0 0 0 1px rgba(167,139,250,.07)}
 #doorfx{position:absolute;inset:0;width:100%;height:100%;display:block}
 /* THE STARE REVEAL - the reward for actually looking at a door */
@@ -1040,6 +1044,7 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
   // panel - the "only half of it shows" defect.
   var nvkeCv = document.getElementById('nvke');
   var nctx = nvkeCv ? nvkeCv.getContext('2d') : null;
+  var doorsSecEl = document.getElementById('doors');   // the showroom section the serpent must not cross
   var dots = [];
   var fieldRunning = true;
   var fieldW = 0, fieldH = 0, fieldDPR = 1;
@@ -1694,8 +1699,25 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
   function drawCreature() {
     if (!nctx) return;
     nctx.clearRect(0, 0, fieldW, fieldH);
-    drawFeed();
-    drawSnake();
+    // THE SERPENT NEVER CROSSES THE SHOWROOM. While the #doors section is on
+    // screen the creature layer is clipped to everything EXCEPT that section, so
+    // no moving pixels ever land on the door row - the serpent slides behind the
+    // showroom instead of over it. Everywhere else on the page it roams freely.
+    var r = doorsSecEl ? doorsSecEl.getBoundingClientRect() : null;
+    if (r && r.bottom > -24 && r.top < fieldH + 24 && r.right > -24 && r.left < fieldW + 24) {
+      var pad = 18;
+      nctx.save();
+      nctx.beginPath();
+      nctx.rect(0, 0, fieldW, fieldH);
+      nctx.rect(r.left - pad, r.top - pad, r.width + pad * 2, r.height + pad * 2);
+      nctx.clip('evenodd');
+      drawFeed();
+      drawSnake();
+      nctx.restore();
+    } else {
+      drawFeed();
+      drawSnake();
+    }
   }
 
   /* THE BRIDGE. The desktop Ghvst creature reads these pellet positions and eats
@@ -1865,9 +1887,9 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
   var STATE_BY_ID = {};
   for (var sj = 0; sj < doorState.length; sj++) STATE_BY_ID[doorState[sj].id] = doorState[sj];
 
-  // AUTO-SHOWCASE: when nobody is pointing at the stage, the showroom demos
-  // itself - the open door cycles through the four products every few seconds.
-  var showcaseT = 0, showcaseIdx = 0;
+  // NO AUTO-SHOWCASE - deliberate. An idle showroom never moves a door by itself:
+  // the open door only changes when the visitor hovers, stares or clicks. A door
+  // swinging open/shut every few seconds reads as a shake bug, not as a demo.
 
   // The selected product's door stands OPEN from the first frame - a showroom with
   // every door shut is a wall. The pointer only ever changes which one is open.
@@ -1988,7 +2010,7 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     return out;
   }
 
-  function drawDoor(d, state, index) {
+  function drawDoor(d, state, index, tSec) {
     // The door row is sized in PIXELS first, then converted to world units using the
     // projection scale. That keeps the showroom framed correctly on every viewport.
     var s0 = FOCAL / ROW_Z;
@@ -2016,7 +2038,7 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     ctx.fill();
 
     /* --- THE PATHWAY: a stairway climbing away into light --- */
-    if (open > 0.02) drawPathway(d, tx, ry, hw, worldH, open, recPts, doorPx);
+    if (open > 0.02) drawPathway(d, tx, ry, hw, worldH, open, recPts, doorPx, tSec);
 
     /* --- THE FRAME: a brushed-metal jamb around the opening --- */
     var fg = ctx.createLinearGradient(recPts[3].x, recPts[3].y, recPts[1].x, recPts[1].y);
@@ -2253,8 +2275,10 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
      a stairway climbs away from the camera into white light, with dust turning in
      the beam. It is the one image that says "success" without spending a word.
      ------------------------------------------------------------ */
-  function drawPathway(d, tx, ry, hw, worldH, open, recPts, doorPx) {
-    var tSec = performance.now() * 0.001;
+  function drawPathway(d, tx, ry, hw, worldH, open, recPts, doorPx, tSec) {
+    // tSec is the STAGE clock, passed in from drawScene. While the visitor is idle
+    // it is HELD, so the dust in the beam freezes with everything else - a door
+    // whose interior shimmers forever reads as a shake bug.
     var steps = 6, stepD = 0.58, stepH = 0.26;
     var z0 = ROW_Z + 0.55;
     var halfW = hw * 0.80;
@@ -2601,8 +2625,13 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     // the products. That single ordering decision is what turns a 2D canvas into a
     // room with air in it.
     var tSec = ((window.performance && performance.now) ? performance.now() : Date.now()) * 0.001;
-    drawStars(tSec);
-    renderMistLayer(false, tSec);
+    // THE STAGE CLOCK. While the visitor is not interacting, the stage renders from
+    // a held clock: stars, fog and doors all draw from the same frozen instant, so
+    // an idle door row is pixel-still (measured 0 changed px/frame). The moment the
+    // pointer enters the canvas, the clock resumes at real time.
+    if (pointer.inside || activeHover >= 0) stageT = tSec;   // interacting: live clock
+    drawStars(stageT);                                        // idle: held clock
+    renderMistLayer(false, stageT);
 
     // floor haze - a low violet bed of light so the doors stand IN something.
     // Pre-rendered at resize: two full-canvas gradient fills per frame was pure
@@ -2611,11 +2640,12 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
 
     var hits = [];
     for (var i = 0; i < DOORS.length; i++) {
-      hits.push(drawDoor(DOORS[i], STATE_BY_ID[DOORS[i].id], i));
+      hits.push(drawDoor(DOORS[i], STATE_BY_ID[DOORS[i].id], i, stageT));
     }
 
     // the near fog and the wisps go OVER the doors - Hidden Mist, not a background
-    renderMistLayer(true, tSec);
+    // (same held clock: while idle this layer is frozen too, so door pixels never move)
+    renderMistLayer(true, stageT);
 
     // vignette (pre-rendered with the haze)
     if (vigCv) ctx.drawImage(vigCv, 0, 0, W, H);
@@ -2626,6 +2656,7 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
   var lastHits = [];
   var lastFrame = 0;
   var fieldPhase = 0;
+  var stageT = 0;   // the stage's own clock - held still while the visitor is idle
 
   function frame(ts) {
     requestAnimationFrame(frame);
@@ -2660,18 +2691,9 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
       st.stare += (st.stareTarget - st.stare) * 0.10;
     }
 
-    // auto-showcase: only while the stage is on screen and nobody is hovering
-    if (stageVisible && !pointer.inside && activeHover < 0 && !REDUCED) {
-      showcaseT += dt;
-      if (showcaseT > 4500) {
-        showcaseT = 0;
-        showcaseIdx = (showcaseIdx + 1) % DOORS.length;
-        fillDetail(DOORS[showcaseIdx].id);
-        applyOpenTargets();
-      }
-    } else {
-      showcaseT = 0;
-    }
+    // IDLE = STILL. There is no auto-showcase: while nobody is interacting, no
+    // door swings and the detail card never changes by itself. The selected door
+    // stays exactly where it is until the visitor acts.
 
     // THE STARE REVEAL. The door that is being looked at answers back: its name, its
     // real price and the exact way to get it, right where the eye already is.
@@ -2763,6 +2785,7 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
       var dx = px - h.cx, dy = py - h.cy;
       if (Math.sqrt(dx * dx + dy * dy) < h.rad) {
         fillDetail(DOORS[i].id);
+        applyOpenTargets();   // a click opens the door immediately, no pointermove needed
         return;
       }
     }
