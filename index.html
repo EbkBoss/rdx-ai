@@ -2238,10 +2238,12 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     ctx.fillStyle = hexA(accent, 0.88);
     ctx.fillText(d.price, labelY.x, labelY.y + Math.max(13, doorPx * 0.09));
 
-    /* --- hit region --- */
-    var cx = (panPts[0].x + panPts[1].x + panPts[2].x + panPts[3].x) / 4;
-    var cy = (panPts[0].y + panPts[1].y + panPts[2].y + panPts[3].y) / 4;
-    var rad = Math.max(Math.abs(panPts[1].x - panPts[0].x), Math.abs(panPts[3].y - panPts[0].y)) * 0.62;
+    /* --- hit region: the DOORWAY (the recess never rotates), not the swung leaf.
+           If the leaf carried the hit test, a fully-open door would move its own
+           target sideways and hovering the open doorway would miss entirely. --- */
+    var cx = (recPts[0].x + recPts[1].x + recPts[2].x + recPts[3].x) / 4;
+    var cy = (recPts[0].y + recPts[1].y + recPts[2].y + recPts[3].y) / 4;
+    var rad = Math.max(Math.abs(recPts[1].x - recPts[0].x), Math.abs(recPts[3].y - recPts[0].y)) * 0.62;
     return { cx: cx, cy: cy, rad: rad };
   }
 
@@ -2633,13 +2635,12 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     if (!fieldRunning && ts - lastFrame < 200) return;
     lastFrame = ts;
 
-    // smooth camera parallax. The camera reads the pointer, and when nobody is
-    // pointing it breathes on its own - a room that stops moving looks like a
-    // screenshot, and a screenshot gets one glance, not a stare.
+    // smooth camera parallax. The camera reads the pointer only. There is NO
+    // idle self-sway: a door row that wobbles on its own reads as a shake bug,
+    // not as a room - the fog, stars and door swings keep the scene alive.
     if (!pointer.inside) {
-      var idleT = ts * 0.00021;
-      targetYaw = Math.sin(idleT) * 0.058;
-      targetPitch = Math.sin(idleT * 0.72 + 1.1) * 0.030;
+      targetYaw = 0;
+      targetPitch = 0;
     }
     cam.yaw += (targetYaw - cam.yaw) * 0.055;
     cam.pitch += (targetPitch - cam.pitch) * 0.055;
