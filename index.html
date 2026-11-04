@@ -332,6 +332,9 @@ h2 .em{background:linear-gradient(100deg,var(--vio),var(--mag));-webkit-backgrou
 .door-detail h3{font-size:23px;font-weight:800;margin-bottom:6px}
 .door-detail .price-big{font-size:30px;font-weight:850;color:var(--gold);letter-spacing:-.02em}
 .door-detail p{color:var(--dim);font-size:14.5px;margin-top:10px}
+.door-detail .path-note{margin-top:8px;font-size:12.5px;font-weight:700;letter-spacing:.02em;
+  text-transform:none;color:var(--vio);opacity:.95}
+.stare .pathline{font-size:11.5px;color:var(--dim);max-width:340px;line-height:1.4}
 .door-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
 .facts{list-style:none;margin-top:16px;display:grid;gap:8px}
 .facts li{font-size:13.5px;color:#c6b8e6;padding-left:26px;position:relative}
@@ -527,6 +530,7 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     <div>
       <h3 id="dd-title">Ghvst Browser</h3>
       <div class="price-big" id="dd-price">$19 Android · $49 PC</div>
+      <p class="path-note" id="dd-path"></p>
       <p id="dd-desc"></p>
       <ul class="facts" id="dd-facts"></ul>
     </div>
@@ -1096,10 +1100,11 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
   var LEN_KEY = 'nvke_len', CHITS_KEY = 'nvke_chits';
   var MAX_LEN = 220;          // hard ceiling: a longer body is a smear, not a creature
   var START_LEN = 40;
+  var SEG_STEP = 8;           // the fixed distance between two body segments (px)
   var CREATURE_HALF = false;  // phones run the creature at 30fps
   var nvkeHud = document.getElementById('nvkeHud');
   var snake = {
-    segs: [], len: START_LEN, chits: 0, fx: [], tick: 0,
+    segs: [], path: [], len: START_LEN, chits: 0, fx: [], tick: 0, phase: 0,
     head: { x: 0, y: 0, a: 0, sp: 6, turn: 0, tongue: 0, tongueCd: 90 }
   };
 
@@ -1139,7 +1144,14 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     h.tongueCd = 90 + Math.floor(Math.random() * 200);
     snake.segs = [];
     for (var i = 0; i < snake.len; i++) {
-      snake.segs.push({ x: h.x - i * 6, y: h.y });
+      snake.segs.push({ x: h.x - i * SEG_STEP, y: h.y });
+    }
+    // THE TRAIL. The body is not a chain of springs - it is the exact route the
+    // head has already travelled. Because it can only ever follow where the head
+    // has been, it can never knot itself into the pretzel the old integrator made.
+    snake.path = [];
+    for (var p = 0; p < snake.len * SEG_STEP + 60; p += 6) {
+      snake.path.push({ x: h.x - Math.cos(h.a) * p, y: h.y - Math.sin(h.a) * p });
     }
   }
 
@@ -1170,8 +1182,7 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     if (segs.length < 2) return false;
     snake.tick++;
     if (CREATURE_HALF && (snake.tick % 2)) return false;   // phones: 30fps creature
-    var hx = h.x, hy = h.y, best = null, bd = 1e18, i;
-    for (i = 0; i < feed.length; i++) {
+    var hx = h.x, hy = h.y, best = null, bd = 1e18, i;    for (i = 0; i < feed.length; i++) {
       var f = feed[i];
       var dx = f.x - hx, dy = f.y - hy, d2 = dx * dx + dy * dy;
       if (d2 < bd) { bd = d2; best = f; }
@@ -1195,9 +1206,15 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     if (h.tongueCd <= 0) { h.tongue = 10; h.tongueCd = 140 + Math.floor(Math.random() * 240); }
     if (h.tongue > 0) h.tongue--;
 
+    // THE SWIM. A serpent travels as a travelling wave: its heading oscillates, so
+    // the path it leaves behind is a chain of S-curves - and the body, sampled from
+    // that path, undulates for free. Without this the trail is a straight line and
+    // the creature looks like a pipe.
+    snake.phase += 0.052;
+    h.a += Math.sin(snake.phase) * 0.085 + Math.sin(snake.phase * 2.27 + 1.1) * 0.028;
+
     var nx = hx + Math.cos(h.a) * h.sp;
-    var ny = hy + Math.sin(h.a) * h.sp;
-    var m = 28, dxw = 0, dyw = 0;
+    var ny = hy + Math.sin(h.a) * h.sp;    var m = 28, dxw = 0, dyw = 0;
     if (nx < -m) { nx = fieldW + m; dxw = fieldW + 2 * m; }
     else if (nx > fieldW + m) { nx = -m; dxw = -(fieldW + 2 * m); }
     if (ny < -m) { ny = fieldH + m; dyw = fieldH + 2 * m; }
@@ -1212,15 +1229,57 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     // an even spacing. This is what makes it read as ONE creature instead of a
     // chain of separate dots.
     segs[0].x = nx; segs[0].y = ny;
-    for (i = 1; i < segs.length; i++) {
-      var px = segs[i - 1].x, py = segs[i - 1].y;
-      var vx = segs[i].x - px, vy = segs[i].y - py;
-      var d = Math.sqrt(vx * vx + vy * vy);
-      if (d > 0.001) {
-        var step = Math.min(d, h.sp);
-        segs[i].x = px + (vx / d) * step;
-        segs[i].y = py + (vy / d) * step;
+
+    /* THE TRAIL. The body is the ROUTE the head has already travelled - not a chain
+       of springs. The old integrator added a perpendicular wave offset to every
+       segment on every frame; because each segment was derived from the one in
+       front of it, those offsets ACCUMULATED and the body tied itself into a
+       pretzel. Sampling one stored path can never do that: the body is always
+       exactly where the head has been. */
+    var path = snake.path;
+    if (dxw || dyw) {
+      for (i = 0; i < path.length; i++) { path[i].x += dxw; path[i].y += dyw; }
+    }
+    var lastP = path[path.length - 1];
+    if (!lastP || (nx - lastP.x) * (nx - lastP.x) + (ny - lastP.y) * (ny - lastP.y) > 1.2) {
+      path.push({ x: nx, y: ny });
+    }
+    // drop the oldest samples once the trail is longer than the body needs
+    var need = segs.length * SEG_STEP + 48;
+    var total = 0, trimTo = 0;
+    for (i = path.length - 1; i > 0; i--) {
+      total += Math.sqrt((path[i].x - path[i - 1].x) * (path[i].x - path[i - 1].x)
+        + (path[i].y - path[i - 1].y) * (path[i].y - path[i - 1].y));
+      if (total > need) { trimTo = i; break; }
+    }
+    if (trimTo > 1) path.splice(0, trimTo - 1);
+
+    // RESAMPLE the trail at exact SEG_STEP intervals. Constant spacing is what a
+    // real body has; it is also what makes the taper smooth instead of lumpy.
+    var want = SEG_STEP, acc = 0, si = 1;
+    var px2 = nx, py2 = ny;
+    for (var pi = path.length - 2; pi >= 0 && si < segs.length; pi--) {
+      var cur = path[pi];
+      var vx2 = cur.x - px2, vy2 = cur.y - py2;
+      var segd = Math.sqrt(vx2 * vx2 + vy2 * vy2);
+      if (segd > 0.0001) {
+        while (acc + segd >= want && si < segs.length) {
+          var tt2 = (want - acc) / segd;
+          segs[si].x = px2 + vx2 * tt2;
+          segs[si].y = py2 + vy2 * tt2;
+          si++;
+          want += SEG_STEP;
+        }
       }
+      acc += segd;
+      px2 = cur.x; py2 = cur.y;
+    }
+    // trail shorter than the body (first frames, or right after a wrap): finish
+    // straight out of the tail rather than leave a gap
+    while (si < segs.length) {
+      segs[si].x = segs[si - 1].x - Math.cos(h.a) * SEG_STEP;
+      segs[si].y = segs[si - 1].y - Math.sin(h.a) * SEG_STEP;
+      si++;
     }
     // EAT
     for (i = feed.length - 1; i >= 0; i--) {
@@ -1273,91 +1332,208 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     }
 
     var n = segs.length;
-    var GRP = 5;   // segments per stroke run: enough for a smooth taper, few enough ops
+
+    /* THE BODY is ONE shape. Drawing it as a stack of overlapping strokes - the old
+       way - gives a rope of blobs with visible joints, and every joint is a place
+       where a naive eye says "that is a mouse tail". A single closed polygon that
+       follows the trail and tapers like a real serpent reads instantly as a snake. */
+    function halfWidth(t) {            // t: 0 at the neck, 1 at the tail tip
+      // A constrictor's body is THICKER than its head, and it swells just behind
+      // the jaw before tapering to the tail tip. A body that is widest at the neck
+      // is what makes a creature read as a lollipop.
+      var grow = 0.58 + 0.42 * Math.min(1, t / 0.20);
+      var taper = Math.pow(Math.max(0, 1 - Math.max(0, t - 0.20) / 0.80), 0.72);
+      return 12.4 * grow * taper;
+    }
+    // normals along the centerline
+    var NL = [], NR = [];
+    for (var bi = 0; bi < n; bi++) {
+      var a0 = segs[Math.max(0, bi - 1)], a1 = segs[Math.min(n - 1, bi + 1)];
+      var dxb = a1.x - a0.x, dyb = a1.y - a0.y;
+      var db = Math.sqrt(dxb * dxb + dyb * dyb) || 1;
+      var uxb = dxb / db, uyb = dyb / db;
+      var hwb = halfWidth(bi / (n - 1));
+      NL.push({ x: segs[bi].x - uyb * hwb, y: segs[bi].y + uxb * hwb });
+      NR.push({ x: segs[bi].x + uyb * hwb, y: segs[bi].y - uxb * hwb });
+    }
+    function bodyPath() {
+      // Quadratic smoothing through the midpoints: a polyline through 40+ points
+      // at 8px spacing shows every corner as a flat facet. One curve pass and the
+      // silhouette becomes a body.
+      nctx.beginPath();
+      var p0 = NL[0], p1 = NL[1];
+      nctx.moveTo((p0.x + p1.x) / 2, (p0.y + p1.y) / 2);
+      for (var q2 = 1; q2 < n - 1; q2++) {
+        nctx.quadraticCurveTo(NL[q2].x, NL[q2].y, (NL[q2].x + NL[q2 + 1].x) / 2, (NL[q2].y + NL[q2 + 1].y) / 2);
+      }
+      nctx.lineTo(NL[n - 1].x, NL[n - 1].y);
+      nctx.lineTo(NR[n - 1].x, NR[n - 1].y);
+      for (var q3 = n - 1; q3 > 0; q3--) {
+        nctx.quadraticCurveTo(NR[q3].x, NR[q3].y, (NR[q3].x + NR[q3 - 1].x) / 2, (NR[q3].y + NR[q3 - 1].y) / 2);
+      }
+      nctx.lineTo(NR[0].x, NR[0].y);
+      nctx.closePath();
+    }
+    var grd = nctx.createLinearGradient(segs[0].x, segs[0].y, segs[n - 1].x, segs[n - 1].y);
+    grd.addColorStop(0, '#a888ea');
+    grd.addColorStop(0.25, '#8b62dd');
+    grd.addColorStop(0.62, '#6842b8');
+    grd.addColorStop(1, '#3a2070');
+    // the glow: cheap, once, on the whole silhouette rather than per stroke
+    nctx.save();
+    nctx.shadowColor = 'rgba(150,112,225,0.55)';
+    nctx.shadowBlur = 22;
+    bodyPath();
+    nctx.fillStyle = grd;
+    nctx.fill();
+    nctx.restore();
+    // the dark belly edge gives the tube volume, and at 1x it is the silhouette that
+    // separates the creature from the page behind it
+    nctx.strokeStyle = 'rgba(24,8,52,0.72)';
+    nctx.lineWidth = 1.7;
+    bodyPath();
+    nctx.stroke();
+    // dorsal highlight: a thin light run down the spine, front two thirds only
+    nctx.beginPath();
+    var spineEnd = Math.floor(n * 0.62);
+    nctx.moveTo(segs[0].x, segs[0].y);
+    for (var s3 = 1; s3 <= spineEnd; s3++) nctx.lineTo(segs[s3].x, segs[s3].y);
+    nctx.strokeStyle = 'rgba(248,240,255,0.34)';
+    nctx.lineWidth = 1.4;
+    nctx.lineCap = 'round';
+    nctx.stroke();
+    // SCALES - chevrons down the back, sized to the body so they sit INSIDE it.
     nctx.lineCap = 'round';
     nctx.lineJoin = 'round';
-    function ribbon(from, to, width, style, alpha) {
-      if (to <= from) return;
-      nctx.beginPath();
-      nctx.moveTo(segs[from].x, segs[from].y);
-      for (var s = from + 1; s <= to; s++) nctx.lineTo(segs[s].x, segs[s].y);
-      nctx.strokeStyle = style;
-      nctx.globalAlpha = alpha;
-      nctx.lineWidth = width;
-      nctx.stroke();
-      nctx.globalAlpha = 1;
-    }
-    function widthAt(idx) {
-      var t = idx / n;                       // 0 = tail, 1 = head
-      return 0.9 + 15.5 * Math.pow(t, 0.95); // tapers to a point, not a blunt cut
-    }
-    // GLOW - only the front 60% glows, so the head reads as the hot end.
-    for (var g = Math.floor(n * 0.40); g < n - 1; g += GRP) {
-      var ge = Math.min(g + GRP, n - 1);
-      ribbon(g, ge, widthAt(g) + 8, 'rgba(150,112,225,0.10)', 1);
-    }
-    // BODY - one gradient from the pale head to the deep violet tail.
-    var grd = nctx.createLinearGradient(segs[0].x, segs[0].y, segs[n - 1].x, segs[n - 1].y);
-    grd.addColorStop(0, '#e6dcff');
-    grd.addColorStop(0.32, '#b79aef');
-    grd.addColorStop(1, '#553394');
-    for (var g2 = 0; g2 < n - 1; g2 += GRP) {
-      var ge2 = Math.min(g2 + GRP, n - 1);
-      ribbon(g2, ge2, widthAt(g2), grd, 1);
-    }
-    // SPINE - a thin wet highlight along the front half.
-    for (var g3 = Math.floor(n * 0.55); g3 < n - 1; g3 += GRP) {
-      var ge3 = Math.min(g3 + GRP, n - 1);
-      ribbon(g3, ge3, Math.max(0.7, 0.9 + 2.1 * (g3 / n)), 'rgba(255,250,255,0.32)', 1);
-    }
-    // SCALES - faint marks that give the body texture.
-    nctx.fillStyle = 'rgba(72,40,138,0.26)';
-    for (var s2 = 6; s2 < n - 3; s2 += 7) {
-      var q2 = segs[s2], r2 = segs[s2 + 2];
+    for (var s2 = 4; s2 < n - 3; s2 += 6) {
+      var q2 = segs[s2], r2 = segs[s2 + 3];
       var ang = Math.atan2(r2.y - q2.y, r2.x - q2.x);
-      var ww = 1.3 + 3.0 * (s2 / n);
+      var nx2 = -Math.sin(ang), ny2 = Math.cos(ang);
+      var ww = halfWidth(s2 / (n - 1)) * 0.72;
+      if (ww < 1.1) continue;
       nctx.beginPath();
-      nctx.ellipse(q2.x, q2.y, ww * 0.95, ww * 0.40, ang, 0, 6.2832);
-      nctx.fill();
+      nctx.moveTo(q2.x + nx2 * ww, q2.y + ny2 * ww);
+      nctx.lineTo(q2.x + Math.cos(ang) * 2.6, q2.y + Math.sin(ang) * 2.6);
+      nctx.lineTo(q2.x - nx2 * ww, q2.y - ny2 * ww);
+      nctx.strokeStyle = 'rgba(30,12,60,0.26)';
+      nctx.lineWidth = 1.05;
+      nctx.stroke();
     }
-    // HEAD - a real head: snout, two eyes, nostrils, and a tongue flick.
+    /* DORSAL SADDLES. At a glance - which is how anyone ever looks at this - a smooth
+       purple tube is a ribbon. A pattern down the back is what makes the eye say
+       "snake" before it has time to read the shape at all. Clipped to the body path so
+       a saddle can never leak past the silhouette on a tight turn. */
+    nctx.save();
+    bodyPath();
+    nctx.clip();
+    for (var sd = 5; sd < n - 7; sd += 15) {
+      var A = segs[sd], B = segs[sd + 6];
+      var ax = Math.atan2(B.y - A.y, B.x - A.x);
+      var anx = -Math.sin(ax), any = Math.cos(ax);
+      var awA = halfWidth(sd / (n - 1)), awB = halfWidth((sd + 6) / (n - 1));
+      if (awA < 2.2) continue;
+      // a slight backward lean so the bands follow the taper instead of brick-stacking
+      var leanX = Math.cos(ax) * 3.2, leanY = Math.sin(ax) * 3.2;
+      nctx.beginPath();
+      nctx.moveTo(A.x + anx * awA, A.y + any * awA);
+      nctx.quadraticCurveTo(
+        (A.x + B.x) / 2 + anx * (awA + awB) * 0.52 + leanX,
+        (A.y + B.y) / 2 + any * (awA + awB) * 0.52 + leanY,
+        B.x + anx * awB, B.y + any * awB);
+      nctx.lineTo(B.x - anx * awB, B.y - any * awB);
+      nctx.quadraticCurveTo(
+        (A.x + B.x) / 2 - anx * (awA + awB) * 0.52 + leanX,
+        (A.y + B.y) / 2 - any * (awA + awB) * 0.52 + leanY,
+        A.x - anx * awA, A.y - any * awA);
+      nctx.closePath();
+      nctx.fillStyle = 'rgba(26,9,54,0.34)';
+      nctx.fill();
+      // the lit edge of each saddle - this is what reads as scales catching light
+      nctx.strokeStyle = 'rgba(206,180,255,0.20)';
+      nctx.lineWidth = 1;
+      nctx.stroke();
+    }
+    nctx.restore();
+    // HEAD - a serpent's skull: a long wedge with a blunt snout, a brow ridge, narrow
+    // amber eyes with VERTICAL slit pupils and a forked tongue. Big round eyes on a
+    // round skull read as a mouse; slit eyes on a wedge read as a snake.
     var hx = h.x, hy = h.y, ha = h.a;
     nctx.save();
     nctx.translate(hx, hy);
     nctx.rotate(ha);
-    nctx.shadowColor = 'rgba(167,139,250,0.95)';
-    nctx.shadowBlur = 28;
+    nctx.scale(1.2, 1.2);   // head geometry is authored at 1:1 and scaled once here
+    // skull: 22 long, 9.3 half-width - a touch wider than the neck, a touch narrower
+    // than the body's thickest point. That is the real constrictor ratio.
     nctx.beginPath();
-    nctx.ellipse(0, 0, 16.5, 12.4, 0, 0, 6.2832);
-    nctx.fillStyle = '#cdb9f7';
+    nctx.moveTo(22.0, 0);
+    nctx.bezierCurveTo(20.6, -4.8, 13.2, -9.1, 1.6, -9.3);
+    nctx.bezierCurveTo(-11.4, -9.3, -18.6, -6.2, -20.2, 0);
+    nctx.bezierCurveTo(-18.6, 6.2, -11.4, 9.3, 1.6, 9.3);
+    nctx.bezierCurveTo(13.2, 9.1, 20.6, 4.8, 22.0, 0);
+    nctx.closePath();
+    var hgr = nctx.createLinearGradient(0, -9.6, 0, 9.6);
+    hgr.addColorStop(0, '#cfb6ff');
+    hgr.addColorStop(0.36, '#9b76e2');
+    hgr.addColorStop(1, '#43257c');
+    nctx.fillStyle = hgr;
+    nctx.shadowColor = 'rgba(167,139,250,0.55)';
+    nctx.shadowBlur = 16;
     nctx.fill();
     nctx.shadowBlur = 0;
+    nctx.strokeStyle = 'rgba(30,14,62,0.7)';
+    nctx.lineWidth = 1.3;
+    nctx.stroke();
+    // jaw line - the crease that separates skull from jaw, and the single detail
+    // that stops the head reading as one smooth lump
+    nctx.strokeStyle = 'rgba(40,18,86,0.55)';
+    nctx.lineWidth = 1.2;
     nctx.beginPath();
-    nctx.ellipse(4.6, 0, 9.4, 7.4, 0, 0, 6.2832);
-    nctx.fillStyle = 'rgba(236,228,255,0.5)';
-    nctx.fill();
-    nctx.fillStyle = '#1b1033';
-    nctx.beginPath(); nctx.ellipse(4.6, -6.2, 3.5, 2.9, 0, 0, 6.2832); nctx.fill();
-    nctx.beginPath(); nctx.ellipse(4.6, 6.2, 3.5, 2.9, 0, 0, 6.2832); nctx.fill();
-    nctx.fillStyle = '#fdfbff';
-    nctx.beginPath(); nctx.arc(6.0, -6.8, 1.55, 0, 6.2832); nctx.fill();
-    nctx.beginPath(); nctx.arc(6.0, 6.8, 1.55, 0, 6.2832); nctx.fill();
-    nctx.fillStyle = 'rgba(56,30,100,0.55)';
-    nctx.beginPath(); nctx.arc(13.8, -2.8, 1.1, 0, 6.2832); nctx.fill();
-    nctx.beginPath(); nctx.arc(13.8, 2.8, 1.1, 0, 6.2832); nctx.fill();
+    nctx.moveTo(19.4, 1.4);
+    nctx.quadraticCurveTo(2.0, 7.4, -17.0, 2.6);
+    nctx.stroke();
+    // the brow ridge
+    nctx.strokeStyle = 'rgba(255,255,255,0.26)';
+    nctx.lineWidth = 1.5;
+    nctx.beginPath();
+    nctx.moveTo(19.0, -2.4);
+    nctx.quadraticCurveTo(2.0, -7.6, -15.6, -3.2);
+    nctx.stroke();
+    // EYES - narrow amber slits set FORWARD on the skull, beside the snout. Eyes
+    // parked at the back of the head read as a face looking at you; eyes forward
+    // read as a predator looking where it is going.
+    for (var side = -1; side <= 1; side += 2) {
+      nctx.save();
+      nctx.translate(9.4, side * 5.1);
+      nctx.rotate(side * 0.30);
+      nctx.beginPath();
+      nctx.ellipse(0, 0, 3.5, 1.75, 0, 0, 6.2832);
+      nctx.fillStyle = '#f9b53c';
+      nctx.fill();
+      nctx.beginPath();
+      nctx.ellipse(0, 0, 0.9, 1.6, 0, 0, 6.2832);
+      nctx.fillStyle = '#150a26';
+      nctx.fill();
+      nctx.restore();
+    }
+    // nostrils
+    nctx.fillStyle = 'rgba(30,14,62,0.75)';
+    nctx.beginPath(); nctx.arc(18.4, -2.2, 0.95, 0, 6.2832); nctx.fill();
+    nctx.beginPath(); nctx.arc(18.4, 2.2, 0.95, 0, 6.2832); nctx.fill();
     nctx.restore();
     if (h.tongue > 0) {
       var tk = Math.min(1, h.tongue / 10);
-      var tx = hx + Math.cos(ha) * 15, ty = hy + Math.sin(ha) * 15;
-      var tipx = tx + Math.cos(ha) * 10 * tk, tipy = ty + Math.sin(ha) * 10 * tk;
-      nctx.strokeStyle = 'rgba(244,114,182,' + (0.85 * tk).toFixed(2) + ')';
-      nctx.lineWidth = 1.7;
+      var tx = hx + Math.cos(ha) * 26.4, ty = hy + Math.sin(ha) * 26.4;
+      var tipx = tx + Math.cos(ha) * 16 * tk, tipy = ty + Math.sin(ha) * 16 * tk;
+      nctx.strokeStyle = 'rgba(244,114,182,' + (0.92 * tk).toFixed(2) + ')';
+      nctx.lineWidth = 2;
+      nctx.lineCap = 'round';
       nctx.beginPath();
-      nctx.moveTo(tx, ty); nctx.lineTo(tipx, tipy);
+      nctx.moveTo(tx, ty);
+      nctx.lineTo(tipx, tipy);
       nctx.moveTo(tipx, tipy);
-      nctx.lineTo(tipx + Math.cos(ha + 0.55) * 4.5, tipy + Math.sin(ha + 0.55) * 4.5);
+      nctx.lineTo(tipx + Math.cos(ha + 0.62) * 5.6, tipy + Math.sin(ha + 0.62) * 5.6);
       nctx.moveTo(tipx, tipy);
-      nctx.lineTo(tipx + Math.cos(ha - 0.55) * 4.5, tipy + Math.sin(ha - 0.55) * 4.5);
+      nctx.lineTo(tipx + Math.cos(ha - 0.62) * 5.6, tipy + Math.sin(ha - 0.62) * 5.6);
       nctx.stroke();
     }
   }
@@ -1417,6 +1593,7 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
   var DOORS = [
     {
       id: 'ghvst', title: 'Ghvst Browser', price: '$19 Android · $49 PC', accent: '#67e8f9',
+      path: 'Opens onto: one browser that holds every account, extension and vault you own.',
       desc: 'The browser the rest of the system lives in. Extensions, saved accounts, the vault and a launchpad home screen — Android and Windows, same codebase.',
       facts: ['Android build is $19, one-time, yours to keep', 'Windows build is $49, one-time',
         'AdGuard + uBOLite bundled, plus the Accounts switcher and RoxVault', 'Native OS picture-in-picture on Windows'],
@@ -1426,6 +1603,7 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     },
     {
       id: 'workspace', title: 'RDX Workspace', price: '$14.99 → $999', accent: '#a78bfa',
+      path: 'Opens onto: your own machine doing the work while you decide what to build next.',
       desc: 'The engineering agent. It reads your repository, edits real files, runs real builds and reports what actually happened.',
       facts: ['Six tiers, from free to $999 one-time', 'Runs builds and tests on your machine, not on a server',
         'Monthly tiers run 30 days and activate on receipt', 'One-time tiers never expire'],
@@ -1435,6 +1613,7 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     },
     {
       id: 'mobile', title: 'RDX Mobile', price: '$29 / 30 days', accent: '#f0abfc',
+      path: 'Opens onto: the same power, out of the house — a task given from anywhere still comes back with proof.',
       desc: 'The same agent in your pocket. Give it a task from a phone and get the proof back, wherever you are.',
       facts: ['Runs real tasks from a phone', 'Same engine as the desktop workspace',
         '$29 for 30 days, activated on receipt', 'Delivered as an installable build after payment'],
@@ -1444,6 +1623,7 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     },
     {
       id: 'roxvault', title: 'RoxVault', price: '$800 lifetime', accent: '#f6c76a',
+      path: 'Opens onto: nothing of yours leaving your machine, ever again.',
       desc: 'Your passwords, keys and accounts in a vault you control. Ships as a browser extension and a native panel inside Ghvst.',
       facts: ['Nothing leaves your machine — no account, no sync', 'One vault: extension and native panel stay in step',
         'Lifetime, no renewal fee, no seat count', 'Unlocked inside Ghvst Browser out of the box'],
@@ -1460,6 +1640,7 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
   var ddTitle = document.getElementById('dd-title');
   var ddPrice = document.getElementById('dd-price');
   var ddDesc = document.getElementById('dd-desc');
+  var ddPath = document.getElementById('dd-path');
   var ddFacts = document.getElementById('dd-facts');
   var ddBuy = document.getElementById('dd-buy');
   var ddSecondary = document.getElementById('dd-secondary');
@@ -1474,6 +1655,7 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     if (ddTitle) ddTitle.textContent = d.title;
     if (ddPrice) { ddPrice.textContent = d.price; ddPrice.style.color = d.accent; }
     if (ddDesc) ddDesc.textContent = d.desc;
+    if (ddPath) { ddPath.textContent = d.path || ''; ddPath.style.color = d.accent; }
     if (ddFacts) {
       ddFacts.innerHTML = '';
       for (var i = 0; i < d.facts.length; i++) {
@@ -1506,6 +1688,7 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
   for (var ti = 0; ti < tabEls.length; ti++) {
     tabEls[ti].addEventListener('click', function (ev) {
       fillDetail(ev.currentTarget.getAttribute('data-door'));
+      applyOpenTargets();
     });
   }
   fillDetail('ghvst');
@@ -1543,6 +1726,15 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
   }
   var STATE_BY_ID = {};
   for (var sj = 0; sj < doorState.length; sj++) STATE_BY_ID[doorState[sj].id] = doorState[sj];
+
+  // The selected product's door stands OPEN from the first frame - a showroom with
+  // every door shut is a wall. The pointer only ever changes which one is open.
+  function applyOpenTargets() {
+    for (var i = 0; i < doorState.length; i++) {
+      doorState[i].openTarget = (doorState[i].id === activeDoor) ? 1 : 0;
+    }
+  }
+  applyOpenTargets();
 
   function sizeCanvas() {
     if (!canvas) return;
@@ -1613,8 +1805,22 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     ctx2.closePath();
   }
 
+  /* Local door space: x from -hw (hinge) to +hw (free edge), y from 0 (floor) up
+     to the leaf height, z = 0 at the leaf surface. ONE helper turns any local point
+     into world space, so the leaf, its recessed panels and its hardware all swing
+     together instead of drifting apart. */
+  function doorToWorld(lx, ly, lz, hw, ry, tx, openAngle, dz) {
+    var cosO = Math.cos(openAngle), sinO = Math.sin(openAngle);
+    var dx = lx + hw;
+    var sx = -hw + dx * cosO + lz * sinO;
+    var sz = -dx * sinO + lz * cosO;
+    var cosR = Math.cos(ry), sinR = Math.sin(ry);
+    var z = sz + (dz || 0);
+    return { X: tx + sx * cosR + z * sinR, Y: ly, Z: ROW_Z - sx * sinR + z * cosR };
+  }
+
   function doorLocalPoints(width, height, thick, ry, tx, openAngle, depthOffset) {
-    // local door frame: hinge on the left edge, panel swings toward the viewer
+    // hinge on the left edge, the leaf swings toward the viewer
     var hw = width / 2;
     var dz = depthOffset || 0;
     var pts = [];
@@ -1624,20 +1830,20 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
       { x: hw, y: height, z: 0 },   // free top
       { x: -hw, y: height, z: 0 }   // hinge top
     ];
-    var cosO = Math.cos(openAngle), sinO = Math.sin(openAngle);
     for (var i = 0; i < corners.length; i++) {
       var c = corners[i];
-      // swing about the hinge axis (x = -hw)
-      var dx = c.x + hw;
-      var sx = -hw + dx * cosO + c.z * sinO;
-      var sz = -dx * sinO + c.z * cosO;
-      // arc placement (row gently curves toward the viewer)
-      var cosR = Math.cos(ry), sinR = Math.sin(ry);
-      var X = tx + sx * cosR + (sz + dz) * sinR;
-      var Z = ROW_Z - sx * sinR + (sz + dz) * cosR;
-      pts.push({ X: X, Y: c.y, Z: Z });
+      var w = doorToWorld(c.x, c.y, c.z, hw, ry, tx, openAngle, dz);
+      pts.push({ X: w.X, Y: w.Y, Z: w.Z });
     }
     return pts;
+  }
+
+  function projW(w) { return project(w.X, w.Y, w.Z, cam.yaw, cam.pitch); }
+
+  function projectPts(list) {
+    var out = [];
+    for (var i = 0; i < list.length; i++) out.push(projW(list[i]));
+    return out;
   }
 
   function drawDoor(d, state, index) {
@@ -1650,105 +1856,244 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     var worldW = doorPx / s0;
     var worldGap = (doorPx + gapPx) / s0;
     var worldH = Math.min(H * 0.76, 340) / s0;
+    var rowZ = ROW_Z;
+    var hw = worldW / 2;
 
     var tx = (index - (DOORS.length - 1) / 2) * worldGap;
     var ry = -(index - (DOORS.length - 1) / 2) * 0.13;
     var open = Math.min(1, state.open + state.stare * 0.30);
+    var openAngle = open * 0.78;          // how far the leaf has swung
+    var accent = d.accent;
     var glow = 0.30 + state.hover * 0.45 + open * 0.55 + state.stare * 0.35;
 
-    /* --- the opening behind the door --- */
-    var rec = doorLocalPoints(worldW * 0.96, worldH * 0.98, 0, ry, tx, 0, 0.42);
-    var recPts = [];
-    for (var i = 0; i < rec.length; i++) recPts.push(project(rec[i].X, rec[i].Y, rec[i].Z, cam.yaw, cam.pitch));
-    var rg = ctx.createLinearGradient(recPts[3].x, recPts[3].y, recPts[0].x, recPts[0].y);
-    rg.addColorStop(0, 'rgba(4,2,9,0.97)');
-    rg.addColorStop(1, hexA(d.accent, 0.08 + open * 0.34));
-    ctx.fillStyle = rg;
+    /* --- THE OPENING: the hole in the wall the leaf came from --- */
+    var rec = doorLocalPoints(worldW * 0.97, worldH * 0.99, 0, ry, tx, 0, 0.42);
+    var recPts = projectPts(rec);
+    ctx.fillStyle = 'rgba(3,1,8,0.98)';
     quad(ctx, recPts);
     ctx.fill();
 
+    /* --- THE PATHWAY: a stairway climbing away into light --- */
+    if (open > 0.02) drawPathway(d, tx, ry, hw, worldH, open, recPts, doorPx);
+
+    /* --- THE FRAME: a brushed-metal jamb around the opening --- */
+    var fg = ctx.createLinearGradient(recPts[3].x, recPts[3].y, recPts[1].x, recPts[1].y);
+    fg.addColorStop(0, 'rgba(226,218,255,0.50)');
+    fg.addColorStop(0.45, 'rgba(126,110,168,0.34)');
+    fg.addColorStop(1, 'rgba(14,9,24,0.85)');
+    ctx.strokeStyle = fg;
+    ctx.lineWidth = 4.5;
+    quad(ctx, recPts);
+    ctx.stroke();
+    ctx.strokeStyle = hexA(accent, 0.22 + glow * 0.28);
+    ctx.lineWidth = 1;
+    quad(ctx, recPts);
+    ctx.stroke();
+
     /* --- light spilling out of the opening onto the floor --- */
     if (open > 0.02) {
-      var spill = project(tx, 0, ROW_Z + 0.2, cam.yaw, cam.pitch);
-      var sr = worldW * 0.62 * spill.s;
+      var spill = project(tx, 0, rowZ + 0.2, cam.yaw, cam.pitch);
+      var sr = worldW * 0.66 * spill.s;
       var sg = ctx.createRadialGradient(spill.x, spill.y, 0, spill.x, spill.y, sr);
-      sg.addColorStop(0, hexA(d.accent, 0.30 * open));
-      sg.addColorStop(1, hexA(d.accent, 0));
+      sg.addColorStop(0, hexA(accent, 0.30 * open));
+      sg.addColorStop(1, hexA(accent, 0));
       ctx.fillStyle = sg;
       ctx.beginPath();
       ctx.ellipse(spill.x, spill.y, sr, sr * 0.24, 0, 0, Math.PI * 2);
       ctx.fill();
     }
 
-    /* --- the door panel --- */
-    var pan = doorLocalPoints(worldW, worldH, 0, ry, tx, open * 0.66, 0);
-    var panPts = [];
-    for (var p = 0; p < pan.length; p++) panPts.push(project(pan[p].X, pan[p].Y, pan[p].Z, cam.yaw, cam.pitch));
+    /* --- THE LEAF: lacquer over metal --- */
+    var pan = doorLocalPoints(worldW, worldH, 0, ry, tx, openAngle, 0);
+    var panPts = projectPts(pan);
 
     var pg = ctx.createLinearGradient(panPts[3].x, panPts[3].y, panPts[0].x, panPts[0].y);
-    pg.addColorStop(0, hexA(d.accent, 0.20 + glow * 0.20));
-    pg.addColorStop(0.48, 'rgba(19,12,34,0.96)');
-    pg.addColorStop(1, hexA(d.accent, 0.34 + glow * 0.24));
+    pg.addColorStop(0, hexA(accent, 0.34 + glow * 0.18));
+    pg.addColorStop(0.18, 'rgba(64,48,102,0.99)');
+    pg.addColorStop(0.60, 'rgba(38,28,64,0.99)');
+    pg.addColorStop(1, 'rgba(17,11,30,1)');
     ctx.fillStyle = pg;
     quad(ctx, panPts);
     ctx.fill();
 
     ctx.save();
-    ctx.shadowColor = hexA(d.accent, 0.9);
-    ctx.shadowBlur = 14 + state.hover * 22 + open * 26;
-    ctx.strokeStyle = hexA(d.accent, 0.60 + glow * 0.40);
-    ctx.lineWidth = 1.6 + state.hover * 1.1;
+    ctx.shadowColor = hexA(accent, 0.9);
+    ctx.shadowBlur = 12 + state.hover * 20 + open * 24;
+    ctx.strokeStyle = hexA(accent, 0.55 + glow * 0.45);
+    ctx.lineWidth = 1.6 + state.hover * 1.2;
     quad(ctx, panPts);
     ctx.stroke();
     ctx.restore();
 
-    /* --- inner inset panel line (reads as a real door frame) --- */
-    var inset = doorLocalPoints(worldW * 0.78, worldH * 0.84, 0, ry, tx, open * 0.66, 0.03);
-    var insetPts = [];
-    for (var q = 0; q < inset.length; q++) insetPts.push(project(inset[q].X, inset[q].Y, inset[q].Z, cam.yaw, cam.pitch));
-    ctx.strokeStyle = hexA(d.accent, 0.22 + state.hover * 0.20);
+    /* --- RECESSED PANELS. A real door has two, between a narrow hinge stile and a
+           wide lock stile. Each is a bevelled recess: lit on the top-left edge,
+           shadowed on the bottom-right. --- */
+    function panel(x0, x1, y0, y1) {
+      return projectPts([
+        doorToWorld(x0, y0, 0, hw, ry, tx, openAngle, 0.035),
+        doorToWorld(x1, y0, 0, hw, ry, tx, openAngle, 0.035),
+        doorToWorld(x1, y1, 0, hw, ry, tx, openAngle, 0.035),
+        doorToWorld(x0, y1, 0, hw, ry, tx, openAngle, 0.035)
+      ]);
+    }
+    function recess(pp) {
+      ctx.fillStyle = 'rgba(30,21,56,0.98)';
+      quad(ctx, pp); ctx.fill();
+      var bg = ctx.createLinearGradient(pp[3].x, pp[3].y, pp[1].x, pp[1].y);
+      bg.addColorStop(0, 'rgba(255,252,255,0.60)');
+      bg.addColorStop(0.42, 'rgba(255,255,255,0.08)');
+      bg.addColorStop(1, 'rgba(0,0,0,0.85)');
+      ctx.strokeStyle = bg;
+      ctx.lineWidth = 2.4;
+      quad(ctx, pp); ctx.stroke();
+      // the catch light along the top inner edge
+      ctx.strokeStyle = 'rgba(255,255,255,0.16)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(pp[3].x, pp[3].y);
+      ctx.lineTo(pp[2].x, pp[2].y);
+      ctx.stroke();
+    }
+    var hingeStile = -hw * 0.80;
+    var lockStile = hw * 0.52;
+    recess(panel(hingeStile, lockStile, worldH * 0.50, worldH * 0.90));
+    recess(panel(hingeStile, lockStile, worldH * 0.15, worldH * 0.38));
+
+    /* --- THE INLAY: a thin metal line just inside the leaf edge. Cheap to draw and
+           it is the single detail that separates a cheap door from an expensive one. --- */
+    var inlay = projectPts([
+      doorToWorld(-hw * 0.93, worldH * 0.035, -0.008, hw, ry, tx, openAngle, 0),
+      doorToWorld(hw * 0.93, worldH * 0.035, -0.008, hw, ry, tx, openAngle, 0),
+      doorToWorld(hw * 0.93, worldH * 0.965, -0.008, hw, ry, tx, openAngle, 0),
+      doorToWorld(-hw * 0.93, worldH * 0.965, -0.008, hw, ry, tx, openAngle, 0)
+    ]);
+    ctx.strokeStyle = 'rgba(228,208,168,0.32)';
     ctx.lineWidth = 1;
-    quad(ctx, insetPts);
+    quad(ctx, inlay);
     ctx.stroke();
 
+    /* --- STEEL KICK PLATE: the strip that stops a boot from marking the lacquer --- */
+    var kick = projectPts([
+      doorToWorld(-hw * 0.90, worldH * 0.015, -0.014, hw, ry, tx, openAngle, 0),
+      doorToWorld(hw * 0.90, worldH * 0.015, -0.014, hw, ry, tx, openAngle, 0),
+      doorToWorld(hw * 0.90, worldH * 0.055, -0.014, hw, ry, tx, openAngle, 0),
+      doorToWorld(-hw * 0.90, worldH * 0.055, -0.014, hw, ry, tx, openAngle, 0)
+    ]);
+    var kg = ctx.createLinearGradient(kick[0].x, kick[0].y, kick[1].x, kick[1].y);
+    kg.addColorStop(0, 'rgba(198,208,232,0.30)');
+    kg.addColorStop(0.5, 'rgba(104,114,144,0.24)');
+    kg.addColorStop(1, 'rgba(30,34,52,0.30)');
+    ctx.fillStyle = kg;
+    quad(ctx, kick); ctx.fill();
+    ctx.strokeStyle = 'rgba(255,255,255,0.14)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    /* --- HARDWARE: a modern vertical pull in brushed brass. Backplate, slim bar
+           standing off the leaf, two standoffs, and a lock cylinder. --- */
+    var hx = hw * 0.74, hy = worldH * 0.40;
+    var barHalf = 0.032;
+    var barTop = hy + 0.52, barBot = hy - 0.52;
+    var plate = projectPts([
+      doorToWorld(hx - 0.060, barTop + 0.07, -0.02, hw, ry, tx, openAngle, 0),
+      doorToWorld(hx + 0.060, barTop + 0.07, -0.02, hw, ry, tx, openAngle, 0),
+      doorToWorld(hx + 0.060, barBot - 0.07, -0.02, hw, ry, tx, openAngle, 0),
+      doorToWorld(hx - 0.060, barBot - 0.07, -0.02, hw, ry, tx, openAngle, 0)
+    ]);
+    var pgd = ctx.createLinearGradient(plate[0].x, plate[0].y, plate[1].x, plate[1].y);
+    pgd.addColorStop(0, 'rgba(255,238,196,0.85)');
+    pgd.addColorStop(0.4, 'rgba(190,150,80,0.80)');
+    pgd.addColorStop(1, 'rgba(84,58,24,0.85)');
+    ctx.fillStyle = pgd;
+    quad(ctx, plate); ctx.fill();
+    // the pull bar
+    var bar = projectPts([
+      doorToWorld(hx - barHalf, barTop, -0.17, hw, ry, tx, openAngle, 0),
+      doorToWorld(hx + barHalf, barTop, -0.17, hw, ry, tx, openAngle, 0),
+      doorToWorld(hx + barHalf, barBot, -0.17, hw, ry, tx, openAngle, 0),
+      doorToWorld(hx - barHalf, barBot, -0.17, hw, ry, tx, openAngle, 0)
+    ]);
+    var bgd = ctx.createLinearGradient(bar[0].x, 0, bar[1].x, 0);
+    bgd.addColorStop(0, '#fff3d4');
+    bgd.addColorStop(0.34, '#e6bb6c');
+    bgd.addColorStop(0.72, '#a97a33');
+    bgd.addColorStop(1, '#5e4018');
+    ctx.fillStyle = bgd;
+    quad(ctx, bar); ctx.fill();
+    ctx.strokeStyle = 'rgba(255,246,214,0.75)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(bar[0].x, bar[0].y);
+    ctx.lineTo(bar[3].x, bar[3].y);
+    ctx.stroke();
+    // the two standoffs that hold the bar off the leaf
+    for (var so = 0; so < 2; so++) {
+      var sy = so ? barBot + 0.06 : barTop - 0.06;
+      var st = projW(doorToWorld(hx, sy, -0.10, hw, ry, tx, openAngle, 0));
+      ctx.fillStyle = 'rgba(206,164,92,0.95)';
+      ctx.beginPath();
+      ctx.ellipse(st.x, st.y, Math.max(1.4, bar[1].s * 0.035), Math.max(1.4, bar[1].s * 0.028), 0, 0, 6.2832);
+      ctx.fill();
+    }
+    // LOCK CYLINDER below the pull
+    var lockP = projW(doorToWorld(hx, barBot - 0.20, -0.035, hw, ry, tx, openAngle, 0));
+    var lockR = Math.max(1.6, doorPx * 0.020);
+    ctx.fillStyle = '#c79a4d';
+    ctx.beginPath(); ctx.arc(lockP.x, lockP.y, lockR, 0, 6.2832); ctx.fill();
+    ctx.fillStyle = 'rgba(22,12,4,0.9)';
+    ctx.beginPath(); ctx.arc(lockP.x, lockP.y, lockR * 0.30, 0, 6.2832); ctx.fill();
+    ctx.fillRect(lockP.x - lockR * 0.11, lockP.y, lockR * 0.22, lockR * 0.52);
+    // HINGE KNUCKLES
+    for (var hi = 0; hi < 2; hi++) {
+      var kn = projW(doorToWorld(-hw + 0.04, worldH * (0.24 + hi * 0.48), -0.03, hw, ry, tx, openAngle, 0));
+      ctx.fillStyle = 'rgba(214,170,92,0.9)';
+      ctx.beginPath();
+      ctx.ellipse(kn.x, kn.y, Math.max(1.4, doorPx * 0.012), Math.max(2.0, doorPx * 0.020), 0, 0, 6.2832);
+      ctx.fill();
+    }
+
     /* --- hinge edge light bar --- */
-    var hingeTop = project(pan[3].X, pan[3].Y, pan[3].Z, cam.yaw, cam.pitch);
-    var hingeBot = project(pan[0].X, pan[0].Y, pan[0].Z, cam.yaw, cam.pitch);
+    var hingeTop = projW(pan[3]);
+    var hingeBot = projW(pan[0]);
     ctx.save();
-    ctx.strokeStyle = hexA(d.accent, 0.9);
-    ctx.shadowColor = hexA(d.accent, 0.9);
+    ctx.strokeStyle = hexA(accent, 0.9);
+    ctx.shadowColor = hexA(accent, 0.9);
     ctx.shadowBlur = 10;
-    ctx.lineWidth = 2.6;
+    ctx.lineWidth = 2.4;
     ctx.beginPath();
     ctx.moveTo(hingeTop.x, hingeTop.y);
     ctx.lineTo(hingeBot.x, hingeBot.y);
     ctx.stroke();
     ctx.restore();
 
-    /* --- handle --- */
-    var hTop = project(pan[2].X, pan[2].Y, pan[2].Z, cam.yaw, cam.pitch);
-    var hBot = project(pan[1].X, pan[1].Y, pan[1].Z, cam.yaw, cam.pitch);
-    var hx = hTop.x + (hBot.x - hTop.x) * 0.30;
-    var hy = hTop.y + (hBot.y - hTop.y) * 0.30;
-    var hx2 = hx + (hBot.x - hTop.x) * 0.16;
-    var hy2 = hy + (hBot.y - hTop.y) * 0.16;
-    ctx.strokeStyle = hexA('#ffffff', 0.55 + state.hover * 0.4);
-    ctx.lineWidth = 2.2;
-    ctx.lineCap = 'round';
-    ctx.beginPath();
-    ctx.moveTo(hx, hy);
-    ctx.lineTo(hx2, hy2);
-    ctx.stroke();
+    /* --- SPECULAR SHEEN: one soft band across the lacquer, clipped to the leaf so
+           it only ever touches the door's own pixels --- */
+    ctx.save();
+    quad(ctx, panPts);
+    ctx.clip();
+    var bx0 = Math.min(panPts[0].x, panPts[1].x, panPts[2].x, panPts[3].x);
+    var bx1 = Math.max(panPts[0].x, panPts[1].x, panPts[2].x, panPts[3].x);
+    var by0 = Math.min(panPts[0].y, panPts[1].y, panPts[2].y, panPts[3].y);
+    var by1 = Math.max(panPts[0].y, panPts[1].y, panPts[2].y, panPts[3].y);
+    var sheen = ctx.createLinearGradient(bx0, by1, bx1, by0);
+    sheen.addColorStop(0, 'rgba(255,255,255,0)');
+    sheen.addColorStop(0.38, 'rgba(255,255,255,0.02)');
+    sheen.addColorStop(0.52, 'rgba(255,255,255,0.10)');
+    sheen.addColorStop(0.64, 'rgba(255,255,255,0.015)');
+    sheen.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = sheen;
+    ctx.fillRect(bx0, by0, bx1 - bx0, by1 - by0);
+    ctx.restore();
 
-    /* --- label --- */
-    var labelY = project(tx, worldH * 0.62, ROW_Z, cam.yaw, cam.pitch);
+    /* --- label, floating above the doorway like an exhibition plate --- */
+    var labelY = projW(doorToWorld(0, worldH * 1.12, 0, hw, ry, tx, 0, 0));
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.font = '800 ' + Math.max(9, Math.min(13, doorPx * 0.072)).toFixed(0) + 'px "Segoe UI Variable","Segoe UI",system-ui,sans-serif';
     ctx.fillStyle = 'rgba(255,255,255,' + (0.62 + state.hover * 0.38) + ')';
     ctx.fillText(d.title.toUpperCase(), labelY.x, labelY.y);
     ctx.font = '700 ' + Math.max(8, Math.min(11, doorPx * 0.058)).toFixed(0) + 'px "Segoe UI Variable","Segoe UI",system-ui,sans-serif';
-    ctx.fillStyle = hexA(d.accent, 0.88);
+    ctx.fillStyle = hexA(accent, 0.88);
     ctx.fillText(d.price, labelY.x, labelY.y + Math.max(13, doorPx * 0.09));
 
     /* --- hit region --- */
@@ -1756,6 +2101,87 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     var cy = (panPts[0].y + panPts[1].y + panPts[2].y + panPts[3].y) / 4;
     var rad = Math.max(Math.abs(panPts[1].x - panPts[0].x), Math.abs(panPts[3].y - panPts[0].y)) * 0.62;
     return { cx: cx, cy: cy, rad: rad };
+  }
+
+  /* ------------------------------------------------------------
+     THE PATHWAY
+     Every door opens onto the same promise: the way forward is up. Behind the leaf
+     a stairway climbs away from the camera into white light, with dust turning in
+     the beam. It is the one image that says "success" without spending a word.
+     ------------------------------------------------------------ */
+  function drawPathway(d, tx, ry, hw, worldH, open, recPts, doorPx) {
+    var tSec = performance.now() * 0.001;
+    var steps = 6, stepD = 0.58, stepH = 0.26;
+    var z0 = ROW_Z + 0.55;
+    var halfW = hw * 0.80;
+
+    ctx.save();
+    quad(ctx, recPts);
+    ctx.clip();
+
+    // THE LIGHT AT THE TOP OF THE PATH
+    var far = projW({ X: tx, Y: worldH * 0.52, Z: z0 + steps * stepD });
+    var bloomR = Math.max(30, doorPx * 0.80);
+    var lg = ctx.createRadialGradient(far.x, far.y, 0, far.x, far.y, bloomR);
+    lg.addColorStop(0, 'rgba(255,251,232,' + (0.95 * open).toFixed(3) + ')');
+    lg.addColorStop(0.14, 'rgba(255,216,142,' + (0.55 * open).toFixed(3) + ')');
+    lg.addColorStop(0.40, hexA(d.accent, 0.20 * open));
+    lg.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = lg;
+    ctx.fillRect(far.x - bloomR, far.y - bloomR, bloomR * 2, bloomR * 2);
+
+    // THE STAIRWAY - every tread is a real surface in world space
+    for (var i = steps - 1; i >= 0; i--) {
+      var zf = z0 + i * stepD, zb = zf + stepD;
+      var y = i * stepH;
+      var w = halfW * (1 - i * 0.035);
+      var k = i / steps;
+      var tread = projectPts([
+        { X: tx - w, Y: y, Z: zf }, { X: tx + w, Y: y, Z: zf },
+        { X: tx + w, Y: y, Z: zb }, { X: tx - w, Y: y, Z: zb }
+      ]);
+      ctx.fillStyle = 'rgba(255,246,218,' + (0.24 + 0.66 * k).toFixed(3) + ')';
+      quad(ctx, tread); ctx.fill();
+      var riser = projectPts([
+        { X: tx - w, Y: y, Z: zf }, { X: tx + w, Y: y, Z: zf },
+        { X: tx + w, Y: y + stepH, Z: zf }, { X: tx - w, Y: y + stepH, Z: zf }
+      ]);
+      ctx.fillStyle = 'rgba(30,19,48,' + (0.88 - k * 0.20).toFixed(3) + ')';
+      quad(ctx, riser); ctx.fill();
+      // the lit nosing on the front edge of each tread
+      ctx.strokeStyle = 'rgba(255,250,232,' + (0.22 + 0.50 * k).toFixed(3) + ')';
+      ctx.lineWidth = 1.2;
+      ctx.beginPath();
+      ctx.moveTo(tread[0].x, tread[0].y);
+      ctx.lineTo(tread[1].x, tread[1].y);
+      ctx.stroke();
+    }
+
+    // THE BEAM pouring down the stairwell
+    var topY = Math.min(recPts[3].y, recPts[2].y);
+    var beam = ctx.createLinearGradient(0, topY, 0, far.y + 30);
+    beam.addColorStop(0, 'rgba(255,250,230,0.18)');
+    beam.addColorStop(1, 'rgba(255,250,230,0)');
+    ctx.fillStyle = beam;
+    ctx.beginPath();
+    ctx.moveTo(far.x - doorPx * 0.12, topY);
+    ctx.lineTo(far.x + doorPx * 0.12, topY);
+    ctx.lineTo(far.x + bloomR * 0.55, far.y + 24);
+    ctx.lineTo(far.x - bloomR * 0.55, far.y + 24);
+    ctx.closePath();
+    ctx.fill();
+
+    // DUST turning in the light
+    for (var m = 0; m < 10; m++) {
+      var ph = (tSec * 0.10 + m * 0.137) % 1;
+      var mx = far.x + Math.sin(m * 2.1 + tSec * 0.7) * doorPx * 0.20;
+      var my = far.y + (1 - ph) * doorPx * 0.70;
+      ctx.fillStyle = 'rgba(255,248,220,' + (0.5 * Math.sin(ph * Math.PI)).toFixed(3) + ')';
+      ctx.beginPath();
+      ctx.arc(mx, my, 1.1 + (m % 3) * 0.45, 0, 6.2832);
+      ctx.fill();
+    }
+    ctx.restore();
   }
 
   function hexA(hex, a) {
@@ -2106,7 +2532,8 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
           var ext = sd.buyPay ? ' target="_blank" rel="noopener noreferrer"' : '';
           stareEl.innerHTML = '<b style="color:' + sd.accent + '">' + sd.title + '</b>'
             + '<span class="price">' + sd.price + '</span>'
-            + '<a href="' + href + '"' + ext + '>' + (sd.buyLabel || 'Open') + '</a>';
+            + '<a href="' + href + '"' + ext + '>' + (sd.buyLabel || 'Open') + '</a>'
+            + '<span class="pathline">' + (sd.path || '') + '</span>';
         }
         stareEl.classList.add('on');
       } else {
