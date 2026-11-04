@@ -1861,8 +1861,8 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
 
     var tx = (index - (DOORS.length - 1) / 2) * worldGap;
     var ry = -(index - (DOORS.length - 1) / 2) * 0.13;
-    var open = Math.min(1, state.open + state.stare * 0.30);
-    var openAngle = open * 0.78;          // how far the leaf has swung
+    var open = Math.min(1, state.open + state.hover * 0.85 + state.stare * 0.30);
+    var openAngle = open * 1.5708;        // how far the leaf has swung - 90deg swings it edge-on so the stairway inside is fully revealed
     var accent = d.accent;
     var glow = 0.30 + state.hover * 0.45 + open * 0.55 + state.stare * 0.35;
 
