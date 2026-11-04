@@ -230,10 +230,17 @@ a{color:inherit}
 
 /* ---------- background field ---------- */
 #field{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
-/* THE CREATURE LAYER - above the page, below the HUD. Never intercepts a click.
+/* THE CREATURE LAYER - BEHIND THE PAGE, NEVER OVER IT.
    width/height are mandatory: a canvas is a replaced element, so `inset:0` alone
-   leaves it at its intrinsic 300x150 and every drawing is squashed into it. */
-#nvke{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:5;pointer-events:none}
+   leaves it at its intrinsic 300x150 and every drawing is squashed into it.
+
+   THIS USED TO SIT AT z-index:5, ON TOP OF EVERY WORD ON THE PAGE. Measured on a
+   390px phone: the serpent struck straight through the hero headline and ten mint
+   pellets sat on top of the stat cards. A creature that crosses the copy is not
+   charm, it is a rendering bug. The mascot is now AMBIENCE - a dim bioluminescent
+   shape in the deep behind the content, on the background plane, where the copy
+   always wins. The bridge (window.__nvkeFood / __nvkeEat) is untouched. */
+#nvke{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:1;pointer-events:none;opacity:.45}
 /* THE CREATURE'S COUNTER - appears only once it has actually eaten something */
 .nvke-hud{position:fixed;left:16px;bottom:16px;z-index:6;pointer-events:none;
   display:inline-flex;align-items:center;gap:9px;padding:7px 13px;border-radius:999px;
@@ -242,6 +249,11 @@ a{color:inherit}
   color:#cbb8f2;font-size:11px;letter-spacing:.07em;font-weight:700;text-transform:uppercase;
   opacity:0;transition:opacity .6s ease;box-shadow:0 10px 30px rgba(0,0,0,.45)}
 .nvke-hud.on{opacity:1}
+/* THE PILL NEVER SITS ON THE HERO. It is a fixed overlay, so on a phone it landed
+   straight on top of the stat cards and the $19 price. While the hero is on
+   screen the counter steps out of the way - the pet keeps its score for the rest
+   of the page. */
+.nvke-hud.off-hero{opacity:0;pointer-events:none}
 .nvke-hud b{color:#e8e2ff;letter-spacing:.1em}
 .nvke-hud .n{color:#6ee7b7}
 #aurora{position:fixed;inset:0;z-index:0;pointer-events:none;
@@ -257,6 +269,7 @@ a{color:inherit}
 
 /* ---------- nav ---------- */
 nav{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:22px 0;position:sticky;top:0;z-index:20;
+  flex-wrap:wrap;
   backdrop-filter:blur(14px);background:linear-gradient(180deg,rgba(8,5,15,.92),rgba(8,5,15,.55) 70%,transparent)}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;letter-spacing:.16em;font-size:19px}
 .logo .star{color:var(--red);font-size:23px;text-shadow:0 0 14px rgba(239,68,68,.75)}
@@ -267,6 +280,21 @@ nav .links a:hover{color:#fff}
   font-weight:700;font-size:12.5px;box-shadow:0 8px 26px rgba(124,58,237,.34);border:1px solid rgba(255,255,255,.14)}
 .navcta.amb{background:rgba(255,255,255,.05);box-shadow:none;border-color:var(--line);cursor:pointer;font-family:inherit}
 .navcta.amb:hover{border-color:var(--vio)}
+/* THE MOBILE LINK STRIP.
+   Below 900px the desktop links were hidden outright, which left a phone visitor
+   with no way to jump to a section except scrolling 19,000px. This strip is the
+   navigation on a phone: one scrollable row of every section, right under the
+   logo bar, and it never wraps into a second line of its own. */
+.navstrip{display:none}
+@media(max-width:900px){
+  .navstrip{display:flex;order:3;width:100%;gap:8px;overflow-x:auto;margin-top:12px;
+    padding-bottom:4px;scrollbar-width:none;-ms-overflow-style:none;scroll-snap-type:x proximity}
+  .navstrip::-webkit-scrollbar{display:none}
+  .navstrip a{flex:0 0 auto;scroll-snap-align:start;font-size:11.5px;color:var(--dim);text-decoration:none;
+    border:1px solid var(--line);background:rgba(255,255,255,.035);padding:6px 12px;border-radius:999px;
+    white-space:nowrap;transition:color .18s,border-color .18s}
+  .navstrip a:hover,.navstrip a:focus-visible{color:#fff;border-color:var(--vio)}
+}
 
 /* ---------- buttons ---------- */
 .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border-radius:13px;font-weight:750;font-size:14px;
@@ -500,6 +528,9 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
 .roxvault-detail ul{margin:10px 0;padding-left:18px}
 .roxvault-detail a{color:#9fe8ff}
 </style>
+<!-- FAIL-SAFE: if the script never runs, no section may stay invisible. The reveal
+     animation is decoration - the copy is the product. -->
+<noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body>
 <canvas id="field" aria-hidden="true"></canvas>
@@ -519,6 +550,16 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     <a href="#contact">Contact</a>
     <a class="navcta" href="#store">Get the build</a>
     <button class="navcta amb" id="ambient-toggle" type="button" aria-pressed="true">Ambient: On</button>
+  </div>
+  <div class="navstrip" aria-label="Sections">
+    <a href="#doors">Products</a>
+    <a href="#store">Store</a>
+    <a href="#tiers">Plans</a>
+    <a href="#roxvault">RoxVault</a>
+    <a href="#proof">Proof</a>
+    <a href="#studio">Studio</a>
+    <a href="#contact">Contact</a>
+    <a href="#terms">Terms</a>
   </div>
 </nav>
 
@@ -1212,8 +1253,10 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     for (var i = 0; i < feed.length; i++) {
       var f = feed[i];
       var pu = 0.72 + 0.28 * Math.sin(f.ph + t * 0.004);
-      var sz = f.r * 9.5;
-      nctx.globalAlpha = (0.55 + 0.35 * pu) * Math.min(1, f.born / 16);
+      // The halo is small on purpose: the pellet is a target for the desktop
+      // creature, not a headlight. A big glow on the page reads as a stray blob.
+      var sz = f.r * 6.4;
+      nctx.globalAlpha = (0.40 + 0.26 * pu) * Math.min(1, f.born / 16);
       nctx.drawImage(sp, f.x - sz / 2, f.y - sz / 2, sz, sz);
       nctx.globalAlpha = 1;
       nctx.beginPath();
@@ -1241,6 +1284,7 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
   var SEG_STEP = 8;           // the fixed distance between two body segments (px)
   var CREATURE_HALF = false;  // phones run the creature at 30fps
   var nvkeHud = document.getElementById('nvkeHud');
+  var heroEl = document.getElementById('top');
   var snake = {
     segs: [], path: [], len: START_LEN, chits: 0, fx: [], tick: 0, phase: 0,
     head: { x: 0, y: 0, a: 0, sp: 6, turn: 0, tongue: 0, tongueCd: 90 }
@@ -1268,6 +1312,19 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     nvkeHud.innerHTML = '<b>$NVKE</b><span>' + snake.len + ' segments</span>'
       + '<span class="n">' + snake.chits + ' eaten</span>';
     if (snake.chits > 0) nvkeHud.classList.add('on');
+  }
+
+  // WHERE THE COUNTER LIVES. The pill is fixed to the viewport, so it has to be
+  // told when the hero is on screen - otherwise it parks itself on the stat cards
+  // and the $19 price. Checked four times a second, not every frame, because a
+  // layout read per frame is a layout thrash per frame.
+  var hudCheckAt = 0;
+  function updateHudPlacement(ts) {
+    if (!nvkeHud || ts - hudCheckAt < 250) return;
+    hudCheckAt = ts;
+    var hr = heroEl ? heroEl.getBoundingClientRect() : null;
+    var heroOn = !!(hr && hr.bottom > 8 && hr.top < fieldH - 8);
+    nvkeHud.classList.toggle('off-hero', heroOn);
   }
 
   function snakeSeed() {
@@ -1682,9 +1739,10 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     // THE SERPENT ONLY ROAMS OUTSIDE THE SHOWROOM. While the visitor is looking at
     // the door row the creature holds its position - a bright body sliding across
     // the viewport at 400+ px/s is the same shake the Director is complaining
-    // about, wearing a different hat.
+    // about, wearing a different hat. A visitor who asked their OS for reduced
+    // motion gets a still pet, too.
     var stepped = false;
-    if (!showroomFocus) stepped = stepSnake();
+    if (!showroomFocus && !REDUCED) stepped = stepSnake();
     if ((snake.tick % 5) === 0) publishFood();
     return stepped;
   }
@@ -1695,14 +1753,14 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     drawDots();
   }
 
-  // THE CREATURE - its own layer, above the page, drawn every frame.
+  // THE CREATURE - its own layer, BEHIND the page content, drawn every frame.
+  // The layer sits below .wrap now, so the mascot can never cross a word.
   function drawCreature() {
     if (!nctx) return;
     nctx.clearRect(0, 0, fieldW, fieldH);
-    // THE SERPENT NEVER CROSSES THE SHOWROOM. While the #doors section is on
-    // screen the creature layer is clipped to everything EXCEPT that section, so
-    // no moving pixels ever land on the door row - the serpent slides behind the
-    // showroom instead of over it. Everywhere else on the page it roams freely.
+    // The showroom gets its own exclusion as well. The stage paints an opaque
+    // room, so the creature is behind it anyway - but clipping keeps the pet out
+    // of the product row completely, on every device, at every scroll position.
     var r = doorsSecEl ? doorsSecEl.getBoundingClientRect() : null;
     if (r && r.bottom > -24 && r.top < fieldH + 24 && r.right > -24 && r.left < fieldW + 24) {
       var pad = 18;
@@ -1752,7 +1810,7 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
      ------------------------------------------------------------ */
   var DOORS = [
     {
-      id: 'ghvst', title: 'Ghvst Browser', price: '$19 Android · $49 PC', accent: '#67e8f9',
+      id: 'ghvst', title: 'Ghvst Browser', short: 'Ghvst', price: '$19 Android · $49 PC', accent: '#67e8f9',
       path: 'Opens onto: one browser that holds every account, extension and vault you own.',
       desc: 'The browser the rest of the system lives in. Extensions, saved accounts, the vault and a launchpad home screen — Android and Windows, same codebase.',
       facts: ['Android build is $19, one-time, yours to keep', 'Windows build is $49, one-time',
@@ -1762,7 +1820,7 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
       note: 'Pay on PayPal, send the receipt on WhatsApp, and the signed APK link is delivered to you the same day. The Windows build is delivered personally once payment is confirmed.'
     },
     {
-      id: 'workspace', title: 'RDX Workspace', price: '$14.99 → $999', accent: '#a78bfa',
+      id: 'workspace', title: 'RDX Workspace', short: 'Workspace', price: '$14.99 → $999', accent: '#a78bfa',
       path: 'Opens onto: your own machine doing the work while you decide what to build next.',
       desc: 'The engineering agent. It reads your repository, edits real files, runs real builds and reports what actually happened.',
       facts: ['Six tiers, from free to $999 one-time', 'Runs builds and tests on your machine, not on a server',
@@ -1772,7 +1830,7 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
       note: 'PayPal links carry the amount. Send your transaction ID with the tier name and it is activated the same day.'
     },
     {
-      id: 'mobile', title: 'RDX Mobile', price: '$29 every 30 days', accent: '#f0abfc',
+      id: 'mobile', title: 'RDX Mobile', short: 'Mobile', price: '$29 every 30 days', accent: '#f0abfc',
       path: 'Opens onto: the same power, out of the house — a task given from anywhere still comes back with proof.',
       desc: 'The same agent in your pocket. Give it a task from a phone and get the proof back, wherever you are.',
       facts: ['Runs real tasks from a phone', 'Same engine as the desktop workspace',
@@ -1782,7 +1840,7 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
       note: 'Pay the $29 up front on PayPal for the 30 days, message the receipt, and the build is delivered straight to you.'
     },
     {
-      id: 'roxvault', title: 'RoxVault', price: '$800 lifetime', accent: '#f6c76a',
+      id: 'roxvault', title: 'RoxVault', short: 'RoxVault', price: '$800 lifetime', accent: '#f6c76a',
       path: 'Opens onto: nothing of yours leaving your machine, ever again.',
       desc: 'Your passwords, keys and accounts in a vault you control. Ships as a browser extension and a native panel inside Ghvst.',
       facts: ['Nothing leaves your machine — no account, no sync', 'One vault: extension and native panel stay in step',
@@ -2013,8 +2071,21 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     // The door row is sized in PIXELS first, then converted to world units using the
     // projection scale. That keeps the showroom framed correctly on every viewport.
     var s0 = FOCAL / ROW_Z;
-    var gapPx = W < 620 ? 12 : 26;
-    var doorPx = Math.min(W < 620 ? 92 : 232, (W - 70 - gapPx * (DOORS.length - 1)) / DOORS.length);
+    // THE ROW GEOMETRY.
+    //
+    // A door leaf that swings TOWARD the camera is magnified as it comes forward,
+    // and because the camera sits on the row's centre line the magnification
+    // throws the leaf OUTWARD - off the left or right edge of the stage. Measured
+    // at 90 degrees, the outermost leaf projected 271px past the frame and was
+    // sliced in half by the stage border; the middle doors reached sideways into
+    // the neighbouring doorway. The fix is the composition, not a bigger canvas:
+    // a shallower swing (62 degrees reads as fully open - the leaf stands on its
+    // hinge and the stairway behind it is clear), a narrower row with real side
+    // margins, and only a whisper of per-door yaw so the row still reads as a
+    // room rather than a flat graphic.
+    var gapPx = W < 620 ? 12 : 22;
+    var margin = W < 620 ? 70 : 150;
+    var doorPx = Math.min(W < 620 ? 92 : 210, (W - margin - gapPx * (DOORS.length - 1)) / DOORS.length);
     if (doorPx < 40) doorPx = 40;
     var worldW = doorPx / s0;
     var worldGap = (doorPx + gapPx) / s0;
@@ -2023,9 +2094,9 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     var hw = worldW / 2;
 
     var tx = (index - (DOORS.length - 1) / 2) * worldGap;
-    var ry = -(index - (DOORS.length - 1) / 2) * 0.13;
+    var ry = -(index - (DOORS.length - 1) / 2) * 0.06;
     var open = Math.min(1, state.open + state.hover * 0.85 + state.stare * 0.30);
-    var openAngle = open * 1.5708;        // how far the leaf has swung - 90deg swings it edge-on so the stairway inside is fully revealed
+    var openAngle = open * 1.082;        // 62 degrees - the leaf stands open on its hinge and the stairway is fully revealed
     var accent = d.accent;
     var glow = 0.30 + state.hover * 0.45 + open * 0.55 + state.stare * 0.35;
 
@@ -2248,16 +2319,39 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     ctx.fillRect(bx0, by0, bx1 - bx0, by1 - by0);
     ctx.restore();
 
-    /* --- label, floating above the doorway like an exhibition plate --- */
+    /* --- label, floating above the doorway like an exhibition plate ---
+       THE PLATE MUST NEVER COLLIDE WITH ITS NEIGHBOUR.
+       On a 390px phone the four doors share about 360px, so the full names ran
+       into each other ("GHVST BROWSERRDX WORKSPACE  RDX MOBILE  ROXVAULT") and the
+       row of plates became an unreadable smear. Every label is now MEASURED
+       against the width it actually owns: full name if it fits, short name if it
+       does not, and the price line only when IT fits as well. Nothing is ever
+       drawn over its neighbour. */
     var labelY = projW(doorToWorld(0, worldH * 1.12, 0, hw, ry, tx, 0, 0));
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.font = '800 ' + Math.max(9, Math.min(13, doorPx * 0.072)).toFixed(0) + 'px "Segoe UI Variable","Segoe UI",system-ui,sans-serif';
-    ctx.fillStyle = 'rgba(255,255,255,' + (0.62 + state.hover * 0.38) + ')';
-    ctx.fillText(d.title.toUpperCase(), labelY.x, labelY.y);
-    ctx.font = '700 ' + Math.max(8, Math.min(11, doorPx * 0.058)).toFixed(0) + 'px "Segoe UI Variable","Segoe UI",system-ui,sans-serif';
-    ctx.fillStyle = hexA(accent, 0.88);
-    ctx.fillText(d.price, labelY.x, labelY.y + Math.max(13, doorPx * 0.09));
+    var LABEL_FONT = '"Segoe UI Variable","Segoe UI",system-ui,sans-serif';
+    var slot = (doorPx + gapPx) * 0.98;           // the space this plate owns
+    var fs = Math.max(9, Math.min(13, doorPx * 0.072));
+    var title = d.title.toUpperCase();
+    ctx.font = '800 ' + fs.toFixed(0) + 'px ' + LABEL_FONT;
+    if (ctx.measureText(title).width > slot && d.short) {
+      title = d.short.toUpperCase();
+    }
+    while (fs > 8 && ctx.measureText(title).width > slot) {
+      fs -= 0.5;
+      ctx.font = '800 ' + fs.toFixed(1) + 'px ' + LABEL_FONT;
+    }
+    if (ctx.measureText(title).width <= slot) {
+      ctx.fillStyle = 'rgba(255,255,255,' + (0.62 + state.hover * 0.38) + ')';
+      ctx.fillText(title, labelY.x, labelY.y);
+    }
+    var pf = Math.max(8, Math.min(11, doorPx * 0.058));
+    ctx.font = '700 ' + pf.toFixed(0) + 'px ' + LABEL_FONT;
+    if (ctx.measureText(d.price).width <= slot) {
+      ctx.fillStyle = hexA(accent, 0.88);
+      ctx.fillText(d.price, labelY.x, labelY.y + Math.max(13, doorPx * 0.09));
+    }
 
     /* --- hit region: the DOORWAY (the recess never rotates), not the swung leaf.
            If the leaf carried the hit test, a fully-open door would move its own
@@ -2662,11 +2756,13 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
 
   function frame(ts) {
     requestAnimationFrame(frame);
-    // Real elapsed time since the last executed frame. Measured BEFORE the throttle
-    // check so the stare clock stays honest even when the ambient field is paused.
-    var dt = lastFrame ? Math.max(0, ts - lastFrame) : 0;
-    if (!fieldRunning && ts - lastFrame < 200) return;
+    // Real elapsed time since the last executed frame. The clock is ALWAYS tracked.
+    // The old version throttled the ENTIRE loop to 5fps while the ambient field was
+    // switched off, so the doors crawled and the stare clock stuttered the moment
+    // a visitor turned the ambience down. Only the ambient drawing is optional now.
+    var dt = lastFrame ? Math.min(100, Math.max(0, ts - lastFrame)) : 0;
     lastFrame = ts;
+    updateHudPlacement(ts);
 
     // THE CAMERA NEVER MOVES.
     //
@@ -2835,6 +2931,12 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
   } else {
     for (var rj = 0; rj < revealEls.length; rj++) revealEls[rj].classList.add('on');
   }
+  // SAFETY NET: a scroll-reveal is decoration. If the observer misses a section
+  // for any reason, that copy must not stay invisible - three seconds is the
+  // longest any visitor waits before the page shows everything it has to show.
+  setTimeout(function () {
+    for (var rs = 0; rs < revealEls.length; rs++) revealEls[rs].classList.add('on');
+  }, 3000);
 
   var ambBtn = document.getElementById('ambient-toggle');
   if (ambBtn) {
