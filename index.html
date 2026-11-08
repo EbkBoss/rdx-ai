@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RDX — Local-first AI agents that do the work</title>
-<meta name="description" content="RDX Workspace, RDX Mobile, Ghvst Browser, RoxVault and MVRK Studio. Local-first agents that edit real files, run real builds and keep your data on your machine. Every product priced in plain numbers and paid for with PayPal.">
+<meta name="description" content="RDX Workspace, RDX Mobile, Ghvst Browser, RoxVault, MVRK Studio and Sovereign Messenger. Local-first agents that edit real files, run real builds and keep your data on your machine. Every product priced in plain numbers and paid for with PayPal.">
 <meta name="theme-color" content="#08050f">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="RDX">
@@ -241,21 +241,10 @@ a{color:inherit}
    shape in the deep behind the content, on the background plane, where the copy
    always wins. The bridge (window.__nvkeFood / __nvkeEat) is untouched. */
 #nvke{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:1;pointer-events:none;opacity:.45}
-/* THE CREATURE'S COUNTER - appears only once it has actually eaten something */
-.nvke-hud{position:fixed;left:16px;bottom:16px;z-index:6;pointer-events:none;
-  display:inline-flex;align-items:center;gap:9px;padding:7px 13px;border-radius:999px;
-  border:1px solid rgba(167,139,250,.26);background:rgba(12,8,22,.72);
-  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-  color:#cbb8f2;font-size:11px;letter-spacing:.07em;font-weight:700;text-transform:uppercase;
-  opacity:0;transition:opacity .6s ease;box-shadow:0 10px 30px rgba(0,0,0,.45)}
-.nvke-hud.on{opacity:1}
-/* THE PILL NEVER SITS ON THE HERO. It is a fixed overlay, so on a phone it landed
-   straight on top of the stat cards and the $19 price. While the hero is on
-   screen the counter steps out of the way - the pet keeps its score for the rest
-   of the page. */
-.nvke-hud.off-hero{opacity:0;pointer-events:none}
-.nvke-hud b{color:#e8e2ff;letter-spacing:.1em}
-.nvke-hud .n{color:#6ee7b7}
+/* THE $NVKE COUNTER IS GONE. A token ticker with a segment count and a score sat in the
+   corner of a store page and read as a crypto flex - unstable, not sovereign - to an
+   $800 vault buyer. The creature itself stays: it is ambience behind the content and it
+   is never on top of the copy. Only the numbers were removed. */
 #aurora{position:fixed;inset:0;z-index:0;pointer-events:none;
   background:
     radial-gradient(ellipse 60% 45% at 18% 8%,rgba(124,58,237,.16),transparent 60%),
@@ -505,6 +494,35 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
 .door-index b{color:#fff}
 @media(max-width:760px){.door-index{grid-template-columns:1fr}}
 .proof-video{width:100%;border-radius:16px;border:1px solid #2c2450;background:#000;display:block}
+/* THE MYTHIC PAGE - a $999 purchase gets its own page, not one line in a grid. */
+.mythic-wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:22px;align-items:start}
+.mythic-stack,.mythic-faq{background:linear-gradient(180deg,#181122,#120d1d);border:1px solid #2a1f3d;border-radius:16px;padding:24px}
+.mythic-stack h3,.mythic-faq h3{margin:0 0 16px;font-size:17px;color:#f6c76a;letter-spacing:.02em}
+.stack{list-style:none;margin:0;padding:0}
+.stack li{display:grid;grid-template-columns:1fr auto;gap:2px 16px;align-items:baseline;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.07)}
+.stack li:last-child{border-bottom:0}
+.stack li b{font-size:15px}
+.stack li span{grid-column:1;color:#a394c4;font-size:13px}
+.stack li em{grid-row:1/3;grid-column:2;align-self:center;font-style:normal;font-weight:800;color:#6ee7b7;font-size:15px}
+.stack-total{display:flex;justify-content:space-between;align-items:baseline;margin-top:14px;padding:11px 14px;border-radius:10px;background:rgba(255,255,255,.04);font-size:14px;color:#a394c4}
+.stack-total b{font-size:19px;color:#f4efff}
+.stack-total.you{background:rgba(246,199,106,.12);border:1px solid rgba(246,199,106,.35);color:#f6c76a}
+.stack-total.you b{color:#f6c76a;font-size:23px}
+.mythic-faq details{border-bottom:1px solid rgba(255,255,255,.07);padding:12px 0}
+.mythic-faq details:last-child{border-bottom:0}
+.mythic-faq summary{cursor:pointer;font-weight:700;font-size:14.5px;color:#c4b5fd;list-style:none}
+.mythic-faq summary::-webkit-details-marker{display:none}
+.mythic-faq summary::after{content:" +";color:#6ee7b7;font-weight:800}
+.mythic-faq details[open] summary::after{content:" -"}
+.mythic-faq details p{margin:9px 0 0;color:#a394c4;font-size:13.5px;line-height:1.62}
+.faq-inline details{border-bottom:1px solid rgba(255,255,255,.07);padding:10px 0}
+.faq-inline details:last-child{border-bottom:0}
+.faq-inline summary{cursor:pointer;font-weight:700;font-size:13.5px;color:#c4b5fd;list-style:none}
+.faq-inline summary::-webkit-details-marker{display:none}
+.faq-inline summary::after{content:" +";color:#6ee7b7;font-weight:800}
+.faq-inline details[open] summary::after{content:" -"}
+.faq-inline details p{margin:8px 0 0;color:#a394c4;font-size:13px;line-height:1.6}
+@media(max-width:900px){.mythic-wrap{grid-template-columns:1fr}}
 .hashes{margin-top:26px;border:1px solid #2c2450;border-radius:16px;padding:18px 20px;background:#120e26}
 .hashes h3{margin:0 0 4px;font-size:16px}
 .hashes .hnote{color:#8a7cad;font-size:12.5px;margin:0 0 12px;line-height:1.6}
@@ -535,7 +553,6 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
 <body>
 <canvas id="field" aria-hidden="true"></canvas>
 <canvas id="nvke" aria-hidden="true"></canvas>
-<div class="nvke-hud" id="nvkeHud" aria-hidden="true"></div>
 <div id="aurora" aria-hidden="true"></div>
 <div id="grain" aria-hidden="true"></div>
 <div class="wrap">
@@ -662,7 +679,7 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
         <li>Picture-in-Picture for video</li>
       </ul>
       <div class="cta-row">
-        <a class="btn p sm" data-paypal="19" href="#">Buy now · Ghvst Browser Android — $19</a>
+        <a class="btn p sm" data-paypal="19" href="#" data-product="ghvst-android">Buy now · Ghvst Browser Android — $19</a>
         <a class="btn g sm" href="#contact">Report an issue</a>
       </div>
       <p class="note">Pay $19 on PayPal, send the receipt on WhatsApp, and the signed APK link comes
@@ -684,7 +701,7 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
         <li>Native picture-in-picture from the OS</li>
       </ul>
       <div class="cta-row">
-        <a class="btn gold sm" id="buy-ghvst-pc" href="https://paypal.me/Nicholasram17/49" data-paypal="49">Buy now · Ghvst Browser PC — $49</a>
+        <a class="btn gold sm" id="buy-ghvst-pc" href="https://paypal.me/Nicholasram17/49" data-paypal="49" data-product="ghvst-pc">Buy now · Ghvst Browser PC — $49</a>
         <a class="btn g sm" href="#contact">Delivery questions</a>
       </div>
       <p class="note">Windows installer is delivered personally after payment — message with your
@@ -706,7 +723,7 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
         <li>Updates included for the lifetime of the product</li>
       </ul>
       <div class="cta-row">
-        <a class="btn gold sm" id="buy-roxvault" href="https://paypal.me/Nicholasram17/800" data-paypal="800">Buy now · RoxVault — $800</a>
+        <a class="btn gold sm" id="buy-roxvault" href="https://paypal.me/Nicholasram17/800" data-paypal="800" data-product="roxvault">Buy now · RoxVault — $800</a>
         <a class="btn g sm" href="#contact">Ask before buying</a>
       </div>
       <p class="note">Lifetime means lifetime: no subscription, no renewal fee. Delivery after
@@ -728,10 +745,34 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
         <li>Personal support from the builder</li>
       </ul>
       <div class="cta-row">
-        <a class="btn gold sm" id="buy-mvrk" href="https://paypal.me/Nicholasram17/59" data-paypal="59">Buy now · MVRK Studio — $59</a>
+        <a class="btn gold sm" id="buy-mvrk" href="https://paypal.me/Nicholasram17/59" data-paypal="59" data-product="mvrk">Buy now · MVRK Studio — $59</a>
         <a class="btn g sm" href="#contact">See the workflow</a>
       </div>
       <p class="note">Delivered as the packaged suite with setup instructions.</p>
+    </article>
+
+    <article class="prod reveal" id="p-sovereign">
+      <span class="tag">In development</span>
+      <div class="glyph">⬢</div>
+      <h3>Sovereign Messenger</h3>
+      <div class="platform">Self-hosted · PC & Android</div>
+      <div class="price">In development <span class="unit">not for sale yet</span></div>
+      <p>Your own team messenger: encrypted rooms, calls and a private AI partner that lives on your
+        own network. The server is yours, the rooms are yours, and nothing phones home.</p>
+      <ul>
+        <li>Runs on your machine — it keeps working when the internet does not</li>
+        <li>End-to-end encrypted rooms — the server relays, it cannot read them</li>
+        <li>Per-user AI partner on NVIDIA NIM — the model talks to your team</li>
+        <li>WebRTC calls — voice and video across your own LAN</li>
+        <li>TLS with a pinned certificate — clients verify before they connect</li>
+        <li>One codebase: the web client and the Android app</li>
+      </ul>
+      <div class="cta-row">
+        <a class="btn gold sm" data-wa href="https://wa.me/18684357698" target="_blank" rel="noopener noreferrer">Ask about Sovereign on WhatsApp</a>
+        <a class="btn g sm" href="#contact">See the contact details</a>
+      </div>
+      <p class="note">Still being built — not for sale yet, and no price is set. Ask on WhatsApp and it
+        goes straight into the next build.</p>
     </article>
   </div>
 
@@ -769,10 +810,42 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
         The SHA-256 of the delivery zip is published in <a href="#proof">Proof</a> — verify it yourself
         after download with <code>certutil -hashfile RoxVault-v1.2.0.zip SHA256</code>.</p>
       <div class="cta-row">
-        <a class="btn gold sm" href="https://paypal.me/Nicholasram17/800" data-paypal="800">Buy now · RoxVault — $800</a>
+        <a class="btn gold sm" href="https://paypal.me/Nicholasram17/800" data-paypal="800" data-product="roxvault">Buy now · RoxVault — $800</a>
         <a class="btn g sm" data-wa href="https://wa.me/18684357698">Ask before you buy</a>
       </div>
       <p class="note">Delivery follows confirmed payment. Lifetime means lifetime — no subscription, no seat count, no renewal fee, ever.</p>
+    </div>
+  </div>
+
+  <div class="roxvault-detail reveal faq-inline" style="margin-top:18px">
+    <div>
+      <h3>Before you buy RoxVault</h3>
+      <details open>
+        <summary>How do I install it?</summary>
+        <p>You receive one zip: the browser extension and the native panel that lives inside Ghvst
+          Browser. Unpack it, load the extension as an unpacked extension in your browser, and the
+          panel is already unlocked inside Ghvst — the same vault, the same entries, kept in step.
+          The install guide in the zip walks through it, and the SHA-256 of the zip is published on
+          the Proof section so you can verify the download before you open it.</p>
+      </details>
+      <details>
+        <summary>What does lifetime mean, exactly?</summary>
+        <p>One payment of $800 and the product is yours for as long as it exists. There is no renewal
+          fee, no annual key, no seat count, no account to sign into and nothing to expire. Update
+          the extension and you keep every update that is shipped.</p>
+      </details>
+      <details>
+        <summary>Where do my passwords actually live?</summary>
+        <p>On your machine, in the vault you control. There is no server, no sync account and no
+          analytics call. The extension and the native panel read the same encrypted store, so
+          nothing is ever left in two places.</p>
+      </details>
+      <details>
+        <summary>And if it does not work for me?</summary>
+        <p>Message on WhatsApp with your PayPal transaction ID and the problem. You get a fix or a
+          refund through PayPal, whichever fits — the same terms written on this page, with no
+          special rule for the $800 tier.</p>
+      </details>
     </div>
   </div>
 </section>
@@ -810,8 +883,8 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
         <li>Full build + test loop</li>
         <li>Priority execution queue</li>
       </ul>
-      <div class="trade">30 days from receipt. Renew by message — takes one reply.</div>
-      <div class="cta-row"><a class="btn p sm" href="https://paypal.me/Nicholasram17/14.99" data-paypal="14.99">Buy now · Workspace Pro — $14.99</a></div>
+      <div class="trade" data-renewal="workspace-pro">30 days from receipt. Renew by message — takes one reply.</div>
+      <div class="cta-row"><a class="btn p sm" href="https://paypal.me/Nicholasram17/14.99" data-paypal="14.99" data-product="workspace-pro">Buy now · Workspace Pro — $14.99</a></div>
     </article>
 
     <article class="tier reveal" id="t-vip">
@@ -824,8 +897,8 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
         <li>Long-running background jobs</li>
         <li>Direct line for requirements</li>
       </ul>
-      <div class="trade">30 days from receipt. Extend any time.</div>
-      <div class="cta-row"><a class="btn p sm" href="https://paypal.me/Nicholasram17/29" data-paypal="29">Buy now · Workspace VIP — $29</a></div>
+      <div class="trade" data-renewal="workspace-vip">30 days from receipt. Extend any time.</div>
+      <div class="cta-row"><a class="btn p sm" href="https://paypal.me/Nicholasram17/29" data-paypal="29" data-product="workspace-vip">Buy now · Workspace VIP — $29</a></div>
     </article>
 
     <article class="tier best reveal" id="t-titan">
@@ -839,8 +912,8 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
         <li>Full repository autonomy</li>
         <li>Deployment + monitoring</li>
       </ul>
-      <div class="trade">30 days from receipt. The tier the studio itself runs on.</div>
-      <div class="cta-row"><a class="btn gold sm" href="https://paypal.me/Nicholasram17/79" data-paypal="79">Buy now · Workspace Titan — $79</a></div>
+      <div class="trade" data-renewal="workspace-titan">30 days from receipt. The tier the studio itself runs on.</div>
+      <div class="cta-row"><a class="btn gold sm" href="https://paypal.me/Nicholasram17/79" data-paypal="79" data-product="workspace-titan">Buy now · Workspace Titan — $79</a></div>
     </article>
 
     <article class="tier reveal" id="t-phantom">
@@ -854,7 +927,7 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
         <li>Direct build access</li>
       </ul>
       <div class="trade">Never expires. Pay once, keep the key.</div>
-      <div class="cta-row"><a class="btn g sm" href="https://paypal.me/Nicholasram17/499" data-paypal="499">Buy now · Workspace Phantom — $499</a></div>
+      <div class="cta-row"><a class="btn g sm" href="https://paypal.me/Nicholasram17/499" data-paypal="499" data-product="workspace-phantom">Buy now · Workspace Phantom — $499</a></div>
     </article>
 
     <article class="tier king reveal" id="t-mythic">
@@ -869,8 +942,79 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
         <li>Private support channel</li>
       </ul>
       <div class="trade">Never expires. One payment of $999 and the whole workspace stack — every current tier and every tier built after — is yours for life, with first access to anything built next.</div>
-      <div class="cta-row"><a class="btn gold sm" href="https://paypal.me/Nicholasram17/999" data-paypal="999">Buy now · Workspace Mythic — $999</a></div>
+      <div class="cta-row"><a class="btn gold sm" href="https://paypal.me/Nicholasram17/999" data-paypal="999" data-product="workspace-mythic">Buy now · Workspace Mythic — $999</a></div>
     </article>
+  </div>
+</section>
+
+<section class="band" id="mythic">
+  <div class="sec-head reveal">
+    <div class="sec-kicker">RDX Workspace — top tier</div>
+    <h2>MYTHIC. <span class="em">$999, paid once.</span></h2>
+    <p class="sec-sub">A four-figure purchase should not be one line in a grid. Here is exactly what
+      $999 buys, what it means, how it is delivered, and what happens if something does not work.</p>
+  </div>
+
+  <div class="mythic-wrap">
+    <div class="mythic-stack reveal">
+      <h3>What $999 buys — itemised</h3>
+      <ul class="stack">
+        <li><b>RoxVault</b><span>Your passwords, keys and accounts — encrypted, on your machine, forever</span><em>$800</em></li>
+        <li><b>RDX Workspace — PHANTOM</b><span>Lifetime agent access, every future core feature, direct build access</span><em>$499</em></li>
+        <li><b>MVRK Studio</b><span>The motion, audio and assembly pipeline behind the animations</span><em>$59</em></li>
+        <li><b>Ghvst Browser — PC</b><span>The Windows build with the Accounts centre and RoxVault inside it</span><em>$49</em></li>
+        <li><b>Ghvst Browser — Android</b><span>The signed Android build with the blockers and picture-in-picture</span><em>$19</em></li>
+      </ul>
+      <div class="stack-total"><span>The same five products, bought separately</span><b>$1,426</b></div>
+      <div class="stack-total you"><span>MYTHIC — all of it, one payment</span><b>$999</b></div>
+      <p class="note">Those five prices are the real prices on this page — nothing is invented for the
+        pitch. MYTHIC is the only discount, and it is a one-time $427 off the same five products.
+        Every future Workspace tier is included as it is built.</p>
+      <div class="cta-row">
+        <a class="btn gold" href="https://paypal.me/Nicholasram17/999" data-paypal="999" data-product="workspace-mythic">Buy MYTHIC — $999</a>
+        <a class="btn g" data-wa href="https://wa.me/18684357698" target="_blank" rel="noopener noreferrer">Ask a question first</a>
+      </div>
+    </div>
+
+    <div class="mythic-faq reveal">
+      <h3>Straight answers before you pay</h3>
+      <details open>
+        <summary>Is this really lifetime?</summary>
+        <p>Yes. One payment of $999. There is no renewal date, no seat count and no feature gate that
+          closes. Everything above stays yours for as long as the products exist — and the agent tier
+          is included as lifetime, so you are never billed a monthly rent on top.</p>
+      </details>
+      <details>
+        <summary>How is it delivered?</summary>
+        <p>Pay with the button, then the receipt page gives you your PayPal transaction ID and opens
+          WhatsApp with that ID already written into the message. You press send. That is the whole
+          order. You get the RoxVault delivery zip with its SHA-256 sidecar, the signed Android APK,
+          the self-contained Windows build, the MVRK package, and your MYTHIC key for the agent.</p>
+      </details>
+      <details>
+        <summary>Do I still pay the $14.99–$79 every 30 days?</summary>
+        <p>No. MYTHIC replaces the monthly tiers — the agent is included for life, so there is no
+          monthly renewal attached to this purchase. The 30-day tiers exist for people who want to
+          rent the agent instead of owning it.</p>
+      </details>
+      <details>
+        <summary>What does "custom feature work included" actually mean?</summary>
+        <p>The $999 covers custom work scoped in writing before the purchase — the feature list is
+          agreed by message first, and it is built and delivered as part of the order. It does not
+          mean unlimited open-ended development forever.</p>
+      </details>
+      <details>
+        <summary>What if a delivery does not work as described?</summary>
+        <p>Message on WhatsApp with your transaction ID and the problem. You get a fix or a refund,
+          whichever fits, handled through PayPal. The same rule that is written on this page applies
+          here — no different terms for the expensive tier.</p>
+      </details>
+      <details>
+        <summary>Who answers me?</summary>
+        <p>One person — the builder — on WhatsApp. MYTHIC buyers are answered first. There is no
+          ticket queue and no support chatbot pretending to be a team.</p>
+      </details>
+    </div>
   </div>
 </section>
 
@@ -921,7 +1065,7 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
   </div>
 
   <div class="reveal" style="margin-top:26px">
-    <video class="proof-video" src="proof/showroom.webm" controls muted loop playsinline preload="metadata"
+    <video class="proof-video" src="proof/showroom.webm" poster="proof/showroom-poster.png" controls muted loop playsinline preload="metadata"
       aria-label="Recorded video of the live RDX 3D door showroom on this page: doors open and prices appear as the camera moves"></video>
     <p class="note" style="margin:10px 0 0;color:#8a7cad;font-size:12.5px">Recorded from this exact page — the live 3D showroom, doors opening, prices appearing. No edits, no cuts.</p>
   </div>
@@ -953,7 +1097,7 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     <div class="st reveal"><b>MVRK Studio</b><span>The creation pipeline: story, motion, audio, assembly.</span></div>
     <div class="st reveal"><b>LILQUENG Music</b><span>Original riddims and production tooling, built with real samples and real mixes.</span></div>
     <div class="st reveal"><b>868XRP</b><span>Server-side game systems with live recovery and honest load handling.</span></div>
-    <div class="st reveal"><b>Ghost System</b><span>The agent fleet, the memory vault and the release pipeline behind every product here.</span></div>
+    <div class="st reveal"><b>Ghvst System</b><span>The agent fleet, the memory vault and the release pipeline behind every product here.</span></div>
   </div>
 </section>
 
@@ -1007,9 +1151,9 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
       <h3>Terms of sale</h3>
       <ul>
         <li>Every product is sold exactly as priced on this page — one-time delivery or a 30-day activation. RDX Mobile is $29 per 30 days, paid up front: a rent model like a Claude Code plan, with no free tier and no one-time fee.</li>
-        <li>Pay with the PayPal button for the product (the amount is pre-filled). Then send the PayPal transaction ID on WhatsApp.</li>
+        <li>Pay with the PayPal button for the product (the amount is pre-filled). You land on the receipt page with your PayPal transaction ID already on it, and the WhatsApp button opens with your product and that ID written into the message — no screenshots to take, nothing to retype.</li>
         <li>Delivery happens after payment is confirmed: APK, installer, zip or activation, per product.</li>
-        <li>30-day tiers run 30 days from the confirmed receipt; renewal is started by hand via message.</li>
+        <li>30-day tiers run 30 days from the confirmed receipt. Renewal is started by hand via message, and each renewal is its own PayPal payment with its own transaction ID.</li>
         <li>The price shown on the page at the moment you pay is the price you pay.</li>
       </ul>
     </div>
@@ -1070,8 +1214,40 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
      ============================================================ */
 
   var PAYPAL_BASE = 'https://paypal.me/Nicholasram17';
-  function paypalUrl(amount) { return PAYPAL_BASE + '/' + String(amount); }
+
+  /* EVERY PAYMENT COMES BACK WITH ITS TRANSACTION ID.
+     PayPal.me returns the payer to the receipt page and appends the transaction ID, so the
+     buyer reads their own ID off the screen and the builder never has to match a screenshot
+     to a payment. The receipt page then opens WhatsApp with the product AND the transaction
+     ID already written into the message. */
+  var RECEIPT_URL = 'https://ebkboss.github.io/rdx-ai/receipt.html';
+
+  function paypalUrl(amount, product) {
+    var base = PAYPAL_BASE + '/' + String(amount);
+    if (!product) return base;
+    var ret = RECEIPT_URL + '?product=' + encodeURIComponent(product) +
+              '&amount=' + encodeURIComponent(String(amount));
+    return base + '?return_url=' + encodeURIComponent(ret);
+  }
   window.RDX_PAYPAL_URL = paypalUrl;
+
+  /* RECURRING PLANS - THE MONTHLY REVENUE SEAM.
+     paypal.me is a ONE-TIME link: it cannot charge a card a second time. Auto-renew needs a
+     PayPal link that CAN - a subscription link or a recurring invoice, both made in the
+     PayPal dashboard and pasted in here, one line per plan. While a line is empty that plan
+     falls back to the one-time link and the page says renewal is started by hand, which is
+     exactly what happens today. The moment a real link is pasted in, the same button starts
+     renewing on its own and the label below the price changes to say so.
+
+     A recurring invoice works on a personal PayPal account: PayPal > Invoicing > Create
+     invoice > Schedule recurring > repeat monthly. Copy its payment link into SUBSCRIPTIONS. */
+  var SUBSCRIPTIONS = {
+    'ghvst-android': '',
+    'rdx-mobile': '',
+    'workspace-pro': '',
+    'workspace-vip': '',
+    'workspace-titan': ''
+  };
 
   var REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -1283,8 +1459,6 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
   var START_LEN = 40;
   var SEG_STEP = 8;           // the fixed distance between two body segments (px)
   var CREATURE_HALF = false;  // phones run the creature at 30fps
-  var nvkeHud = document.getElementById('nvkeHud');
-  var heroEl = document.getElementById('top');
   var snake = {
     segs: [], path: [], len: START_LEN, chits: 0, fx: [], tick: 0, phase: 0,
     head: { x: 0, y: 0, a: 0, sp: 6, turn: 0, tongue: 0, tongueCd: 90 }
@@ -1307,25 +1481,6 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     } catch (e) {}
   }
 
-  function snakeHud() {
-    if (!nvkeHud) return;
-    nvkeHud.innerHTML = '<b>$NVKE</b><span>' + snake.len + ' segments</span>'
-      + '<span class="n">' + snake.chits + ' eaten</span>';
-    if (snake.chits > 0) nvkeHud.classList.add('on');
-  }
-
-  // WHERE THE COUNTER LIVES. The pill is fixed to the viewport, so it has to be
-  // told when the hero is on screen - otherwise it parks itself on the stat cards
-  // and the $19 price. Checked four times a second, not every frame, because a
-  // layout read per frame is a layout thrash per frame.
-  var hudCheckAt = 0;
-  function updateHudPlacement(ts) {
-    if (!nvkeHud || ts - hudCheckAt < 250) return;
-    hudCheckAt = ts;
-    var hr = heroEl ? heroEl.getBoundingClientRect() : null;
-    var heroOn = !!(hr && hr.bottom > 8 && hr.top < fieldH - 8);
-    nvkeHud.classList.toggle('off-hero', heroOn);
-  }
 
   function snakeSeed() {
     snakeLoad();
@@ -1358,9 +1513,6 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
       var tail = snake.segs[snake.segs.length - 1];
       snake.segs.push({ x: tail.x, y: tail.y });
     }
-    snakePersist();
-    snakeHud();
-    publishFood();
   }
 
   function snakeBite(x, y, r) {
@@ -1815,7 +1967,7 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
       desc: 'The browser the rest of the system lives in. Extensions, saved accounts, the vault and a launchpad home screen — Android and Windows, same codebase.',
       facts: ['Android build is $19, one-time, yours to keep', 'Windows build is $49, one-time',
         'AdGuard + uBOLite bundled, plus the Accounts switcher and RoxVault', 'Native OS picture-in-picture on Windows'],
-      buyLabel: 'Buy now · Ghvst Browser — $19', buyHref: '#', buyPay: '19',
+      buyLabel: 'Buy now · Ghvst Browser — $19', buyHref: '#', buyPay: '19', buyProduct: 'ghvst-android',
       secondaryLabel: 'See it running', secondaryHref: '#proof',
       note: 'Pay on PayPal, send the receipt on WhatsApp, and the signed APK link is delivered to you the same day. The Windows build is delivered personally once payment is confirmed.'
     },
@@ -1835,9 +1987,9 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
       desc: 'The same agent in your pocket. Give it a task from a phone and get the proof back, wherever you are.',
       facts: ['Runs real tasks from a phone', 'Same engine as the desktop workspace',
         '$29 every 30 days, paid up front — rent, no free tier (like a Claude Code plan)', 'Delivered as an installable build after payment'],
-      buyLabel: 'Buy now · RDX Mobile — $29', buyHref: '#', buyPay: '29',
-      secondaryLabel: 'Message to activate', secondaryHref: WA_URL,
-      note: 'Pay the $29 up front on PayPal for the 30 days, message the receipt, and the build is delivered straight to you.'
+      buyLabel: 'Buy now · RDX Mobile — $29', buyHref: '#', buyPay: '29', buyProduct: 'rdx-mobile',
+      secondaryLabel: 'Ask a question first', secondaryHref: WA_URL,
+      note: 'Pay the $29 up front on PayPal for 30 days. The receipt page hands you your transaction ID and a WhatsApp message with it already written - the build comes back to you straight away.'
     },
     {
       id: 'roxvault', title: 'RoxVault', short: 'RoxVault', price: '$800 lifetime', accent: '#f6c76a',
@@ -1845,7 +1997,7 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
       desc: 'Your passwords, keys and accounts in a vault you control. Ships as a browser extension and a native panel inside Ghvst.',
       facts: ['Nothing leaves your machine — no account, no sync', 'One vault: extension and native panel stay in step',
         'Lifetime, no renewal fee, no seat count', 'Unlocked inside Ghvst Browser out of the box'],
-      buyLabel: 'Buy now · RoxVault — $800', buyHref: '#', buyPay: '800',
+      buyLabel: 'Buy now · RoxVault — $800', buyHref: '#', buyPay: '800', buyProduct: 'roxvault',
       secondaryLabel: 'Ask a question first', secondaryHref: WA_URL,
       note: 'Lifetime means lifetime. Delivery follows confirmed payment — no subscription, ever.'
     }
@@ -1884,7 +2036,7 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     }
     if (ddBuy) {
       ddBuy.textContent = d.buyLabel;
-      ddBuy.setAttribute('href', d.buyPay ? paypalUrl(d.buyPay) : d.buyHref);
+      ddBuy.setAttribute('href', d.buyPay ? paypalUrl(d.buyPay, d.buyProduct) : d.buyHref);
       if (d.buyPay) { ddBuy.setAttribute('target', '_blank'); ddBuy.setAttribute('rel', 'noopener noreferrer'); }
       else { ddBuy.removeAttribute('target'); ddBuy.removeAttribute('rel'); }
     }
@@ -2761,8 +2913,6 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
     // switched off, so the doors crawled and the stare clock stuttered the moment
     // a visitor turned the ambience down. Only the ambient drawing is optional now.
     var dt = lastFrame ? Math.min(100, Math.max(0, ts - lastFrame)) : 0;
-    lastFrame = ts;
-    updateHudPlacement(ts);
 
     // THE CAMERA NEVER MOVES.
     //
@@ -2909,9 +3059,30 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
   var payAnchors = document.querySelectorAll('a[data-paypal]');
   for (var pi = 0; pi < payAnchors.length; pi++) {
     var a = payAnchors[pi];
-    a.setAttribute('href', paypalUrl(a.getAttribute('data-paypal')));
+    var amount = a.getAttribute('data-paypal');
+    var product = a.getAttribute('data-product');
+    var sub = product ? (SUBSCRIPTIONS[product] || '') : '';
+    if (sub) {
+      // A real recurring link is in place: this plan renews itself.
+      a.setAttribute('href', sub);
+      a.setAttribute('data-billing', 'recurring');
+    } else {
+      a.setAttribute('href', paypalUrl(amount, product));
+      a.setAttribute('data-billing', 'one-time');
+    }
     a.setAttribute('target', '_blank');
     a.setAttribute('rel', 'noopener noreferrer');
+  }
+
+  // The renewal line under a monthly price says the truth about that plan: auto-renew when
+  // a recurring link is configured, manual renewal when it is not. Never a promise the
+  // payment system does not actually keep.
+  var renewalEls = document.querySelectorAll('[data-renewal]');
+  for (var ri = 0; ri < renewalEls.length; ri++) {
+    var key = renewalEls[ri].getAttribute('data-renewal');
+    renewalEls[ri].textContent = (SUBSCRIPTIONS[key] || '')
+      ? 'Renews automatically every 30 days. Cancel it in PayPal any time.'
+      : '30 days from the receipt. Renew by message - one reply and it is on.';
   }
 
   /* ------------------------------------------------------------
@@ -2968,9 +3139,6 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
 
   sizeField();
   sizeCanvas();
-  seedMist();
-  snakeHud();
-  publishFood();
   requestAnimationFrame(frame);
 
   window.RDXSite = {

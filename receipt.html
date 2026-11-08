@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment received — RDX</title>
+<meta name="description" content="Your RDX payment receipt. Your PayPal transaction ID, your product, and one button to get your download.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23c4b5fd'>✦</text></svg>">
+<style>
+  :root{
+    --bg:#08050f; --panel:#120d1d; --panel2:#181122; --line:#2a1f3d;
+    --text:#f4efff; --muted:#a394c4; --gold:#f6c76a; --violet:#c4b5fd; --green:#6ee7b7;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:
+      radial-gradient(900px 500px at 50% -10%, rgba(122,86,190,.20), transparent 60%),
+      var(--bg);
+    color:var(--text);
+    font:16px/1.6 "Segoe UI",system-ui,-apple-system,sans-serif;
+    min-height:100vh; display:flex; align-items:flex-start; justify-content:center;
+    padding:40px 18px 64px;
+  }
+  .wrap{width:100%;max-width:660px}
+  .kicker{color:var(--muted);font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:700}
+  h1{font-size:30px;line-height:1.2;margin:10px 0 6px;letter-spacing:-.01em}
+  h1 .em{color:var(--gold)}
+  .sub{color:var(--muted);margin:0 0 26px}
+  .card{
+    background:linear-gradient(180deg,var(--panel2),var(--panel));
+    border:1px solid var(--line);border-radius:16px;padding:22px;margin:0 0 16px;
+  }
+  .row{display:flex;justify-content:space-between;gap:16px;align-items:baseline;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+  .row:last-child{border-bottom:0}
+  .row span:first-child{color:var(--muted);font-size:13px;letter-spacing:.04em;text-transform:uppercase;font-weight:700}
+  .row span:last-child{font-weight:600;text-align:right;word-break:break-word}
+  .txbox{
+    font-family:ui-monospace,"Cascadia Mono",Consolas,monospace;
+    font-size:19px;letter-spacing:.04em;color:var(--green);
+    background:rgba(110,231,183,.08);border:1px solid rgba(110,231,183,.28);
+    border-radius:10px;padding:14px 16px;margin:6px 0 14px;word-break:break-all;
+  }
+  .btn{
+    display:inline-block;text-decoration:none;border-radius:11px;padding:13px 20px;
+    font-weight:700;font-size:15px;border:1px solid transparent;cursor:pointer;
+  }
+  .btn.gold{background:var(--gold);color:#1a1206}
+  .btn.ghost{background:transparent;border-color:var(--line);color:var(--text)}
+  .btn.ghost:hover{border-color:var(--violet)}
+  .rowbtns{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+  .note{color:var(--muted);font-size:13px;margin:14px 0 0}
+  .steps{counter-reset:s;list-style:none;padding:0;margin:0}
+  .steps li{counter-increment:s;position:relative;padding:0 0 14px 40px;color:var(--muted);font-size:14px}
+  .steps li::before{
+    content:counter(s);position:absolute;left:0;top:0;width:26px;height:26px;border-radius:50%;
+    background:rgba(196,181,253,.14);border:1px solid rgba(196,181,253,.35);color:var(--violet);
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;
+  }
+  .steps b{color:var(--text)}
+  .warn{border-color:rgba(246,199,106,.45);background:rgba(246,199,106,.07)}
+  .warn h2{color:var(--gold);font-size:17px;margin:0 0 8px}
+  .foot{margin-top:26px;color:var(--muted);font-size:13px;text-align:center}
+  .foot a{color:var(--violet)}
+  .copied{color:var(--green);font-weight:700;font-size:13px;margin-left:10px;display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">RDX · payment received</div>
+  <h1>Your payment <span class="em">landed</span>.</h1>
+  <p class="sub">Keep this page. Your transaction ID is below — it is the fastest way to get your build.</p>
+
+  <div class="card">
+    <div class="row"><span>Product</span><span id="r-product">—</span></div>
+    <div class="row"><span>Amount</span><span id="r-amount">—</span></div>
+    <div class="row"><span>Status</span><span id="r-status">Confirmed by PayPal</span></div>
+  </div>
+
+  <div class="card" id="tx-card">
+    <span class="kicker" style="font-size:11px">PayPal transaction ID</span>
+    <div class="txbox" id="r-tx">—</div>
+    <div class="rowbtns">
+      <button class="btn gold" id="copy-tx" type="button">Copy transaction ID</button>
+      <span class="copied" id="copied-tx">Copied</span>
+    </div>
+    <p class="note">This is the ID PayPal put on your receipt. Send it with your message and the
+      delivery is matched to your payment instantly — no screenshots, no waiting to be figured out.</p>
+  </div>
+
+  <div class="card">
+    <span class="kicker" style="font-size:11px">Get your build</span>
+    <ol class="steps" style="margin-top:14px">
+      <li><b>Tap the button below.</b> WhatsApp opens with your product and transaction ID already written into the message.</li>
+      <li><b>Press send.</b> That is the whole order. Your transaction ID travels with it.</li>
+      <li><b>The download link comes back to you</b> — the signed APK for Android, the self-contained build for Windows, the delivery zip for RoxVault.</li>
+    </ol>
+    <div class="rowbtns">
+      <a class="btn gold" id="r-wa" href="https://wa.me/18684357698" target="_blank" rel="noopener noreferrer">Message the builder on WhatsApp</a>
+      <a class="btn ghost" href="https://ebkboss.github.io/rdx-ai/#store" target="_blank" rel="noopener noreferrer">Back to the store</a>
+    </div>
+  </div>
+
+  <div class="card warn" id="no-tx" style="display:none">
+    <h2>Your transaction ID is in your PayPal email</h2>
+    <p style="margin:0 0 12px;color:var(--muted);font-size:14px">PayPal sent a receipt to your email address.
+      The transaction ID is at the top of it, under &ldquo;Transaction ID&rdquo;. Paste that into the
+      WhatsApp message and your delivery is matched to your payment on the spot.</p>
+    <div class="rowbtns">
+      <a class="btn gold" id="r-wa2" href="https://wa.me/18684357698" target="_blank" rel="noopener noreferrer">Message the builder</a>
+    </div>
+  </div>
+
+  <p class="foot">Delivered by one human · <a href="https://ebkboss.github.io/rdx-ai/#terms">Terms & refunds</a></p>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var WA_DIGITS = '18684357698';
+  var params = new URLSearchParams(window.location.search);
+
+  function get(k) { return (params.get(k) || '').trim(); }
+
+  var tx = get('tx') || get('txn_id') || get('transaction_id') || '';
+  var product = get('product') || '';
+  var amount = get('amount') || '';
+
+  var PRODUCT_NAMES = {
+    'ghvst-android': 'Ghvst Browser — Android',
+    'ghvst-pc': 'Ghvst Browser — PC',
+    'roxvault': 'RoxVault',
+    'mvrk': 'MVRK Studio',
+    'rdx-mobile': 'RDX Mobile',
+    'workspace-pro': 'RDX Workspace — PRO',
+    'workspace-vip': 'RDX Workspace — VIP',
+    'workspace-titan': 'RDX Workspace — TITAN',
+    'workspace-phantom': 'RDX Workspace — PHANTOM',
+    'workspace-mythic': 'RDX Workspace — MYTHIC'
+  };
+
+  var elProduct = document.getElementById('r-product');
+  var elAmount = document.getElementById('r-amount');
+  var elTx = document.getElementById('r-tx');
+  var elStatus = document.getElementById('r-status');
+
+  elProduct.textContent = product ? (PRODUCT_NAMES[product] || product) : 'See the order in your PayPal activity';
+  elAmount.textContent = amount ? ('$' + amount) : '—';
+
+  if (tx) {
+    elTx.textContent = tx;
+    elStatus.textContent = 'Confirmed by PayPal';
+  } else {
+    elTx.textContent = 'Not in this link';
+    document.getElementById('tx-card').style.display = 'none';
+    document.getElementById('no-tx').style.display = 'block';
+    elStatus.textContent = 'Paid — transaction ID in your PayPal email';
+  }
+
+  // The message carries the order. The builder never has to match a screenshot to a payment.
+  var label = product ? (PRODUCT_NAMES[product] || product) : 'an RDX product';
+  var message = 'Hi — I just paid for ' + label +
+                (amount ? ' ($' + amount + ')' : '') + '.' +
+                (tx ? '\nPayPal transaction ID: ' + tx : '') +
+                '\nPlease send the download link.';
+  var waHref = 'https://wa.me/' + WA_DIGITS + '?text=' + encodeURIComponent(message);
+  document.getElementById('r-wa').href = waHref;
+  document.getElementById('r-wa2').href = waHref;
+
+  var copyBtn = document.getElementById('copy-tx');
+  var copied = document.getElementById('copied-tx');
+  copyBtn.addEventListener('click', function () {
+    var text = tx || (document.getElementById('r-product').textContent + ' ' + document.getElementById('r-amount').textContent);
+    var done = function () {
+      copied.style.display = 'inline';
+      copyBtn.textContent = 'Copied';
+      setTimeout(function () { copied.style.display = 'none'; copyBtn.textContent = 'Copy transaction ID'; }, 2200);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { fallbackCopy(text, done); });
+    } else {
+      fallbackCopy(text, done);
+    }
+  });
+
+  function fallbackCopy(text, done) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', 'readonly');
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); done(); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+})();
+</script>
+</body>
+</html>
