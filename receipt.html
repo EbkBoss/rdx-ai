@@ -75,6 +75,7 @@
   <div class="card">
     <div class="row"><span>Product</span><span id="r-product">—</span></div>
     <div class="row"><span>Amount</span><span id="r-amount">—</span></div>
+    <div class="row"><span>Plan</span><span id="r-plan">—</span></div>
     <div class="row"><span>Status</span><span id="r-status">Confirmed by PayPal</span></div>
   </div>
 
@@ -126,6 +127,7 @@
   var tx = get('tx') || get('txn_id') || get('transaction_id') || '';
   var product = get('product') || '';
   var amount = get('amount') || '';
+  var plan = get('plan') || '';
 
   var PRODUCT_NAMES = {
     'ghvst-android': 'Ghvst Browser — Android',
@@ -133,6 +135,13 @@
     'roxvault': 'RoxVault',
     'mvrk': 'MVRK Studio',
     'rdx-mobile': 'RDX Mobile',
+    'ghvst-allapps': 'GHOST Apps Licence — every Ghvst app',
+    'ghvst-terminal': 'Ghvst Terminal — the AI operator for your phone',
+    'sovereign': 'Sovereign Messenger',
+    'capture': 'GHVST Capture',
+    'devkit': 'GHVST DevKit',
+    'suite': 'GHVST Capture Suite',
+    'team': 'GHOST Team Licence',
     'workspace-pro': 'RDX Workspace — PRO',
     'workspace-vip': 'RDX Workspace — VIP',
     'workspace-titan': 'RDX Workspace — TITAN',
@@ -140,13 +149,24 @@
     'workspace-mythic': 'RDX Workspace — MYTHIC'
   };
 
+  // The plan tells the seller WHICH licence to issue. A $25 RoxVault payment is a month;
+  // the same product at $499 is for life. The order message must carry that.
+  var PLAN_NAMES = {
+    'monthly': 'Monthly',
+    'annual': 'Annual',
+    'lifetime': 'Lifetime',
+    '30days': '30 days'
+  };
+
   var elProduct = document.getElementById('r-product');
   var elAmount = document.getElementById('r-amount');
+  var elPlan = document.getElementById('r-plan');
   var elTx = document.getElementById('r-tx');
   var elStatus = document.getElementById('r-status');
 
   elProduct.textContent = product ? (PRODUCT_NAMES[product] || product) : 'See the order in your PayPal activity';
   elAmount.textContent = amount ? ('$' + amount) : '—';
+  elPlan.textContent = plan ? (PLAN_NAMES[plan] || plan) : '—';
 
   if (tx) {
     elTx.textContent = tx;
@@ -160,7 +180,9 @@
 
   // The message carries the order. The builder never has to match a screenshot to a payment.
   var label = product ? (PRODUCT_NAMES[product] || product) : 'an RDX product';
+  var planLabel = plan ? (PLAN_NAMES[plan] || plan) : '';
   var message = 'Hi — I just paid for ' + label +
+                (planLabel ? ' (' + planLabel + ' licence)' : '') +
                 (amount ? ' ($' + amount + ')' : '') + '.' +
                 (tx ? '\nPayPal transaction ID: ' + tx : '') +
                 '\nPlease send the download link.';

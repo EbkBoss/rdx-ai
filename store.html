@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The GHOST store - every licence, every price, one page</title>
+<meta name="description" content="Every Ghvst product with its real price. No free tier, no trial. Pay with PayPal, activate with your transaction ID, renew without losing a day.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23f6c76a'>G</text></svg>">
+<style>
+  :root{--bg:#08050f;--panel:#120d1d;--panel2:#181122;--line:#2a1f3d;--text:#f4efff;
+        --muted:#a394c4;--gold:#f6c76a;--violet:#c4b5fd;--green:#6ee7b7;}
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:radial-gradient(900px 500px at 50% -10%,rgba(122,86,190,.20),transparent 60%),var(--bg);
+       color:var(--text);font:16px/1.6 "Segoe UI",system-ui,-apple-system,sans-serif;min-height:100vh}
+  .wrap{width:100%;max-width:1080px;margin:0 auto;padding:48px 20px 80px}
+  .kicker{color:var(--muted);font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:700}
+  h1{font-size:clamp(30px,5vw,52px);line-height:1.08;margin:12px 0 10px;letter-spacing:-.02em}
+  h1 .em{color:var(--gold)}
+  h3{margin:0 0 4px;font-size:21px}
+  .sub,.note{color:var(--muted);font-size:13.5px;margin:6px 0 0}
+  .card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);
+        border-radius:18px;padding:26px;margin:0 0 18px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px}
+  .prod{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);
+        border-radius:18px;padding:22px;margin:0 0 18px}
+  .app{color:var(--gold);font:600 11px/1 ui-monospace,Consolas,monospace;letter-spacing:.16em;
+       text-transform:uppercase;margin-bottom:8px}
+  table.plans{width:100%;border-collapse:collapse;margin:14px 0 0}
+  table.plans td{padding:12px 8px;border-top:1px solid rgba(255,255,255,.07);vertical-align:middle}
+  table.plans td.pr{font-size:22px;font-weight:700;white-space:nowrap;color:var(--gold)}
+  table.plans td.act{text-align:right;white-space:nowrap}
+  .badge{font:700 9px/1 ui-monospace,monospace;letter-spacing:.12em;color:var(--green);
+         border:1px solid rgba(110,231,183,.4);border-radius:5px;padding:3px 5px;margin-left:6px}
+  .eq{color:var(--muted);font-size:12px;font-weight:400}
+  .btn{display:inline-block;text-decoration:none;border-radius:12px;padding:12px 18px;font-weight:700;
+       font-size:14px;background:var(--gold);color:#1a1206;border:1px solid transparent;cursor:pointer}
+  .btn:hover{filter:brightness(1.08)}
+  .btn.sm{padding:7px 12px;font-size:12.5px}
+  .btn.ghost{background:transparent;border-color:var(--line);color:var(--text)}
+  .tiers{margin-top:14px;border-top:1px solid rgba(255,255,255,.07);padding-top:12px}
+  .tiers h4{margin:0 0 10px;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .tier{margin-bottom:12px}
+  .tier-h{font-weight:700;color:var(--violet)}
+  .tier-c{color:var(--muted);font-size:13px}
+  .tier-p{list-style:none;padding:0;margin:6px 0 0}
+  .tier-p li{padding:5px 0;border-top:1px solid rgba(255,255,255,.05);font-size:14px}
+  .steps{counter-reset:s;list-style:none;padding:0;margin:0}
+  .steps li{counter-increment:s;position:relative;padding:0 0 14px 38px;color:var(--muted);font-size:14.5px}
+  .steps li::before{content:counter(s);position:absolute;left:0;top:0;width:26px;height:26px;border-radius:50%;
+       background:rgba(196,181,253,.14);border:1px solid var(--line);color:var(--violet);font-weight:700;
+       font-size:13px;display:flex;align-items:center;justify-content:center}
+  .steps b{color:var(--text)}
+  .live{margin-top:14px;padding:12px 14px;border:1px dashed var(--line);border-radius:12px;
+        color:var(--muted);font-size:13.5px}
+  code{font-family:ui-monospace,Consolas,monospace;color:var(--green);font-size:13px}
+  .foot{color:var(--muted);font-size:12.5px;margin-top:26px;text-align:center}
+  a{color:var(--violet)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">The GHOST store</div>
+  <h1>Every product. <span class="em">Every price.</span><br>One page, one licence.</h1>
+  <p class="note" style="max-width:720px">No free tier. No trial. Every price below is the price the
+     licence issuer charges - this page is generated from the same catalogue the issuer reads, so the
+     number you read is the number you pay. Pay with PayPal, paste your transaction ID, the key is
+     issued against it.</p>
+
+  <div class="card">
+    <div class="kicker">How activation works</div>
+    <ol class="steps">
+      <li><b>Pay.</b> The button opens PayPal with the exact amount already filled in.</li>
+      <li><b>Copy the transaction ID</b> from your PayPal receipt.</li>
+      <li><b>Paste it</b> into the app's licence screen - or send it to the seller and the key comes
+          straight back.</li>
+      <li><b>Renew any time:</b> pay again and paste the new transaction ID. The extra time is
+          <b>added</b> to what you have left. You never lose a day you paid for, and your licence id
+          never changes.</li>
+    </ol>
+    <div class="live">The issuer is published at <code>https://license.ghvst.dev</code>.</div>
+  </div>
+
+  <div class="grid">
+<article class="prod" id="p-GhvstAllApps">
+  <h3>GHOST Apps Licence - every Ghvst app</h3>
+  <div class="app">ALL</div>
+  <p class="note"></p>
+  
+  <table class="plans"><tbody>
+<tr><td class="pl">Monthly <span class="badge">DEFAULT</span><div class="sub">every Ghvst app</div></td><td class="pr">$29.0<div class="sub">1 month <span class="eq">= $29.0/mo equivalent</span></div></td><td class="act"><a class="btn" href="https://www.paypal.me/Nicholasram17/29" rel="noopener" data-product="GhvstAllApps" data-plan="monthly">Pay $29.0</a></td></tr>
+<tr><td class="pl">Annual<div class="sub">2.5 months free</div></td><td class="pr">$249.0<div class="sub">12 months <span class="eq">= $20.465753424657535/mo equivalent</span></div></td><td class="act"><a class="btn" href="https://www.paypal.me/Nicholasram17/249" rel="noopener" data-product="GhvstAllApps" data-plan="annual">Pay $249.0</a></td></tr>
+<tr><td class="pl">Lifetime<div class="sub">one payment, never expires</div></td><td class="pr">$499.0<div class="sub">never expires </div></td><td class="act"><a class="btn" href="https://www.paypal.me/Nicholasram17/499" rel="noopener" data-product="GhvstAllApps" data-plan="lifetime">Pay $499.0</a></td></tr>
+  </tbody></table>
+  
+</article>
+<article class="prod" id="p-GhvstBrowserAndroid">
+  <h3>Ghvst Browser for Android</h3>
+  <div class="app">GHVST_BROWSER</div>
+  <p class="note"></p>
+  
+  <table class="plans"><tbody>
+<tr><td class="pl">Monthly <span class="badge">DEFAULT</span><div class="sub">billed every month</div></td><td class="pr">$12.0<div class="sub">1 month <span class="eq">= $12.0/mo equivalent</span></div></td><td class="act"><a class="btn" href="https://www.paypal.me/Nicholasram17/12" rel="noopener" data-product="GhvstBrowserAndroid" data-plan="monthly">Pay $12.0</a></td></tr>
+<tr><td class="pl">Annual<div class="sub">2.5 months free</div></td><td class="pr">$99.0<div class="sub">12 months <span class="eq">= $8.136986301369863/mo equivalent</span></div></td><td class="act"><a class="btn" href="https://www.paypal.me/Nicholasram17/99" rel="noopener" data-product="GhvstBrowserAndroid" data-plan="annual">Pay $99.0</a></td></tr>
+<tr><td class="pl">Lifetime<div class="sub">one payment, never expires</div></td><td class="pr">$249.0<div class="sub">never expires </div></td><td class="act"><a class="btn" href="https://www.paypal.me/Nicholasram17/249" rel="noopener" data-product="GhvstBrowserAndroid" data-plan="lifetime">Pay $249.0</a></td></tr>
+  </tbody></table>
+  
+</article>
+<article class="prod" id="p-GhvstTerminalAndroid">
+  <h3>Ghvst Terminal - the AI operator for your phone</h3>
+  <div class="app">GHVST_TERMINAL</div>
+  <p class="note">The flagship operator product: a real agent that ACTS on the phone (device scan, files, open apps, tap and type, calls, SMS, speaker voice, web, code) with an offline signed licence. Tier picks the capability set, plan picks the term and the price. Rented tiers (PRO/VIP/TITAN) sell monthly and annual terms; the permanent seats (PHANTOM/MYTHIC) are one payment and never expire, so they have no renewal.</p>
+  
+  <table class="plans"><tbody>
+<tr><td class="pl">Monthly <span class="badge">DEFAULT</span><div class="sub">billed every month</div></td><td class="pr">$15.0<div class="sub">1 month <span class="eq">= $15.0/mo equivalent</span></div></td><td class="act"><a class="btn" href="https://www.paypal.me/Nicholasram17/15" rel="noopener" data-product="GhvstTerminalAndroid" data-plan="monthly">Pay $15.0</a></td></tr>
+<tr><td class="pl">Annual<div class="sub">2 months free</div></td><td class="pr">$150.0<div class="sub">12 months <span class="eq">= $12.328767123287673/mo equivalent</span></div></td><td class="act"><a class="btn" href="https://www.paypal.me/Nicholasram17/150" rel="noopener" data-product="GhvstTerminalAndroid" data-plan="annual">Pay $150.0</a></td></tr>
+  </tbody></table>
+  <div class="tiers"><h4>Tiers</h4><div class="tier"><div class="tier-h">Ghvst PRO</div><div class="tier-c">48-step agent, toolchain auto-provision, APK build and install, fast hosted models</div><ul class="tier-p"><li><b>$15.0</b> - PRO monthly <span class="sub">(1 month)</span> <a class="btn sm" href="https://www.paypal.me/Nicholasram17/15" rel="noopener" data-product="GhvstTerminalAndroid" data-tier="pro" data-plan="monthly">Pay</a></li><li><b>$150.0</b> - PRO annual <span class="sub">(12 months)</span> <a class="btn sm" href="https://www.paypal.me/Nicholasram17/150" rel="noopener" data-product="GhvstTerminalAndroid" data-tier="pro" data-plan="annual">Pay</a></li></ul></div><div class="tier"><div class="tier-h">Ghvst VIP</div><div class="tier-c">96 steps, reasoning models, God&#x27;s Eye live feeds, full skills and MCP packs, vision repair</div><ul class="tier-p"><li><b>$29.0</b> - VIP monthly <span class="sub">(1 month)</span> <a class="btn sm" href="https://www.paypal.me/Nicholasram17/29" rel="noopener" data-product="GhvstTerminalAndroid" data-tier="vip" data-plan="monthly">Pay</a></li><li><b>$290.0</b> - VIP annual <span class="sub">(12 months)</span> <a class="btn sm" href="https://www.paypal.me/Nicholasram17/290" rel="noopener" data-product="GhvstTerminalAndroid" data-tier="vip" data-plan="annual">Pay</a></li></ul></div><div class="tier"><div class="tier-h">Ghvst TITAN</div><div class="tier-c">160 steps, big models, multi-device console, long-running jobs</div><ul class="tier-p"><li><b>$79.0</b> - TITAN monthly <span class="sub">(1 month)</span> <a class="btn sm" href="https://www.paypal.me/Nicholasram17/79" rel="noopener" data-product="GhvstTerminalAndroid" data-tier="titan" data-plan="monthly">Pay</a></li><li><b>$790.0</b> - TITAN annual <span class="sub">(12 months)</span> <a class="btn sm" href="https://www.paypal.me/Nicholasram17/790" rel="noopener" data-product="GhvstTerminalAndroid" data-tier="titan" data-plan="annual">Pay</a></li></ul></div><div class="tier"><div class="tier-h">Ghvst PHANTOM</div><div class="tier-c">everything in TITAN, permanently, with a permanent token that survives reinstall</div><ul class="tier-p"><li><b>$499.0</b> - PHANTOM lifetime <span class="sub">(never expires)</span> <a class="btn sm" href="https://www.paypal.me/Nicholasram17/499" rel="noopener" data-product="GhvstTerminalAndroid" data-tier="phantom" data-plan="lifetime">Pay</a></li></ul></div><div class="tier"><div class="tier-h">Ghvst MYTHIC</div><div class="tier-c">everything, forever: endpoint editor, GGUF scout, every future feature</div><ul class="tier-p"><li><b>$999.0</b> - MYTHIC lifetime <span class="sub">(never expires)</span> <a class="btn sm" href="https://www.paypal.me/Nicholasram17/999" rel="noopener" data-product="GhvstTerminalAndroid" data-tier="mythic" data-plan="lifetime">Pay</a></li></ul></div></div>
+</article>
+<article class="prod" id="p-SovereignMessenger">
+  <h3>Sovereign Messenger (Ghvst Sovereign Gang)</h3>
+  <div class="app">SOVEREIGN_MESSENGER</div>
+  <p class="note"></p>
+  
+  <table class="plans"><tbody>
+<tr><td class="pl">Monthly <span class="badge">DEFAULT</span><div class="sub">billed every month</div></td><td class="pr">$7.0<div class="sub">1 month <span class="eq">= $7.0/mo equivalent</span></div></td><td class="act"><a class="btn" href="https://www.paypal.me/Nicholasram17/7" rel="noopener" data-product="SovereignMessenger" data-plan="monthly">Pay $7.0</a></td></tr>
+<tr><td class="pl">Annual<div class="sub">2 months free</div></td><td class="pr">$59.0<div class="sub">12 months <span class="eq">= $4.8493150684931505/mo equivalent</span></div></td><td class="act"><a class="btn" href="https://www.paypal.me/Nicholasram17/59" rel="noopener" data-product="SovereignMessenger" data-plan="annual">Pay $59.0</a></td></tr>
+<tr><td class="pl">Lifetime<div class="sub">one payment, never expires</div></td><td class="pr">$149.0<div class="sub">never expires </div></td><td class="act"><a class="btn" href="https://www.paypal.me/Nicholasram17/149" rel="noopener" data-product="SovereignMessenger" data-plan="lifetime">Pay $149.0</a></td></tr>
+  </tbody></table>
+  
+</article>
+<article class="prod" id="p-RoxVault">
+  <h3>RoxVault - Roblox Account Manager</h3>
+  <div class="app">ROXVAULT</div>
+  <p class="note"></p>
+  
+  <table class="plans"><tbody>
+<tr><td class="pl">Monthly <span class="badge">DEFAULT</span><div class="sub">billed every month</div></td><td class="pr">$25.0<div class="sub">1 month <span class="eq">= $25.0/mo equivalent</span></div></td><td class="act"><a class="btn" href="https://www.paypal.me/Nicholasram17/25" rel="noopener" data-product="RoxVault" data-plan="monthly">Pay $25.0</a></td></tr>
+<tr><td class="pl">Annual<div class="sub">2 months free</div></td><td class="pr">$199.0<div class="sub">12 months <span class="eq">= $16.356164383561644/mo equivalent</span></div></td><td class="act"><a class="btn" href="https://www.paypal.me/Nicholasram17/199" rel="noopener" data-product="RoxVault" data-plan="annual">Pay $199.0</a></td></tr>
+<tr><td class="pl">Lifetime<div class="sub">one payment, never expires</div></td><td class="pr">$499.0<div class="sub">never expires </div></td><td class="act"><a class="btn" href="https://www.paypal.me/Nicholasram17/499" rel="noopener" data-product="RoxVault" data-plan="lifetime">Pay $499.0</a></td></tr>
+  </tbody></table>
+  
+</article>
+<article class="prod" id="p-GhvstCapture">
+  <h3>GHVST Capture - screen + camera evidence engine with offline AI</h3>
+  <div class="app">GHVST_CAPTURE</div>
+  <p class="note">PROFESSIONAL CAPTURE RIG + AI. Screen recorder, camera evidence engine, image editor, video editor, offline Jenny neural voice, on-device AI assistant with markdown bulletins and a live model catalogue. Priced above the browser because it is a different job: evidence, not browsing.</p>
+  
+  <table class="plans"><tbody>
+<tr><td class="pl">Monthly <span class="badge">DEFAULT</span><div class="sub">billed every month</div></td><td class="pr">$19.0<div class="sub">1 month <span class="eq">= $19.0/mo equivalent</span></div></td><td class="act"><a class="btn" href="https://www.paypal.me/Nicholasram17/19" rel="noopener" data-product="GhvstCapture" data-plan="monthly">Pay $19.0</a></td></tr>
+<tr><td class="pl">Annual<div class="sub">2 months free</div></td><td class="pr">$149.0<div class="sub">12 months <span class="eq">= $12.246575342465754/mo equivalent</span></div></td><td class="act"><a class="btn" href="https://www.paypal.me/Nicholasram17/149" rel="noopener" data-product="GhvstCapture" data-plan="annual">Pay $149.0</a></td></tr>
+<tr><td class="pl">Lifetime<div class="sub">one payment, never expires</div></td><td class="pr">$399.0<div class="sub">never expires </div></td><td class="act"><a class="btn" href="https://www.paypal.me/Nicholasram17/399" rel="noopener" data-product="GhvstCapture" data-plan="lifetime">Pay $399.0</a></td></tr>
+  </tbody></table>
+  
+</article>
+<article class="prod" id="p-GhvstDevKit">
+  <h3>GHVST DevKit - the on-device development workstation</h3>
+  <div class="app">GHVST_DEVKIT</div>
+  <p class="note">A REAL TERMINAL ON THE PHONE. App-private rootfs, toybox applet suite, installable packs, files + editor + terminal + package manager + agent bridge, survives reboot and alarms. It runs the whole developer workflow on a cheap Android phone with no laptop.</p>
+  
+  <table class="plans"><tbody>
+<tr><td class="pl">Monthly <span class="badge">DEFAULT</span><div class="sub">billed every month</div></td><td class="pr">$29.0<div class="sub">1 month <span class="eq">= $29.0/mo equivalent</span></div></td><td class="act"><a class="btn" href="https://www.paypal.me/Nicholasram17/29" rel="noopener" data-product="GhvstDevKit" data-plan="monthly">Pay $29.0</a></td></tr>
+<tr><td class="pl">Annual<div class="sub">2 months free</div></td><td class="pr">$219.0<div class="sub">12 months <span class="eq">= $18.0/mo equivalent</span></div></td><td class="act"><a class="btn" href="https://www.paypal.me/Nicholasram17/219" rel="noopener" data-product="GhvstDevKit" data-plan="annual">Pay $219.0</a></td></tr>
+<tr><td class="pl">Lifetime<div class="sub">one payment, never expires</div></td><td class="pr">$549.0<div class="sub">never expires </div></td><td class="act"><a class="btn" href="https://www.paypal.me/Nicholasram17/549" rel="noopener" data-product="GhvstDevKit" data-plan="lifetime">Pay $549.0</a></td></tr>
+  </tbody></table>
+  
+</article>
+<article class="prod" id="p-GhvstCaptureSuite">
+  <h3>GHVST Capture Suite - Capture + DevKit together</h3>
+  <div class="app">GHVST_SUITE</div>
+  <p class="note">Both tools, one licence. The suite price is less than buying them separately, so nobody is charged twice for the same work.</p>
+  
+  <table class="plans"><tbody>
+<tr><td class="pl">Monthly <span class="badge">DEFAULT</span><div class="sub">Capture + DevKit</div></td><td class="pr">$39.0<div class="sub">1 month <span class="eq">= $39.0/mo equivalent</span></div></td><td class="act"><a class="btn" href="https://www.paypal.me/Nicholasram17/39" rel="noopener" data-product="GhvstCaptureSuite" data-plan="monthly">Pay $39.0</a></td></tr>
+<tr><td class="pl">Annual<div class="sub">Capture + DevKit, 2 months free</div></td><td class="pr">$299.0<div class="sub">12 months <span class="eq">= $24.575342465753426/mo equivalent</span></div></td><td class="act"><a class="btn" href="https://www.paypal.me/Nicholasram17/299" rel="noopener" data-product="GhvstCaptureSuite" data-plan="annual">Pay $299.0</a></td></tr>
+<tr><td class="pl">Lifetime<div class="sub">one payment, never expires</div></td><td class="pr">$799.0<div class="sub">never expires </div></td><td class="act"><a class="btn" href="https://www.paypal.me/Nicholasram17/799" rel="noopener" data-product="GhvstCaptureSuite" data-plan="lifetime">Pay $799.0</a></td></tr>
+  </tbody></table>
+  
+</article>
+<article class="prod" id="p-GhvstTeam">
+  <h3>GHOST Team Licence</h3>
+  <div class="app">ALL</div>
+  <p class="note"></p>
+  <div class="sub">Team pricing: $12 per seat (minimum 5).</div>
+  <table class="plans"><tbody>
+<tr><td class="pl">Team monthly<div class="sub">5 seats, $12 each</div></td><td class="pr">$60.0<div class="sub">1 month <span class="eq">= $60.0/mo equivalent</span></div></td><td class="act"><a class="btn" href="https://www.paypal.me/Nicholasram17/60" rel="noopener" data-product="GhvstTeam" data-plan="monthly">Pay $60.0</a></td></tr>
+<tr><td class="pl">Team annual <span class="badge">DEFAULT</span><div class="sub">5 seats, 2 months free</div></td><td class="pr">$600.0<div class="sub">12 months <span class="eq">= $49.31506849315069/mo equivalent</span></div></td><td class="act"><a class="btn" href="https://www.paypal.me/Nicholasram17/600" rel="noopener" data-product="GhvstTeam" data-plan="annual">Pay $600.0</a></td></tr>
+  </tbody></table>
+  
+</article>
+<article class="prod" id="p-rdx-workspace">
+  <h3>RDX Workspace - the AI engineering cockpit for Windows</h3>
+  <div class="app">RDX_DESKTOP</div>
+  <p class="note">The Windows engineering cockpit: a real OS-sandboxed agent, local GGUF support, a local semantic index, the MCP fleet, and an OFFLINE signed licence with no account, no server and no phone-home. One product id, three tiers. The TIER is the capability set and goes into the signed payload; the PLAN is the term and the price. Standard is one machine. Pro is three machines with priority support. Enterprise is a site licence on the customer&#x27;s own infrastructure. Prices here are the ONLY source of truth - the app&#x27;s price sheet is GENERATED from this file.</p>
+  
+  <table class="plans"><tbody>
+<tr><td class="pl">Monthly <span class="badge">DEFAULT</span><div class="sub">30 days - the low-cost way in</div></td><td class="pr">$29.0<div class="sub">1 month <span class="eq">= $29.0/mo equivalent</span></div></td><td class="act"><a class="btn" href="https://www.paypal.me/Nicholasram17/29" rel="noopener" data-product="rdx-workspace" data-plan="monthly">Pay $29.0</a></td></tr>
+<tr><td class="pl">Annual<div class="sub">one payment, one year of every release</div></td><td class="pr">$199.0<div class="sub">12 months <span class="eq">= $16.356164383561644/mo equivalent</span></div></td><td class="act"><a class="btn" href="https://www.paypal.me/Nicholasram17/199" rel="noopener" data-product="rdx-workspace" data-plan="annual">Pay $199.0</a></td></tr>
+<tr><td class="pl">Perpetual<div class="sub">one payment, never expires - the headline licence</div></td><td class="pr">$499.0<div class="sub">never expires </div></td><td class="act"><a class="btn" href="https://www.paypal.me/Nicholasram17/499" rel="noopener" data-product="rdx-workspace" data-plan="lifetime">Pay $499.0</a></td></tr>
+  </tbody></table>
+  <div class="tiers"><h4>Tiers</h4><div class="tier"><div class="tier-h">RDX Workspace Standard</div><div class="tier-c">the full desktop cockpit on 1 machine</div><ul class="tier-p"><li><b>$29.0</b> - Monthly <span class="sub">(1 month)</span> <a class="btn sm" href="https://www.paypal.me/Nicholasram17/29" rel="noopener" data-product="rdx-workspace" data-tier="standard" data-plan="monthly">Pay</a></li><li><b>$199.0</b> - Annual <span class="sub">(12 months)</span> <a class="btn sm" href="https://www.paypal.me/Nicholasram17/199" rel="noopener" data-product="rdx-workspace" data-tier="standard" data-plan="annual">Pay</a></li><li><b>$499.0</b> - Perpetual <span class="sub">(never expires)</span> <a class="btn sm" href="https://www.paypal.me/Nicholasram17/499" rel="noopener" data-product="rdx-workspace" data-tier="standard" data-plan="lifetime">Pay</a></li></ul></div><div class="tier"><div class="tier-h">RDX Workspace Pro</div><div class="tier-c">Standard plus 3 machines, priority support and every new release for the term</div><ul class="tier-p"><li><b>$1499.0</b> - Pro annual <span class="sub">(12 months)</span> <a class="btn sm" href="https://www.paypal.me/Nicholasram17/1499" rel="noopener" data-product="rdx-workspace" data-tier="pro" data-plan="annual">Pay</a></li><li><b>$3749.0</b> - Pro perpetual <span class="sub">(never expires)</span> <a class="btn sm" href="https://www.paypal.me/Nicholasram17/3749" rel="noopener" data-product="rdx-workspace" data-tier="pro" data-plan="lifetime">Pay</a></li></ul></div><div class="tier"><div class="tier-h">RDX Workspace Enterprise</div><div class="tier-c">site licence on the customer&#x27;s own infrastructure, named support, source escrow on request</div><ul class="tier-p"><li><b>$12000.0</b> - Enterprise annual <span class="sub">(12 months)</span> <a class="btn sm" href="https://www.paypal.me/Nicholasram17/12000" rel="noopener" data-product="rdx-workspace" data-tier="enterprise" data-plan="annual">Pay</a></li></ul></div></div>
+</article>
+  </div>
+
+  <div class="card">
+    <div class="kicker">The rules</div>
+    <ul class="steps">
+      <li>Every product is paid software. There is no free version of any of these.</li>
+      <li>Licences are verified OFFLINE inside the app, so a key always works even if a network is down.</li>
+      <li>Monthly and annual plans renew by paying again. Lifetime plans never expire and never renew.</li>
+      <li>Team licences are per seat, with a five seat minimum.</li>
+      <li>Questions before you buy: ask the seller directly. Nobody is auto-charged, ever.</li>
+    </ul>
+  </div>
+
+  <div class="foot">Prices generated from the GHOST licence catalogue - the issuer charges exactly these.
+     <br>Licence key, transaction id and renewal rules: <code>license.ghvst.dev</code></div>
+</div>
+</body>
+</html>

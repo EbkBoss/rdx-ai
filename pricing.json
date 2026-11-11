@@ -1,0 +1,635 @@
+{
+  "products": [
+    {
+      "id": "GhvstTerminalAndroid",
+      "slug": "ghvst-terminal",
+      "card": "p-ghvst-terminal",
+      "name": "Ghvst Terminal - the AI operator for your phone",
+      "note": "The flagship operator product: a real agent that ACTS on the phone (device scan, files, open apps, tap and type, calls, SMS, speaker voice, web, code) with an offline signed licence. Tier picks the capability set, plan picks the term and the price. Rented tiers (PRO/VIP/TITAN) sell monthly and annual terms; the permanent seats (PHANTOM/MYTHIC) are one payment and never expire, so they have no renewal.",
+      "app": "GHVST_TERMINAL",
+      "glyph": "▲",
+      "blurbs": [
+        "A real agent that acts on the phone - files, apps, calls, SMS, web, code",
+        "Five capability tiers, from PRO to MYTHIC",
+        "PHANTOM and MYTHIC are permanent: one payment, never expires"
+      ],
+      "plans": [
+        {
+          "name": "monthly",
+          "label": "Monthly",
+          "price": 15.0,
+          "days": 30,
+          "term": "1 month",
+          "note": "billed every month",
+          "paypal": "https://www.paypal.me/Nicholasram17/15",
+          "default": true
+        },
+        {
+          "name": "annual",
+          "label": "Annual",
+          "price": 150.0,
+          "days": 365,
+          "term": "12 months",
+          "note": "2 months free",
+          "paypal": "https://www.paypal.me/Nicholasram17/150",
+          "default": false
+        }
+      ],
+      "tiers": [
+        {
+          "id": "pro",
+          "label": "Ghvst PRO",
+          "capabilities": "48-step agent, toolchain auto-provision, APK build and install, fast hosted models",
+          "plans": [
+            {
+              "label": "PRO monthly",
+              "price": 15.0,
+              "term": "1 month",
+              "paypal": "https://www.paypal.me/Nicholasram17/15"
+            },
+            {
+              "label": "PRO annual",
+              "price": 150.0,
+              "term": "12 months",
+              "paypal": "https://www.paypal.me/Nicholasram17/150"
+            }
+          ]
+        },
+        {
+          "id": "vip",
+          "label": "Ghvst VIP",
+          "capabilities": "96 steps, reasoning models, God's Eye live feeds, full skills and MCP packs, vision repair",
+          "plans": [
+            {
+              "label": "VIP monthly",
+              "price": 29.0,
+              "term": "1 month",
+              "paypal": "https://www.paypal.me/Nicholasram17/29"
+            },
+            {
+              "label": "VIP annual",
+              "price": 290.0,
+              "term": "12 months",
+              "paypal": "https://www.paypal.me/Nicholasram17/290"
+            }
+          ]
+        },
+        {
+          "id": "titan",
+          "label": "Ghvst TITAN",
+          "capabilities": "160 steps, big models, multi-device console, long-running jobs",
+          "plans": [
+            {
+              "label": "TITAN monthly",
+              "price": 79.0,
+              "term": "1 month",
+              "paypal": "https://www.paypal.me/Nicholasram17/79"
+            },
+            {
+              "label": "TITAN annual",
+              "price": 790.0,
+              "term": "12 months",
+              "paypal": "https://www.paypal.me/Nicholasram17/790"
+            }
+          ]
+        },
+        {
+          "id": "phantom",
+          "label": "Ghvst PHANTOM",
+          "capabilities": "everything in TITAN, permanently, with a permanent token that survives reinstall",
+          "plans": [
+            {
+              "label": "PHANTOM lifetime",
+              "price": 499.0,
+              "term": "never expires",
+              "paypal": "https://www.paypal.me/Nicholasram17/499"
+            }
+          ]
+        },
+        {
+          "id": "mythic",
+          "label": "Ghvst MYTHIC",
+          "capabilities": "everything, forever: endpoint editor, GGUF scout, every future feature",
+          "plans": [
+            {
+              "label": "MYTHIC lifetime",
+              "price": 999.0,
+              "term": "never expires",
+              "paypal": "https://www.paypal.me/Nicholasram17/999"
+            }
+          ]
+        }
+      ],
+      "seats": {}
+    },
+    {
+      "id": "GhvstBrowserAndroid",
+      "slug": "ghvst-android",
+      "card": "p-ghvst-android",
+      "name": "Ghvst Browser for Android",
+      "note": "",
+      "app": "GHVST_BROWSER",
+      "glyph": "◈",
+      "blurbs": [
+        "Signed release APK - tabs, blockers, downloads, media controls, picture-in-picture",
+        "Licence key verified OFFLINE inside the app",
+        "No account, no telemetry, no subscription trap"
+      ],
+      "plans": [
+        {
+          "name": "monthly",
+          "label": "Monthly",
+          "price": 12.0,
+          "days": 30,
+          "term": "1 month",
+          "note": "billed every month",
+          "paypal": "https://www.paypal.me/Nicholasram17/12",
+          "default": true
+        },
+        {
+          "name": "annual",
+          "label": "Annual",
+          "price": 99.0,
+          "days": 365,
+          "term": "12 months",
+          "note": "2.5 months free",
+          "paypal": "https://www.paypal.me/Nicholasram17/99",
+          "default": false
+        },
+        {
+          "name": "lifetime",
+          "label": "Lifetime",
+          "price": 249.0,
+          "days": 0,
+          "term": "never expires",
+          "note": "one payment, never expires",
+          "paypal": "https://www.paypal.me/Nicholasram17/249",
+          "default": false
+        }
+      ],
+      "tiers": [],
+      "seats": {}
+    },
+    {
+      "id": "SovereignMessenger",
+      "slug": "sovereign",
+      "card": "p-sovereign",
+      "name": "Sovereign Messenger (Ghvst Sovereign Gang)",
+      "note": "",
+      "app": "SOVEREIGN_MESSENGER",
+      "glyph": "●",
+      "blurbs": [
+        "Your own messenger, your own server, your own rules",
+        "Monthly, annual or lifetime - the key is the same",
+        "Upgrade later, keep the days you already paid for"
+      ],
+      "plans": [
+        {
+          "name": "monthly",
+          "label": "Monthly",
+          "price": 7.0,
+          "days": 30,
+          "term": "1 month",
+          "note": "billed every month",
+          "paypal": "https://www.paypal.me/Nicholasram17/7",
+          "default": true
+        },
+        {
+          "name": "annual",
+          "label": "Annual",
+          "price": 59.0,
+          "days": 365,
+          "term": "12 months",
+          "note": "2 months free",
+          "paypal": "https://www.paypal.me/Nicholasram17/59",
+          "default": false
+        },
+        {
+          "name": "lifetime",
+          "label": "Lifetime",
+          "price": 149.0,
+          "days": 0,
+          "term": "never expires",
+          "note": "one payment, never expires",
+          "paypal": "https://www.paypal.me/Nicholasram17/149",
+          "default": false
+        }
+      ],
+      "tiers": [],
+      "seats": {}
+    },
+    {
+      "id": "RoxVault",
+      "slug": "roxvault",
+      "card": "p-roxvault",
+      "name": "RoxVault - Roblox Account Manager",
+      "note": "",
+      "app": "ROXVAULT",
+      "glyph": "■",
+      "blurbs": [
+        "Passwords, cookies and accounts stored under your control",
+        "Extension for Edge/Chrome/Brave, plus the native panel inside Ghvst Browser",
+        "500 accounts, the account maker, bulk jobs, backups, live health"
+      ],
+      "plans": [
+        {
+          "name": "monthly",
+          "label": "Monthly",
+          "price": 25.0,
+          "days": 30,
+          "term": "1 month",
+          "note": "billed every month",
+          "paypal": "https://www.paypal.me/Nicholasram17/25",
+          "default": true
+        },
+        {
+          "name": "annual",
+          "label": "Annual",
+          "price": 199.0,
+          "days": 365,
+          "term": "12 months",
+          "note": "2 months free",
+          "paypal": "https://www.paypal.me/Nicholasram17/199",
+          "default": false
+        },
+        {
+          "name": "lifetime",
+          "label": "Lifetime",
+          "price": 499.0,
+          "days": 0,
+          "term": "never expires",
+          "note": "one payment, never expires",
+          "paypal": "https://www.paypal.me/Nicholasram17/499",
+          "default": false
+        }
+      ],
+      "tiers": [],
+      "seats": {}
+    },
+    {
+      "id": "GhvstAllApps",
+      "slug": "ghvst-allapps",
+      "card": "p-ghvst-allapps",
+      "name": "GHOST Apps Licence - every Ghvst app",
+      "note": "",
+      "app": "ALL",
+      "glyph": "✦",
+      "blurbs": [
+        "Every Ghvst app behind ONE licence key",
+        "Annual plan covers every app you add later",
+        "The cheapest way to buy the whole system"
+      ],
+      "plans": [
+        {
+          "name": "monthly",
+          "label": "Monthly",
+          "price": 29.0,
+          "days": 30,
+          "term": "1 month",
+          "note": "every Ghvst app",
+          "paypal": "https://www.paypal.me/Nicholasram17/29",
+          "default": true
+        },
+        {
+          "name": "annual",
+          "label": "Annual",
+          "price": 249.0,
+          "days": 365,
+          "term": "12 months",
+          "note": "2.5 months free",
+          "paypal": "https://www.paypal.me/Nicholasram17/249",
+          "default": false
+        },
+        {
+          "name": "lifetime",
+          "label": "Lifetime",
+          "price": 499.0,
+          "days": 0,
+          "term": "never expires",
+          "note": "one payment, never expires",
+          "paypal": "https://www.paypal.me/Nicholasram17/499",
+          "default": false
+        }
+      ],
+      "tiers": [],
+      "seats": {}
+    },
+    {
+      "id": "GhvstCapture",
+      "slug": "capture",
+      "card": "p-capture",
+      "name": "GHVST Capture - screen + camera evidence engine with offline AI",
+      "note": "PROFESSIONAL CAPTURE RIG + AI. Screen recorder, camera evidence engine, image editor, video editor, offline Jenny neural voice, on-device AI assistant with markdown bulletins and a live model catalogue. Priced above the browser because it is a different job: evidence, not browsing.",
+      "app": "GHVST_CAPTURE",
+      "glyph": "◉",
+      "blurbs": [
+        "Screen recorder + camera evidence engine + image and video editor",
+        "Offline neural voice and an on-device AI assistant",
+        "Evidence rig: capture, annotate, export, keep"
+      ],
+      "plans": [
+        {
+          "name": "monthly",
+          "label": "Monthly",
+          "price": 19.0,
+          "days": 30,
+          "term": "1 month",
+          "note": "billed every month",
+          "paypal": "https://www.paypal.me/Nicholasram17/19",
+          "default": true
+        },
+        {
+          "name": "annual",
+          "label": "Annual",
+          "price": 149.0,
+          "days": 365,
+          "term": "12 months",
+          "note": "2 months free",
+          "paypal": "https://www.paypal.me/Nicholasram17/149",
+          "default": false
+        },
+        {
+          "name": "lifetime",
+          "label": "Lifetime",
+          "price": 399.0,
+          "days": 0,
+          "term": "never expires",
+          "note": "one payment, never expires",
+          "paypal": "https://www.paypal.me/Nicholasram17/399",
+          "default": false
+        }
+      ],
+      "tiers": [],
+      "seats": {}
+    },
+    {
+      "id": "GhvstDevKit",
+      "slug": "devkit",
+      "card": "p-devkit",
+      "name": "GHVST DevKit - the on-device development workstation",
+      "note": "A REAL TERMINAL ON THE PHONE. App-private rootfs, toybox applet suite, installable packs, files + editor + terminal + package manager + agent bridge, survives reboot and alarms. It runs the whole developer workflow on a cheap Android phone with no laptop.",
+      "app": "GHVST_DEVKIT",
+      "glyph": "⌘",
+      "blurbs": [
+        "A real terminal on the phone - app-private rootfs, files, editor, package manager",
+        "Survives reboot and alarms",
+        "The whole developer workflow on a cheap Android phone"
+      ],
+      "plans": [
+        {
+          "name": "monthly",
+          "label": "Monthly",
+          "price": 29.0,
+          "days": 30,
+          "term": "1 month",
+          "note": "billed every month",
+          "paypal": "https://www.paypal.me/Nicholasram17/29",
+          "default": true
+        },
+        {
+          "name": "annual",
+          "label": "Annual",
+          "price": 219.0,
+          "days": 365,
+          "term": "12 months",
+          "note": "2 months free",
+          "paypal": "https://www.paypal.me/Nicholasram17/219",
+          "default": false
+        },
+        {
+          "name": "lifetime",
+          "label": "Lifetime",
+          "price": 549.0,
+          "days": 0,
+          "term": "never expires",
+          "note": "one payment, never expires",
+          "paypal": "https://www.paypal.me/Nicholasram17/549",
+          "default": false
+        }
+      ],
+      "tiers": [],
+      "seats": {}
+    },
+    {
+      "id": "GhvstCaptureSuite",
+      "slug": "suite",
+      "card": "p-suite",
+      "name": "GHVST Capture Suite - Capture + DevKit together",
+      "note": "Both tools, one licence. The suite price is less than buying them separately, so nobody is charged twice for the same work.",
+      "app": "GHVST_SUITE",
+      "glyph": "◈◉",
+      "blurbs": [
+        "Capture + DevKit together, one licence, less than buying them apart",
+        "Everything in both products, one key",
+        "Same rules: pay, paste the transaction ID, unlocked"
+      ],
+      "plans": [
+        {
+          "name": "monthly",
+          "label": "Monthly",
+          "price": 39.0,
+          "days": 30,
+          "term": "1 month",
+          "note": "Capture + DevKit",
+          "paypal": "https://www.paypal.me/Nicholasram17/39",
+          "default": true
+        },
+        {
+          "name": "annual",
+          "label": "Annual",
+          "price": 299.0,
+          "days": 365,
+          "term": "12 months",
+          "note": "Capture + DevKit, 2 months free",
+          "paypal": "https://www.paypal.me/Nicholasram17/299",
+          "default": false
+        },
+        {
+          "name": "lifetime",
+          "label": "Lifetime",
+          "price": 799.0,
+          "days": 0,
+          "term": "never expires",
+          "note": "one payment, never expires",
+          "paypal": "https://www.paypal.me/Nicholasram17/799",
+          "default": false
+        }
+      ],
+      "tiers": [],
+      "seats": {}
+    },
+    {
+      "id": "GhvstTeam",
+      "slug": "team",
+      "card": "p-team",
+      "name": "GHOST Team Licence",
+      "note": "",
+      "app": "ALL",
+      "glyph": "◆",
+      "blurbs": [
+        "Every Ghvst app for your whole team, per seat",
+        "Five seat minimum - ask for more",
+        "Annual team plans save two months"
+      ],
+      "plans": [
+        {
+          "name": "monthly",
+          "label": "Team monthly",
+          "price": 60.0,
+          "days": 30,
+          "term": "1 month",
+          "note": "5 seats, $12 each",
+          "paypal": "https://www.paypal.me/Nicholasram17/60",
+          "default": false
+        },
+        {
+          "name": "annual",
+          "label": "Team annual",
+          "price": 600.0,
+          "days": 365,
+          "term": "12 months",
+          "note": "5 seats, 2 months free",
+          "paypal": "https://www.paypal.me/Nicholasram17/600",
+          "default": true
+        }
+      ],
+      "tiers": [],
+      "seats": {
+        "price_per_seat": 12,
+        "minimum_seats": 5,
+        "currency": "USD"
+      }
+    },
+    {
+      "id": "rdx-workspace",
+      "slug": "rdx-workspace",
+      "card": "p-rdx-workspace",
+      "name": "RDX Workspace - the AI engineering cockpit for Windows",
+      "note": "The Windows engineering cockpit: a real OS-sandboxed agent, local GGUF support, a local semantic index, the MCP fleet, and an OFFLINE signed licence with no account, no server and no phone-home. One product id, three tiers. The TIER is the capability set and goes into the signed payload; the PLAN is the term and the price. Standard is one machine. Pro is three machines with priority support. Enterprise is a site licence on the customer's own infrastructure. Prices here are the ONLY source of truth - the app's price sheet is GENERATED from this file.",
+      "app": "RDX_DESKTOP",
+      "glyph": "●",
+      "blurbs": [],
+      "plans": [
+        {
+          "name": "monthly",
+          "label": "Monthly",
+          "price": 29.0,
+          "days": 30,
+          "term": "1 month",
+          "note": "30 days - the low-cost way in",
+          "paypal": "https://www.paypal.me/Nicholasram17/29",
+          "default": true
+        },
+        {
+          "name": "annual",
+          "label": "Annual",
+          "price": 199.0,
+          "days": 365,
+          "term": "12 months",
+          "note": "one payment, one year of every release",
+          "paypal": "https://www.paypal.me/Nicholasram17/199",
+          "default": false
+        },
+        {
+          "name": "lifetime",
+          "label": "Perpetual",
+          "price": 499.0,
+          "days": 0,
+          "term": "never expires",
+          "note": "one payment, never expires - the headline licence",
+          "paypal": "https://www.paypal.me/Nicholasram17/499",
+          "default": false
+        }
+      ],
+      "tiers": [
+        {
+          "id": "standard",
+          "label": "RDX Workspace Standard",
+          "capabilities": "the full desktop cockpit on 1 machine",
+          "plans": [
+            {
+              "label": "Monthly",
+              "price": 29.0,
+              "term": "1 month",
+              "paypal": "https://www.paypal.me/Nicholasram17/29"
+            },
+            {
+              "label": "Annual",
+              "price": 199.0,
+              "term": "12 months",
+              "paypal": "https://www.paypal.me/Nicholasram17/199"
+            },
+            {
+              "label": "Perpetual",
+              "price": 499.0,
+              "term": "never expires",
+              "paypal": "https://www.paypal.me/Nicholasram17/499"
+            }
+          ]
+        },
+        {
+          "id": "pro",
+          "label": "RDX Workspace Pro",
+          "capabilities": "Standard plus 3 machines, priority support and every new release for the term",
+          "plans": [
+            {
+              "label": "Pro annual",
+              "price": 1499.0,
+              "term": "12 months",
+              "paypal": "https://www.paypal.me/Nicholasram17/1499"
+            },
+            {
+              "label": "Pro perpetual",
+              "price": 3749.0,
+              "term": "never expires",
+              "paypal": "https://www.paypal.me/Nicholasram17/3749"
+            }
+          ]
+        },
+        {
+          "id": "enterprise",
+          "label": "RDX Workspace Enterprise",
+          "capabilities": "site licence on the customer's own infrastructure, named support, source escrow on request",
+          "plans": [
+            {
+              "label": "Enterprise annual",
+              "price": 12000.0,
+              "term": "12 months",
+              "paypal": "https://www.paypal.me/Nicholasram17/12000"
+            }
+          ]
+        }
+      ],
+      "seats": {}
+    }
+  ],
+  "issuer": "https://license.ghvst.dev",
+  "generated_at": "2026-11-11T09:57:15+00:00",
+  "mythic_bundle": {
+    "mythic_price": 999.0,
+    "items": [
+      {
+        "name": "RoxVault",
+        "price": 499.0
+      },
+      {
+        "name": "RDX Workspace — PHANTOM",
+        "price": 499.0
+      },
+      {
+        "name": "MVRK Studio",
+        "price": 59.0
+      },
+      {
+        "name": "Ghvst Browser — PC",
+        "price": 49.0
+      },
+      {
+        "name": "Ghvst Browser — Android",
+        "price": 249.0
+      }
+    ],
+    "separate_total": 1355.0,
+    "saving": 356.0
+  }
+}
