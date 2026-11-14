@@ -534,7 +534,7 @@
       "slug": "rdx-workspace",
       "card": "p-rdx-workspace",
       "name": "RDX Workspace - the AI engineering cockpit for Windows",
-      "note": "The Windows engineering cockpit: a real OS-sandboxed agent, local GGUF support, a local semantic index, the MCP fleet, and an OFFLINE signed licence with no account, no server and no phone-home. One product id, three tiers. The TIER is the capability set and goes into the signed payload; the PLAN is the term and the price. Standard is one machine. Pro is three machines with priority support. Enterprise is a site licence on the customer's own infrastructure. Prices here are the ONLY source of truth - the app's price sheet is GENERATED from this file.",
+      "note": "The Windows engineering cockpit: a real OS-sandboxed agent, local GGUF support, a local semantic index, the MCP fleet, and an OFFLINE signed licence with no account, no server and no phone-home. One product id, four tiers. The TIER is the capability set and goes into the signed payload; the PLAN is the term and the price. Standard is one machine. MYTHIC is the forever tier - the full cockpit for life plus every future release. Pro is three machines with priority support. Enterprise is a site licence on the customer's own infrastructure. Prices here are the ONLY source of truth - the app's price sheet is GENERATED from this file.",
       "app": "RDX_DESKTOP",
       "glyph": "●",
       "blurbs": [],
@@ -603,6 +603,23 @@
               "term": "never expires",
               "note": "one payment, never expires - the headline licence",
               "paypal": "https://www.paypal.me/Nicholasram17/499"
+            }
+          ]
+        },
+        {
+          "id": "mythic",
+          "label": "RDX Workspace MYTHIC",
+          "short": "MYTHIC",
+          "capabilities": "everything in Standard, permanently, plus every future release of RDX for life - the forever tier",
+          "plans": [
+            {
+              "name": "lifetime",
+              "label": "MYTHIC lifetime",
+              "price": 999.0,
+              "days": 0,
+              "term": "never expires",
+              "note": "one payment, never expires - every future release included",
+              "paypal": "https://www.paypal.me/Nicholasram17/999"
             }
           ]
         },
@@ -710,7 +727,7 @@
     }
   ],
   "issuer": "https://license.ghvst.dev",
-  "generated_at": "2026-11-14T13:44:41+00:00",
+  "generated_at": "2026-11-14T18:21:14+00:00",
   "mythic_bundle": {
     "mythic_price": 999.0,
     "items": [
