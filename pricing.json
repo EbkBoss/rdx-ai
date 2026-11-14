@@ -39,18 +39,25 @@
         {
           "id": "pro",
           "label": "Ghvst PRO",
+          "short": "PRO",
           "capabilities": "48-step agent, toolchain auto-provision, APK build and install, fast hosted models",
           "plans": [
             {
+              "name": "monthly",
               "label": "PRO monthly",
               "price": 15.0,
+              "days": 30,
               "term": "1 month",
+              "note": "billed every month",
               "paypal": "https://www.paypal.me/Nicholasram17/15"
             },
             {
+              "name": "annual",
               "label": "PRO annual",
               "price": 150.0,
+              "days": 365,
               "term": "12 months",
+              "note": "2 months free",
               "paypal": "https://www.paypal.me/Nicholasram17/150"
             }
           ]
@@ -58,18 +65,25 @@
         {
           "id": "vip",
           "label": "Ghvst VIP",
+          "short": "VIP",
           "capabilities": "96 steps, reasoning models, God's Eye live feeds, full skills and MCP packs, vision repair",
           "plans": [
             {
+              "name": "monthly",
               "label": "VIP monthly",
               "price": 29.0,
+              "days": 30,
               "term": "1 month",
+              "note": "billed every month",
               "paypal": "https://www.paypal.me/Nicholasram17/29"
             },
             {
+              "name": "annual",
               "label": "VIP annual",
               "price": 290.0,
+              "days": 365,
               "term": "12 months",
+              "note": "2 months free",
               "paypal": "https://www.paypal.me/Nicholasram17/290"
             }
           ]
@@ -77,18 +91,25 @@
         {
           "id": "titan",
           "label": "Ghvst TITAN",
+          "short": "TITAN",
           "capabilities": "160 steps, big models, multi-device console, long-running jobs",
           "plans": [
             {
+              "name": "monthly",
               "label": "TITAN monthly",
               "price": 79.0,
+              "days": 30,
               "term": "1 month",
+              "note": "billed every month",
               "paypal": "https://www.paypal.me/Nicholasram17/79"
             },
             {
+              "name": "annual",
               "label": "TITAN annual",
               "price": 790.0,
+              "days": 365,
               "term": "12 months",
+              "note": "2 months free",
               "paypal": "https://www.paypal.me/Nicholasram17/790"
             }
           ]
@@ -96,12 +117,16 @@
         {
           "id": "phantom",
           "label": "Ghvst PHANTOM",
+          "short": "PHANTOM",
           "capabilities": "everything in TITAN, permanently, with a permanent token that survives reinstall",
           "plans": [
             {
+              "name": "lifetime",
               "label": "PHANTOM lifetime",
               "price": 499.0,
+              "days": 0,
               "term": "never expires",
+              "note": "one payment, never expires",
               "paypal": "https://www.paypal.me/Nicholasram17/499"
             }
           ]
@@ -109,12 +134,16 @@
         {
           "id": "mythic",
           "label": "Ghvst MYTHIC",
+          "short": "MYTHIC",
           "capabilities": "everything, forever: endpoint editor, GGUF scout, every future feature",
           "plans": [
             {
+              "name": "lifetime",
               "label": "MYTHIC lifetime",
               "price": 999.0,
+              "days": 0,
               "term": "never expires",
+              "note": "one payment, never expires",
               "paypal": "https://www.paypal.me/Nicholasram17/999"
             }
           ]
@@ -545,24 +574,34 @@
         {
           "id": "standard",
           "label": "RDX Workspace Standard",
+          "short": "Standard",
           "capabilities": "the full desktop cockpit on 1 machine",
           "plans": [
             {
+              "name": "monthly",
               "label": "Monthly",
               "price": 29.0,
+              "days": 30,
               "term": "1 month",
+              "note": "30 days - the low-cost way in",
               "paypal": "https://www.paypal.me/Nicholasram17/29"
             },
             {
+              "name": "annual",
               "label": "Annual",
               "price": 199.0,
+              "days": 365,
               "term": "12 months",
+              "note": "one payment, one year of every release",
               "paypal": "https://www.paypal.me/Nicholasram17/199"
             },
             {
+              "name": "lifetime",
               "label": "Perpetual",
               "price": 499.0,
+              "days": 0,
               "term": "never expires",
+              "note": "one payment, never expires - the headline licence",
               "paypal": "https://www.paypal.me/Nicholasram17/499"
             }
           ]
@@ -570,18 +609,25 @@
         {
           "id": "pro",
           "label": "RDX Workspace Pro",
+          "short": "Pro",
           "capabilities": "Standard plus 3 machines, priority support and every new release for the term",
           "plans": [
             {
+              "name": "annual",
               "label": "Pro annual",
               "price": 1499.0,
+              "days": 365,
               "term": "12 months",
+              "note": "3 machines, priority support, every release for a year",
               "paypal": "https://www.paypal.me/Nicholasram17/1499"
             },
             {
+              "name": "lifetime",
               "label": "Pro perpetual",
               "price": 3749.0,
+              "days": 0,
               "term": "never expires",
+              "note": "3 machines, never expires - 2.5 years of Pro annual paid once",
               "paypal": "https://www.paypal.me/Nicholasram17/3749"
             }
           ]
@@ -589,22 +635,82 @@
         {
           "id": "enterprise",
           "label": "RDX Workspace Enterprise",
+          "short": "Enterprise",
           "capabilities": "site licence on the customer's own infrastructure, named support, source escrow on request",
           "plans": [
             {
+              "name": "annual",
               "label": "Enterprise annual",
               "price": 12000.0,
+              "days": 365,
               "term": "12 months",
+              "note": "site licence on the customer's own infrastructure - priced by scope from $9,000 to $25,000, invoiced",
               "paypal": "https://www.paypal.me/Nicholasram17/12000"
             }
           ]
         }
       ],
       "seats": {}
+    },
+    {
+      "id": "GhvstBrowserPC",
+      "slug": "ghvst-pc",
+      "card": "p-ghvst-pc",
+      "name": "Ghvst Browser - PC",
+      "note": "The Windows build of Ghvst Browser: the WebView2 engine, extension loading, the Accounts control centre and RoxVault inside it. One payment, one key, it never expires.",
+      "app": "GHVST_BROWSER_PC",
+      "glyph": "◇",
+      "blurbs": [
+        "The Windows build - WebView2 engine, extension loading, Accounts control centre",
+        "RoxVault inside it, one self-contained package",
+        "One payment, one key, it never expires"
+      ],
+      "plans": [
+        {
+          "name": "lifetime",
+          "label": "Lifetime",
+          "price": 49.0,
+          "days": 0,
+          "term": "never expires",
+          "note": "one payment, never expires",
+          "paypal": "https://www.paypal.me/Nicholasram17/49",
+          "default": true
+        }
+      ],
+      "tiers": [],
+      "seats": {}
+    },
+    {
+      "id": "MVRKStudio",
+      "slug": "mvrk",
+      "card": "p-mvrk",
+      "name": "MVRK Studio",
+      "note": "The creation suite: the motion, audio and assembly pipeline behind the animations. One payment, one key, it never expires.",
+      "app": "MVRK",
+      "glyph": "◆",
+      "blurbs": [
+        "The motion, audio and assembly pipeline behind the animations",
+        "Built for shipping work, not for demos",
+        "One payment, one key, it never expires"
+      ],
+      "plans": [
+        {
+          "name": "lifetime",
+          "label": "Lifetime",
+          "price": 59.0,
+          "days": 0,
+          "term": "never expires",
+          "note": "one payment, never expires",
+          "paypal": "https://www.paypal.me/Nicholasram17/59",
+          "default": true
+        }
+      ],
+      "tiers": [],
+      "seats": {}
     }
   ],
   "issuer": "https://license.ghvst.dev",
-  "generated_at": "2026-11-11T09:57:15+00:00",
+  "generated_at": "2026-11-14T10:20:45+00:00",
   "mythic_bundle": {
     "mythic_price": 999.0,
     "items": [
@@ -613,7 +719,7 @@
         "price": 499.0
       },
       {
-        "name": "RDX Workspace — PHANTOM",
+        "name": "Ghvst Terminal — PHANTOM",
         "price": 499.0
       },
       {

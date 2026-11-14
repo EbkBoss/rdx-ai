@@ -128,13 +128,14 @@
   var product = get('product') || '';
   var amount = get('amount') || '';
   var plan = get('plan') || '';
+  var tier = get('tier') || '';
 
   var PRODUCT_NAMES = {
     'ghvst-android': 'Ghvst Browser — Android',
     'ghvst-pc': 'Ghvst Browser — PC',
     'roxvault': 'RoxVault',
     'mvrk': 'MVRK Studio',
-    'rdx-mobile': 'RDX Mobile',
+    'rdx-mobile': 'Ghvst Terminal — the AI operator for your phone',
     'ghvst-allapps': 'GHOST Apps Licence — every Ghvst app',
     'ghvst-terminal': 'Ghvst Terminal — the AI operator for your phone',
     'sovereign': 'Sovereign Messenger',
@@ -142,11 +143,12 @@
     'devkit': 'GHVST DevKit',
     'suite': 'GHVST Capture Suite',
     'team': 'GHOST Team Licence',
+    'rdx-workspace': 'RDX Workspace — the AI engineering cockpit for Windows',
     'workspace-pro': 'RDX Workspace — PRO',
     'workspace-vip': 'RDX Workspace — VIP',
     'workspace-titan': 'RDX Workspace — TITAN',
-    'workspace-phantom': 'RDX Workspace — PHANTOM',
-    'workspace-mythic': 'RDX Workspace — MYTHIC'
+    'workspace-phantom': 'Ghvst Terminal — PHANTOM',
+    'workspace-mythic': 'Ghvst Terminal — MYTHIC'
   };
 
   // The plan tells the seller WHICH licence to issue. A $25 RoxVault payment is a month;
@@ -158,15 +160,32 @@
     '30days': '30 days'
   };
 
+  // The TIER is the capability set, and it goes into the signed licence. Two tiers can
+  // cost the same, so the amount alone never says which one was bought - the order
+  // message has to say it or the seller has to guess.
+  var TIER_NAMES = {
+    'pro': 'PRO',
+    'vip': 'VIP',
+    'titan': 'TITAN',
+    'phantom': 'PHANTOM',
+    'mythic': 'MYTHIC',
+    'standard': 'Standard',
+    'enterprise': 'Enterprise'
+  };
+
   var elProduct = document.getElementById('r-product');
   var elAmount = document.getElementById('r-amount');
   var elPlan = document.getElementById('r-plan');
   var elTx = document.getElementById('r-tx');
   var elStatus = document.getElementById('r-status');
 
+  var tierLabel = tier ? (TIER_NAMES[tier] || tier) : '';
   elProduct.textContent = product ? (PRODUCT_NAMES[product] || product) : 'See the order in your PayPal activity';
   elAmount.textContent = amount ? ('$' + amount) : '—';
   elPlan.textContent = plan ? (PLAN_NAMES[plan] || plan) : '—';
+  if (tierLabel && elPlan) {
+    elPlan.textContent = elPlan.textContent + ' · ' + tierLabel + ' tier';
+  }
 
   if (tx) {
     elTx.textContent = tx;
@@ -182,6 +201,7 @@
   var label = product ? (PRODUCT_NAMES[product] || product) : 'an RDX product';
   var planLabel = plan ? (PLAN_NAMES[plan] || plan) : '';
   var message = 'Hi — I just paid for ' + label +
+                (tierLabel ? ' — ' + tierLabel + ' tier' : '') +
                 (planLabel ? ' (' + planLabel + ' licence)' : '') +
                 (amount ? ' ($' + amount + ')' : '') + '.' +
                 (tx ? '\nPayPal transaction ID: ' + tx : '') +
