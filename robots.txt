@@ -108,6 +108,62 @@ Disallow: /
 User-agent: ia_archiver
 Disallow: /
 
+# ---- Reverse-engineering crawlers / the REA campaign ------------------------------
+# These are the crawlers that map an app's outbound traffic and attribute it to
+# code (mitmproxy -> .har -> REA). They are aimed at products people already
+# trust, and this storefront publishes real prices, real features and real
+# download links - so they are not welcome here.
+User-agent: rea-agents
+Disallow: /
+
+User-agent: rea
+Disallow: /
+
+User-agent: rea.tools
+Disallow: /
+
+User-agent: ArchiveExplorer
+Disallow: /
+
+User-agent: morluto
+Disallow: /
+
+User-agent: mitmproxy
+Disallow: /
+
+User-agent: mitmweb
+Disallow: /
+
+User-agent: mitmdump
+Disallow: /
+
+User-agent: Charles
+Disallow: /
+
+User-agent: Fiddler
+Disallow: /
+
+User-agent: zaproxy
+Disallow: /
+
+User-agent: BurpSuite
+Disallow: /
+
+User-agent: httpcanary
+Disallow: /
+
+User-agent: pcapdroid
+Disallow: /
+
+User-agent: frida
+Disallow: /
+
+User-agent: jadx
+Disallow: /
+
+User-agent: apktool
+Disallow: /
+
 # ---- Ordinary search indexing stays open so buyers can find the products ---------
 User-agent: Googlebot
 Allow: /

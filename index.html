@@ -13,6 +13,14 @@
 <meta property="og:url" content="https://ebkboss.github.io/rdx-ai/">
 <meta property="og:image" content="https://ebkboss.github.io/rdx-ai/proof/ghvst-pc.png">
 <meta name="twitter:card" content="summary_large_image">
+<!-- AI / scraping policy. noai + noimageai are honoured by a growing number of
+     crawlers; the client-side wall below is the second layer for the ones that
+     ignore robots.txt. Honest limit: GitHub Pages gives no edge control, so a
+     true block needs a custom domain plus a Cloudflare WAF rule. This is
+     policy + wall + monitoring, not an edge block. -->
+<meta name="robots" content="noai, noimageai, noindexai, index, follow">
+<meta name="googlebot" content="index, follow">
+<meta name="ai-content-declaration" content="noai">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26' fill='%23ef4444'>%E2%9C%A6</text></svg>">
 <!-- Structured data: every price below is the real, live price shown on this page. -->
 <script type="application/ld+json" id="ldjson">
@@ -1242,6 +1250,50 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
 <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body>
+<!-- THE CLIENT-SIDE WALL (2026-11-14).
+     robots.txt is a policy; this is the speed bump for the crawlers that ignore
+     it. It matches AI training bots, AI answer engines, SEO harvesters and the
+     REA / mitmproxy campaign against trusted apps. A real buyer on a real
+     browser is never affected - the list is matched on explicit agent
+     signatures only, and headless detection is deliberately NOT used because it
+     breaks legitimate QA and is trivial to spoof.
+     Honest limit: this cannot stop a scraper that reads the raw HTML over HTTP.
+     That needs an edge (custom domain + Cloudflare WAF); until that exists the
+     protection is policy + wall + monitoring. -->
+<script>
+(function () {
+  var ua = (navigator.userAgent || '').toLowerCase();
+  var blocked = [
+    'gptbot', 'chatgpt-user', 'claudebot', 'claude-web', 'anthropic-ai', 'ccbot',
+    'perplexitybot', 'perplexity-user', 'google-extended', 'applebot-extended',
+    'bytespider', 'diffbot', 'omgilibot', 'meta-externalagent', 'timpibot',
+    'webzio-extended', 'youbot', 'imagesiftbot', 'cohere-ai', 'amazonbot',
+    'facebookbot', 'scrapy', 'semrushbot', 'ahrefsbot', 'mj12bot', 'dotbot',
+    'blexbot', 'dataforseobot', 'seznambot', 'ia_archiver',
+    'rea-agents', 'morluto', 'archiveexplorer',
+    'mitmproxy', 'mitmweb', 'mitmdump', 'charles', 'fiddler', 'zaproxy',
+    'burpsuite', 'httpcanary', 'pcapdroid', 'frida', 'jadx', 'apktool'
+  ];
+  for (var i = 0; i < blocked.length; i++) {
+    if (ua.indexOf(blocked[i]) !== -1) {
+      var ld = document.getElementById('ldjson');
+      if (ld && ld.parentNode) { ld.parentNode.removeChild(ld); }
+      document.body.innerHTML =
+        '<div style="max-width:640px;margin:12vh auto;padding:32px;font-family:system-ui,sans-serif;' +
+        'color:#e8eaf2;background:#08050f;line-height:1.7">' +
+        '<h1 style="font-size:22px;margin:0 0 14px">This page is not available to automated agents.</h1>' +
+        '<p style="font-size:15px;color:#a9b0c6">You are reading this with an automated crawler. ' +
+        'The RDX storefront publishes real prices, real features and real download links for paid ' +
+        'software, and automated harvesting of it is not permitted.</p>' +
+        '<p style="font-size:15px;color:#a9b0c6">If you are a person on a normal browser and you saw ' +
+        'this by mistake, the products are still here - email or WhatsApp ' +
+        '<a style="color:#9fe8ff" href="https://wa.me/18684357698">+1-868-435-7698</a> and we will ' +
+        'walk you through it.</p></div>';
+      return;
+    }
+  }
+})();
+</script>
 <canvas id="field" aria-hidden="true"></canvas>
 <canvas id="nvke" aria-hidden="true"></canvas>
 <div id="aurora" aria-hidden="true"></div>
