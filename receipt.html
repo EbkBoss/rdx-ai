@@ -90,6 +90,17 @@
       delivery is matched to your payment instantly — no screenshots, no waiting to be figured out.</p>
   </div>
 
+  <div class="card warn" id="need-link" style="display:none">
+    <h2>That option needs a checkout link</h2>
+    <p style="margin:0 0 12px;color:var(--muted);font-size:14px" id="need-link-msg">We could not open the right
+      PayPal checkout for this option from that page. Nothing has been charged. Tell us what you want and we
+      send the exact link and, the moment it is paid, your key and your build — one message, no waiting.</p>
+    <div class="rowbtns">
+      <a class="btn gold" id="r-wa3" href="https://wa.me/18684357698" target="_blank" rel="noopener noreferrer">Ask for the link</a>
+      <a class="btn ghost" href="https://ebkboss.github.io/rdx-ai/#store" target="_blank" rel="noopener noreferrer">Back to the store</a>
+    </div>
+  </div>
+
   <div class="card" id="claim-card">
     <span class="kicker" style="font-size:11px">Instant delivery</span>
     <h2 style="margin:6px 0 8px;font-size:19px">Get your files and your licence key</h2>
@@ -156,6 +167,9 @@
   var amount = get('amount') || '';
   var plan = get('plan') || '';
   var tier = get('tier') || '';
+  // need=link means the page could not open a checkout for this option. Nobody has
+  // been charged, so this page must not talk about a payment that did not happen.
+  var needLink = get('need') === 'link';
 
   var PRODUCT_NAMES = {
     'ghvst-android': 'Ghvst Browser — Android',
@@ -214,7 +228,23 @@
     elPlan.textContent = elPlan.textContent + ' · ' + tierLabel + ' tier';
   }
 
-  if (tx) {
+  if (needLink) {
+    // NO PAYMENT HAS HAPPENED YET. Say so, and ask for the link instead of
+    // pretending the money already moved.
+    elStatus.textContent = 'Nothing charged yet';
+    document.getElementById('tx-card').style.display = 'none';
+    document.getElementById('no-tx').style.display = 'none';
+    var needCard = document.getElementById('need-link');
+    needCard.style.display = 'block';
+    if (product) {
+      document.getElementById('need-link-msg').textContent =
+        'We could not open the right PayPal checkout for ' +
+        (PRODUCT_NAMES[product] || product) +
+        (plan ? ' (' + (PLAN_NAMES[plan] || plan) + ')' : '') +
+        ' from that page. Nothing has been charged. Tell us what you want and we send the exact link and, ' +
+        'the moment it is paid, your key and your build — one message, no waiting.';
+    }
+  } else if (tx) {
     elTx.textContent = tx;
     elStatus.textContent = 'Confirmed by PayPal';
   } else {
@@ -227,15 +257,23 @@
   // The message carries the order. The builder never has to match a screenshot to a payment.
   var label = product ? (PRODUCT_NAMES[product] || product) : 'an RDX product';
   var planLabel = plan ? (PLAN_NAMES[plan] || plan) : '';
-  var message = 'Hi — I just paid for ' + label +
-                (tierLabel ? ' — ' + tierLabel + ' tier' : '') +
-                (planLabel ? ' (' + planLabel + ' licence)' : '') +
-                (amount ? ' ($' + amount + ')' : '') + '.' +
-                (tx ? '\nPayPal transaction ID: ' + tx : '') +
-                '\nPlease send the download link.';
+  var message = needLink
+    ? 'Hi — I want to buy ' + label +
+      (tierLabel ? ' — ' + tierLabel + ' tier' : '') +
+      (planLabel ? ' (' + planLabel + ' licence)' : '') +
+      (amount ? ' ($' + amount + ')' : '') +
+      '. Please send me the PayPal link for it.'
+    : 'Hi — I just paid for ' + label +
+      (tierLabel ? ' — ' + tierLabel + ' tier' : '') +
+      (planLabel ? ' (' + planLabel + ' licence)' : '') +
+      (amount ? ' ($' + amount + ')' : '') + '.' +
+      (tx ? '\nPayPal transaction ID: ' + tx : '') +
+      '\nPlease send the download link.';
   var waHref = 'https://wa.me/' + WA_DIGITS + '?text=' + encodeURIComponent(message);
   document.getElementById('r-wa').href = waHref;
   document.getElementById('r-wa2').href = waHref;
+  var wa3 = document.getElementById('r-wa3');
+  if (wa3) wa3.href = waHref;
 
   var copyBtn = document.getElementById('copy-tx');
   var copied = document.getElementById('copied-tx');

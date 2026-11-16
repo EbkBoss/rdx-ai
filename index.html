@@ -2053,14 +2053,11 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
        1. Gravity dot field  (ambient background + desktop bridge)
        2. 3D door showroom   (canvas perspective projection)
        3. Store wiring       (PayPal amount URLs, door detail card)
-     ============================================================ */
-
-  var PAYPAL_BASE = 'https://paypal.me/Nicholasram17';
-
-  /* THE CHECKOUT MAP - generated from the licence catalogue, one line per option.
+     ============================================================ */  /* THE CHECKOUT MAP - generated from the licence catalogue, one line per option.
      A key is slug|tier|plan; a product that sells no tiers keys as slug||plan. Every
      value is that option's OWN PayPal link, so a buyer always lands on the exact
-     product, tier and term they clicked. The amount URL below is the last resort. */
+     product, tier and term they clicked. An option with no named link is not sold
+     here: the buyer lands on the receipt page and a human finishes the order. */
   var PAYPAL_CHECKOUT = {
     'capture||annual': 'https://www.paypal.com/webapps/billing/subscriptions?ba_token=BA-101653634Y5274225',
     'capture||lifetime': 'https://www.paypal.com/ncp/payment/8AKFFXJUKRTRS',
@@ -2112,44 +2109,46 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
 
 
 
-  /* EVERY PAYMENT COMES BACK WITH ITS TRANSACTION ID.
-     PayPal.me returns the payer to the receipt page and appends the transaction ID, so the
-     buyer reads their own ID off the screen and the builder never has to match a screenshot
-     to a payment. The receipt page then opens WhatsApp with the product AND the transaction
-     ID already written into the message. */
+  /* WHERE THE BUYER GOES AFTER PAYING.
+     The named PayPal links carry no return URL, so the page does not pretend one
+     exists. Every product card carries a second link - "Paid already?" - that opens
+     the receipt page for that product, where the buyer pastes the transaction ID from
+     the PayPal receipt and the signed licence and the one-time download ticket arrive
+     together, with no human in the loop. */
   var RECEIPT_URL = 'https://ebkboss.github.io/rdx-ai/receipt.html';
 
   function paypalUrl(amount, product, plan, tier) {
-    /* THE NAMED LINK WINS. Every option has its own PayPal link, so the button
-       opens exactly that checkout. The amount URL survives only for an option that
-       has no named link, and it still returns the buyer to the receipt page with
-       the transaction id on screen. */
+    /* THE NAMED LINK, OR THE RECEIPT PAGE. Every option the catalogue sells has its
+       own PayPal link and the map above is generated from that same catalogue, so a
+       buyer always lands on the exact product, tier and term they clicked. An
+       option with no named link is NOT sold here: the buyer goes to the receipt page
+       with the order details so a human can finish it. No amount URL is ever built -
+       the old amount-bearing fallback could charge a price nobody quoted. */
     if (product) {
       var key = product + '|' + (tier || '') + '|' + (plan || '');
       if (PAYPAL_CHECKOUT[key]) return PAYPAL_CHECKOUT[key];
       key = product + '||' + (plan || '');
       if (PAYPAL_CHECKOUT[key]) return PAYPAL_CHECKOUT[key];
     }
-    var base = PAYPAL_BASE + '/' + String(amount);
-    if (!product) return base;
-    var ret = RECEIPT_URL + '?product=' + encodeURIComponent(product) +
-              '&amount=' + encodeURIComponent(String(amount)) +
-              (plan ? '&plan=' + encodeURIComponent(plan) : '') +
-              (tier ? '&tier=' + encodeURIComponent(tier) : '');
-    return base + '?return_url=' + encodeURIComponent(ret);
+    var ret = RECEIPT_URL + (product
+      ? '?product=' + encodeURIComponent(product) +
+        '&amount=' + encodeURIComponent(String(amount)) +
+        (plan ? '&plan=' + encodeURIComponent(plan) : '') +
+        (tier ? '&tier=' + encodeURIComponent(tier) : '') +
+        '&need=link'
+      : '?need=link');
+    return ret;
   }
   window.RDX_PAYPAL_URL = paypalUrl;
 
   /* RECURRING PLANS - THE MONTHLY REVENUE SEAM.
-     paypal.me is a ONE-TIME link: it cannot charge a card a second time. Auto-renew needs a
-     PayPal link that CAN - a subscription link or a recurring invoice, both made in the
-     PayPal dashboard and pasted in here, one line per plan. While a line is empty that plan
-     falls back to the one-time link and the page says renewal is started by hand, which is
-     exactly what happens today. The moment a real link is pasted in, the same button starts
-     renewing on its own and the label below the price changes to say so.
-
-     A recurring invoice works on a personal PayPal account: PayPal > Invoicing > Create
-     invoice > Schedule recurring > repeat monthly. Copy its payment link into SUBSCRIPTIONS. */
+     A one-time payment link cannot charge a card a second time. Auto-renew needs a
+     PayPal link that CAN - a subscription link, one per option, made in the PayPal
+     dashboard and recorded in the licence catalogue. The map below is generated from
+     that catalogue, so the button and the sentence under it always agree: when a plan
+     has a subscription link the page says it renews by itself, and when it does not the
+     page says renewal starts with a message. It never promises a renewal the payment
+     system will not keep. */
   var SUBSCRIPTIONS = {
     'capture': 'https://www.paypal.com/webapps/billing/subscriptions?ba_token=BA-9SA27532VW204012U',
     'devkit': 'https://www.paypal.com/webapps/billing/subscriptions?ba_token=BA-20U84653822448044',
