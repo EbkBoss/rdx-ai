@@ -90,12 +90,38 @@
       delivery is matched to your payment instantly — no screenshots, no waiting to be figured out.</p>
   </div>
 
+  <div class="card" id="claim-card">
+    <span class="kicker" style="font-size:11px">Instant delivery</span>
+    <h2 style="margin:6px 0 8px;font-size:19px">Get your files and your licence key</h2>
+    <p class="note" style="margin:0 0 12px">Paste the transaction ID from your PayPal receipt. The
+      issuer checks the payment and hands back the installer and your signed key in the same
+      breath — automatically, no waiting for a human.</p>
+    <input id="claim-tx" type="text" autocomplete="off" spellcheck="false" placeholder="PayPal transaction ID"
+           style="width:100%;box-sizing:border-box;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);color:inherit;font:inherit;font-size:16px">
+    <div class="rowbtns" style="margin-top:12px">
+      <button class="btn gold" id="claim-go" type="button">Get my files</button>
+      <span class="copied" id="claim-state"></span>
+    </div>
+    <p class="note" id="claim-msg" style="margin:10px 0 0;display:none"></p>
+  </div>
+
+  <div class="card" id="deliver-card" style="display:none">
+    <span class="kicker" style="font-size:11px">Your licence</span>
+    <div class="txbox" id="lic-key" style="word-break:break-all">—</div>
+    <div class="rowbtns">
+      <button class="btn" id="copy-lic" type="button">Copy licence key</button>
+      <span class="copied" id="copied-lic">Copied</span>
+    </div>
+    <p class="note" id="lic-meta" style="margin:10px 0 0"></p>
+    <div id="dl-list" style="margin-top:14px"></div>
+  </div>
+
   <div class="card">
     <span class="kicker" style="font-size:11px">Get your build</span>
     <ol class="steps" style="margin-top:14px">
-      <li><b>Tap the button below.</b> WhatsApp opens with your product and transaction ID already written into the message.</li>
-      <li><b>Press send.</b> That is the whole order. Your transaction ID travels with it.</li>
-      <li><b>The download link comes back to you</b> — the signed APK for Android, the self-contained build for Windows, the delivery zip for RoxVault.</li>
+      <li><b>Paste your transaction ID above.</b> That is the whole order — the payment is matched automatically.</li>
+      <li><b>Your key and your installer appear</b> — the signed APK for Android, the self-contained build for Windows, the delivery zip for RoxVault.</li>
+      <li><b>Nothing arrived?</b> Send the transaction ID to the builder directly and it is delivered by hand.</li>
     </ol>
     <div class="rowbtns">
       <a class="btn gold" id="r-wa" href="https://wa.me/18684357698" target="_blank" rel="noopener noreferrer">Message the builder on WhatsApp</a>
@@ -116,6 +142,7 @@
   <p class="foot">Delivered by one human · <a href="https://ebkboss.github.io/rdx-ai/#terms">Terms & refunds</a></p>
 </div>
 
+<script src="siteguard.js"></script>
 <script>
 (function () {
   'use strict';
@@ -236,6 +263,146 @@
     ta.select();
     try { document.execCommand('copy'); done(); } catch (e) {}
     document.body.removeChild(ta);
+  }
+
+  /* ==================================================================
+     THE ISSUER lives in siteguard.js - the ONE file every public page
+     loads. It finds the issuer exactly the way the apps find it: cached
+     address -> the site's SIGNED issuer.json -> the SIGNED ntfy discovery
+     list, verified in the browser with the embedded RSA public key. A
+     forged list fails the signature and is thrown away - a page that
+     trusted an unsigned list could be pointed at a stranger's endpoint
+     and leak a buyer's transaction id.
+     ================================================================== */
+
+  function say(text, bad) {
+    var el = document.getElementById('claim-msg');
+    el.textContent = text;
+    el.style.display = text ? 'block' : 'none';
+    el.style.color = bad ? '#f6c76a' : '';
+  }
+
+  function sizeText(bytes) {
+    if (!bytes) return '';
+    var mb = bytes / 1048576;
+    return (mb >= 1 ? mb.toFixed(1) + ' MB' : Math.round(bytes / 1024) + ' KB');
+  }
+
+  function renderDelivery(payload) {
+    document.getElementById('deliver-card').style.display = 'block';
+    var keyBox = document.getElementById('lic-key');
+    keyBox.textContent = payload.license || '(no key returned)';
+    var meta = [];
+    if (payload.plan) meta.push((PLAN_NAMES[payload.plan] || payload.plan) + ' licence');
+    if (payload.expiresText) meta.push(payload.expiresText);
+    if (payload.renewal) meta.push('renews when you pay again');
+    document.getElementById('lic-meta').textContent = meta.join(' · ');
+
+    var list = document.getElementById('dl-list');
+    list.innerHTML = '';
+    var files = payload.downloads || [];
+    if (!files.length) {
+      list.innerHTML = '<p class="note" style="margin:0">This product is delivered by the ' +
+        'builder — send the transaction ID above and it is on its way.</p>';
+    }
+    files.forEach(function (file) {
+      var a = document.createElement('a');
+      a.className = 'btn gold';
+      a.href = file.url;
+      a.textContent = 'Download ' + (file.abi || file.name) +
+        (file.bytes ? ' (' + sizeText(file.bytes) + ')' : '');
+      a.style.display = 'block';
+      a.style.margin = '0 0 8px';
+      list.appendChild(a);
+      if (file.abiNote) {
+        var p = document.createElement('p');
+        p.className = 'note';
+        p.style.margin = '0 0 10px';
+        p.textContent = file.abiNote;
+        list.appendChild(p);
+      }
+    });
+
+    document.getElementById('copy-lic').onclick = function () {
+      var box = document.getElementById('copied-lic');
+      var done = function () {
+        box.style.display = 'inline';
+        setTimeout(function () { box.style.display = 'none'; }, 2200);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(payload.license || '').then(done, function () {});
+      }
+    };
+  }
+
+  function claim(txn) {
+    txn = (txn || '').trim();
+    if (!txn) { say('Paste the transaction ID from your PayPal receipt first.', true); return; }
+    var btn = document.getElementById('claim-go');
+    btn.disabled = true;
+    say('Checking your payment…', false);
+    window.GHVST_GUARD.findIssuer().then(function (base) {
+      if (!base) {
+        say('The licence service is unreachable right now. Send the transaction ID on ' +
+            'WhatsApp and it is delivered by hand.', true);
+        return;
+      }
+      return fetch(base + '/claim', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          txid: txn,
+          product: product,
+          plan: plan,
+          tier: tier,
+          email: get('email') || get('payer_email') || ''
+        })
+      }).then(function (response) {
+        return response.json().catch(function () { return {}; })
+          .then(function (body) { return { status: response.status, body: body }; });
+      }).then(function (result) {
+        var body = result.body || {};
+        if (result.status === 200 && body.ok) {
+          say('Payment verified. Your key and your files are below.', false);
+          renderDelivery(body);
+          return;
+        }
+        if (result.status === 402) {
+          say(body.reason || 'That payment is not verified yet. If you just paid, wait a ' +
+              'minute and try again, or send the ID on WhatsApp.', true);
+          return;
+        }
+        if (result.status === 409) {
+          var spent = body.licenseId ? (' (key id ' + body.licenseId + ')') : '';
+          say('That payment already issued its one licence' + spent + '. ' +
+              (body.recover || 'Send the transaction ID on WhatsApp and the same key is sent back — you are not charged again.'), true);
+          return;
+        }
+        say(body.reason || body.error || 'That transaction ID could not be verified. Check ' +
+            'it, or send it on WhatsApp.', true);
+      });
+    }).catch(function () {
+      say('The claim could not be completed. Send the transaction ID on WhatsApp.', true);
+    }).then(function () {
+      btn.disabled = false;
+    });
+  }
+
+  document.getElementById('claim-go').addEventListener('click', function () {
+    claim(document.getElementById('claim-tx').value);
+  });
+  document.getElementById('claim-tx').addEventListener('keydown', function (ev) {
+    if (ev.key === 'Enter') { ev.preventDefault(); claim(this.value); }
+  });
+
+  // A buyer arriving from PayPal already has the id in the link, so the page
+  // does the claim for them instead of asking them to copy it by hand.
+  var input = document.getElementById('claim-tx');
+  if (tx) {
+    input.value = tx;
+    claim(tx);
+  } else {
+    say('Your transaction ID is at the top of the PayPal receipt email.', false);
   }
 })();
 </script>

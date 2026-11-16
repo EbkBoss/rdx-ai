@@ -1,0 +1,9 @@
+{
+  "signed": "GVST1.djF8aXNzdWVyLW1hbmlmZXN0fGV5SndjbTlrZFdOMElqb2lVMjkyWlhKbGFXZHVUV1Z6YzJWdVoyVnlJaXdpZFhKc2N5STZXeUpvZEhSd2N6b3ZMMk52Ym5OcGMzUmxiblF0WTJGMFlXeHZaM1ZsTFdacGJtUnNZWGN0Wlc1bWIzSmpaVzFsYm5RdWRISjVZMnh2ZFdSbWJHRnlaUzVqYjIwaUxDSm9kSFJ3Y3pvdkwyRmtiM0IwWldRdFkyRnRjR0ZwWjI1ekxYQmhhVzUwWldRdGNHVnlablZ0WlM1MGNubGpiRzkxWkdac1lYSmxMbU52YlNKZGZRfDE3OTQ3OTc3MTh8MTc5NzM4OTcxOA.HzOULbMdcGw82i3RMU8oOVUdE91sbMAsk--1_7Ll2g2EEHmU82eJL5B3BVA5YXgy496ZRDE_dU9JpIhsmw4qDWzW4ssh7rO_FsAedYs7yjM_Nk4Ws7QZkv7kQRBtsYWQ7psskec94zgWic4w2paGgTeoU_QTomkv7JSVUFFrXah0L5sco2LEsrjVTxsFJBi_pJS5gaT71XIPf7myqoru1A2DsCRLYJFqJKlpHfXsOin3gCoIZaz3SnTEJ0B3CWHla8FGRET6e047oEGqBh5q-Rd6oaWOBc8zhY_enqc2EtTtkNu-3Td0SerG7n4Lhk6H-dtynlLJKJagLkeq5-DnD0JMzAZYyugFlbkyNW1rwMT4FPdg1NWlnurRFBLouizOFYm9IY-7U-LYR2_uIPpPYdwkYqG1-oPIAzA593fSKf-wD4FZJgVZkRl4zFPeBPAeSNOgLFkDK8rz-FNrgLO8rMg-5zzyTm5b8ZXZBOvzZ0rNsoejijBZU0ncTGX4Thwl",
+  "issuers": [
+    "https://consistent-catalogue-findlaw-enforcement.trycloudflare.com",
+    "https://adopted-campaigns-painted-perfume.trycloudflare.com"
+  ],
+  "updatedAt": 1794797718,
+  "note": "The SIGNED envelope is the only part a client trusts. The plain 'issuers' list is informational: verify the envelope or ignore it."
+}

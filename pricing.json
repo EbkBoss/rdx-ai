@@ -21,7 +21,7 @@
           "days": 30,
           "term": "1 month",
           "note": "billed every month",
-          "paypal": "https://www.paypal.me/Nicholasram17/15",
+          "paypal": "https://www.paypal.com/webapps/billing/subscriptions?ba_token=BA-85D003824W983602K",
           "default": true
         },
         {
@@ -31,7 +31,7 @@
           "days": 365,
           "term": "12 months",
           "note": "2 months free",
-          "paypal": "https://www.paypal.me/Nicholasram17/150",
+          "paypal": "https://www.paypal.com/webapps/billing/subscriptions?ba_token=BA-3VM89254VG9374812",
           "default": false
         }
       ],
@@ -49,7 +49,7 @@
               "days": 30,
               "term": "1 month",
               "note": "billed every month",
-              "paypal": "https://www.paypal.me/Nicholasram17/15"
+              "paypal": "https://www.paypal.com/webapps/billing/subscriptions?ba_token=BA-85D003824W983602K"
             },
             {
               "name": "annual",
@@ -58,7 +58,7 @@
               "days": 365,
               "term": "12 months",
               "note": "2 months free",
-              "paypal": "https://www.paypal.me/Nicholasram17/150"
+              "paypal": "https://www.paypal.com/webapps/billing/subscriptions?ba_token=BA-3VM89254VG9374812"
             }
           ]
         },
@@ -75,7 +75,7 @@
               "days": 30,
               "term": "1 month",
               "note": "billed every month",
-              "paypal": "https://www.paypal.me/Nicholasram17/29"
+              "paypal": "https://www.paypal.com/webapps/billing/subscriptions?ba_token=BA-18951309PX647402B"
             },
             {
               "name": "annual",
@@ -84,7 +84,7 @@
               "days": 365,
               "term": "12 months",
               "note": "2 months free",
-              "paypal": "https://www.paypal.me/Nicholasram17/290"
+              "paypal": "https://www.paypal.com/webapps/billing/subscriptions?ba_token=BA-92E255204V334882T"
             }
           ]
         },
@@ -101,7 +101,7 @@
               "days": 30,
               "term": "1 month",
               "note": "billed every month",
-              "paypal": "https://www.paypal.me/Nicholasram17/79"
+              "paypal": "https://www.paypal.com/webapps/billing/subscriptions?ba_token=BA-8YD52195M5860913A"
             },
             {
               "name": "annual",
@@ -110,7 +110,7 @@
               "days": 365,
               "term": "12 months",
               "note": "2 months free",
-              "paypal": "https://www.paypal.me/Nicholasram17/790"
+              "paypal": "https://www.paypal.com/webapps/billing/subscriptions?ba_token=BA-60U96537PH004790T"
             }
           ]
         },
@@ -127,7 +127,7 @@
               "days": 0,
               "term": "never expires",
               "note": "one payment, never expires",
-              "paypal": "https://www.paypal.me/Nicholasram17/499"
+              "paypal": "https://www.paypal.com/ncp/payment/2VATAUJMWJZNA"
             }
           ]
         },
@@ -144,7 +144,7 @@
               "days": 0,
               "term": "never expires",
               "note": "one payment, never expires",
-              "paypal": "https://www.paypal.me/Nicholasram17/999"
+              "paypal": "https://www.paypal.com/ncp/payment/FDLTPZMER7T66"
             }
           ]
         }
@@ -172,7 +172,7 @@
           "days": 30,
           "term": "1 month",
           "note": "billed every month",
-          "paypal": "https://www.paypal.me/Nicholasram17/12",
+          "paypal": "https://www.paypal.com/webapps/billing/subscriptions?ba_token=BA-790456709W936031N",
           "default": true
         },
         {
@@ -182,7 +182,7 @@
           "days": 365,
           "term": "12 months",
           "note": "2.5 months free",
-          "paypal": "https://www.paypal.me/Nicholasram17/99",
+          "paypal": "https://www.paypal.com/webapps/billing/subscriptions?ba_token=BA-38184588CJ217483H",
           "default": false
         },
         {
@@ -192,7 +192,7 @@
           "days": 0,
           "term": "never expires",
           "note": "one payment, never expires",
-          "paypal": "https://www.paypal.me/Nicholasram17/249",
+          "paypal": "https://www.paypal.com/ncp/payment/F6YU5SSZGQBQ6",
           "default": false
         }
       ],
@@ -220,7 +220,7 @@
           "days": 30,
           "term": "1 month",
           "note": "billed every month",
-          "paypal": "https://www.paypal.me/Nicholasram17/7",
+          "paypal": "https://www.paypal.com/webapps/billing/subscriptions?ba_token=BA-22480071J77166437",
           "default": true
         },
         {
@@ -230,7 +230,7 @@
           "days": 365,
           "term": "12 months",
           "note": "2 months free",
-          "paypal": "https://www.paypal.me/Nicholasram17/59",
+          "paypal": "https://www.paypal.com/webapps/billing/subscriptions?ba_token=BA-9B8988823E6403617",
           "default": false
         },
         {
@@ -240,7 +240,7 @@
           "days": 0,
           "term": "never expires",
           "note": "one payment, never expires",
-          "paypal": "https://www.paypal.me/Nicholasram17/149",
+          "paypal": "https://www.paypal.com/ncp/payment/Q5WLM3CUTN9DE",
           "default": false
         }
       ],
@@ -268,7 +268,7 @@
           "days": 30,
           "term": "1 month",
           "note": "billed every month",
-          "paypal": "https://www.paypal.me/Nicholasram17/25",
+          "paypal": "https://www.paypal.com/webapps/billing/subscriptions?ba_token=BA-0VP891463S460943N",
           "default": true
         },
         {
@@ -278,7 +278,7 @@
           "days": 365,
           "term": "12 months",
           "note": "2 months free",
-          "paypal": "https://www.paypal.me/Nicholasram17/199",
+          "paypal": "https://www.paypal.com/webapps/billing/subscriptions?ba_token=BA-3WY95352JV8628125",
           "default": false
         },
         {
@@ -288,7 +288,7 @@
           "days": 0,
           "term": "never expires",
           "note": "one payment, never expires",
-          "paypal": "https://www.paypal.me/Nicholasram17/499",
+          "paypal": "https://www.paypal.com/ncp/payment/V4PRY4TFPU2AU",
           "default": false
         }
       ],
@@ -316,7 +316,7 @@
           "days": 30,
           "term": "1 month",
           "note": "every Ghvst app",
-          "paypal": "https://www.paypal.me/Nicholasram17/29",
+          "paypal": "https://www.paypal.com/webapps/billing/subscriptions?ba_token=BA-5PC33772J8877170X",
           "default": true
         },
         {
@@ -326,7 +326,7 @@
           "days": 365,
           "term": "12 months",
           "note": "2.5 months free",
-          "paypal": "https://www.paypal.me/Nicholasram17/249",
+          "paypal": "https://www.paypal.com/webapps/billing/subscriptions?ba_token=BA-0UR34342FU2102944",
           "default": false
         },
         {
@@ -336,7 +336,7 @@
           "days": 0,
           "term": "never expires",
           "note": "one payment, never expires",
-          "paypal": "https://www.paypal.me/Nicholasram17/499",
+          "paypal": "https://www.paypal.com/ncp/payment/UVFX98243BBHS",
           "default": false
         }
       ],
@@ -364,7 +364,7 @@
           "days": 30,
           "term": "1 month",
           "note": "billed every month",
-          "paypal": "https://www.paypal.me/Nicholasram17/19",
+          "paypal": "https://www.paypal.com/webapps/billing/subscriptions?ba_token=BA-9SA27532VW204012U",
           "default": true
         },
         {
@@ -374,7 +374,7 @@
           "days": 365,
           "term": "12 months",
           "note": "2 months free",
-          "paypal": "https://www.paypal.me/Nicholasram17/149",
+          "paypal": "https://www.paypal.com/webapps/billing/subscriptions?ba_token=BA-101653634Y5274225",
           "default": false
         },
         {
@@ -384,7 +384,7 @@
           "days": 0,
           "term": "never expires",
           "note": "one payment, never expires",
-          "paypal": "https://www.paypal.me/Nicholasram17/399",
+          "paypal": "https://www.paypal.com/ncp/payment/8AKFFXJUKRTRS",
           "default": false
         }
       ],
@@ -412,7 +412,7 @@
           "days": 30,
           "term": "1 month",
           "note": "billed every month",
-          "paypal": "https://www.paypal.me/Nicholasram17/29",
+          "paypal": "https://www.paypal.com/webapps/billing/subscriptions?ba_token=BA-20U84653822448044",
           "default": true
         },
         {
@@ -422,7 +422,7 @@
           "days": 365,
           "term": "12 months",
           "note": "2 months free",
-          "paypal": "https://www.paypal.me/Nicholasram17/219",
+          "paypal": "https://www.paypal.com/webapps/billing/subscriptions?ba_token=BA-8VE5758170494484P",
           "default": false
         },
         {
@@ -432,7 +432,7 @@
           "days": 0,
           "term": "never expires",
           "note": "one payment, never expires",
-          "paypal": "https://www.paypal.me/Nicholasram17/549",
+          "paypal": "https://www.paypal.com/ncp/payment/JEPEW9MVKAZ2Y",
           "default": false
         }
       ],
@@ -460,7 +460,7 @@
           "days": 30,
           "term": "1 month",
           "note": "Capture + DevKit",
-          "paypal": "https://www.paypal.me/Nicholasram17/39",
+          "paypal": "https://www.paypal.com/webapps/billing/subscriptions?ba_token=BA-0AL11452H02397706",
           "default": true
         },
         {
@@ -470,7 +470,7 @@
           "days": 365,
           "term": "12 months",
           "note": "Capture + DevKit, 2 months free",
-          "paypal": "https://www.paypal.me/Nicholasram17/299",
+          "paypal": "https://www.paypal.com/webapps/billing/subscriptions?ba_token=BA-31L60478GM4941457",
           "default": false
         },
         {
@@ -480,7 +480,7 @@
           "days": 0,
           "term": "never expires",
           "note": "one payment, never expires",
-          "paypal": "https://www.paypal.me/Nicholasram17/799",
+          "paypal": "https://www.paypal.com/ncp/payment/7R3JC67FXZ3H4",
           "default": false
         }
       ],
@@ -508,7 +508,7 @@
           "days": 30,
           "term": "1 month",
           "note": "5 seats, $12 each",
-          "paypal": "https://www.paypal.me/Nicholasram17/60",
+          "paypal": "https://www.paypal.com/webapps/billing/subscriptions?ba_token=BA-2U298634SS406914U",
           "default": false
         },
         {
@@ -518,7 +518,7 @@
           "days": 365,
           "term": "12 months",
           "note": "5 seats, 2 months free",
-          "paypal": "https://www.paypal.me/Nicholasram17/600",
+          "paypal": "https://www.paypal.com/webapps/billing/subscriptions?ba_token=BA-51Y62829SJ616841G",
           "default": true
         }
       ],
@@ -546,7 +546,7 @@
           "days": 30,
           "term": "1 month",
           "note": "30 days - the low-cost way in",
-          "paypal": "https://www.paypal.me/Nicholasram17/29",
+          "paypal": "https://www.paypal.com/webapps/billing/subscriptions?ba_token=BA-3NR870083M5247100",
           "default": true
         },
         {
@@ -556,7 +556,7 @@
           "days": 365,
           "term": "12 months",
           "note": "one payment, one year of every release",
-          "paypal": "https://www.paypal.me/Nicholasram17/199",
+          "paypal": "https://www.paypal.com/webapps/billing/subscriptions?ba_token=BA-4KN116979K630220N",
           "default": false
         },
         {
@@ -566,7 +566,7 @@
           "days": 0,
           "term": "never expires",
           "note": "one payment, never expires - the headline licence",
-          "paypal": "https://www.paypal.me/Nicholasram17/499",
+          "paypal": "https://www.paypal.com/ncp/payment/UYDKHF9CPDCB6",
           "default": false
         }
       ],
@@ -584,7 +584,7 @@
               "days": 30,
               "term": "1 month",
               "note": "30 days - the low-cost way in",
-              "paypal": "https://www.paypal.me/Nicholasram17/29"
+              "paypal": "https://www.paypal.com/webapps/billing/subscriptions?ba_token=BA-3NR870083M5247100"
             },
             {
               "name": "annual",
@@ -593,7 +593,7 @@
               "days": 365,
               "term": "12 months",
               "note": "one payment, one year of every release",
-              "paypal": "https://www.paypal.me/Nicholasram17/199"
+              "paypal": "https://www.paypal.com/webapps/billing/subscriptions?ba_token=BA-4KN116979K630220N"
             },
             {
               "name": "lifetime",
@@ -602,7 +602,7 @@
               "days": 0,
               "term": "never expires",
               "note": "one payment, never expires - the headline licence",
-              "paypal": "https://www.paypal.me/Nicholasram17/499"
+              "paypal": "https://www.paypal.com/ncp/payment/UYDKHF9CPDCB6"
             }
           ]
         },
@@ -619,7 +619,7 @@
               "days": 0,
               "term": "never expires",
               "note": "one payment, never expires - every future release included",
-              "paypal": "https://www.paypal.me/Nicholasram17/999"
+              "paypal": "https://www.paypal.com/ncp/payment/7DWT76LM4ZKBY"
             }
           ]
         },
@@ -636,7 +636,7 @@
               "days": 365,
               "term": "12 months",
               "note": "3 machines, priority support, every release for a year",
-              "paypal": "https://www.paypal.me/Nicholasram17/1499"
+              "paypal": "https://www.paypal.com/webapps/billing/subscriptions?ba_token=BA-64987885550194343"
             },
             {
               "name": "lifetime",
@@ -645,7 +645,7 @@
               "days": 0,
               "term": "never expires",
               "note": "3 machines, never expires - 2.5 years of Pro annual paid once",
-              "paypal": "https://www.paypal.me/Nicholasram17/3749"
+              "paypal": "https://www.paypal.com/ncp/payment/H27R4W7W8W8U6"
             }
           ]
         },
@@ -662,7 +662,7 @@
               "days": 365,
               "term": "12 months",
               "note": "site licence on the customer's own infrastructure - priced by scope from $9,000 to $25,000, invoiced",
-              "paypal": "https://www.paypal.me/Nicholasram17/12000"
+              "paypal": "https://www.paypal.com/ncp/payment/DF46F5VAT7HAJ"
             }
           ]
         }
@@ -690,7 +690,7 @@
           "days": 0,
           "term": "never expires",
           "note": "one payment, never expires",
-          "paypal": "https://www.paypal.me/Nicholasram17/49",
+          "paypal": "https://www.paypal.com/ncp/payment/K3QPTFJQYFYK2",
           "default": true
         }
       ],
@@ -718,7 +718,7 @@
           "days": 0,
           "term": "never expires",
           "note": "one payment, never expires",
-          "paypal": "https://www.paypal.me/Nicholasram17/59",
+          "paypal": "https://www.paypal.com/ncp/payment/6G23LVV9URXPQ",
           "default": true
         }
       ],
@@ -727,7 +727,7 @@
     }
   ],
   "issuer": "https://license.ghvst.dev",
-  "generated_at": "2026-11-14T18:21:14+00:00",
+  "generated_at": "2026-11-16T03:05:26+00:00",
   "mythic_bundle": {
     "mythic_price": 999.0,
     "items": [
