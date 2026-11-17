@@ -7,6 +7,10 @@
 <meta name="description" content="Your RDX payment receipt. Your PayPal transaction ID, your product, and one button to get your download.">
 <meta name="robots" content="noindex">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23c4b5fd'>✦</text></svg>">
+<!-- THE WALL RUNS FIRST. siteguard.js is loaded in the HEAD, before the
+     receipt card is parsed, so an automated agent never gets the page built:
+     the guard writes its own document and closes the parser. -->
+<script src="siteguard.js"></script>
 <style>
   :root{
     --bg:#08050f; --panel:#120d1d; --panel2:#181122; --line:#2a1f3d;
@@ -153,7 +157,6 @@
   <p class="foot">Delivered by one human · <a href="https://ebkboss.github.io/rdx-ai/#terms">Terms & refunds</a></p>
 </div>
 
-<script src="siteguard.js"></script>
 <script>
 (function () {
   'use strict';

@@ -70,9 +70,25 @@
   function wall() {
     var ld = document.getElementById('ldjson');
     if (ld && ld.parentNode) { ld.parentNode.removeChild(ld); }
-    document.body.innerHTML =
-      '<div style="max-width:640px;margin:12vh auto;padding:32px;font-family:system-ui,sans-serif;' +
-      'color:#e8eaf2;background:#08050f;line-height:1.7">' +
+    // THE WALL MUST ACTUALLY STOP THE PAGE.
+    //
+    // Replacing document.body.innerHTML is not enough: the parser keeps going,
+    // so every card, price and link BELOW this script still lands in the DOM.
+    // An agent then reads the wall message and the whole storefront anyway.
+    //
+    // Writing the wall as the document and closing the parser is what really
+    // stops it: the rest of the source is never parsed, so no content is
+    // built, no script runs, and the agent gets ONE page - this one.
+    //
+    // This script is loaded in the <head>, before any content, so the write
+    // happens while the document is still open.
+    var html =
+      '<!doctype html><html lang="en"><head><meta charset="utf-8">' +
+      '<meta name="viewport" content="width=device-width, initial-scale=1">' +
+      '<title>Not available to automated agents</title>' +
+      '<style>html,body{margin:0;padding:0;background:#08050f;color:#e8eaf2;' +
+      'font-family:system-ui,-apple-system,Segoe UI,sans-serif}</style></head><body>' +
+      '<div style="max-width:640px;margin:12vh auto;padding:32px;line-height:1.7">' +
       '<h1 style="font-size:22px;margin:0 0 14px">This page is not available to automated agents.</h1>' +
       '<p style="font-size:15px;color:#a9b0c6">You are reading this with an automated crawler. ' +
       'The RDX storefront publishes real prices, real features and real download links for paid ' +
@@ -80,7 +96,20 @@
       '<p style="font-size:15px;color:#a9b0c6">If you are a person on a normal browser and you saw ' +
       'this by mistake, the products are still here - email or WhatsApp ' +
       '<a style="color:#9fe8ff" href="https://wa.me/18684357698">+1-868-435-7698</a> and we will ' +
-      'walk you through it.</p></div>';
+      'walk you through it.</p></div></body></html>';
+    try {
+      document.open();
+      document.write(html);
+      document.close();
+      return;
+    } catch (e) { /* fall through to the DOM-only wall below */ }
+    if (document.body) {
+      document.body.innerHTML =
+        '<div style="max-width:640px;margin:12vh auto;padding:32px;font-family:system-ui,sans-serif;' +
+        'color:#e8eaf2;background:#08050f;line-height:1.7">' +
+        '<h1 style="font-size:22px;margin:0 0 14px">This page is not available to automated agents.</h1>' +
+        '</div>';
+    }
   }
 
   /* ------------------------------------------------------------- the issuer */
@@ -137,18 +166,45 @@
     }).catch(function () { return null; });
   }
 
-  function alive(base) {
-    return fetch(base.replace(/\/$/, '') + '/health', { cache: 'no-store' })
+  function alive(base, timeoutMs) {
+    /* A health check with its own deadline. A tunnel that has died can hang on
+       DNS for longer than a buyer is willing to wait, and a promise that never
+       settles is worse than a promise that says no. */
+    var ctrl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+    var options = { cache: 'no-store' };
+    if (ctrl) options.signal = ctrl.signal;
+    var timer = null;
+    if (ctrl && timeoutMs) {
+      timer = setTimeout(function () { try { ctrl.abort(); } catch (e) {} }, timeoutMs);
+    }
+    return fetch(base.replace(/\/$/, '') + '/health', options)
       .then(function (r) { return r.ok ? base.replace(/\/$/, '') : null; })
-      .catch(function () { return null; });
+      .catch(function () { return null; })
+      .then(function (value) {
+        if (timer) clearTimeout(timer);
+        return value;
+      });
   }
 
   function firstAlive(list) {
     list = (list || []).filter(Boolean);
     if (!list.length) return Promise.resolve(null);
-    return Promise.all(list.map(alive)).then(function (results) {
-      for (var i = 0; i < results.length; i++) if (results[i]) return results[i];
-      return null;
+    /* THE FIRST ADDRESS THAT ANSWERS WINS.
+       Promise.all waited for EVERY address, so one dead tunnel stalled the
+       whole thing - the visit ping never fired and a paid buyer sat on a
+       receipt page that could not reach the issuer. A race with a deadline
+       fixes both. */
+    return new Promise(function (resolve) {
+      var pending = list.length;
+      var settled = false;
+      list.forEach(function (base) {
+        alive(base, 7000).then(function (hit) {
+          if (settled) return;
+          if (hit) { settled = true; resolve(hit); return; }
+          pending -= 1;
+          if (pending === 0) { settled = true; resolve(null); }
+        });
+      });
     });
   }
 

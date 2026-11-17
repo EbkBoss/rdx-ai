@@ -13,6 +13,11 @@
 <meta property="og:url" content="https://ebkboss.github.io/rdx-ai/">
 <meta property="og:image" content="https://ebkboss.github.io/rdx-ai/proof/ghvst-pc.png">
 <meta name="twitter:card" content="summary_large_image">
+<!-- THE WALL RUNS FIRST. siteguard.js is loaded in the HEAD, before a single
+     product card is parsed, so an automated agent never gets the page built:
+     the guard writes its own document and closes the parser. Loaded lower
+     down, the content below it would still land in the DOM. -->
+<script src="siteguard.js"></script>
 <!-- AI / scraping policy. noai + noimageai are honoured by a growing number of
      crawlers; the client-side wall below is the second layer for the ones that
      ignore robots.txt. Honest limit: GitHub Pages gives no edge control, so a
@@ -1298,7 +1303,6 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
      Honest limit: this cannot stop a scraper that reads the raw HTML over HTTP.
      That needs an edge (custom domain + Cloudflare WAF); until that exists the
      protection is policy + wall + monitoring. -->
-<script src="siteguard.js"></script>
 <canvas id="field" aria-hidden="true"></canvas>
 <canvas id="nvke" aria-hidden="true"></canvas>
 <div id="aurora" aria-hidden="true"></div>
