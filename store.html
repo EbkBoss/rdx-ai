@@ -6,6 +6,9 @@
 <title>The GHOST store - every licence, every price, one page</title>
 <meta name="description" content="Every Ghvst product with its real price. No free tier, no trial. Pay with PayPal, activate with your transaction ID, renew without losing a day.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23f6c76a'>G</text></svg>">
+<!-- THE WALL RUNS FIRST. siteguard.js is loaded in the HEAD, before a single
+     product card is parsed, so an automated agent never gets the price list. -->
+<script src="siteguard.js"></script>
 <style>
   :root{--bg:#08050f;--panel:#120d1d;--panel2:#181122;--line:#2a1f3d;--text:#f4efff;
         --muted:#a394c4;--gold:#f6c76a;--violet:#c4b5fd;--green:#6ee7b7;}

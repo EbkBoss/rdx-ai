@@ -70,18 +70,35 @@
   function wall() {
     var ld = document.getElementById('ldjson');
     if (ld && ld.parentNode) { ld.parentNode.removeChild(ld); }
+
     // THE WALL MUST ACTUALLY STOP THE PAGE.
     //
-    // Replacing document.body.innerHTML is not enough: the parser keeps going,
-    // so every card, price and link BELOW this script still lands in the DOM.
-    // An agent then reads the wall message and the whole storefront anyway.
+    // MEASURED, not assumed: writing the wall with document.open() /
+    // document.write() / document.close() does NOT stop the parser. The parser
+    // keeps consuming the rest of the source and appends every card, price and
+    // pay link to the same document. A headless Edge dump proved it - the wall
+    // message was in the DOM AND all 71 data-paypal anchors and the whole
+    // storefront were still there. An agent read the wall and the shop anyway.
     //
-    // Writing the wall as the document and closing the parser is what really
-    // stops it: the rest of the source is never parsed, so no content is
-    // built, no script runs, and the agent gets ONE page - this one.
-    //
-    // This script is loaded in the <head>, before any content, so the write
-    // happens while the document is still open.
+    // The only thing that genuinely stops the parser is LEAVING the document.
+    // So the wall navigates to wall.html, which carries the same message and
+    // nothing else. The old document is aborted, the storefront is never
+    // finished, and the agent is left with one page that has no prices and no
+    // links on it.
+    var wallUrl = 'wall.html';
+    try {
+      wallUrl = new URL('wall.html', document.baseURI).href;
+    } catch (e) { /* the relative path is the fallback */ }
+
+    try { window.stop(); } catch (e) { /* no subresource loads after this */ }
+
+    try {
+      window.location.replace(wallUrl);
+    } catch (e) { /* fall through to the write-and-wipe path */ }
+
+    // BELT AND BRACES. If the navigation is refused (a sandboxed frame, a
+    // blocked redirect), the document is still wiped: the wall is written and
+    // the page content is removed as soon as the parser hands over.
     var html =
       '<!doctype html><html lang="en"><head><meta charset="utf-8">' +
       '<meta name="viewport" content="width=device-width, initial-scale=1">' +
@@ -101,15 +118,18 @@
       document.open();
       document.write(html);
       document.close();
-      return;
-    } catch (e) { /* fall through to the DOM-only wall below */ }
-    if (document.body) {
-      document.body.innerHTML =
-        '<div style="max-width:640px;margin:12vh auto;padding:32px;font-family:system-ui,sans-serif;' +
-        'color:#e8eaf2;background:#08050f;line-height:1.7">' +
-        '<h1 style="font-size:22px;margin:0 0 14px">This page is not available to automated agents.</h1>' +
-        '</div>';
+    } catch (e) { /* the wipe below still runs */ }
+
+    function wipe() {
+      try {
+        document.documentElement.innerHTML =
+          '<head><meta charset="utf-8"><title>Not available to automated agents</title></head>' +
+          '<body style="background:#08050f;color:#e8eaf2;font-family:system-ui,sans-serif;padding:32px">' +
+          '<h1 style="font-size:22px">This page is not available to automated agents.</h1></body>';
+      } catch (e) { /* nothing else can be done from here */ }
     }
+    try { window.addEventListener('load', wipe); } catch (e) { /* no load event */ }
+    try { setTimeout(wipe, 0); } catch (e) { /* no timers */ }
   }
 
   /* ------------------------------------------------------------- the issuer */
