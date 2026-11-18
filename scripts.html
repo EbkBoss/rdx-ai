@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MVRK Script Store</title>
+<meta name="description" content="Named Luau scripts, validated in the MVRK runtime and pinned by SHA-256.">
+<link rel="stylesheet" href="siteguard.css">
+<style>
+:root{color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:#08080c;color:#d9d7e0;font-family:"Segoe UI",Inter,system-ui,sans-serif;line-height:1.5}
+.wrap{max-width:1100px;margin:0 auto;padding:38px 22px 70px}
+.eyebrow{color:#c9a227;font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:700}
+h1{font-size:34px;margin:10px 0 6px;color:#f2f0f6;letter-spacing:-.01em}
+.lede{color:#9a97a8;font-size:15px;max-width:70ch;margin:0 0 26px}
+.banner{display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between;
+  background:linear-gradient(120deg,#14121c,#0d0f16);border:1px solid #2a3040;border-radius:14px;padding:20px 22px;margin-bottom:26px}
+.banner b{color:#f2f0f6}
+.cta{display:inline-block;background:linear-gradient(135deg,#e9c84a,#c9a227);color:#17140a;font-weight:700;
+  padding:11px 20px;border-radius:9px;text-decoration:none;font-size:14px}
+.cta:hover{filter:brightness(1.08)}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(320px,1fr))}
+.card{background:#0c0c13;border:1px solid #24242f;border-radius:13px;padding:17px 18px;display:flex;flex-direction:column;gap:10px}
+.card h2{font-size:16px;margin:0;color:#f2f0f6}
+.card p{margin:0;color:#9a97a8;font-size:13px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:10.5px;color:#b7b6c0;background:#161620;border:1px solid #262633;border-radius:999px;padding:2px 9px}
+.meta{display:flex;flex-wrap:wrap;gap:12px;font-family:"Cascadia Code",Consolas,monospace;font-size:11px;color:#6f6c80}
+.ok{color:#4ade80}.warn{color:#fbbf24}.bad{color:#f87171}
+.hash{font-family:"Cascadia Code",Consolas,monospace;font-size:10.5px;color:#5f5c70;word-break:break-all}
+.foot{margin-top:34px;color:#5f5c70;font-size:12px;border-top:1px solid #1c1c25;padding-top:16px}
+.foot a{color:#9a97a8}
+.topnav{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:22px;padding-bottom:14px;border-bottom:1px solid #1c1c25}
+.topnav a{color:#9a97a8;text-decoration:none;font-size:12px;border:1px solid #262633;border-radius:999px;padding:4px 12px}
+.topnav a:hover{color:#f2f0f6;border-color:#3a3a49}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="topnav">
+    <a href="index.html">&larr; RDX</a>
+    <a href="store.html">Price list</a>
+    <a href="policy.html">Policy</a>
+  </nav>
+  <div class="eyebrow">MVRK</div>
+  <h1>MVRK Script Store</h1>
+  <p class="lede">Named Luau scripts, validated in the MVRK runtime and pinned by SHA-256.</p>
+  <p class="lede">Every script below was linted, executed in the MVRK Luau runtime and pinned by
+    SHA-256 before it was listed. The hash is the receipt: the file that ships is the file that ran.</p>
+  <div class="banner">
+  <div>
+    <b>Every script ships with MVRK Studio · $59.</b>
+    <div class="meta"><span>never expires</span>
+    <span>MVRK Studio · Lifetime</span></div>
+  </div>
+  <a class="cta" href="https://www.paypal.com/ncp/payment/6G23LVV9URXPQ" rel="noopener">Get MVRK Studio</a>
+</div>
+  <div class="grid">
+<article class="card">
+  <h2>Saber Showdown</h2>
+  <p>saber showdown — the birthday gift, repaired  (v2, adaptive)</p>
+  <div class="tags"><span class="tag">saber-showdown</span><span class="tag">rayfield</span><span class="tag">combat</span><span class="tag">guard</span><span class="tag">esp</span></div>
+  <div class="meta">
+    <span>47,874 bytes</span>
+    <span class="ok">● validated</span>
+    <span>lint findings 1</span>
+  </div>
+  <div class="hash">sha256 cc30fa69fe2bee661f380488510be01d44e8a662d8f28b0c9483145c3195f8da</div>
+  <div class="hash"><div>[saber] Rayfield fetch failed (no body): https://raw.githubusercontent.com/jensonhirst/Rayfield/main/source</div><div>[saber] Rayfield fetch failed (no body): https://raw.githubusercontent.com/SiriusSoftwareLtd/Rayfield/main/source.lua</div><div>[saber] Rayfield shim loaded (offline)</div><div>[rayfield] window &#x27;⚔ saber showdown ⚔&#x27; ready</div><div>[rayfield] tab &#x27;combat ⚔&#x27;</div><div>[rayfield] button &#x27;Kill closest player&#x27;</div></div>
+</article>
+<article class="card">
+  <h2>Saber Showdown Pro</h2>
+  <p>SABER SHOWDOWN PRO — TOGGLE HUB BUILD (no executor hub, no network)</p>
+  <div class="tags"><span class="tag">saber-showdown</span><span class="tag">rayfield</span><span class="tag">pro</span></div>
+  <div class="meta">
+    <span>60,016 bytes</span>
+    <span class="ok">● validated</span>
+    <span>lint findings 0</span>
+  </div>
+  <div class="hash">sha256 a5c119388f78d54718f89eda41aaa906b842bebab714cab47a8a3c1e4dcf41eb</div>
+  <div class="hash"><div>[saber] environment: MVRK offline arena</div><div>PASS  first sight changes nothing                    0</div><div>PASS  first stays 100                                100</div><div>PASS  second stays 50                                50</div><div>PASS  spend restores one slot                        1</div><div>PASS  first back to its own ceiling                  100</div></div>
+</article>
+<article class="card">
+  <h2>Saber Showdown — Lordship</h2>
+  <p>SABER SHOWDOWN v4 â€” LORDSHIP BUILD (no executor hub, no network)</p>
+  <div class="tags"><span class="tag">saber-showdown</span><span class="tag">rayfield</span><span class="tag">lordship</span></div>
+  <div class="meta">
+    <span>45,192 bytes</span>
+    <span class="ok">● validated</span>
+    <span>lint findings 0</span>
+  </div>
+  <div class="hash">sha256 5fe296f9a5cdddbdbbc7554697e6bbb0e96773a04c169c4158d6393fd7947180</div>
+  <div class="hash"><div>[saber] environment: MVRK offline arena</div><div>PASS  first sight changes nothing                    0</div><div>PASS  first stays 100                                100</div><div>PASS  second stays 50                                50</div><div>PASS  spend restores one slot                        1</div><div>PASS  first back to its own ceiling                  100</div></div>
+</article>
+<article class="card">
+  <h2>Saber Lord</h2>
+  <p>SABER LORD — DOJUTSU BUILD (no executor hub, no network, zero dependencies)</p>
+  <div class="tags"><span class="tag">saber-showdown</span><span class="tag">rayfield</span><span class="tag">lord</span></div>
+  <div class="meta">
+    <span>74,243 bytes</span>
+    <span class="ok">● validated</span>
+    <span>lint findings 0</span>
+  </div>
+  <div class="hash">sha256 259303d346fa921a397d47fc49fc7bd8e3c349a3c0a5b800009daf20457dc4d3</div>
+  <div class="hash"><div>[lord] environment: MVRK offline arena</div><div>PASS  ring point 1 exists                            true</div><div>PASS  ring point 1 radius                            5.5</div><div>PASS  ring point 2 exists                            true</div><div>PASS  ring point 2 radius                            5.5</div><div>PASS  ring point 3 exists                            true</div></div>
+</article>
+<article class="card">
+  <h2>Rinnegan</h2>
+  <p>SABER LORD — ONE HUB, ONE KEY (RightShift), REAL EFFECTS ONLY</p>
+  <div class="tags"><span class="tag">saber-showdown</span><span class="tag">rayfield</span><span class="tag">sharingan</span></div>
+  <div class="meta">
+    <span>131,564 bytes</span>
+    <span class="ok">● validated</span>
+    <span>lint findings 0</span>
+  </div>
+  <div class="hash">sha256 6d11e1c96f04554c44a7f675947d69df23bce6cfe6ed2f2af9eca7650ebede54</div>
+  <div class="hash"><div>[lord] warn: part shape ball: [string &quot;D:\GHOST_SYSTEM\PROJECTS\MVRK\scripts\saber-showdown\rinnegan.luau&quot;]:117: attempt to index nil with &#x27;Ball&#x27;</div><div>[lord] warn: part shape block: [string &quot;D:\GHOST_SYSTEM\PROJECTS\MVRK\scripts\saber-showdown\rinnegan.luau&quot;]:120: attempt to index nil with &#x27;Block&#x27;</div><div>[lord] warn: ContextActionResult.Sink: [string &quot;D:\GHOST_SYSTEM\PROJECTS\MVRK\scripts\saber-showdown\rinnegan.luau&quot;]:3330: attempt to index nil with &#x27;Sink&#x27;</div><div>[lord] environment: MVRK offline arena</div><div>PASS  ring point 1 exists                            true</div><div>PASS  ring point 1 radius                            5.5</div></div>
+</article>
+<article class="card">
+  <h2>Rinnegan (New)</h2>
+  <p>SABER // LORD - REAL-ONLY BUILD (one hub, one key: RightShift)</p>
+  <div class="tags"><span class="tag">saber-showdown</span><span class="tag">rayfield</span><span class="tag">sharingan</span></div>
+  <div class="meta">
+    <span>102,206 bytes</span>
+    <span class="ok">● validated</span>
+    <span>lint findings 0</span>
+  </div>
+  <div class="hash">sha256 37d13be8e12269c8f535537c8efffbd90aa8bdec70cbbf0bbfad2cd15722c45c</div>
+  <div class="hash"><div>[lord] environment: MVRK offline arena</div><div>PASS  hover climbs toward target                     10</div><div>PASS  hover descends when too high                   -10</div><div>PASS  hover dead-zone on target                      0</div><div>PASS  hover dead-zone tolerance                      0</div><div>PASS  hover caps a climb                             26</div></div>
+</article>
+<article class="card">
+  <h2>Saber Throne</h2>
+  <p>SABER THRONE  |  v7  |  GOD TIER</p>
+  <div class="tags"><span class="tag">saber-showdown</span><span class="tag">rayfield</span><span class="tag">throne</span></div>
+  <div class="meta">
+    <span>150,404 bytes</span>
+    <span class="ok">● validated</span>
+    <span>lint findings 0</span>
+  </div>
+  <div class="hash">sha256 55e315fa6e2a3afb87eb44237c5dea8d555408671e3e607ab272755ab6ce04c7</div>
+  <div class="hash"><div>[THRONE] self-test 26 checks, 0 fail</div><div>[THRONE] done - offline (MVRK)</div><div>[MVRK] complete · virtual 0 s · 0 frames</div></div>
+</article>
+<article class="card">
+  <h2>Godmode</h2>
+  <p>IZANAGI v1 — DEDICATED GOD MODE FOR SABER SHOWDOWN</p>
+  <div class="tags"><span class="tag">saber-showdown</span><span class="tag">utility</span></div>
+  <div class="meta">
+    <span>29,315 bytes</span>
+    <span class="ok">● validated</span>
+    <span>lint findings 0</span>
+  </div>
+  <div class="hash">sha256 e083fcb7cdee304493199efdf62685845256ace41bc7c831953ac89efcf9009f</div>
+  <div class="hash"><div>[iz] environment: MVRK offline arena</div><div>PASS  health name: Health                            true</div><div>PASS  health name: HPBar                             true</div><div>PASS  health name: Fuel                              false</div><div>PASS  health text: 87/100                            100/100</div><div>PASS  health text: 87                                100</div></div>
+</article>
+<article class="card">
+  <h2>Sharingan</h2>
+  <p>SHARINGAN — target lock with motion prediction (no dependency, no network)</p>
+  <div class="tags"><span class="tag">saber-showdown</span><span class="tag">utility</span><span class="tag">sharingan</span></div>
+  <div class="meta">
+    <span>27,767 bytes</span>
+    <span class="ok">● validated</span>
+    <span>lint findings 0</span>
+  </div>
+  <div class="hash">sha256 3af9c9d1dfafbff9990af36f3b858f6529a6f303e70b247d915ab0c6d0a5f674</div>
+  <div class="hash"><div>[sharingan] environment: MVRK offline arena</div><div>PASS  close target scores higher                     true</div><div>PASS  perfect target scores 1                        100</div><div>PASS  out of range scores 0                          0</div><div>PASS  outside the cone scores 0                      0</div><div>PASS  just outside the cone scores 0                 0</div></div>
+</article>
+  </div>
+  <div class="foot">Generated 2026-11-18T09:25:46Z · every hash above is the SHA-256 of the exact file that shipped.
+    No scraping, no reverse engineering, no clones &mdash; read the <a href="policy.html">policy</a>.</div>
+</div>
+</body>
+</html>
