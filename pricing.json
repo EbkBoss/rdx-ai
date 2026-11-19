@@ -20,7 +20,7 @@
           "price": 15.0,
           "days": 30,
           "term": "1 month",
-          "note": "billed every month",
+          "note": "30-day licence - renew any time",
           "paypal": "https://www.paypal.com/ncp/payment/YT7PRZVY7EGSC",
           "default": true
         },
@@ -30,7 +30,7 @@
           "price": 150.0,
           "days": 365,
           "term": "12 months",
-          "note": "2 months free",
+          "note": "2 months free - 365-day licence, renew any time",
           "paypal": "https://www.paypal.com/ncp/payment/HB3LM3LQXVLSU",
           "default": false
         }
@@ -48,7 +48,7 @@
               "price": 15.0,
               "days": 30,
               "term": "1 month",
-              "note": "billed every month",
+              "note": "30-day licence - renew any time",
               "paypal": "https://www.paypal.com/ncp/payment/YT7PRZVY7EGSC"
             },
             {
@@ -57,7 +57,7 @@
               "price": 150.0,
               "days": 365,
               "term": "12 months",
-              "note": "2 months free",
+              "note": "2 months free - 365-day licence, renew any time",
               "paypal": "https://www.paypal.com/ncp/payment/HB3LM3LQXVLSU"
             }
           ]
@@ -74,7 +74,7 @@
               "price": 29.0,
               "days": 30,
               "term": "1 month",
-              "note": "billed every month",
+              "note": "30-day licence - renew any time",
               "paypal": "https://www.paypal.com/ncp/payment/Y3TFFZ75M6FTU"
             },
             {
@@ -83,7 +83,7 @@
               "price": 290.0,
               "days": 365,
               "term": "12 months",
-              "note": "2 months free",
+              "note": "2 months free - 365-day licence, renew any time",
               "paypal": "https://www.paypal.com/ncp/payment/MXMH2RYQK8SR4"
             }
           ]
@@ -100,7 +100,7 @@
               "price": 79.0,
               "days": 30,
               "term": "1 month",
-              "note": "billed every month",
+              "note": "30-day licence - renew any time",
               "paypal": "https://www.paypal.com/ncp/payment/ASNEPPFLRC65W"
             },
             {
@@ -109,7 +109,7 @@
               "price": 790.0,
               "days": 365,
               "term": "12 months",
-              "note": "2 months free",
+              "note": "2 months free - 365-day licence, renew any time",
               "paypal": "https://www.paypal.com/ncp/payment/DUX296LGUPKWA"
             }
           ]
@@ -171,7 +171,7 @@
           "price": 12.0,
           "days": 30,
           "term": "1 month",
-          "note": "billed every month",
+          "note": "30-day licence - renew any time",
           "paypal": "https://www.paypal.com/ncp/payment/XGZUY2SV9XYNJ",
           "default": true
         },
@@ -181,7 +181,7 @@
           "price": 99.0,
           "days": 365,
           "term": "12 months",
-          "note": "2.5 months free",
+          "note": "2.5 months free - 365-day licence, renew any time",
           "paypal": "https://www.paypal.com/ncp/payment/U36JU7BR93GCU",
           "default": false
         },
@@ -219,7 +219,7 @@
           "price": 7.0,
           "days": 30,
           "term": "1 month",
-          "note": "billed every month",
+          "note": "30-day licence - renew any time",
           "paypal": "https://www.paypal.com/ncp/payment/ERCJURYYVGA6J",
           "default": true
         },
@@ -229,7 +229,7 @@
           "price": 59.0,
           "days": 365,
           "term": "12 months",
-          "note": "2 months free",
+          "note": "2 months free - 365-day licence, renew any time",
           "paypal": "https://www.paypal.com/ncp/payment/Z2LULUHUAC5ZC",
           "default": false
         },
@@ -267,7 +267,7 @@
           "price": 25.0,
           "days": 30,
           "term": "1 month",
-          "note": "billed every month",
+          "note": "30-day licence - renew any time",
           "paypal": "https://www.paypal.com/ncp/payment/JVFPD3JFRCWUG",
           "default": true
         },
@@ -277,7 +277,7 @@
           "price": 199.0,
           "days": 365,
           "term": "12 months",
-          "note": "2 months free",
+          "note": "2 months free - 365-day licence, renew any time",
           "paypal": "https://www.paypal.com/ncp/payment/Z39S9YZD6GL4A",
           "default": false
         },
@@ -315,7 +315,7 @@
           "price": 29.0,
           "days": 30,
           "term": "1 month",
-          "note": "every Ghvst app",
+          "note": "every Ghvst app - 30-day licence, renew any time",
           "paypal": "https://www.paypal.com/ncp/payment/7XJF5B2FARRG6",
           "default": true
         },
@@ -325,7 +325,7 @@
           "price": 249.0,
           "days": 365,
           "term": "12 months",
-          "note": "2.5 months free",
+          "note": "2.5 months free - 365-day licence, renew any time",
           "paypal": "https://www.paypal.com/ncp/payment/UW7LV8BZL2FMA",
           "default": false
         },
@@ -363,7 +363,7 @@
           "price": 19.0,
           "days": 30,
           "term": "1 month",
-          "note": "billed every month",
+          "note": "30-day licence - renew any time",
           "paypal": "https://www.paypal.com/ncp/payment/MNPDLYNLHTYJA",
           "default": true
         },
@@ -373,7 +373,7 @@
           "price": 149.0,
           "days": 365,
           "term": "12 months",
-          "note": "2 months free",
+          "note": "2 months free - 365-day licence, renew any time",
           "paypal": "https://www.paypal.com/ncp/payment/TFBBSZ57FTM58",
           "default": false
         },
@@ -411,7 +411,7 @@
           "price": 29.0,
           "days": 30,
           "term": "1 month",
-          "note": "billed every month",
+          "note": "30-day licence - renew any time",
           "paypal": "https://www.paypal.com/ncp/payment/FLQJDSLNDB4P8",
           "default": true
         },
@@ -421,7 +421,7 @@
           "price": 219.0,
           "days": 365,
           "term": "12 months",
-          "note": "2 months free",
+          "note": "2 months free - 365-day licence, renew any time",
           "paypal": "https://www.paypal.com/ncp/payment/XRYZ4FPTTXABY",
           "default": false
         },
@@ -459,7 +459,7 @@
           "price": 39.0,
           "days": 30,
           "term": "1 month",
-          "note": "Capture + DevKit",
+          "note": "Capture + DevKit - 30-day licence, renew any time",
           "paypal": "https://www.paypal.com/ncp/payment/B4YZLRPMAPMNW",
           "default": true
         },
@@ -469,7 +469,7 @@
           "price": 299.0,
           "days": 365,
           "term": "12 months",
-          "note": "Capture + DevKit, 2 months free",
+          "note": "Capture + DevKit, 2 months free - 365-day licence, renew any time",
           "paypal": "https://www.paypal.com/ncp/payment/TTZS4L3BCBXBA",
           "default": false
         },
@@ -507,7 +507,7 @@
           "price": 60.0,
           "days": 30,
           "term": "1 month",
-          "note": "5 seats, $12 each",
+          "note": "5 seats, $12 each - 30-day licence, renew any time",
           "paypal": "https://www.paypal.com/ncp/payment/U5EAJJNUN6MD6",
           "default": false
         },
@@ -517,7 +517,7 @@
           "price": 600.0,
           "days": 365,
           "term": "12 months",
-          "note": "5 seats, 2 months free",
+          "note": "5 seats, 2 months free - 365-day licence, renew any time",
           "paypal": "https://www.paypal.com/ncp/payment/Q3A4X3AHUDMU8",
           "default": true
         }
@@ -545,7 +545,7 @@
           "price": 29.0,
           "days": 30,
           "term": "1 month",
-          "note": "30 days - the low-cost way in",
+          "note": "30 days - the low-cost way in - 30-day licence, renew any time",
           "paypal": "https://www.paypal.com/ncp/payment/8YXFNZYC7TYEG",
           "default": true
         },
@@ -555,7 +555,7 @@
           "price": 199.0,
           "days": 365,
           "term": "12 months",
-          "note": "one payment, one year of every release",
+          "note": "one payment, one year of every release - 365-day licence, renew any time",
           "paypal": "https://www.paypal.com/ncp/payment/FRLV3WPVMJF3S",
           "default": false
         },
@@ -583,7 +583,7 @@
               "price": 29.0,
               "days": 30,
               "term": "1 month",
-              "note": "30 days - the low-cost way in",
+              "note": "30 days - the low-cost way in - 30-day licence, renew any time",
               "paypal": "https://www.paypal.com/ncp/payment/8YXFNZYC7TYEG"
             },
             {
@@ -592,7 +592,7 @@
               "price": 199.0,
               "days": 365,
               "term": "12 months",
-              "note": "one payment, one year of every release",
+              "note": "one payment, one year of every release - 365-day licence, renew any time",
               "paypal": "https://www.paypal.com/ncp/payment/FRLV3WPVMJF3S"
             },
             {
@@ -635,7 +635,7 @@
               "price": 1499.0,
               "days": 365,
               "term": "12 months",
-              "note": "3 machines, priority support, every release for a year",
+              "note": "3 machines, priority support, every release for a year - 365-day licence, renew any time",
               "paypal": "https://www.paypal.com/ncp/payment/5YVRDVF8A644J"
             },
             {
@@ -661,7 +661,7 @@
               "price": 12000.0,
               "days": 365,
               "term": "12 months",
-              "note": "site licence on the customer's own infrastructure - priced by scope from $9,000 to $25,000, invoiced",
+              "note": "site licence on the customer's own infrastructure - priced by scope from $9,000 to $25,000, invoiced - 365-day licence, renew any time",
               "paypal": "https://www.paypal.com/ncp/payment/DF46F5VAT7HAJ"
             }
           ]
@@ -727,7 +727,7 @@
     }
   ],
   "issuer": "https://license.ghvst.dev",
-  "generated_at": "2026-11-19T14:13:11+00:00",
+  "generated_at": "2026-11-19T21:29:55+00:00",
   "mythic_bundle": {
     "mythic_price": 999.0,
     "items": [
