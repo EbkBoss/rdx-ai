@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What's fixed - every GHVST update, in plain words</title>
+<meta name="description" content="Every GHVST product release with the exact list of what was fixed, when, and the SHA-256 of the file that shipped. No version number without a reason.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23f6c76a'>G</text></svg>">
+<script src="siteguard.js"></script>
+<style>
+  :root{--bg:#08050f;--panel:#120d1d;--panel2:#181122;--line:#2a1f3d;--text:#f4efff;
+        --muted:#a394c4;--gold:#f6c76a;--violet:#c4b5fd;--green:#6ee7b7;--amber:#fbbf24;}
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:radial-gradient(900px 500px at 50% -10%,rgba(122,86,190,.20),transparent 60%),var(--bg);
+       color:var(--text);font:16px/1.6 "Segoe UI",system-ui,-apple-system,sans-serif;min-height:100vh}
+  .wrap{width:100%;max-width:900px;margin:0 auto;padding:48px 20px 80px}
+  .kicker{color:var(--muted);font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:700}
+  h1{font-size:clamp(28px,5vw,46px);line-height:1.08;margin:12px 0 10px;letter-spacing:-.02em}
+  h1 .em{color:var(--gold)}
+  .sub{color:var(--muted);font-size:14px;margin:0 0 26px;max-width:62ch}
+  .rel{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);
+       border-radius:18px;padding:22px 22px 18px;margin:0 0 16px}
+  .rel-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px}
+  .prod{color:var(--gold);font:600 11px/1 ui-monospace,Consolas,monospace;letter-spacing:.16em;text-transform:uppercase}
+  .ver{font:700 12px/1 ui-monospace,Consolas,monospace;color:var(--violet);
+       border:1px solid rgba(196,181,253,.35);border-radius:6px;padding:4px 7px}
+  .when{color:var(--muted);font-size:12.5px;margin-left:auto;font-family:ui-monospace,Consolas,monospace}
+  .head{font-size:19px;font-weight:700;margin:10px 0 14px;line-height:1.35}
+  .lbl{font:700 10px/1 ui-monospace,monospace;letter-spacing:.18em;text-transform:uppercase;
+       color:var(--muted);margin:16px 0 8px}
+  ul{margin:0;padding:0;list-style:none}
+  ul.fixed li{position:relative;padding:0 0 10px 22px;font-size:14.5px;color:#e7e0f7}
+  ul.fixed li::before{content:"";position:absolute;left:0;top:9px;width:8px;height:8px;border-radius:50%;
+       background:var(--green);box-shadow:0 0 10px rgba(110,231,183,.55)}
+  ul.proof li{position:relative;padding:0 0 8px 22px;font-size:13.5px;color:var(--muted)}
+  ul.proof li::before{content:"\2713";position:absolute;left:2px;top:0;color:var(--violet);font-weight:700}
+  .files{margin-top:14px;border-top:1px solid rgba(255,255,255,.07);padding-top:12px}
+  .file{font:12px/1.7 ui-monospace,Consolas,monospace;color:var(--muted);word-break:break-all}
+  .file b{color:var(--text);font-weight:600}
+  .file .sha{color:var(--green)}
+  .tag{display:inline-block;font:700 9px/1 ui-monospace,monospace;letter-spacing:.14em;
+       border-radius:5px;padding:4px 6px;margin-left:8px;text-transform:uppercase}
+  .tag.shipped{color:var(--green);border:1px solid rgba(110,231,183,.4)}
+  .tag.draft{color:var(--amber);border:1px solid rgba(251,191,36,.4)}
+  .tag.internal{color:var(--muted);border:1px solid var(--line)}
+  .foot{color:var(--muted);font-size:12.5px;margin-top:28px;text-align:center}
+  .foot a{color:var(--violet)}
+  .empty{color:var(--muted);font-size:14px}
+  .note{color:var(--muted);font-size:13px;margin-top:6px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">The record</div>
+  <h1>What's fixed, <span class="em">every single update</span></h1>
+  <p class="sub">A version number on its own means nothing. This page is the list: what was actually
+     broken, what was changed, what was measured afterwards, and the SHA-256 of the file that shipped.
+     Newest first. It is generated from a machine record, and a hash that does not match the file on
+     disk fails the record's own check - so nothing here can quietly drift from the bytes you download.</p>
+
+  <div id="list"><p class="empty">Loading the record...</p></div>
+
+  <div class="foot">
+    <a href="store.html">Every product and price</a> &middot;
+    <a href="index.html">The GHOST system</a> &middot;
+    <a href="policy.html">The policy</a>
+  </div>
+</div>
+
+<script>
+(function () {
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+  function bytes(n) {
+    if (!n && n !== 0) return '';
+    return n.toLocaleString('en-US') + ' bytes';
+  }
+  function dateText(iso) {
+    try {
+      var d = new Date(iso + 'T12:00:00Z');
+      return d.toLocaleDateString('en-GB', {day:'numeric', month:'short', year:'numeric'});
+    } catch (e) { return iso; }
+  }
+  function render(doc) {
+    var host = document.getElementById('list');
+    var rels = (doc && doc.releases) || [];
+    if (!rels.length) {
+      host.innerHTML = '<p class="empty">No release has been recorded yet.</p>';
+      return;
+    }
+    var out = '';
+    rels.forEach(function (r) {
+      out += '<div class="rel">';
+      out += '<div class="rel-head">';
+      out += '<span class="prod">' + esc(r.name || r.product) + '</span>';
+      out += '<span class="ver">v' + esc(r.version) + '</span>';
+      if (r.status) out += '<span class="tag ' + esc(r.status) + '">' + esc(r.status) + '</span>';
+      out += '<span class="when">' + esc(dateText(r.date)) + '</span>';
+      out += '</div>';
+      out += '<div class="head">' + esc(r.headline) + '</div>';
+      if (r.fixed && r.fixed.length) {
+        out += '<div class="lbl">What was fixed</div><ul class="fixed">';
+        r.fixed.forEach(function (f) { out += '<li>' + esc(f) + '</li>'; });
+        out += '</ul>';
+      }
+      if (r.proof && r.proof.length) {
+        out += '<div class="lbl">How it was proven</div><ul class="proof">';
+        r.proof.forEach(function (p) { out += '<li>' + esc(p) + '</li>'; });
+        out += '</ul>';
+      }
+      if (r.files && r.files.length) {
+        out += '<div class="files"><div class="lbl" style="margin-top:0">The files this shipped</div>';
+        r.files.forEach(function (f) {
+          out += '<div class="file"><b>' + esc(f.name) + '</b> &middot; ' + esc(bytes(f.bytes)) +
+                 '<br><span class="sha">sha256 ' + esc(f.sha256) + '</span></div>';
+        });
+        out += '</div>';
+      }
+      if (r.note) out += '<p class="note">' + esc(r.note) + '</p>';
+      out += '</div>';
+    });
+    host.innerHTML = out;
+  }
+  fetch('whats-fixed.json', {cache: 'no-store'})
+    .then(function (r) { return r.json(); })
+    .then(render)
+    .catch(function () {
+      document.getElementById('list').innerHTML =
+        '<p class="empty">The record could not be loaded. It lives at whats-fixed.json next to this page.</p>';
+    });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "updated": "2026-11-18",
+  "releases": [
+    {
+      "product": "GhvstCapture",
+      "name": "GHVST Capture",
+      "version": "2.1.0",
+      "date": "2026-11-18",
+      "status": "shipped",
+      "headline": "The Film Desk: the phone now makes real, watchable videos - with music, with the screen off",
+      "fixed": [
+        "Pictures the app itself took now count as film material. Before this, a phone holding a hundred screenshots built a film out of nothing and reported 'no pictures found'.",
+        "Film and Studio both dropped every frame before the last one: the muxer only started while draining the end of the stream, so the MP4 opened, had a size, and played as nothing. One shared encoder path now starts the muxer the moment the format is known, and the file is only called finished when it holds real frames.",
+        "A film can carry music. Any MP3/M4A/WAV/AAC/OGG/FLAC is decoded, laid under the picture at bed level, and muxed as a real AAC track.",
+        "Every finished film is published to the gallery and shares through a content:// URI, because a file:// path is refused by Android 7 and up.",
+        "Film jobs survive the screen going off and the phone restarting: a queued job is picked up again after boot.",
+        "The agent can drive the whole thing: MAKE VIDEO, ADD MUSIC, PROOF, JOBS, CANCEL, SOUNDS, FORGE.",
+        "New FILM DESK screen: picture count, seconds per picture, music picker, the live queue with cancel, and a proof panel for every finished film."
+      ],
+      "proof": [
+        "A 1080x1920 H.264 film, 24 fps, 288 frames, 12.000 s, 1,796,690 bytes - read back off the device and verified with ffprobe.",
+        "A film with music: H.264 video plus AAC 44.1 kHz audio, 8.057 s, 518,871 bytes.",
+        "Both films were made while the phone's screen was off and the keyguard was up - the overnight case.",
+        "The SHA-256 in the app's own proof panel matched the pulled file byte for byte."
+      ],
+      "files": [
+        {
+          "name": "app-share-arm64-v8a-release.apk",
+          "bytes": 37801784,
+          "sha256": "D0F54B077514FFB594689D7C0A2E9ED6CADD94462C0A3651D9BE4870CE5C11CB"
+        },
+        {
+          "name": "app-share-armeabi-v7a-release.apk",
+          "bytes": 28152124,
+          "sha256": "1496DF057F8CA7946C505D6656F9C3D5005668ED51A9FD9A4CC13C006F5E0890"
+        },
+        {
+          "name": "app-share-x86_64-release.apk",
+          "bytes": 42015908,
+          "sha256": "48D9DE4F551121EF4C02AFB462530F5D51930733701310D21EB534C07E5BECCC"
+        },
+        {
+          "name": "app-director-arm64-v8a-release.apk",
+          "bytes": 37801784,
+          "sha256": "3FC2B073D87FEF9A4C615F292D73F0A112D5935C2FA7A61A1CDAC232D484C5B3"
+        },
+        {
+          "name": "app-director-armeabi-v7a-release.apk",
+          "bytes": 28152124,
+          "sha256": "F5DFF527809BABAE6877579206E499C18FA53D675AF21551175DA8CCE96AA417"
+        },
+        {
+          "name": "app-director-x86_64-release.apk",
+          "bytes": 42015908,
+          "sha256": "03A95A3FB17A6792D98AFD66B4556A73B0EDE6B9B37107EA2AEA884F444830A0"
+        }
+      ]
+    }
+  ]
+}
