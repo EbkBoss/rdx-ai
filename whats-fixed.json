@@ -5,6 +5,43 @@
     {
       "product": "GhvstBrowserAndroid",
       "name": "Ghvst Browser (Android)",
+      "version": "1.4.20",
+      "date": "2026-11-20",
+      "status": "shipped",
+      "headline": "Ask the assistant what is new - it answers from the app's own release record, not from a guess",
+      "fixed": [
+        "'WHAT'S NEW IN THIS UPDATE?' NOW HAS A REAL ANSWER: a new app_updates tool reads the app's own release record, so the assistant describes the build it is actually running on instead of inventing a changelog from training data.",
+        "THE ASSISTANT IS TOLD TO USE IT: when you ask what changed, what was fixed or which version you are on, it calls the tool rather than answering from memory.",
+        "THE RECORD IS PART OF THE RELEASE PROCESS: every new version updates ReleaseNotes.java, so this cannot silently go stale.",
+        "Everything from 1.4.15 to 1.4.18 is still here: the rich bubble, the Wifi Scanner, one-tap PayPal and X, the new prices, and the RDX artifact handoff."
+      ],
+      "proof": [
+        "assembleRelease - BUILD SUCCESSFUL in 29s (53 tasks), 2026-11-20.",
+        "testReleaseUnitTest - 423 tests / 0 failures / 0 errors / 0 skipped.",
+        "apksigner re-run on all three SHIP artifacts: v2 true, v3 true, rc=0. No nvapi- bytes in any shipped APK."
+      ],
+      "files": [
+        {
+          "name": "Ghvst_Browser_Android_1.4.20_arm64-v8a.apk",
+          "bytes": 32327866,
+          "sha256": "29A2FDEEE3F587B447D7B5D107F67CB4ED8C28DF14C0771B1D650BF0EB7397EE"
+        },
+        {
+          "name": "Ghvst_Browser_Android_1.4.20_armeabi-v7a.apk",
+          "bytes": 22678206,
+          "sha256": "DAF8F2DD1BD93FC6937D88CA52CB2708B1B70266ED2C3E9DCB01BCB5DC6EFE22"
+        },
+        {
+          "name": "Ghvst_Browser_Android_1.4.20_x86_64.apk",
+          "bytes": 36541990,
+          "sha256": "13C7CB1BE2C912E7E9F056F6D7240C9023A34C13B65CFE6DE3ADF24D122786B6"
+        }
+      ],
+      "note": "A live model turn calling app_updates on a phone was not exercised - proven by compilation and the unit suite. Customer APKs stay DRAFT on GitHub; delivery is issuer-side behind a signed paid ticket."
+    },
+    {
+      "product": "GhvstBrowserAndroid",
+      "name": "Ghvst Browser (Android)",
       "version": "1.4.19",
       "date": "2026-11-20",
       "status": "shipped",
@@ -37,7 +74,7 @@
           "sha256": "7B8ABDFA78BBD9308E4DDEAE25522373E79D6465E09BECCA9F82F44C97FD6EDB"
         }
       ],
-      "note": "A live model turn calling app_updates on a phone was not exercised - proven by compilation and the unit suite. Customer APKs stay DRAFT on GitHub; delivery is issuer-side behind a signed paid ticket."
+      "note": "A live model turn calling app_updates on a phone was not exercised - proven by compilation and the unit suite. Customer APKs stay DRAFT on GitHub; delivery is issuer-side behind a signed paid ticket. Plan names and terms quoted in this entry are the ones in force on the day it shipped; every plan is a subscription now."
     },
     {
       "product": "GhvstBrowserAndroid",
@@ -76,7 +113,7 @@
           "sha256": "B9521E390C6315AC11D54A6FF6D37F57BB7C81D3263918E56B875A419758C836"
         }
       ],
-      "note": "A customer on 1.4.16 still sees the old prices until they update - the price sheet is generated at build time; the checkout itself always charges the manifest amount. Customer APKs stay DRAFT on GitHub; delivery is issuer-side behind a signed paid ticket."
+      "note": "A customer on 1.4.16 still sees the old prices until they update - the price sheet is generated at build time; the checkout itself always charges the manifest amount. Customer APKs stay DRAFT on GitHub; delivery is issuer-side behind a signed paid ticket. Plan names and terms quoted in this entry are the ones in force on the day it shipped; every plan is a subscription now."
     },
     {
       "product": "GhvstBrowserAndroid",
@@ -115,7 +152,7 @@
           "sha256": "997101E2F194B0FD367CBAD581AE4BC0F5A3A490175895F1C4A0EF0D0A4CEFD5"
         }
       ],
-      "note": "On-device acceptance of 1.4.16 was not run (build + 423 JVM unit tests only) - named as a risk rather than claimed. The scan list needs location permission because Android treats a nearby SSID as a location clue. Customer APKs stay DRAFT on GitHub; delivery is issuer-side behind a signed paid ticket."
+      "note": "On-device acceptance of 1.4.16 was not run (build + 423 JVM unit tests only) - named as a risk rather than claimed. The scan list needs location permission because Android treats a nearby SSID as a location clue. Customer APKs stay DRAFT on GitHub; delivery is issuer-side behind a signed paid ticket. Plan names and terms quoted in this entry are the ones in force on the day it shipped; every plan is a subscription now."
     },
     {
       "product": "GhvstBrowserAndroid",
@@ -154,7 +191,7 @@
           "sha256": "061CBCE3EB8E5CC5C3B1E12863D875AA85F584FD76FBD58E4E9513EE00891DD9"
         }
       ],
-      "note": "On-device acceptance of 1.4.15 was not run (build + 416 JVM unit tests only) - named as a risk rather than claimed. Customer APKs stay DRAFT on GitHub; delivery is issuer-side behind a signed paid ticket."
+      "note": "On-device acceptance of 1.4.15 was not run (build + 416 JVM unit tests only) - named as a risk rather than claimed. Customer APKs stay DRAFT on GitHub; delivery is issuer-side behind a signed paid ticket. Plan names and terms quoted in this entry are the ones in force on the day it shipped; every plan is a subscription now."
     },
     {
       "product": "GhvstBrowserAndroid",
@@ -192,7 +229,7 @@
           "sha256": "24D0410B67948D8E41C593A208B5806A58A94868A722C557CF983C372A2E581D"
         }
       ],
-      "note": "On-device acceptance of 1.4.14 was not re-run in this pass (build + 408 unit tests only) - named as a risk rather than claimed. Customer APKs stay DRAFT on GitHub; delivery is issuer-side behind a signed paid ticket."
+      "note": "On-device acceptance of 1.4.14 was not re-run in this pass (build + 408 unit tests only) - named as a risk rather than claimed. Customer APKs stay DRAFT on GitHub; delivery is issuer-side behind a signed paid ticket. Plan names and terms quoted in this entry are the ones in force on the day it shipped; every plan is a subscription now."
     },
     {
       "product": "GhvstTerminalAndroid",
@@ -226,7 +263,7 @@
           "sha256": "E6AA20C1D6E94A33387B096A979D209ECC5CEEEFDC89D1431BA1BB8592BA1019"
         }
       ],
-      "note": "Named residual risk, not hidden: the phone's apt toolchain is still unproven on-device, and the licence activation flow does not yet call the issuer's POST /claim (next cut). The director flavours are never distributed."
+      "note": "Named residual risk, not hidden: the phone's apt toolchain is still unproven on-device, and the licence activation flow does not yet call the issuer's POST /claim (next cut). The director flavours are never distributed. Plan names and terms quoted in this entry are the ones in force on the day it shipped; every plan is a subscription now."
     },
     {
       "product": "SovereignMessenger",
@@ -257,7 +294,7 @@
           "sha256": "455376BD4CE965FE5FFD46C43F66ED8573030D5F38899907DD793799B053AFB1"
         }
       ],
-      "note": "The device-acceptance suite for 1.7.24 is stale (14 pass / 11 fail recorded on an earlier cut), so buyer-device proof is not claimed. Customer APKs stay DRAFT on GitHub; delivery is issuer-side behind a signed paid ticket."
+      "note": "The device-acceptance suite for 1.7.24 is stale (14 pass / 11 fail recorded on an earlier cut), so buyer-device proof is not claimed. Customer APKs stay DRAFT on GitHub; delivery is issuer-side behind a signed paid ticket. Plan names and terms quoted in this entry are the ones in force on the day it shipped; every plan is a subscription now."
     },
     {
       "product": "GhvstDevKit",
@@ -288,7 +325,7 @@
           "sha256": "B4D11F38132E776D2D4A727BEB574EDDE0193DF05B0B29B2977CB907E4544CE3"
         }
       ],
-      "note": "Stated plainly: the agent cannot compile an APK on the phone (no JDK or Gradle on the device), analyze_image needs a model that accepts images, the shared Downloads collection needs Android 10+, and Shizuku dies with a phone reboot and re-binds itself. This release stayed a PUBLIC draft was closed on 2026-11-18 - a published release is a free product, so delivery is issuer-side only."
+      "note": "Stated plainly: the agent cannot compile an APK on the phone (no JDK or Gradle on the device), analyze_image needs a model that accepts images, the shared Downloads collection needs Android 10+, and Shizuku dies with a phone reboot and re-binds itself. This release stayed a PUBLIC draft was closed on 2026-11-18 - a published release is a free product, so delivery is issuer-side only. Plan names and terms quoted in this entry are the ones in force on the day it shipped; every plan is a subscription now."
     },
     {
       "product": "GhvstCapture",
@@ -343,7 +380,7 @@
           "sha256": "B394DA6356947E4AD53A482F6FC5C0FD107BCADB7D4A280E6089F2806E35D350"
         }
       ],
-      "note": "Customer APKs stay DRAFT on GitHub - delivery is issuer-side, behind a signed paid ticket. A published release is a free product."
+      "note": "Customer APKs stay DRAFT on GitHub - delivery is issuer-side, behind a signed paid ticket. A published release is a free product. Plan names and terms quoted in this entry are the ones in force on the day it shipped; every plan is a subscription now."
     },
     {
       "product": "GhvstCapture",
@@ -362,7 +399,7 @@
         "On-device cartoon on R5GL4114B4K: 9.0 s, 1080x1920, 2,093,685 bytes, H.264 15 fps / 135 frames, read back with ffprobe after being pulled off the phone."
       ],
       "files": [],
-      "note": "Superseded by 2.3.0 (the art pass plus the voice track). This cut's APKs are no longer the shipped ones."
+      "note": "Superseded by 2.3.0 (the art pass plus the voice track). This cut's APKs are no longer the shipped ones. Plan names and terms quoted in this entry are the ones in force on the day it shipped; every plan is a subscription now."
     },
     {
       "product": "GhvstCapture",
@@ -417,7 +454,8 @@
           "bytes": 42015908,
           "sha256": "03A95A3FB17A6792D98AFD66B4556A73B0EDE6B9B37107EA2AEA884F444830A0"
         }
-      ]
+      ],
+      "note": " Plan names and terms quoted in this entry are the ones in force on the day it shipped; every plan is a subscription now."
     }
   ]
 }

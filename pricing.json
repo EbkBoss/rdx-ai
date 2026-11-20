@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-20T18:06:53+00:00",
+  "generated_at": "2026-11-20T20:09:27+00:00",
   "issuer": "https://license.ghvst.dev",
   "issuer_live": "",
   "paypal_handle": "",
@@ -513,7 +513,7 @@
     {
       "id": "GhvstBrowserPC",
       "name": "Ghvst Browser - PC",
-      "note": "The Windows build of Ghvst Browser: the WebView2 engine, extension loading, the Accounts control centre and RoxVault inside it. One payment, one key, it never expires.",
+      "note": "The Windows build of Ghvst Browser: the WebView2 engine, extension loading, the Accounts control centre and RoxVault inside it. One payment, one year, renews when you want it.",
       "app": "GHVST_BROWSER_PC",
       "plans": [
         {
@@ -534,7 +534,7 @@
     {
       "id": "MVRKStudio",
       "name": "MVRK Studio",
-      "note": "The creation suite: the motion, audio and assembly pipeline behind the animations. One payment, one key, it never expires.",
+      "note": "The creation suite: the motion, audio and assembly pipeline behind the animations. One payment, one year, renews when you want it.",
       "app": "MVRK",
       "plans": [
         {
