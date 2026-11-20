@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get your update - buyers and testers</title>
+<meta name="description" content="Already bought a GHVST product, or testing one? Paste your licence key and download the newest sealed build, with the full list of what was fixed.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23f6c76a'>G</text></svg>">
+<script src="siteguard.js"></script>
+<style>
+  :root{--bg:#08050f;--panel:#120d1d;--panel2:#181122;--line:#2a1f3d;--text:#f4efff;
+        --muted:#a394c4;--gold:#f6c76a;--violet:#c4b5fd;--green:#6ee7b7;--amber:#fbbf24;}
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:radial-gradient(900px 500px at 50% -10%,rgba(122,86,190,.20),transparent 60%),var(--bg);
+       color:var(--text);font:16px/1.6 "Segoe UI",system-ui,-apple-system,sans-serif;min-height:100vh}
+  .wrap{width:100%;max-width:860px;margin:0 auto;padding:48px 20px 80px}
+  .kicker{color:var(--muted);font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:700}
+  h1{font-size:clamp(28px,5vw,44px);line-height:1.08;margin:12px 0 10px;letter-spacing:-.02em}
+  h1 .em{color:var(--gold)}
+  .sub{color:var(--muted);font-size:14px;margin:0 0 24px;max-width:64ch}
+  .card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);
+        border-radius:18px;padding:22px;margin:0 0 18px}
+  label{display:block;font:700 10px/1 ui-monospace,monospace;letter-spacing:.18em;text-transform:uppercase;
+        color:var(--muted);margin:0 0 10px}
+  textarea{width:100%;min-height:88px;resize:vertical;background:#0b0713;color:var(--text);
+        border:1px solid var(--line);border-radius:12px;padding:12px 14px;
+        font:13px/1.6 ui-monospace,Consolas,monospace;outline:none}
+  textarea:focus{border-color:var(--violet)}
+  .btnrow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:14px}
+  button,.dl{cursor:pointer;border:0;border-radius:12px;padding:12px 20px;font:700 14px/1 inherit;
+        background:linear-gradient(180deg,#f8d07c,#e8b84f);color:#201603;text-decoration:none;display:inline-block}
+  button[disabled]{opacity:.55;cursor:default}
+  .ghost{background:rgba(255,255,255,.05);color:var(--text);border:1px solid var(--line)}
+  .msg{display:none;margin-top:14px;font-size:14px;color:var(--muted)}
+  .msg.bad{color:var(--amber)}
+  .meta{color:var(--muted);font-size:13px;margin:0 0 14px}
+  .meta b{color:var(--text)}
+  .file{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;
+        border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:0 0 10px;background:rgba(255,255,255,.02)}
+  .fname{font:600 13px/1.5 ui-monospace,Consolas,monospace;word-break:break-all}
+  .fmeta{color:var(--muted);font:12px/1.6 ui-monospace,Consolas,monospace;word-break:break-all}
+  .fmeta .sha{color:var(--green)}
+  .rec{font:700 9px/1 ui-monospace,monospace;letter-spacing:.12em;color:var(--green);
+        border:1px solid rgba(110,231,183,.4);border-radius:5px;padding:3px 6px;margin-left:6px;text-transform:uppercase}
+  .lbl{font:700 10px/1 ui-monospace,monospace;letter-spacing:.18em;text-transform:uppercase;
+       color:var(--muted);margin:18px 0 8px}
+  ul{margin:0;padding:0;list-style:none}
+  ul.fixed li{position:relative;padding:0 0 9px 20px;font-size:14px;color:#e7e0f7}
+  ul.fixed li::before{content:"";position:absolute;left:0;top:8px;width:7px;height:7px;border-radius:50%;background:var(--green)}
+  ul.proof li{position:relative;padding:0 0 7px 20px;font-size:13px;color:var(--muted)}
+  ul.proof li::before{content:"\2713";position:absolute;left:2px;top:0;color:var(--violet);font-weight:700}
+  .head{font-size:18px;font-weight:700;margin:8px 0 6px;line-height:1.4}
+  .note{color:var(--muted);font-size:13px;margin-top:10px}
+  .foot{color:var(--muted);font-size:12.5px;margin-top:26px;text-align:center}
+  .foot a,.sub a{color:var(--violet)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">The update desk</div>
+  <h1>Your newest build, <span class="em">with your licence key</span></h1>
+  <p class="sub">Bought a product, or testing one for us? Paste the key you were given. The licence is
+     verified against its signature and the sale on record, and the newest sealed build of YOUR product
+     comes back with the list of what was fixed. Nothing to buy again, nothing to sign up for.
+     No key yet? <a href="store.html">The store is here</a>.</p>
+
+  <div class="card">
+    <label for="key">Licence key</label>
+    <textarea id="key" placeholder="GHVST-..." spellcheck="false" autocomplete="off"></textarea>
+    <div class="btnrow">
+      <button id="go" type="button">Get my update</button>
+      <a class="ghost dl" href="whats-fixed.html">Read every fix</a>
+    </div>
+    <div class="msg" id="msg"></div>
+  </div>
+
+  <div id="result" style="display:none">
+    <div class="card">
+      <div class="kicker" id="r-prod"></div>
+      <p class="meta" id="r-meta"></p>
+      <div id="r-files"></div>
+      <p class="note">Each link is signed and expires shortly after it is issued. If one stops working,
+         press "Get my update" again - a fresh link costs nothing.</p>
+    </div>
+    <div class="card" id="r-notes" style="display:none">
+      <div class="kicker">What changed in this build</div>
+      <div class="head" id="r-head"></div>
+      <div id="r-fixed"></div>
+      <div id="r-proof"></div>
+      <p class="note" id="r-note"></p>
+    </div>
+  </div>
+
+  <div class="foot">
+    <a href="store.html">Store</a> &middot;
+    <a href="whats-fixed.html">The fix record</a> &middot;
+    <a href="index.html">The GHOST system</a>
+  </div>
+</div>
+
+<script>
+(function () {
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+  function sizeText(bytes) {
+    if (!bytes) return '';
+    var mb = bytes / 1048576;
+    return (mb >= 1 ? mb.toFixed(1) + ' MB' : Math.round(bytes / 1024) + ' KB');
+  }
+  function say(text, bad) {
+    var el = document.getElementById('msg');
+    el.textContent = text || '';
+    el.style.display = text ? 'block' : 'none';
+    el.className = 'msg' + (bad ? ' bad' : '');
+  }
+
+  function render(payload) {
+    document.getElementById('result').style.display = 'block';
+    document.getElementById('r-prod').textContent =
+      (payload.productName || payload.product || '') + ' - the newest sealed build';
+    var meta = [];
+    if (payload.licenseId) meta.push('licence <b>' + esc(payload.licenseId) + '</b>');
+    if (payload.plan) meta.push(esc(payload.plan) + ' plan');
+    if (payload.expiresText) meta.push(esc(payload.expiresText));
+    document.getElementById('r-meta').innerHTML = meta.join(' &middot; ');
+
+    var files = payload.downloads || [];
+    var html = '';
+    files.forEach(function (f) {
+      html += '<div class="file"><div><div class="fname">' + esc(f.name) +
+        (f.recommended ? '<span class="rec">recommended</span>' : '') + '</div>' +
+        '<div class="fmeta">' + esc(sizeText(f.bytes)) +
+        (f.abiNote ? ' &middot; ' + esc(f.abiNote) : '') +
+        '<br><span class="sha">sha256 ' + esc(f.sha256) + '</span></div></div>' +
+        '<a class="dl" href="' + esc(f.url) + '" rel="noopener">Download</a></div>';
+    });
+    document.getElementById('r-files').innerHTML = html ||
+      '<p class="meta">No file is on record for this product yet.</p>';
+
+    var rel = payload.release;
+    if (rel && rel.version) {
+      document.getElementById('r-notes').style.display = 'block';
+      document.getElementById('r-head').textContent =
+        'v' + rel.version + ' - ' + (rel.headline || '');
+      var fixed = '';
+      if (rel.fixed && rel.fixed.length) {
+        fixed = '<div class="lbl">What was fixed</div><ul class="fixed">';
+        rel.fixed.forEach(function (f) { fixed += '<li>' + esc(f) + '</li>'; });
+        fixed += '</ul>';
+      }
+      document.getElementById('r-fixed').innerHTML = fixed;
+      var proof = '';
+      if (rel.proof && rel.proof.length) {
+        proof = '<div class="lbl">How it was proven</div><ul class="proof">';
+        rel.proof.forEach(function (p) { proof += '<li>' + esc(p) + '</li>'; });
+        proof += '</ul>';
+      }
+      document.getElementById('r-proof').innerHTML = proof;
+      document.getElementById('r-note').textContent = rel.note || '';
+    }
+  }
+
+  function run() {
+    var key = (document.getElementById('key').value || '').trim();
+    if (!key) { say('Paste the licence key first - it starts with GHVST-.', true); return; }
+    var btn = document.getElementById('go');
+    btn.disabled = true;
+    say('Checking your licence and finding the newest build...', false);
+    window.GHVST_GUARD.findIssuer().then(function (base) {
+      if (!base) {
+        say('The licence service is unreachable right now. Nothing was charged and nothing ' +
+            'was lost - try again in a minute, or send your key on WhatsApp and the build is sent by hand.', true);
+        return;
+      }
+      return fetch(base + '/update', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ license: key })
+      }).then(function (response) {
+        return response.json().catch(function () { return {}; })
+          .then(function (body) { return { status: response.status, body: body }; });
+      }).then(function (result) {
+        var body = result.body || {};
+        if (result.status === 200 && body.ok) {
+          say('Licence verified. Your build is below.', false);
+          render(body);
+          return;
+        }
+        if (result.status === 403 && body.expired) {
+          say(body.reason || 'That licence has expired. Renew it in the store and the newest ' +
+              'build is yours again - your paid days are never lost.', true);
+          return;
+        }
+        say(body.reason || body.error || 'That key could not be verified. Check it against the ' +
+            'key you were sent, or send it on WhatsApp.', true);
+      });
+    }).catch(function () {
+      say('The update could not be fetched. Check your connection and try again.', true);
+    }).then(function () {
+      btn.disabled = false;
+    });
+  }
+
+  document.getElementById('go').addEventListener('click', run);
+  document.getElementById('key').addEventListener('keydown', function (ev) {
+    if (ev.key === 'Enter' && (ev.ctrlKey || ev.metaKey)) run();
+  });
+  try {
+    var saved = window.localStorage.getItem('ghvst.lastKey');
+    if (saved) document.getElementById('key').value = saved;
+    document.getElementById('go').addEventListener('click', function () {
+      try { window.localStorage.setItem('ghvst.lastKey', document.getElementById('key').value.trim()); } catch (e) {}
+    });
+  } catch (e) {}
+})();
+</script>
+</body>
+</html>
