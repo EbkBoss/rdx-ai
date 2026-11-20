@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-20T16:57:13+00:00",
+  "generated_at": "2026-11-20T18:06:53+00:00",
   "issuer": "https://license.ghvst.dev",
   "issuer_live": "",
   "paypal_handle": "",
@@ -115,12 +115,12 @@
           "capabilities": "everything in TITAN, permanently, with a permanent token that survives reinstall",
           "plans": [
             {
-              "name": "lifetime",
-              "label": "PHANTOM lifetime",
+              "name": "annual",
+              "label": "Annual",
               "price": 499.0,
-              "days": 0,
-              "term": "never expires",
-              "note": "one payment, never expires",
+              "days": 365,
+              "term": "12 months",
+              "note": "365-day licence - renew any time",
               "paypal": "https://www.paypal.com/ncp/payment/2VATAUJMWJZNA"
             }
           ]
@@ -131,12 +131,12 @@
           "capabilities": "everything, forever: endpoint editor, GGUF scout, every future feature",
           "plans": [
             {
-              "name": "lifetime",
-              "label": "MYTHIC lifetime",
+              "name": "annual",
+              "label": "Annual",
               "price": 999.0,
-              "days": 0,
-              "term": "never expires",
-              "note": "one payment, never expires",
+              "days": 365,
+              "term": "12 months",
+              "note": "365-day licence - renew any time",
               "paypal": "https://www.paypal.com/ncp/payment/FDLTPZMER7T66"
             }
           ]
@@ -171,17 +171,6 @@
           "paypal": "https://www.paypal.com/ncp/payment/U36JU7BR93GCU",
           "monthly_equivalent": 9.78082191780822,
           "default": false
-        },
-        {
-          "name": "lifetime",
-          "label": "Lifetime",
-          "price": 299.0,
-          "days": 0,
-          "term": "never expires",
-          "note": "one payment, never expires",
-          "paypal": "https://www.paypal.com/ncp/payment/F6YU5SSZGQBQ6",
-          "monthly_equivalent": 299.0,
-          "default": false
         }
       ],
       "tiers": [],
@@ -213,17 +202,6 @@
           "note": "2 months free - 365-day licence, renew any time",
           "paypal": "https://www.paypal.com/ncp/payment/Z2LULUHUAC5ZC",
           "monthly_equivalent": 4.8493150684931505,
-          "default": false
-        },
-        {
-          "name": "lifetime",
-          "label": "Lifetime",
-          "price": 149.0,
-          "days": 0,
-          "term": "never expires",
-          "note": "one payment, never expires",
-          "paypal": "https://www.paypal.com/ncp/payment/Q5WLM3CUTN9DE",
-          "monthly_equivalent": 149.0,
           "default": false
         }
       ],
@@ -257,17 +235,6 @@
           "paypal": "https://www.paypal.com/ncp/payment/Z39S9YZD6GL4A",
           "monthly_equivalent": 16.356164383561644,
           "default": false
-        },
-        {
-          "name": "lifetime",
-          "label": "Lifetime",
-          "price": 499.0,
-          "days": 0,
-          "term": "never expires",
-          "note": "one payment, never expires",
-          "paypal": "https://www.paypal.com/ncp/payment/V4PRY4TFPU2AU",
-          "monthly_equivalent": 499.0,
-          "default": false
         }
       ],
       "tiers": [],
@@ -299,17 +266,6 @@
           "note": "2.5 months free - 365-day licence, renew any time",
           "paypal": "https://www.paypal.com/ncp/payment/UW7LV8BZL2FMA",
           "monthly_equivalent": 20.465753424657535,
-          "default": false
-        },
-        {
-          "name": "lifetime",
-          "label": "Lifetime",
-          "price": 499.0,
-          "days": 0,
-          "term": "never expires",
-          "note": "one payment, never expires",
-          "paypal": "https://www.paypal.com/ncp/payment/UVFX98243BBHS",
-          "monthly_equivalent": 499.0,
           "default": false
         }
       ],
@@ -343,17 +299,6 @@
           "paypal": "https://www.paypal.com/ncp/payment/TFBBSZ57FTM58",
           "monthly_equivalent": 12.246575342465754,
           "default": false
-        },
-        {
-          "name": "lifetime",
-          "label": "Lifetime",
-          "price": 399.0,
-          "days": 0,
-          "term": "never expires",
-          "note": "one payment, never expires",
-          "paypal": "https://www.paypal.com/ncp/payment/8AKFFXJUKRTRS",
-          "monthly_equivalent": 399.0,
-          "default": false
         }
       ],
       "tiers": [],
@@ -386,17 +331,6 @@
           "paypal": "https://www.paypal.com/ncp/payment/XRYZ4FPTTXABY",
           "monthly_equivalent": 18.0,
           "default": false
-        },
-        {
-          "name": "lifetime",
-          "label": "Lifetime",
-          "price": 549.0,
-          "days": 0,
-          "term": "never expires",
-          "note": "one payment, never expires",
-          "paypal": "https://www.paypal.com/ncp/payment/JEPEW9MVKAZ2Y",
-          "monthly_equivalent": 549.0,
-          "default": false
         }
       ],
       "tiers": [],
@@ -428,17 +362,6 @@
           "note": "Capture + DevKit, 2 months free - 365-day licence, renew any time",
           "paypal": "https://www.paypal.com/ncp/payment/TTZS4L3BCBXBA",
           "monthly_equivalent": 24.575342465753426,
-          "default": false
-        },
-        {
-          "name": "lifetime",
-          "label": "Lifetime",
-          "price": 799.0,
-          "days": 0,
-          "term": "never expires",
-          "note": "one payment, never expires",
-          "paypal": "https://www.paypal.com/ncp/payment/7R3JC67FXZ3H4",
-          "monthly_equivalent": 799.0,
           "default": false
         }
       ],
@@ -508,17 +431,6 @@
           "paypal": "https://www.paypal.com/ncp/payment/FRLV3WPVMJF3S",
           "monthly_equivalent": 16.356164383561644,
           "default": false
-        },
-        {
-          "name": "lifetime",
-          "label": "Perpetual",
-          "price": 499.0,
-          "days": 0,
-          "term": "never expires",
-          "note": "one payment, never expires - the headline licence",
-          "paypal": "https://www.paypal.com/ncp/payment/UYDKHF9CPDCB6",
-          "monthly_equivalent": 499.0,
-          "default": false
         }
       ],
       "tiers": [
@@ -544,15 +456,6 @@
               "term": "12 months",
               "note": "one payment, one year of every release - 365-day licence, renew any time",
               "paypal": "https://www.paypal.com/ncp/payment/FRLV3WPVMJF3S"
-            },
-            {
-              "name": "lifetime",
-              "label": "Perpetual",
-              "price": 499.0,
-              "days": 0,
-              "term": "never expires",
-              "note": "one payment, never expires - the headline licence",
-              "paypal": "https://www.paypal.com/ncp/payment/UYDKHF9CPDCB6"
             }
           ]
         },
@@ -562,12 +465,12 @@
           "capabilities": "everything in Standard, permanently, plus every future release of RDX for life - the forever tier",
           "plans": [
             {
-              "name": "lifetime",
-              "label": "MYTHIC lifetime",
+              "name": "annual",
+              "label": "Annual",
               "price": 999.0,
-              "days": 0,
-              "term": "never expires",
-              "note": "one payment, never expires - every future release included",
+              "days": 365,
+              "term": "12 months",
+              "note": "365-day licence - renew any time",
               "paypal": "https://www.paypal.com/ncp/payment/7DWT76LM4ZKBY"
             }
           ]
@@ -585,15 +488,6 @@
               "term": "12 months",
               "note": "3 machines, priority support, every release for a year - 365-day licence, renew any time",
               "paypal": "https://www.paypal.com/ncp/payment/5YVRDVF8A644J"
-            },
-            {
-              "name": "lifetime",
-              "label": "Pro perpetual",
-              "price": 3749.0,
-              "days": 0,
-              "term": "never expires",
-              "note": "3 machines, never expires - 2.5 years of Pro annual paid once",
-              "paypal": "https://www.paypal.com/ncp/payment/H27R4W7W8W8U6"
             }
           ]
         },
@@ -623,14 +517,14 @@
       "app": "GHVST_BROWSER_PC",
       "plans": [
         {
-          "name": "lifetime",
-          "label": "Lifetime",
+          "name": "annual",
+          "label": "Annual",
           "price": 79.0,
-          "days": 0,
-          "term": "never expires",
-          "note": "one payment, never expires",
+          "days": 365,
+          "term": "12 months",
+          "note": "365-day licence - renew any time",
           "paypal": "https://www.paypal.com/ncp/payment/K3QPTFJQYFYK2",
-          "monthly_equivalent": 79.0,
+          "monthly_equivalent": 6.493150684931507,
           "default": true
         }
       ],
@@ -644,14 +538,14 @@
       "app": "MVRK",
       "plans": [
         {
-          "name": "lifetime",
-          "label": "Lifetime",
+          "name": "annual",
+          "label": "Annual",
           "price": 59.0,
-          "days": 0,
-          "term": "never expires",
-          "note": "one payment, never expires",
+          "days": 365,
+          "term": "12 months",
+          "note": "365-day licence - renew any time",
           "paypal": "https://www.paypal.com/ncp/payment/6G23LVV9URXPQ",
-          "monthly_equivalent": 59.0,
+          "monthly_equivalent": 4.8493150684931505,
           "default": true
         }
       ],
