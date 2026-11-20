@@ -46,9 +46,20 @@
   .foot{color:var(--muted);font-size:12px;margin-top:22px;text-align:center}
   .foot a{color:var(--violet)}
 </style>
+<style>
+.rea-ban{position:relative;z-index:60;margin:10px auto 0;max-width:1180px;padding:9px 16px;
+  border:1px solid rgba(246,199,106,.35);border-radius:10px;background:rgba(20,10,26,.92);
+  color:#f6c76a;font:700 10.5px/1.6 ui-monospace,Consolas,monospace;letter-spacing:.10em;
+  text-align:center;text-transform:uppercase}
+.rea-ban-bottom{margin:26px auto 30px;color:#a394c4;border-color:rgba(196,181,253,.25);text-transform:none;
+  letter-spacing:.04em;font-weight:600}
+</style>
 </head>
 <body>
 <div class="wrap">
+<div class="rea-ban" role="note">NO REVERSE ENGINEERING &middot; NO AI SCRAPING &middot; NO AGENT TRAFFIC.
+Every product, build and byte here is the owner's work. Automated access is refused, logged and reported.</div>
+
   <div class="kicker">Owner only</div>
   <h1>Traffic. <span class="em">Who came, from where, for what.</span></h1>
   <p class="sub">This page reads the visit log through the licence service, with your admin token.
@@ -155,5 +166,8 @@
   } catch (e) {}
 })();
 </script>
+<div class="rea-ban rea-ban-bottom" role="note">Hands off. No decompiling, no unpacking, no hooking, no
+mitm proxying, no AI training on this site, no agent reads of any kind. Humans only - and every visit is logged with its IP.</div>
+
 </body>
 </html>

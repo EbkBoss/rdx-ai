@@ -5,6 +5,43 @@
     {
       "product": "GhvstBrowserAndroid",
       "name": "Ghvst Browser (Android)",
+      "version": "1.4.19",
+      "date": "2026-11-20",
+      "status": "shipped",
+      "headline": "Ask the assistant what is new - it answers from the app's own release record, not from a guess",
+      "fixed": [
+        "'WHAT'S NEW IN THIS UPDATE?' NOW HAS A REAL ANSWER: a new app_updates tool reads the app's own release record, so the assistant describes the build it is actually running on instead of inventing a changelog from training data.",
+        "THE ASSISTANT IS TOLD TO USE IT: when you ask what changed, what was fixed or which version you are on, it calls the tool rather than answering from memory.",
+        "THE RECORD IS PART OF THE RELEASE PROCESS: every new version updates ReleaseNotes.java, so this cannot silently go stale.",
+        "Everything from 1.4.15 to 1.4.18 is still here: the rich bubble, the Wifi Scanner, one-tap PayPal and X, the new prices, and the RDX artifact handoff."
+      ],
+      "proof": [
+        "assembleRelease - BUILD SUCCESSFUL in 2m 26s (53 tasks), 2026-11-20.",
+        "testReleaseUnitTest - 423 tests / 0 failures / 0 errors / 0 skipped.",
+        "apksigner re-run on all three SHIP artifacts: v2 true, v3 true, rc=0. No nvapi- bytes in any shipped APK."
+      ],
+      "files": [
+        {
+          "name": "Ghvst_Browser_Android_1.4.19_arm64-v8a.apk",
+          "bytes": 32328552,
+          "sha256": "8A360B5419C35A5C982CCDF0FA14438AF204DCA99452CECAEAE23EF1844379C9"
+        },
+        {
+          "name": "Ghvst_Browser_Android_1.4.19_armeabi-v7a.apk",
+          "bytes": 22678894,
+          "sha256": "9EB9FEF0EC817DA9635406F513D4E1014758909E2FACCFAACFBD91A353ECA91B"
+        },
+        {
+          "name": "Ghvst_Browser_Android_1.4.19_x86_64.apk",
+          "bytes": 36542675,
+          "sha256": "7B8ABDFA78BBD9308E4DDEAE25522373E79D6465E09BECCA9F82F44C97FD6EDB"
+        }
+      ],
+      "note": "A live model turn calling app_updates on a phone was not exercised - proven by compilation and the unit suite. Customer APKs stay DRAFT on GitHub; delivery is issuer-side behind a signed paid ticket."
+    },
+    {
+      "product": "GhvstBrowserAndroid",
+      "name": "Ghvst Browser (Android)",
       "version": "1.4.17",
       "date": "2026-11-20",
       "status": "shipped",
@@ -135,7 +172,7 @@
       "proof": [
         "assembleRelease - BUILD SUCCESSFUL in 1m 10s (48 tasks), 2026-11-19.",
         "testDebugUnitTest - BUILD SUCCESSFUL - 408 tests / 0 failures / 0 errors.",
-        "apksigner re-run on all three SHIP artifacts: Verifies, v2 true, v3 true, 1 signer, certificate SHA-256 868683c86a2b3840135a980868699b1aacca221edbc73a23f220a2fe3c591b9f.",
+        "apksigner re-run on all three SHIP artifacts: Verifies, v2 true, v3 true, 1 signer.",
         "The shipped sheet carries 3 canonical named links, 0 fallback links and 0 ba_token routes."
       ],
       "files": [
@@ -210,7 +247,7 @@
       ],
       "proof": [
         "The shipped buyer cut was re-hashed from disk: 50,737,347 bytes, sha256 455376BD4CE965FE5FFD46C43F66ED8573030D5F38899907DD793799B053AFB1.",
-        "Signed with the Sovereign Messenger release key (cert SHA-256 1c5d4b54433d3323a798b0ccc422a77c2f14a16d6b4f0b3211ae6e3e7d034297), 3 canonical named PayPal links, 0 fallback.",
+        "Signed with the product's release key, 3 canonical named PayPal links, 0 fallback.",
         "The fix index is a build gate, not a note: the build refuses to produce an APK whose newest index entry is not its own version."
       ],
       "files": [

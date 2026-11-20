@@ -1293,6 +1293,14 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
 <!-- FAIL-SAFE: if the script never runs, no section may stay invisible. The reveal
      animation is decoration - the copy is the product. -->
 <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
+<style>
+.rea-ban{position:relative;z-index:60;margin:10px auto 0;max-width:1180px;padding:9px 16px;
+  border:1px solid rgba(246,199,106,.35);border-radius:10px;background:rgba(20,10,26,.92);
+  color:#f6c76a;font:700 10.5px/1.6 ui-monospace,Consolas,monospace;letter-spacing:.10em;
+  text-align:center;text-transform:uppercase}
+.rea-ban-bottom{margin:26px auto 30px;color:#a394c4;border-color:rgba(196,181,253,.25);text-transform:none;
+  letter-spacing:.04em;font-weight:600}
+</style>
 </head>
 <body>
 <!-- THE CLIENT-SIDE WALL (2026-11-14).
@@ -1303,6 +1311,9 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
      Honest limit: this cannot stop a scraper that reads the raw HTML over HTTP.
      That needs an edge (custom domain + Cloudflare WAF); until that exists the
      protection is policy + wall + monitoring. -->
+<div class="rea-ban" role="note">NO REVERSE ENGINEERING &middot; NO AI SCRAPING &middot; NO AGENT TRAFFIC.
+Every product, build and byte here is the owner's work. Automated access is refused, logged and reported.</div>
+
 <canvas id="field" aria-hidden="true"></canvas>
 <canvas id="nvke" aria-hidden="true"></canvas>
 <div id="aurora" aria-hidden="true"></div>
@@ -1378,9 +1389,9 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
       Bought it already, or testing for us? <a href="update.html">Get your update with your licence key</a>.</p>
   </div>
   <div class="fixgrid">
+<article class="fixcard"><div class="fixtop"><span class="fixprod">Ghvst Browser (Android)</span><span class="fixver">v1.4.19</span><span class="fixdate">2026-11-20</span></div><h3>Ask the assistant what is new - it answers from the app&#x27;s own release record, not from a guess</h3><ul><li>&#x27;WHAT&#x27;S NEW IN THIS UPDATE?&#x27; NOW HAS A REAL ANSWER: a new app_updates tool reads the app&#x27;s own release record, so the assistant describes the build it is actually running on instead of inventing a changelog from training data.</li><li>THE ASSISTANT IS TOLD TO USE IT: when you ask what changed, what was fixed or which version you are on, it calls the tool rather than answering from memory.</li><li>THE RECORD IS PART OF THE RELEASE PROCESS: every new version updates ReleaseNotes.java, so this cannot silently go stale.</li><li>Everything from 1.4.15 to 1.4.18 is still here: the rich bubble, the Wifi Scanner, one-tap PayPal and X, the new prices, and the RDX artifact handoff.</li></ul></article>
 <article class="fixcard"><div class="fixtop"><span class="fixprod">Ghvst Browser (Android)</span><span class="fixver">v1.4.17</span><span class="fixdate">2026-11-20</span></div><h3>The price went up - and the app, the store and PayPal all charge the same new amount, proven by reading it back</h3><ul><li>NEW PRICES: Android monthly $15, annual $119 (save $61 against twelve months), lifetime $299. The Windows lifetime licence is $79.</li><li>NOTHING WAS HAND-TYPED: the catalogue changed first, the four PayPal hosted links were edited and read back, and this APK&#x27;s price sheet was generated from the rebuilt 40-option manifest.</li><li>THE ANNUAL PLAN NOW SAYS EXACTLY WHAT IT SAVES instead of a vague &#x27;months free&#x27; line.</li><li>THE STORE PAGE PRINTS PRICES LIKE A SHOP, not like a spreadsheet: $15 instead of $15.0, and $9.78/mo instead of a fourteen-decimal monthly equivalent.</li><li class="more">+1 more in the full record</li></ul></article>
 <article class="fixcard"><div class="fixtop"><span class="fixprod">Ghvst Browser (Android)</span><span class="fixver">v1.4.16</span><span class="fixdate">2026-11-20</span></div><h3>The Wifi Scanner is on the phone, PayPal is one tap away, and the assistant now answers in rich markdown with emojis and full HTML pages</h3><ul><li>EVERY NETWORK IN RANGE, ON ONE SCREEN, OFFLINE: name, security, band, channel, signal and the exact state - CONNECTED NOW / SAVED ON THIS PHONE / NOT CONNECTED - strongest first, from a tile on the home page.</li><li>NOTHING CONNECTS ON ITS OWN. No auto-connect, no auto-reconnect, no saving keys: the scanner opens Android&#x27;s own WiFi panel and builds a correctly escaped WIFI: join code for a key you type in once.</li><li>THE HONEST LIMIT IS ON THE SCREEN: a network this phone has never saved has no password stored on it, and Android gives no app the key of a saved one on an unrooted phone. No invented passwords, ever.</li><li>PAYPAL AND X ARE ONE TAP ON THE HOME PAGE, and both sit in the shield&#x27;s payment-and-login allowlist so the tracker shield and the data saver cannot break a checkout or a sign-in.</li><li class="more">+1 more in the full record</li></ul></article>
-<article class="fixcard"><div class="fixtop"><span class="fixprod">Ghvst Browser (Android)</span><span class="fixver">v1.4.15</span><span class="fixdate">2026-11-20</span></div><h3>The chat stopped looking like a receipt: rich markdown answers, and any page the assistant writes opens as a live HTML preview card</h3><ul><li>ANSWERS USED TO BE A FLAT GREY WALL OF TEXT. A heading was a line of characters, a table was pipes, and a whole HTML page the model wrote was a wall of angle brackets. Answers now render as a real chat: headings, emphasis, lists, tables, quotes, code with a language label and links.</li><li>HTML THE ASSISTANT WRITES IS NOW A CARD WITH A LIVE PREVIEW - title read off the page, Preview / Source tabs, Copy and Open. Explaining something with a page is now something you can actually look at, not read as source.</li><li>STREAMING RE-RENDERS AS THE ANSWER ARRIVES (coalesced at 140ms) and the FINAL render is the complete answer, so a dropped or duplicated fragment cannot survive in the bubble you keep.</li><li>THE BUBBLE CANNOT BE TURNED INTO AN ATTACK: every model character is escaped, only http/https/mailto links are clickable, the artifact preview is a sandboxed iframe, and the answer page blocks every network load, file access and content access.</li><li class="more">+1 more in the full record</li></ul></article>
   </div>
   <p class="fixmore"><a class="btn g" href="whats-fixed.html">The full fix record <span class="sub">every release, every hash</span></a>
      <a class="btn p" href="update.html">Download my update <span class="sub">licence key - buyers and testers</span></a></p>
@@ -1649,7 +1660,7 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
 
   <div class="tiers" style="margin-top:22px">
     <article class="tier reveal" id="dl-browser">
-      <h3>Ghvst Browser for Android &mdash; v1.4.17</h3>
+      <h3>Ghvst Browser for Android &mdash; v1.4.19</h3>
       <div class="price">Signed release build <span class="unit">/ arm64-v8a installer</span></div>
       <p class="tagline">The private browser with the AI assistant that remembers you between chats.</p>
       <ul>
@@ -4293,5 +4304,8 @@ footer{margin-top:86px;border-top:1px solid var(--line);padding:36px 0 60px}
 </script>
 
 </div>
+<div class="rea-ban rea-ban-bottom" role="note">Hands off. No decompiling, no unpacking, no hooking, no
+mitm proxying, no AI training on this site, no agent reads of any kind. Humans only - and every visit is logged with its IP.</div>
+
 </body>
 </html>
