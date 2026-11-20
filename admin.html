@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Owner admin - traffic</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23f6c76a'>G</text></svg>">
+<script src="siteguard.js"></script>
+<style>
+  :root{--bg:#08050f;--panel:#120d1d;--panel2:#181122;--line:#2a1f3d;--text:#f4efff;
+        --muted:#a394c4;--gold:#f6c76a;--violet:#c4b5fd;--green:#6ee7b7;--amber:#fbbf24;}
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:radial-gradient(900px 500px at 50% -10%,rgba(122,86,190,.20),transparent 60%),var(--bg);
+       color:var(--text);font:15px/1.6 "Segoe UI",system-ui,-apple-system,sans-serif;min-height:100vh}
+  .wrap{width:100%;max-width:1100px;margin:0 auto;padding:40px 20px 70px}
+  .kicker{color:var(--muted);font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:700}
+  h1{font-size:clamp(26px,4vw,40px);margin:10px 0 8px;letter-spacing:-.02em}
+  h1 .em{color:var(--gold)}
+  .sub{color:var(--muted);font-size:13.5px;margin:0 0 22px;max-width:64ch}
+  .card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);
+        border-radius:16px;padding:20px;margin:0 0 16px}
+  input{width:100%;background:#0b0713;color:var(--text);border:1px solid var(--line);border-radius:10px;
+        padding:12px 14px;font:13px/1.5 ui-monospace,Consolas,monospace;outline:none}
+  input:focus{border-color:var(--violet)}
+  button{cursor:pointer;border:0;border-radius:10px;padding:11px 18px;margin-top:12px;
+        font:700 13px/1 inherit;background:linear-gradient(180deg,#f8d07c,#e8b84f);color:#201603}
+  button[disabled]{opacity:.5}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
+  .stat{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);
+        border-radius:14px;padding:16px}
+  .stat b{display:block;font-size:30px;color:var(--gold);line-height:1.1}
+  .stat span{color:var(--muted);font-size:12px}
+  table{width:100%;border-collapse:collapse;font:12px/1.6 ui-monospace,Consolas,monospace}
+  th{color:var(--gold);text-align:left;font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+     padding:8px 10px;border-bottom:1px solid var(--line)}
+  td{padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.05);color:#ded4f2;vertical-align:top}
+  td.ip{color:var(--green)}
+  td.agent{color:var(--muted);max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .msg{display:none;margin-top:12px;color:var(--amber);font-size:13.5px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+  .chip{border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:12px;color:var(--muted)}
+  .chip b{color:var(--text)}
+  #data{display:none}
+  .foot{color:var(--muted);font-size:12px;margin-top:22px;text-align:center}
+  .foot a{color:var(--violet)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">Owner only</div>
+  <h1>Traffic. <span class="em">Who came, from where, for what.</span></h1>
+  <p class="sub">This page reads the visit log through the licence service, with your admin token.
+     The token never leaves your machine except as a header to your own issuer, and the log itself
+     is never published. Nobody else can read this - a wrong token gets a flat 403.</p>
+
+  <div class="card">
+    <input id="token" type="password" placeholder="Admin token (D:\GHOST_SYSTEM\SECURE\ghvst-license\admin_token.txt)"
+           spellcheck="false" autocomplete="off">
+    <button id="go" type="button">Open the panel</button>
+    <div class="msg" id="msg"></div>
+  </div>
+
+  <div id="data">
+    <div class="stats">
+      <div class="stat"><b id="s-total">0</b><span>Total events</span></div>
+      <div class="stat"><b id="s-ips">0</b><span>Unique IPs</span></div>
+      <div class="stat"><b id="s-updates">0</b><span>Licence-key updates</span></div>
+      <div class="stat"><b id="s-claims">0</b><span>Claims / purchases</span></div>
+    </div>
+    <div class="card"><div class="kicker">By product</div><div class="chips" id="products"></div></div>
+    <div class="card">
+      <div class="kicker">Newest first</div>
+      <table>
+        <thead><tr><th>When</th><th>IP</th><th>Kind</th><th>Product</th><th>Licence</th><th>Agent</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="foot"><a href="index.html">Back to the store</a> &middot; <a href="update.html">The update desk</a></div>
+</div>
+
+<script>
+(function () {
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+  function when(ts) {
+    try { return new Date(ts * 1000).toLocaleString('en-GB', {hour12:false}); }
+    catch (e) { return ts; }
+  }
+  function say(t) {
+    var el = document.getElementById('msg');
+    el.textContent = t || '';
+    el.style.display = t ? 'block' : 'none';
+  }
+
+  function render(body) {
+    document.getElementById('data').style.display = 'block';
+    document.getElementById('s-total').textContent = body.total || 0;
+    document.getElementById('s-ips').textContent = body.uniqueIps || 0;
+    var kinds = body.byKind || {};
+    document.getElementById('s-updates').textContent = kinds.update || 0;
+    document.getElementById('s-claims').textContent = (kinds.claim || 0) + (kinds.purchase || 0);
+    var chips = '';
+    Object.keys(body.byProduct || {}).forEach(function (p) {
+      chips += '<span class="chip">' + esc(p) + ' <b>' + esc(body.byProduct[p]) + '</b></span>';
+    });
+    document.getElementById('products').innerHTML = chips || '<span class="chip">No product events yet</span>';
+    var rows = '';
+    (body.recent || []).forEach(function (r) {
+      rows += '<tr><td>' + esc(when(r.at)) + '</td><td class="ip">' + esc(r.ip || '') + '</td><td>' +
+        esc(r.kind || '') + '</td><td>' + esc(r.product || '') + '</td><td>' + esc(r.licenseId || '') +
+        '</td><td class="agent" title="' + esc(r.agent || '') + '">' + esc(r.agent || '') + '</td></tr>';
+    });
+    document.getElementById('rows').innerHTML = rows ||
+      '<tr><td colspan="6">No visits recorded yet.</td></tr>';
+  }
+
+  function run() {
+    var token = (document.getElementById('token').value || '').trim();
+    if (!token) { say('Paste the admin token first.'); return; }
+    var btn = document.getElementById('go');
+    btn.disabled = true;
+    say('');
+    window.GHVST_GUARD.findIssuer().then(function (base) {
+      if (!base) { say('The licence service is unreachable right now.'); return; }
+      return fetch(base + '/admin/traffic', { headers: { 'X-Admin-Token': token } })
+        .then(function (response) {
+          return response.json().catch(function () { return {}; })
+            .then(function (body) { return { status: response.status, body: body }; });
+        })
+        .then(function (result) {
+          if (result.status === 200 && result.body.ok) { render(result.body); return; }
+          say(result.status === 403 ? 'That token is not the admin token.' : 'The panel could not be read.');
+        });
+    }).catch(function () { say('The panel could not be loaded. Check your connection.'); })
+      .then(function () { btn.disabled = false; });
+  }
+
+  document.getElementById('go').addEventListener('click', run);
+  document.getElementById('token').addEventListener('keydown', function (ev) {
+    if (ev.key === 'Enter') run();
+  });
+  try {
+    var saved = window.localStorage.getItem('ghvst.adminToken');
+    if (saved) document.getElementById('token').value = saved;
+    document.getElementById('go').addEventListener('click', function () {
+      try { window.localStorage.setItem('ghvst.adminToken', document.getElementById('token').value.trim()); } catch (e) {}
+    });
+  } catch (e) {}
+})();
+</script>
+</body>
+</html>
