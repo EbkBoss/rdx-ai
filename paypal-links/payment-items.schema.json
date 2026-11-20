@@ -1,0 +1,143 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ebkboss.github.io/rdx-ai/paypal-links/payment-items.schema.json",
+  "title": "Ghost/RedX Ai commerce manifest - 40 canonical purchase options",
+  "description": "The sole consumable commerce manifest for RedX Ai products. Every option is identified by (product_id, tier, plan). tier is the empty string for a product that sells no tiers. A manifest is consumable ONLY when status is exactly 'complete' and items has exactly 40 entries.",
+  "type": "object",
+  "required": ["status", "generated_at", "merchant", "currency", "items"],
+  "additionalProperties": false,
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["draft", "incomplete", "complete"],
+      "description": "Only 'complete' with exactly 40 items authorises production checkout migration."
+    },
+    "generated_at": {
+      "type": "string",
+      "minLength": 20,
+      "description": "ISO-8601 timestamp of manifest generation."
+    },
+    "merchant": {
+      "type": "object",
+      "required": ["display_name", "paypal_account"],
+      "additionalProperties": false,
+      "properties": {
+        "display_name": {"type": "string", "const": "RedX Ai"},
+        "paypal_account": {"type": "string", "minLength": 3},
+        "site_url": {"type": "string"},
+        "support_contact": {"type": "string"}
+      }
+    },
+    "currency": {
+      "type": "string",
+      "const": "USD",
+      "description": "Every option in the canonical catalogue is priced in USD."
+    },
+    "items": {
+      "type": "array",
+      "minItems": 40,
+      "maxItems": 40,
+      "description": "Exactly the 40 canonical catalogue options, one entry each.",
+      "items": {
+        "type": "object",
+        "required": [
+          "slug", "product_id", "tier", "plan", "name", "description",
+          "price", "currency", "days", "billing_type", "checkout_url",
+          "hosted_id", "paypal_plan_id", "frequency", "qr",
+          "button_stacked", "button_single", "license_days"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "slug": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "description": "Stable convenience key; the tuple (product_id, tier, plan) remains authoritative."
+          },
+          "product_id": {"type": "string", "minLength": 2},
+          "tier": {
+            "type": "string",
+            "description": "Tier id, or the empty string for a product that sells no tiers."
+          },
+          "plan": {
+            "type": "string",
+            "enum": ["monthly", "annual", "lifetime"]
+          },
+          "name": {"type": "string", "minLength": 3},
+          "description": {"type": "string", "minLength": 3},
+          "price": {"type": "number", "exclusiveMinimum": 0},
+          "currency": {"type": "string", "const": "USD"},
+          "days": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Licence duration in days. 0 means perpetual (never expires)."
+          },
+          "license_days": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "The licence duration the issuer must mint for this option."
+          },
+          "billing_type": {
+            "type": "string",
+            "enum": ["subscription", "one_time", "contract"],
+            "description": "subscription = a real recurring PayPal plan; one_time = a single charge, never expires for lifetime; contract = scoped, invoiced."
+          },
+          "checkout_url": {
+            "type": "string",
+            "pattern": "^https://",
+            "description": "The exact buyer-facing PayPal checkout URL for this option."
+          },
+          "hosted_id": {
+            "type": "string",
+            "minLength": 4,
+            "description": "PayPal hosted id. Payment links use the hosted payment-link id; subscriptions use the hosted subscribe id (ba_token / plan id) that resolves the same option."
+          },
+          "paypal_plan_id": {
+            "type": ["string", "null"],
+            "description": "The real PayPal subscription plan id (P-...) for billing_type=subscription; null for one_time and contract."
+          },
+          "frequency": {
+            "type": "string",
+            "enum": ["monthly", "annual", "none"],
+            "description": "Billing frequency. 'none' for one-time and contract options."
+          },
+          "qr": {
+            "type": "object",
+            "required": ["file", "decoded_payload"],
+            "additionalProperties": false,
+            "properties": {
+              "file": {"type": "string", "minLength": 3},
+              "decoded_payload": {
+                "type": "string",
+                "minLength": 8,
+                "description": "The EXACT checkout_url of this option, decoded from the QR image. A filename is never evidence."
+              },
+              "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+            }
+          },
+          "button_stacked": {
+            "type": "object",
+            "required": ["file", "hosted_id", "kind"],
+            "additionalProperties": false,
+            "properties": {
+              "file": {"type": "string", "minLength": 3},
+              "hosted_id": {"type": "string", "minLength": 4},
+              "kind": {"type": "string", "const": "stacked"},
+              "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+            }
+          },
+          "button_single": {
+            "type": "object",
+            "required": ["file", "hosted_id", "kind"],
+            "additionalProperties": false,
+            "properties": {
+              "file": {"type": "string", "minLength": 3},
+              "hosted_id": {"type": "string", "minLength": 4},
+              "kind": {"type": "string", "const": "single"},
+              "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+            }
+          }
+        }
+      }
+    }
+  }
+}

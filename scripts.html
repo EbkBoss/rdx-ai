@@ -1,118 +1,236 @@
 <!doctype html>
 <html lang="en">
 <head>
+<meta name="robots" content="noai,noimageai,noindexai">
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>MVRK Script Store</title>
 <meta name="description" content="Named Luau scripts, validated in the MVRK runtime and pinned by SHA-256.">
 <link rel="stylesheet" href="siteguard.css">
-<script src="siteguard.js"></script>
 <style>
-:root{color-scheme:dark;--bg:#07050e;--panel:rgba(24,17,38,.72);--line:rgba(196,181,253,.16);
-      --text:#f4efff;--muted:#a394c4;--gold:#f6c76a;--violet:#c4b5fd;--green:#6ee7b7}
+:root{color-scheme:dark}
 *{box-sizing:border-box}
-body{margin:0;color:var(--text);font:15px/1.6 "Segoe UI",system-ui,sans-serif;min-height:100vh;
-  background:radial-gradient(1000px 520px at 12% -10%,rgba(174,117,255,.20),transparent 60%),
-             radial-gradient(800px 460px at 92% 0%,rgba(246,199,106,.12),transparent 55%),var(--bg)}
-.wrap{max-width:1180px;margin:0 auto;padding:32px 22px 70px}
-.topnav{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px}
-.topnav a{color:var(--muted);text-decoration:none;font-size:12px;border:1px solid var(--line);
-  border-radius:999px;padding:5px 13px}
-.topnav a:hover{color:var(--text);border-color:var(--violet)}
-.eyebrow{color:var(--gold);font:700 11px/1 ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase}
-h1{font-size:clamp(30px,4.6vw,44px);margin:10px 0 8px;letter-spacing:-.02em}
-h1 .em{color:var(--gold)}
-.lede{color:var(--muted);font-size:14px;max-width:74ch;margin:0 0 20px}
-.banner{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;
-  background:linear-gradient(120deg,rgba(246,199,106,.12),rgba(174,117,255,.10));
-  border:1px solid rgba(246,199,106,.28);border-radius:18px;padding:20px 22px;margin-bottom:20px;
-  box-shadow:0 20px 50px rgba(0,0,0,.35)}
-.banner b{color:var(--text);font-size:17px}
-.cta{display:inline-block;background:linear-gradient(180deg,#f8d07c,#e8b84f);color:#201603;font-weight:800;
-  padding:12px 22px;border-radius:12px;text-decoration:none;font-size:14px;
-  box-shadow:0 12px 26px rgba(246,199,106,.22)}
-.cta:hover{filter:brightness(1.07)}
-.controls{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 18px}
-.controls input{flex:1;min-width:230px;background:rgba(8,5,15,.75);color:var(--text);
-  border:1px solid var(--line);border-radius:12px;padding:12px 14px;font:14px/1.4 inherit;outline:none}
-.controls input:focus{border-color:var(--violet)}
-.controls select{background:rgba(8,5,15,.75);color:var(--text);border:1px solid var(--line);
-  border-radius:12px;padding:12px 14px;font:14px/1.4 inherit}
-.count{color:var(--muted);font-size:12.5px;margin:0 0 14px}
-.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(330px,1fr))}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;
-  display:flex;flex-direction:column;gap:10px;backdrop-filter:blur(14px);
-  box-shadow:0 18px 44px rgba(0,0,0,.35);transition:transform .18s ease,border-color .18s ease}
-.card:hover{transform:translateY(-3px);border-color:rgba(246,199,106,.4)}
-.cardtop{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.card h2{font-size:17px;margin:0;letter-spacing:-.01em}
-.card p{margin:0;color:var(--muted);font-size:13px}
-.ok{color:var(--green);font-size:10.5px;white-space:nowrap;font-weight:700}
+body{margin:0;background:#08080c;color:#d9d7e0;font-family:"Segoe UI",Inter,system-ui,sans-serif;line-height:1.5}
+.wrap{max-width:1100px;margin:0 auto;padding:38px 22px 70px}
+.eyebrow{color:#c9a227;font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:700}
+h1{font-size:34px;margin:10px 0 6px;color:#f2f0f6;letter-spacing:-.01em}
+.lede{color:#9a97a8;font-size:15px;max-width:70ch;margin:0 0 26px}
+.banner{display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between;
+  background:linear-gradient(120deg,#14121c,#0d0f16);border:1px solid #2a3040;border-radius:14px;padding:20px 22px;margin-bottom:26px}
+.banner b{color:#f2f0f6}
+.cta{display:inline-block;background:linear-gradient(135deg,#e9c84a,#c9a227);color:#17140a;font-weight:700;
+  padding:11px 20px;border-radius:9px;text-decoration:none;font-size:14px}
+.cta:hover{filter:brightness(1.08)}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(320px,1fr))}
+.card{background:#0c0c13;border:1px solid #24242f;border-radius:13px;padding:17px 18px;display:flex;flex-direction:column;gap:10px}
+.card h2{font-size:16px;margin:0;color:#f2f0f6}
+.card p{margin:0;color:#9a97a8;font-size:13px}
 .tags{display:flex;flex-wrap:wrap;gap:6px}
-.tag{font-size:10.5px;color:var(--violet);background:rgba(196,181,253,.08);
-  border:1px solid var(--line);border-radius:999px;padding:2px 10px}
-.meta{display:flex;flex-wrap:wrap;gap:12px;font:11px/1.5 ui-monospace,Consolas,monospace;color:var(--muted)}
-details{border-top:1px solid rgba(255,255,255,.07);padding-top:10px}
-summary{cursor:pointer;color:var(--gold);font-size:12px;font-weight:700}
-.hash{font:10.5px/1.7 ui-monospace,Consolas,monospace;color:var(--muted);word-break:break-all;margin-top:8px}
-.log{font:11px/1.7 ui-monospace,Consolas,monospace;color:#cfc4e6;max-height:190px;overflow:auto;
-  background:rgba(8,5,15,.6);border:1px solid var(--line);border-radius:10px;padding:10px;margin-top:8px}
-.foot{margin-top:30px;color:var(--muted);font-size:12px;border-top:1px solid var(--line);padding-top:16px}
-.foot a{color:var(--violet)}
-.rea-ban{position:relative;z-index:60;margin:10px auto 20px;max-width:1180px;padding:9px 16px;
-  border:1px solid rgba(246,199,106,.35);border-radius:10px;background:rgba(20,10,26,.92);
-  color:var(--gold);font:700 10.5px/1.6 ui-monospace,monospace;letter-spacing:.10em;text-align:center;text-transform:uppercase}
+.tag{font-size:10.5px;color:#b7b6c0;background:#161620;border:1px solid #262633;border-radius:999px;padding:2px 9px}
+.meta{display:flex;flex-wrap:wrap;gap:12px;font-family:"Cascadia Code",Consolas,monospace;font-size:11px;color:#6f6c80}
+.ok{color:#4ade80}.warn{color:#fbbf24}.bad{color:#f87171}
+.hash{font-family:"Cascadia Code",Consolas,monospace;font-size:10.5px;color:#5f5c70;word-break:break-all}
+.foot{margin-top:34px;color:#5f5c70;font-size:12px;border-top:1px solid #1c1c25;padding-top:16px}
+.foot a{color:#9a97a8}
+.topnav{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:22px;padding-bottom:14px;border-bottom:1px solid #1c1c25}
+.topnav a{color:#9a97a8;text-decoration:none;font-size:12px;border:1px solid #262633;border-radius:999px;padding:4px 12px}
+.topnav a:hover{color:#f2f0f6;border-color:#3a3a49}
 </style>
 </head>
 <body>
-<div class="rea-ban">NO REVERSE ENGINEERING &middot; NO AI SCRAPING &middot; NO AGENT TRAFFIC. Every script here is the owner's work.</div>
 <div class="wrap">
-  <nav class="topnav"><a href="index.html">&larr; RDX</a><a href="store.html">Price list</a><a href="policy.html">Policy</a></nav>
+  <nav class="topnav">
+    <a href="index.html">&larr; RDX</a>
+    <a href="store.html">Price list</a>
+    <a href="policy.html">Policy</a>
+  </nav>
   <div class="eyebrow">MVRK</div>
-  <h1>The Script Store, <span class="em">proven before it ships</span></h1>
+  <h1>MVRK Script Store</h1>
+  <p class="lede">Named Luau scripts, validated in the MVRK runtime and pinned by SHA-256.</p>
   <p class="lede">Every script below was linted, executed in the MVRK offline Luau runtime and pinned by
     SHA-256 before it was listed. The hash is the receipt: the file that ships is the file that ran.
-    This page proves offline validation only - it does not claim live Roblox-client execution.</p>
+    This page proves offline validation only; it does not claim live Roblox-client execution.</p>
   <div class="banner">
-    <div><b>13 scripts included &middot; MVRK Studio Lifetime &middot; $59.</b>
-      <div class="meta"><span>never expires</span><span>MVRK Studio &middot; Lifetime</span></div></div>
-    <a class="cta" href="https://www.paypal.com/ncp/payment/6G23LVV9URXPQ" rel="noopener">Get MVRK Studio</a>
+  <div>
+    <b>14 scripts included · MVRK Studio Lifetime · $59.</b>
+    <div class="meta"><span>never expires</span>
+    <span>MVRK Studio · Lifetime</span></div>
   </div>
-  <div class="controls">
-    <input id="q" placeholder="Search scripts - saber, hover, rinnegan, throne, combo...">
-    <select id="tag"><option value="">Every category</option><option value="auto-combat">auto-combat</option><option value="build-planner">build-planner</option><option value="classic">classic</option><option value="combat">combat</option><option value="combo-trainer">combo-trainer</option><option value="duel-coach">duel-coach</option><option value="esp">esp</option><option value="fly">fly</option><option value="guard">guard</option><option value="hover">hover</option><option value="hud">hud</option><option value="lord">lord</option><option value="lordship">lordship</option><option value="mod-menu">mod-menu</option><option value="movement-trainer">movement-trainer</option><option value="pro">pro</option><option value="pvp">pvp</option><option value="rayfield">rayfield</option><option value="saber-showdown">saber-showdown</option><option value="sharingan">sharingan</option><option value="shindo-life">shindo-life</option><option value="target-lock">target-lock</option><option value="throne">throne</option><option value="training">training</option><option value="utility">utility</option></select>
-  </div>
-  <p class="count" id="count"></p>
-  <div class="grid" id="grid"><article class="card" data-search="saber showdown saber-showdown rayfield combat guard esp"><div class="cardtop"><h2>Saber Showdown</h2><span class="ok">● offline validated</span></div><p>saber showdown — the birthday gift, repaired  (v2, adaptive)</p><div class="tags"><span class="tag">saber-showdown</span> <span class="tag">rayfield</span> <span class="tag">combat</span> <span class="tag">guard</span> <span class="tag">esp</span></div><div class="meta"><span>47,874 bytes</span><span>lint findings 1</span></div><details><summary>Proof and hash</summary><div class="hash">sha256 cc30fa69fe2bee661f380488510be01d44e8a662d8f28b0c9483145c3195f8da</div><div class="log"><div>[saber] Rayfield fetch failed (no body): https://raw.githubusercontent.com/jensonhirst/Rayfield/main/source</div></div><div>[saber] Rayfield fetch failed (no body): https://raw.githubusercontent.com/SiriusSoftwareLtd/Rayfield/main/source.lua</div></div><div>[saber] Rayfield shim loaded (offline)</div></div><div>[rayfield] window &#x27;⚔ saber showdown ⚔&#x27; ready</div></div><div>[rayfield] tab &#x27;combat ⚔&#x27;</div></div><div>[rayfield] button &#x27;Kill closest player&#x27;</div></div></details></article>
-<article class="card" data-search="saber lord hover — pro saber-showdown rayfield pro lordship hover fly"><div class="cardtop"><h2>Saber Lord Hover — Pro</h2><span class="ok">● offline validated</span></div><p>SABER SHOWDOWN PRO — TOGGLE HUB BUILD (no executor hub, no network)</p><div class="tags"><span class="tag">saber-showdown</span> <span class="tag">rayfield</span> <span class="tag">pro</span> <span class="tag">lordship</span> <span class="tag">hover</span> <span class="tag">fly</span></div><div class="meta"><span>60,016 bytes</span><span>lint findings 0</span></div><details><summary>Proof and hash</summary><div class="hash">sha256 a5c119388f78d54718f89eda41aaa906b842bebab714cab47a8a3c1e4dcf41eb</div><div class="log"><div>[saber] environment: MVRK offline arena</div></div><div>PASS  first sight changes nothing                    0</div></div><div>PASS  first stays 100                                100</div></div><div>PASS  second stays 50                                50</div></div><div>PASS  spend restores one slot                        1</div></div><div>PASS  first back to its own ceiling                  100</div></div></details></article>
-<article class="card" data-search="saber lord hover — classic saber-showdown rayfield lordship hover classic"><div class="cardtop"><h2>Saber Lord Hover — Classic</h2><span class="ok">● offline validated</span></div><p>SABER SHOWDOWN v4 — LORDSHIP BUILD (no executor hub, no network)</p><div class="tags"><span class="tag">saber-showdown</span> <span class="tag">rayfield</span> <span class="tag">lordship</span> <span class="tag">hover</span> <span class="tag">classic</span></div><div class="meta"><span>45,192 bytes</span><span>lint findings 0</span></div><details><summary>Proof and hash</summary><div class="hash">sha256 5fe296f9a5cdddbdbbc7554697e6bbb0e96773a04c169c4158d6393fd7947180</div><div class="log"><div>[saber] environment: MVRK offline arena</div></div><div>PASS  first sight changes nothing                    0</div></div><div>PASS  first stays 100                                100</div></div><div>PASS  second stays 50                                50</div></div><div>PASS  spend restores one slot                        1</div></div><div>PASS  first back to its own ceiling                  100</div></div></details></article>
-<article class="card" data-search="saber lord saber-showdown rayfield lord"><div class="cardtop"><h2>Saber Lord</h2><span class="ok">● offline validated</span></div><p>SABER LORD — DOJUTSU BUILD (no executor hub, no network, zero dependencies)</p><div class="tags"><span class="tag">saber-showdown</span> <span class="tag">rayfield</span> <span class="tag">lord</span></div><div class="meta"><span>74,243 bytes</span><span>lint findings 0</span></div><details><summary>Proof and hash</summary><div class="hash">sha256 259303d346fa921a397d47fc49fc7bd8e3c349a3c0a5b800009daf20457dc4d3</div><div class="log"><div>[lord] environment: MVRK offline arena</div></div><div>PASS  ring point 1 exists                            true</div></div><div>PASS  ring point 1 radius                            5.5</div></div><div>PASS  ring point 2 exists                            true</div></div><div>PASS  ring point 2 radius                            5.5</div></div><div>PASS  ring point 3 exists                            true</div></div></details></article>
-<article class="card" data-search="rinnegan saber-showdown rayfield sharingan"><div class="cardtop"><h2>Rinnegan</h2><span class="ok">● offline validated</span></div><p>SABER LORD — ONE HUB, ONE KEY (RightShift), REAL EFFECTS ONLY</p><div class="tags"><span class="tag">saber-showdown</span> <span class="tag">rayfield</span> <span class="tag">sharingan</span></div><div class="meta"><span>131,564 bytes</span><span>lint findings 0</span></div><details><summary>Proof and hash</summary><div class="hash">sha256 6d11e1c96f04554c44a7f675947d69df23bce6cfe6ed2f2af9eca7650ebede54</div><div class="log"><div>[lord] warn: part shape ball: [string &quot;(local build path removed)]:117: attempt to index nil with &#x27;Ball&#x27;</div></div><div>[lord] warn: part shape block: [string &quot;(local build path removed)]:120: attempt to index nil with &#x27;Block&#x27;</div></div><div>[lord] warn: ContextActionResult.Sink: [string &quot;(local build path removed)]:3330: attempt to index nil with &#x27;Sink&#x27;</div></div><div>[lord] environment: MVRK offline arena</div></div><div>PASS  ring point 1 exists                            true</div></div><div>PASS  ring point 1 radius                            5.5</div></div></details></article>
-<article class="card" data-search="rinnegan (new) saber-showdown rayfield sharingan"><div class="cardtop"><h2>Rinnegan (New)</h2><span class="ok">● offline validated</span></div><p>SABER // LORD - REAL-ONLY BUILD (one hub, one key: RightShift)</p><div class="tags"><span class="tag">saber-showdown</span> <span class="tag">rayfield</span> <span class="tag">sharingan</span></div><div class="meta"><span>102,206 bytes</span><span>lint findings 0</span></div><details><summary>Proof and hash</summary><div class="hash">sha256 37d13be8e12269c8f535537c8efffbd90aa8bdec70cbbf0bbfad2cd15722c45c</div><div class="log"><div>[lord] environment: MVRK offline arena</div></div><div>PASS  hover climbs toward target                     10</div></div><div>PASS  hover descends when too high                   -10</div></div><div>PASS  hover dead-zone on target                      0</div></div><div>PASS  hover dead-zone tolerance                      0</div></div><div>PASS  hover caps a climb                             26</div></div></details></article>
-<article class="card" data-search="saber throne saber-showdown rayfield throne"><div class="cardtop"><h2>Saber Throne</h2><span class="ok">● offline validated</span></div><p>SABER THRONE  |  v7  |  GOD TIER</p><div class="tags"><span class="tag">saber-showdown</span> <span class="tag">rayfield</span> <span class="tag">throne</span></div><div class="meta"><span>150,404 bytes</span><span>lint findings 0</span></div><details><summary>Proof and hash</summary><div class="hash">sha256 55e315fa6e2a3afb87eb44237c5dea8d555408671e3e607ab272755ab6ce04c7</div><div class="log"><div>[THRONE] self-test 26 checks, 0 fail</div></div><div>[THRONE] done - offline (MVRK)</div></div><div>[MVRK] complete · virtual 0 s · 0 frames</div></div></details></article>
-<article class="card" data-search="godmode saber-showdown utility"><div class="cardtop"><h2>Godmode</h2><span class="ok">● offline validated</span></div><p>IZANAGI v1 — DEDICATED GOD MODE FOR SABER SHOWDOWN</p><div class="tags"><span class="tag">saber-showdown</span> <span class="tag">utility</span></div><div class="meta"><span>29,315 bytes</span><span>lint findings 0</span></div><details><summary>Proof and hash</summary><div class="hash">sha256 e083fcb7cdee304493199efdf62685845256ace41bc7c831953ac89efcf9009f</div><div class="log"><div>[iz] environment: MVRK offline arena</div></div><div>PASS  health name: Health                            true</div></div><div>PASS  health name: HPBar                             true</div></div><div>PASS  health name: Fuel                              false</div></div><div>PASS  health text: 87/100                            100/100</div></div><div>PASS  health text: 87                                100</div></div></details></article>
-<article class="card" data-search="sharingan saber-showdown utility sharingan"><div class="cardtop"><h2>Sharingan</h2><span class="ok">● offline validated</span></div><p>SHARINGAN — target lock with motion prediction (no dependency, no network)</p><div class="tags"><span class="tag">saber-showdown</span> <span class="tag">utility</span> <span class="tag">sharingan</span></div><div class="meta"><span>27,767 bytes</span><span>lint findings 0</span></div><details><summary>Proof and hash</summary><div class="hash">sha256 3af9c9d1dfafbff9990af36f3b858f6529a6f303e70b247d915ab0c6d0a5f674</div><div class="log"><div>[sharingan] environment: MVRK offline arena</div></div><div>PASS  close target scores higher                     true</div></div><div>PASS  perfect target scores 1                        100</div></div><div>PASS  out of range scores 0                          0</div></div><div>PASS  outside the cone scores 0                      0</div></div><div>PASS  just outside the cone scores 0                 0</div></div></details></article>
-<article class="card" data-search="shindo build lab shindo-life mod-menu build-planner movement-trainer"><div class="cardtop"><h2>Shindo Build Lab</h2><span class="ok">● offline validated</span></div><p>TARGET A - THE LIVE GAME (runs in the MVRK VM too: the planner prints, the</p><div class="tags"><span class="tag">shindo-life</span> <span class="tag">mod-menu</span> <span class="tag">build-planner</span> <span class="tag">movement-trainer</span></div><div class="meta"><span>14,817 bytes</span><span>lint findings 0</span></div><details><summary>Proof and hash</summary><div class="hash">sha256 0456ea5472b96fc9dfda09d4baab4481180e3ea5b48f63edac87d42ac034cfca</div><div class="log"><div>[warn] [build lab] no GUI data model here - the menu needs the live client. The planner still works: call printBuild(name, element).</div></div><div>[build lab] Rengoku + Fire</div></div><div>CHI 139 | NIN 222 | TAI 83 | HP 56  (total 500)</div></div><div>style: burst | element pairs: burst / aoe</div></div><div>note: Fast burst strings. Wins by ending the duel before it drags on.</div></div><div>combo 1: Opener: Fire jab -&gt; dash in -&gt; Rengoku first hit.</div></div></details></article>
-<article class="card" data-search="saber duel lab saber-showdown duel-coach hud training"><div class="cardtop"><h2>Saber Duel Lab</h2><span class="ok">● offline validated</span></div><p>TARGET A - THE LIVE GAME (in the offline VM it prints its guide and says</p><div class="tags"><span class="tag">saber-showdown</span> <span class="tag">duel-coach</span> <span class="tag">hud</span> <span class="tag">training</span></div><div class="meta"><span>7,760 bytes</span><span>lint findings 0</span></div><details><summary>Proof and hash</summary><div class="hash">sha256 6a6e2fcd20fe3fa9801b7603f28684fef141e4c008de1a6bd93a895f69d5bad5</div><div class="log"><div>[warn] [duel lab] no GUI data model here - the HUD needs the live client</div></div><div>[duel lab] SABER DUEL LAB ready</div></div><div>F6 start/stop a duel · F7 report · F8 reset · RightControl HUD</div></div><div>It measures range, cadence and time-in-range, then tells you what to fix.</div></div><div>[MVRK] complete · virtual 0 s · 0 frames</div></div></details></article>
-<article class="card" data-search="saber combo forge saber-showdown mod-menu combo-trainer hud"><div class="cardtop"><h2>Saber Combo Forge</h2><span class="ok">● offline validated</span></div><p>SABER COMBO FORGE - real combo trainer + combat HUD for any sword game.</p><div class="tags"><span class="tag">saber-showdown</span> <span class="tag">mod-menu</span> <span class="tag">combo-trainer</span> <span class="tag">hud</span></div><div class="meta"><span>9,081 bytes</span><span>lint findings 0</span></div><details><summary>Proof and hash</summary><div class="hash">sha256 13307968fee8bcf89996dea254ae4afec9828f87d94b4cf61437c9f82cf95506</div><div class="log"><div>[warn] [combo forge] GUI needs the live client; trainer logic remains available</div></div><div>[combo forge] ready | RightControl menu | F6 drill | F7 report | F8 reset</div></div><div>[combo forge] score 0 | completed 0 | best streak 0 | avg gap 0.00s</div></div><div>coach: F6 starts a drill. Follow the shown F-key sequence.</div></div><div>[MVRK] complete · virtual 0 s · 0 frames</div></div></details></article>
-<article class="card" data-search="saber reaper saber-showdown mod-menu pvp target-lock auto-combat"><div class="cardtop"><h2>Saber Reaper</h2><span class="ok">● offline validated</span></div><p>SABER REAPER - target-lock PvP combat assistant for sword games.</p><div class="tags"><span class="tag">saber-showdown</span> <span class="tag">mod-menu</span> <span class="tag">pvp</span> <span class="tag">target-lock</span> <span class="tag">auto-combat</span></div><div class="meta"><span>14,578 bytes</span><span>lint findings 0</span></div><details><summary>Proof and hash</summary><div class="hash">sha256 f7bfe1546c5d5d81800ff494dc4dc07ea07db19f966dff10078df1f614df040b</div><div class="log"><div>[warn] [reaper] GUI needs the live client; combat logic remains available</div></div><div>[reaper] ready | F7 nearest | F8 cycle | F6 engage/stop | RightControl HUD</div></div><div>[MVRK] complete · virtual 0 s · 0 frames</div></div></details></article></div>
-  <div class="foot">Every hash above is the SHA-256 of the exact file that shipped.
-    No scraping, no reverse engineering, no clones - read the <a href="policy.html">policy</a>.</div>
+  <a class="cta" href="https://www.paypal.com/ncp/payment/6G23LVV9URXPQ" rel="noopener">Get MVRK Studio</a>
 </div>
-<script>
-(function(){
-  var q=document.getElementById('q'), tag=document.getElementById('tag');
-  function apply(){
-    var text=q.value.toLowerCase(), want=tag.value, n=0;
-    document.querySelectorAll('.card').forEach(function(card){
-      var hay=card.getAttribute('data-search');
-      var show=(!text||hay.indexOf(text)>=0)&&(!want||hay.indexOf(want)>=0);
-      card.style.display=show?'':'none';if(show)n++;
-    });
-    document.getElementById('count').textContent=n+' of 13 scripts';
-  }
-  q.addEventListener('input',apply);tag.addEventListener('change',apply);apply();
-})();
-</script>
+  <div class="grid">
+<article class="card">
+  <h2>Saber Showdown</h2>
+  <p>saber showdown — the birthday gift, repaired  (v2, adaptive)</p>
+  <div class="tags"><span class="tag">saber-showdown</span><span class="tag">rayfield</span><span class="tag">combat</span><span class="tag">guard</span><span class="tag">esp</span></div>
+  <div class="meta">
+    <span>47,874 bytes</span>
+    <span class="ok">● offline validated</span>
+    <span>lint findings 1</span>
+  </div>
+  <div class="hash">sha256 cc30fa69fe2bee661f380488510be01d44e8a662d8f28b0c9483145c3195f8da</div>
+  <div class="hash"><div>[saber] Rayfield fetch failed (no body): https://raw.githubusercontent.com/jensonhirst/Rayfield/main/source</div><div>[saber] Rayfield fetch failed (no body): https://raw.githubusercontent.com/SiriusSoftwareLtd/Rayfield/main/source.lua</div><div>[saber] Rayfield shim loaded (offline)</div><div>[rayfield] window &#x27;⚔ saber showdown ⚔&#x27; ready</div><div>[rayfield] tab &#x27;combat ⚔&#x27;</div><div>[rayfield] button &#x27;Kill closest player&#x27;</div></div>
+</article>
+<article class="card">
+  <h2>Saber Lord Hover — Pro</h2>
+  <p>SABER SHOWDOWN PRO — TOGGLE HUB BUILD (no executor hub, no network)</p>
+  <div class="tags"><span class="tag">saber-showdown</span><span class="tag">rayfield</span><span class="tag">pro</span><span class="tag">lordship</span><span class="tag">hover</span><span class="tag">fly</span></div>
+  <div class="meta">
+    <span>60,016 bytes</span>
+    <span class="ok">● offline validated</span>
+    <span>lint findings 0</span>
+  </div>
+  <div class="hash">sha256 a5c119388f78d54718f89eda41aaa906b842bebab714cab47a8a3c1e4dcf41eb</div>
+  <div class="hash"><div>[saber] environment: MVRK offline arena</div><div>PASS  first sight changes nothing                    0</div><div>PASS  first stays 100                                100</div><div>PASS  second stays 50                                50</div><div>PASS  spend restores one slot                        1</div><div>PASS  first back to its own ceiling                  100</div></div>
+</article>
+<article class="card">
+  <h2>Saber Lord Hover — Classic</h2>
+  <p>SABER SHOWDOWN v4 â€” LORDSHIP BUILD (no executor hub, no network)</p>
+  <div class="tags"><span class="tag">saber-showdown</span><span class="tag">rayfield</span><span class="tag">lordship</span><span class="tag">hover</span><span class="tag">classic</span></div>
+  <div class="meta">
+    <span>45,192 bytes</span>
+    <span class="ok">● offline validated</span>
+    <span>lint findings 0</span>
+  </div>
+  <div class="hash">sha256 5fe296f9a5cdddbdbbc7554697e6bbb0e96773a04c169c4158d6393fd7947180</div>
+  <div class="hash"><div>[saber] environment: MVRK offline arena</div><div>PASS  first sight changes nothing                    0</div><div>PASS  first stays 100                                100</div><div>PASS  second stays 50                                50</div><div>PASS  spend restores one slot                        1</div><div>PASS  first back to its own ceiling                  100</div></div>
+</article>
+<article class="card">
+  <h2>Saber Lord Hover — v4 Lordship</h2>
+  <p>SABER SHOWDOWN v4 — LORDSHIP BUILD (no executor hub, no network)</p>
+  <div class="tags"><span class="tag">saber-showdown</span><span class="tag">lordship</span><span class="tag">hover</span><span class="tag">god-mode</span><span class="tag">fuel</span><span class="tag">self-contained</span></div>
+  <div class="meta">
+    <span>56,810 bytes</span>
+    <span class="ok">● offline validated</span>
+    <span>lint findings 0</span>
+  </div>
+  <div class="hash">sha256 33dfcbf952f736958f04f527de6a10267cc2689af73666c240f25aa466da8d48</div>
+  <div class="hash"><div>[saber] environment: MVRK offline arena</div><div>PASS  first sight changes nothing                    0</div><div>PASS  first stays 100                                100</div><div>PASS  second stays 50                                50</div><div>PASS  spend restores one slot                        1</div><div>PASS  first back to its own ceiling                  100</div></div>
+</article>
+<article class="card">
+  <h2>Saber Lord</h2>
+  <p>SABER LORD — DOJUTSU BUILD (no executor hub, no network, zero dependencies)</p>
+  <div class="tags"><span class="tag">saber-showdown</span><span class="tag">rayfield</span><span class="tag">lord</span></div>
+  <div class="meta">
+    <span>74,243 bytes</span>
+    <span class="ok">● offline validated</span>
+    <span>lint findings 0</span>
+  </div>
+  <div class="hash">sha256 259303d346fa921a397d47fc49fc7bd8e3c349a3c0a5b800009daf20457dc4d3</div>
+  <div class="hash"><div>[lord] environment: MVRK offline arena</div><div>PASS  ring point 1 exists                            true</div><div>PASS  ring point 1 radius                            5.5</div><div>PASS  ring point 2 exists                            true</div><div>PASS  ring point 2 radius                            5.5</div><div>PASS  ring point 3 exists                            true</div></div>
+</article>
+<article class="card">
+  <h2>Rinnegan</h2>
+  <p>SABER LORD — ONE HUB, ONE KEY (RightShift), REAL EFFECTS ONLY</p>
+  <div class="tags"><span class="tag">saber-showdown</span><span class="tag">rayfield</span><span class="tag">sharingan</span></div>
+  <div class="meta">
+    <span>131,564 bytes</span>
+    <span class="ok">● offline validated</span>
+    <span>lint findings 0</span>
+  </div>
+  <div class="hash">sha256 6d11e1c96f04554c44a7f675947d69df23bce6cfe6ed2f2af9eca7650ebede54</div>
+  <div class="hash"><div>[lord] warn: part shape ball: [string &quot;D:\GHOST_SYSTEM\PROJECTS\MVRK\scripts\saber-showdown\rinnegan.luau&quot;]:117: attempt to index nil with &#x27;Ball&#x27;</div><div>[lord] warn: part shape block: [string &quot;D:\GHOST_SYSTEM\PROJECTS\MVRK\scripts\saber-showdown\rinnegan.luau&quot;]:120: attempt to index nil with &#x27;Block&#x27;</div><div>[lord] warn: ContextActionResult.Sink: [string &quot;D:\GHOST_SYSTEM\PROJECTS\MVRK\scripts\saber-showdown\rinnegan.luau&quot;]:3330: attempt to index nil with &#x27;Sink&#x27;</div><div>[lord] environment: MVRK offline arena</div><div>PASS  ring point 1 exists                            true</div><div>PASS  ring point 1 radius                            5.5</div></div>
+</article>
+<article class="card">
+  <h2>Rinnegan (New)</h2>
+  <p>SABER // LORD - REAL-ONLY BUILD (one hub, one key: RightShift)</p>
+  <div class="tags"><span class="tag">saber-showdown</span><span class="tag">rayfield</span><span class="tag">sharingan</span></div>
+  <div class="meta">
+    <span>102,206 bytes</span>
+    <span class="ok">● offline validated</span>
+    <span>lint findings 0</span>
+  </div>
+  <div class="hash">sha256 37d13be8e12269c8f535537c8efffbd90aa8bdec70cbbf0bbfad2cd15722c45c</div>
+  <div class="hash"><div>[lord] environment: MVRK offline arena</div><div>PASS  hover climbs toward target                     10</div><div>PASS  hover descends when too high                   -10</div><div>PASS  hover dead-zone on target                      0</div><div>PASS  hover dead-zone tolerance                      0</div><div>PASS  hover caps a climb                             26</div></div>
+</article>
+<article class="card">
+  <h2>Saber Throne</h2>
+  <p>SABER THRONE  |  v7  |  GOD TIER</p>
+  <div class="tags"><span class="tag">saber-showdown</span><span class="tag">rayfield</span><span class="tag">throne</span></div>
+  <div class="meta">
+    <span>150,404 bytes</span>
+    <span class="ok">● offline validated</span>
+    <span>lint findings 0</span>
+  </div>
+  <div class="hash">sha256 55e315fa6e2a3afb87eb44237c5dea8d555408671e3e607ab272755ab6ce04c7</div>
+  <div class="hash"><div>[THRONE] self-test 26 checks, 0 fail</div><div>[THRONE] done - offline (MVRK)</div><div>[MVRK] complete · virtual 0 s · 0 frames</div></div>
+</article>
+<article class="card">
+  <h2>Godmode</h2>
+  <p>IZANAGI v1 — DEDICATED GOD MODE FOR SABER SHOWDOWN</p>
+  <div class="tags"><span class="tag">saber-showdown</span><span class="tag">utility</span></div>
+  <div class="meta">
+    <span>29,315 bytes</span>
+    <span class="ok">● offline validated</span>
+    <span>lint findings 0</span>
+  </div>
+  <div class="hash">sha256 e083fcb7cdee304493199efdf62685845256ace41bc7c831953ac89efcf9009f</div>
+  <div class="hash"><div>[iz] environment: MVRK offline arena</div><div>PASS  health name: Health                            true</div><div>PASS  health name: HPBar                             true</div><div>PASS  health name: Fuel                              false</div><div>PASS  health text: 87/100                            100/100</div><div>PASS  health text: 87                                100</div></div>
+</article>
+<article class="card">
+  <h2>Sharingan</h2>
+  <p>SHARINGAN — target lock with motion prediction (no dependency, no network)</p>
+  <div class="tags"><span class="tag">saber-showdown</span><span class="tag">utility</span><span class="tag">sharingan</span></div>
+  <div class="meta">
+    <span>27,767 bytes</span>
+    <span class="ok">● offline validated</span>
+    <span>lint findings 0</span>
+  </div>
+  <div class="hash">sha256 3af9c9d1dfafbff9990af36f3b858f6529a6f303e70b247d915ab0c6d0a5f674</div>
+  <div class="hash"><div>[sharingan] environment: MVRK offline arena</div><div>PASS  close target scores higher                     true</div><div>PASS  perfect target scores 1                        100</div><div>PASS  out of range scores 0                          0</div><div>PASS  outside the cone scores 0                      0</div><div>PASS  just outside the cone scores 0                 0</div></div>
+</article>
+<article class="card">
+  <h2>Shindo Build Lab</h2>
+  <p>TARGET A - THE LIVE GAME (runs in the MVRK VM too: the planner prints, the</p>
+  <div class="tags"><span class="tag">shindo-life</span><span class="tag">mod-menu</span><span class="tag">build-planner</span><span class="tag">movement-trainer</span></div>
+  <div class="meta">
+    <span>14,817 bytes</span>
+    <span class="ok">● offline validated</span>
+    <span>lint findings 0</span>
+  </div>
+  <div class="hash">sha256 0456ea5472b96fc9dfda09d4baab4481180e3ea5b48f63edac87d42ac034cfca</div>
+  <div class="hash"><div>[warn] [build lab] no GUI data model here - the menu needs the live client. The planner still works: call printBuild(name, element).</div><div>[build lab] Rengoku + Fire</div><div>CHI 139 | NIN 222 | TAI 83 | HP 56  (total 500)</div><div>style: burst | element pairs: burst / aoe</div><div>note: Fast burst strings. Wins by ending the duel before it drags on.</div><div>combo 1: Opener: Fire jab -&gt; dash in -&gt; Rengoku first hit.</div></div>
+</article>
+<article class="card">
+  <h2>Saber Duel Lab</h2>
+  <p>TARGET A - THE LIVE GAME (in the offline VM it prints its guide and says</p>
+  <div class="tags"><span class="tag">saber-showdown</span><span class="tag">duel-coach</span><span class="tag">hud</span><span class="tag">training</span></div>
+  <div class="meta">
+    <span>7,760 bytes</span>
+    <span class="ok">● offline validated</span>
+    <span>lint findings 0</span>
+  </div>
+  <div class="hash">sha256 6a6e2fcd20fe3fa9801b7603f28684fef141e4c008de1a6bd93a895f69d5bad5</div>
+  <div class="hash"><div>[warn] [duel lab] no GUI data model here - the HUD needs the live client</div><div>[duel lab] SABER DUEL LAB ready</div><div>F6 start/stop a duel · F7 report · F8 reset · RightControl HUD</div><div>It measures range, cadence and time-in-range, then tells you what to fix.</div><div>[MVRK] complete · virtual 0 s · 0 frames</div></div>
+</article>
+<article class="card">
+  <h2>Saber Combo Forge</h2>
+  <p>SABER COMBO FORGE - real combo trainer + combat HUD for any sword game.</p>
+  <div class="tags"><span class="tag">saber-showdown</span><span class="tag">mod-menu</span><span class="tag">combo-trainer</span><span class="tag">hud</span></div>
+  <div class="meta">
+    <span>9,081 bytes</span>
+    <span class="ok">● offline validated</span>
+    <span>lint findings 0</span>
+  </div>
+  <div class="hash">sha256 13307968fee8bcf89996dea254ae4afec9828f87d94b4cf61437c9f82cf95506</div>
+  <div class="hash"><div>[warn] [combo forge] GUI needs the live client; trainer logic remains available</div><div>[combo forge] ready | RightControl menu | F6 drill | F7 report | F8 reset</div><div>[combo forge] score 0 | completed 0 | best streak 0 | avg gap 0.00s</div><div>coach: F6 starts a drill. Follow the shown F-key sequence.</div><div>[MVRK] complete · virtual 0 s · 0 frames</div></div>
+</article>
+<article class="card">
+  <h2>Saber Reaper</h2>
+  <p>SABER REAPER - target-lock PvP combat assistant for sword games.</p>
+  <div class="tags"><span class="tag">saber-showdown</span><span class="tag">mod-menu</span><span class="tag">pvp</span><span class="tag">target-lock</span><span class="tag">auto-combat</span></div>
+  <div class="meta">
+    <span>14,578 bytes</span>
+    <span class="ok">● offline validated</span>
+    <span>lint findings 0</span>
+  </div>
+  <div class="hash">sha256 f7bfe1546c5d5d81800ff494dc4dc07ea07db19f966dff10078df1f614df040b</div>
+  <div class="hash"><div>[warn] [reaper] GUI needs the live client; combat logic remains available</div><div>[reaper] ready | F7 nearest | F8 cycle | F6 engage/stop | RightControl HUD</div><div>[MVRK] complete · virtual 0 s · 0 frames</div></div>
+</article>
+  </div>
+  <div class="foot">Generated 2026-11-20T16:16:11Z · every hash above is the SHA-256 of the exact file that shipped.
+    No scraping, no reverse engineering, no clones &mdash; read the <a href="policy.html">policy</a>.</div>
+</div>
 </body>
 </html>

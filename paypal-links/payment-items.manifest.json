@@ -1,0 +1,1372 @@
+{
+  "status": "complete",
+  "generated_at": "2026-11-20T16:57:10Z",
+  "merchant": {
+    "display_name": "RedX Ai",
+    "paypal_account": "WQJHW27WD2DWU",
+    "site_url": "https://ebkboss.github.io/rdx-ai/"
+  },
+  "currency": "USD",
+  "items": [
+    {
+      "slug": "ghvstterminalandroid-pro-monthly",
+      "product_id": "GhvstTerminalAndroid",
+      "tier": "pro",
+      "plan": "monthly",
+      "name": "Ghvst Terminal - the AI operator for your phone - Ghvst PRO - PRO monthly",
+      "description": "48-step agent, toolchain auto-provision, APK build and install, fast hosted models 30-day licence - renew any time.",
+      "price": 15.0,
+      "currency": "USD",
+      "days": 30,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/YT7PRZVY7EGSC",
+      "hosted_id": "YT7PRZVY7EGSC",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/ghvstterminalandroid-pro-monthly.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/YT7PRZVY7EGSC",
+        "sha256": "e9069d9a28f53be90b6204c3a105cf4029f806c0ee70a8e8ab7d8ece18dff6d3"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/ghvstterminalandroid-pro-monthly.html",
+        "hosted_id": "YT7PRZVY7EGSC",
+        "kind": "stacked",
+        "sha256": "5ed7ced51ed1326c8e7056c039b64c1dc1e0d8f5fcb42bca4086e71d302850d4"
+      },
+      "button_single": {
+        "file": "buttons/single/ghvstterminalandroid-pro-monthly.html",
+        "hosted_id": "YT7PRZVY7EGSC",
+        "kind": "single",
+        "sha256": "674f71ffed10819c9684995bba1cd65c5593e4da520daddb24a9ad24836b4aa9"
+      },
+      "license_days": 30
+    },
+    {
+      "slug": "ghvstterminalandroid-pro-annual",
+      "product_id": "GhvstTerminalAndroid",
+      "tier": "pro",
+      "plan": "annual",
+      "name": "Ghvst Terminal - the AI operator for your phone - Ghvst PRO - PRO annual",
+      "description": "48-step agent, toolchain auto-provision, APK build and install, fast hosted models 2 months free - 365-day licence, renew any time.",
+      "price": 150.0,
+      "currency": "USD",
+      "days": 365,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/HB3LM3LQXVLSU",
+      "hosted_id": "HB3LM3LQXVLSU",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/ghvstterminalandroid-pro-annual.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/HB3LM3LQXVLSU",
+        "sha256": "8ef6254cc32876ca6632bc78ec03c8a46d0ff134e6283d48d60f380f24a98492"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/ghvstterminalandroid-pro-annual.html",
+        "hosted_id": "HB3LM3LQXVLSU",
+        "kind": "stacked",
+        "sha256": "3edf69ab3a99f5f8ede8a17028d50b3d747f621eb54110c94241dd5f7f946832"
+      },
+      "button_single": {
+        "file": "buttons/single/ghvstterminalandroid-pro-annual.html",
+        "hosted_id": "HB3LM3LQXVLSU",
+        "kind": "single",
+        "sha256": "6962538ff3265270f5df36a3f884b537035becfbea302069bf5e90347bd3dbc7"
+      },
+      "license_days": 365
+    },
+    {
+      "slug": "ghvstterminalandroid-vip-monthly",
+      "product_id": "GhvstTerminalAndroid",
+      "tier": "vip",
+      "plan": "monthly",
+      "name": "Ghvst Terminal - the AI operator for your phone - Ghvst VIP - VIP monthly",
+      "description": "96 steps, reasoning models, God's Eye live feeds, full skills and MCP packs, vision repair 30-day licence - renew any time.",
+      "price": 29.0,
+      "currency": "USD",
+      "days": 30,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/Y3TFFZ75M6FTU",
+      "hosted_id": "Y3TFFZ75M6FTU",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/ghvstterminalandroid-vip-monthly.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/Y3TFFZ75M6FTU",
+        "sha256": "c73ab30e20859795aadecabd842b5df5ced192113a8c6afcd04771cf0ba25922"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/ghvstterminalandroid-vip-monthly.html",
+        "hosted_id": "Y3TFFZ75M6FTU",
+        "kind": "stacked",
+        "sha256": "70923a60177601b884ec43e80703a0c37290d149de6e54a220e543626ff02c6a"
+      },
+      "button_single": {
+        "file": "buttons/single/ghvstterminalandroid-vip-monthly.html",
+        "hosted_id": "Y3TFFZ75M6FTU",
+        "kind": "single",
+        "sha256": "cc4b6758b711c24e015f0f2d95d740ac60bc99784b55454a1f6b254a2d9bb390"
+      },
+      "license_days": 30
+    },
+    {
+      "slug": "ghvstterminalandroid-vip-annual",
+      "product_id": "GhvstTerminalAndroid",
+      "tier": "vip",
+      "plan": "annual",
+      "name": "Ghvst Terminal - the AI operator for your phone - Ghvst VIP - VIP annual",
+      "description": "96 steps, reasoning models, God's Eye live feeds, full skills and MCP packs, vision repair 2 months free - 365-day licence, renew any time.",
+      "price": 290.0,
+      "currency": "USD",
+      "days": 365,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/MXMH2RYQK8SR4",
+      "hosted_id": "MXMH2RYQK8SR4",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/ghvstterminalandroid-vip-annual.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/MXMH2RYQK8SR4",
+        "sha256": "0900328140e564a50d560a917d0a23de929ab011012f76a09af588118555b4a4"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/ghvstterminalandroid-vip-annual.html",
+        "hosted_id": "MXMH2RYQK8SR4",
+        "kind": "stacked",
+        "sha256": "6e058e683fbb37ad493e88fcb64efd4dfd541f6c65c072c7f2449799e0e703e5"
+      },
+      "button_single": {
+        "file": "buttons/single/ghvstterminalandroid-vip-annual.html",
+        "hosted_id": "MXMH2RYQK8SR4",
+        "kind": "single",
+        "sha256": "d03ce8547b4b55183965376e5f969a6ecdf9cdf0c788014c2008036c39d5b52a"
+      },
+      "license_days": 365
+    },
+    {
+      "slug": "ghvstterminalandroid-titan-monthly",
+      "product_id": "GhvstTerminalAndroid",
+      "tier": "titan",
+      "plan": "monthly",
+      "name": "Ghvst Terminal - the AI operator for your phone - Ghvst TITAN - TITAN monthly",
+      "description": "160 steps, big models, multi-device console, long-running jobs 30-day licence - renew any time.",
+      "price": 79.0,
+      "currency": "USD",
+      "days": 30,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/ASNEPPFLRC65W",
+      "hosted_id": "ASNEPPFLRC65W",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/ghvstterminalandroid-titan-monthly.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/ASNEPPFLRC65W",
+        "sha256": "ff0a097655ff54dd06a14b641d1844af6a791cd6eaf9155d4765a5913cbf939f"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/ghvstterminalandroid-titan-monthly.html",
+        "hosted_id": "ASNEPPFLRC65W",
+        "kind": "stacked",
+        "sha256": "4d07a0e9138965684e1388ba2c4b1b069cee3da21c85d277fc33c5b13b6ec28e"
+      },
+      "button_single": {
+        "file": "buttons/single/ghvstterminalandroid-titan-monthly.html",
+        "hosted_id": "ASNEPPFLRC65W",
+        "kind": "single",
+        "sha256": "9b8ef02a45566bc092944b091141b0ddfee7c1f02a6d3760f4715dd21eeda063"
+      },
+      "license_days": 30
+    },
+    {
+      "slug": "ghvstterminalandroid-titan-annual",
+      "product_id": "GhvstTerminalAndroid",
+      "tier": "titan",
+      "plan": "annual",
+      "name": "Ghvst Terminal - the AI operator for your phone - Ghvst TITAN - TITAN annual",
+      "description": "160 steps, big models, multi-device console, long-running jobs 2 months free - 365-day licence, renew any time.",
+      "price": 790.0,
+      "currency": "USD",
+      "days": 365,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/DUX296LGUPKWA",
+      "hosted_id": "DUX296LGUPKWA",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/ghvstterminalandroid-titan-annual.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/DUX296LGUPKWA",
+        "sha256": "180bf0e45e2d7e2ac80c4c89b9691f6d698f073976e7e46f38c2736369572d68"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/ghvstterminalandroid-titan-annual.html",
+        "hosted_id": "DUX296LGUPKWA",
+        "kind": "stacked",
+        "sha256": "730f8b82efbdebb03bd056f07d144a296762dacf70e2a6ec16a3663a7f828b61"
+      },
+      "button_single": {
+        "file": "buttons/single/ghvstterminalandroid-titan-annual.html",
+        "hosted_id": "DUX296LGUPKWA",
+        "kind": "single",
+        "sha256": "37ccfd10571cec456934255a53f0f3fea339fdc593813254223aadcb7db817a7"
+      },
+      "license_days": 365
+    },
+    {
+      "slug": "ghvstterminalandroid-phantom-lifetime",
+      "product_id": "GhvstTerminalAndroid",
+      "tier": "phantom",
+      "plan": "lifetime",
+      "name": "Ghvst Terminal - the AI operator for your phone - Ghvst PHANTOM - PHANTOM lifetime",
+      "description": "everything in TITAN, permanently, with a permanent token that survives reinstall one payment, never expires.",
+      "price": 499.0,
+      "currency": "USD",
+      "days": 0,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/2VATAUJMWJZNA",
+      "hosted_id": "2VATAUJMWJZNA",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/ghvstterminalandroid-phantom-lifetime.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/2VATAUJMWJZNA",
+        "sha256": "d781f84d1f23612072e66581dbeb53819458f2d1d1612be7bfef58a396f3ab7a"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/ghvstterminalandroid-phantom-lifetime.html",
+        "hosted_id": "2VATAUJMWJZNA",
+        "kind": "stacked",
+        "sha256": "d531f5dc5791b4a0db045b1e506f6060ae7ea10d96036567e083182d73765da9"
+      },
+      "button_single": {
+        "file": "buttons/single/ghvstterminalandroid-phantom-lifetime.html",
+        "hosted_id": "2VATAUJMWJZNA",
+        "kind": "single",
+        "sha256": "efe1070160ea807e8d2d428cbd501626216dcc201a38b2f7edab92de7eba444a"
+      },
+      "license_days": 0
+    },
+    {
+      "slug": "ghvstterminalandroid-mythic-lifetime",
+      "product_id": "GhvstTerminalAndroid",
+      "tier": "mythic",
+      "plan": "lifetime",
+      "name": "Ghvst Terminal - the AI operator for your phone - Ghvst MYTHIC - MYTHIC lifetime",
+      "description": "everything, forever: endpoint editor, GGUF scout, every future feature one payment, never expires.",
+      "price": 999.0,
+      "currency": "USD",
+      "days": 0,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/FDLTPZMER7T66",
+      "hosted_id": "FDLTPZMER7T66",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/ghvstterminalandroid-mythic-lifetime.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/FDLTPZMER7T66",
+        "sha256": "b1512fa02901176213558a0ac2c522872e39cae36634b09e4b6ceaf826892679"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/ghvstterminalandroid-mythic-lifetime.html",
+        "hosted_id": "FDLTPZMER7T66",
+        "kind": "stacked",
+        "sha256": "a50697396250b5fcec7c70c2c48894dfc5aad22cccd24cdfba25675094d1c2c2"
+      },
+      "button_single": {
+        "file": "buttons/single/ghvstterminalandroid-mythic-lifetime.html",
+        "hosted_id": "FDLTPZMER7T66",
+        "kind": "single",
+        "sha256": "31103c834f643f9a82893d73a2f17f76750de0cac6a51ffa9726fe2e7ceb5e4d"
+      },
+      "license_days": 0
+    },
+    {
+      "slug": "ghvstbrowserandroid-standard-monthly",
+      "product_id": "GhvstBrowserAndroid",
+      "tier": "",
+      "plan": "monthly",
+      "name": "Ghvst Browser for Android - Monthly",
+      "description": "30-day licence - renew any time.",
+      "price": 15.0,
+      "currency": "USD",
+      "days": 30,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/XGZUY2SV9XYNJ",
+      "hosted_id": "XGZUY2SV9XYNJ",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/ghvstbrowserandroid-standard-monthly.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/XGZUY2SV9XYNJ",
+        "sha256": "5aa90a6eb1f3d8c0ecae8cd70abea88086abee9981b22659dc022e05f1e97bb1"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/ghvstbrowserandroid-standard-monthly.html",
+        "hosted_id": "XGZUY2SV9XYNJ",
+        "kind": "stacked",
+        "sha256": "9bf5b47fa46907e6d959f0ef43a1287ae155020dd86cb661bfcd67f6d5b5b431"
+      },
+      "button_single": {
+        "file": "buttons/single/ghvstbrowserandroid-standard-monthly.html",
+        "hosted_id": "XGZUY2SV9XYNJ",
+        "kind": "single",
+        "sha256": "815a4101a32bac8ca885795fe01dc4602e23fde6d70f015c951cb64da314f9a2"
+      },
+      "license_days": 30
+    },
+    {
+      "slug": "ghvstbrowserandroid-standard-annual",
+      "product_id": "GhvstBrowserAndroid",
+      "tier": "",
+      "plan": "annual",
+      "name": "Ghvst Browser for Android - Annual",
+      "description": "save $61 - 365-day licence, renew any time.",
+      "price": 119.0,
+      "currency": "USD",
+      "days": 365,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/U36JU7BR93GCU",
+      "hosted_id": "U36JU7BR93GCU",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/ghvstbrowserandroid-standard-annual.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/U36JU7BR93GCU",
+        "sha256": "5945f4d4fbc22e4892f148df1330820fab59b5eadf32d2f68c2e4544eb63a130"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/ghvstbrowserandroid-standard-annual.html",
+        "hosted_id": "U36JU7BR93GCU",
+        "kind": "stacked",
+        "sha256": "1bf1d21cc7a26e90c532d0814bc509edc25705410106e8fd7b64177d4d9766b4"
+      },
+      "button_single": {
+        "file": "buttons/single/ghvstbrowserandroid-standard-annual.html",
+        "hosted_id": "U36JU7BR93GCU",
+        "kind": "single",
+        "sha256": "368cd2decf764bc68f556ff59fa35fa2d762258acd5d834f08a88417cff00361"
+      },
+      "license_days": 365
+    },
+    {
+      "slug": "ghvstbrowserandroid-standard-lifetime",
+      "product_id": "GhvstBrowserAndroid",
+      "tier": "",
+      "plan": "lifetime",
+      "name": "Ghvst Browser for Android - Lifetime",
+      "description": "one payment, never expires.",
+      "price": 299.0,
+      "currency": "USD",
+      "days": 0,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/F6YU5SSZGQBQ6",
+      "hosted_id": "F6YU5SSZGQBQ6",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/ghvstbrowserandroid-standard-lifetime.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/F6YU5SSZGQBQ6",
+        "sha256": "c216e4881c2814d22b1bf017c78c383a05069f164d575253051faa7a4a43fbb1"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/ghvstbrowserandroid-standard-lifetime.html",
+        "hosted_id": "F6YU5SSZGQBQ6",
+        "kind": "stacked",
+        "sha256": "b16be0ab239fcf921effaadc0b52d198d41bd7bb49700a8e726b6f9694e1cbd0"
+      },
+      "button_single": {
+        "file": "buttons/single/ghvstbrowserandroid-standard-lifetime.html",
+        "hosted_id": "F6YU5SSZGQBQ6",
+        "kind": "single",
+        "sha256": "a738e2321dff23ce770604a82e2f734559c251c591fc4e99ce65c4b9fbb7d9f6"
+      },
+      "license_days": 0
+    },
+    {
+      "slug": "sovereignmessenger-standard-monthly",
+      "product_id": "SovereignMessenger",
+      "tier": "",
+      "plan": "monthly",
+      "name": "Sovereign Messenger (Ghvst Sovereign Gang) - Monthly",
+      "description": "30-day licence - renew any time.",
+      "price": 7.0,
+      "currency": "USD",
+      "days": 30,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/ERCJURYYVGA6J",
+      "hosted_id": "ERCJURYYVGA6J",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/sovereignmessenger-standard-monthly.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/ERCJURYYVGA6J",
+        "sha256": "880d94627b264fa9761eec0909b88d885796130673056c4a509b8d961a7a784e"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/sovereignmessenger-standard-monthly.html",
+        "hosted_id": "ERCJURYYVGA6J",
+        "kind": "stacked",
+        "sha256": "7d29dd01e0bdcc642104eeb14709871ee00a5e1716dea0e95f32b54f78fbe9b2"
+      },
+      "button_single": {
+        "file": "buttons/single/sovereignmessenger-standard-monthly.html",
+        "hosted_id": "ERCJURYYVGA6J",
+        "kind": "single",
+        "sha256": "d155116cfaba2dc1ec6c13c2aa7aa08f9dd1246724e7c37a50c97e1bf0f915ef"
+      },
+      "license_days": 30
+    },
+    {
+      "slug": "sovereignmessenger-standard-annual",
+      "product_id": "SovereignMessenger",
+      "tier": "",
+      "plan": "annual",
+      "name": "Sovereign Messenger (Ghvst Sovereign Gang) - Annual",
+      "description": "2 months free - 365-day licence, renew any time.",
+      "price": 59.0,
+      "currency": "USD",
+      "days": 365,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/Z2LULUHUAC5ZC",
+      "hosted_id": "Z2LULUHUAC5ZC",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/sovereignmessenger-standard-annual.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/Z2LULUHUAC5ZC",
+        "sha256": "916c5769721ed31c85f4e43561872f82e2e2b6ce24325fbabd47c0411ccda2a8"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/sovereignmessenger-standard-annual.html",
+        "hosted_id": "Z2LULUHUAC5ZC",
+        "kind": "stacked",
+        "sha256": "7980102378519861ac7597251134dafe9b5c365b0adda7d1baa3203a0de90e61"
+      },
+      "button_single": {
+        "file": "buttons/single/sovereignmessenger-standard-annual.html",
+        "hosted_id": "Z2LULUHUAC5ZC",
+        "kind": "single",
+        "sha256": "378f3bc2d73f8601fce7dd872905b08bc87e16790ec905cb8f59dc797a0ea4ad"
+      },
+      "license_days": 365
+    },
+    {
+      "slug": "sovereignmessenger-standard-lifetime",
+      "product_id": "SovereignMessenger",
+      "tier": "",
+      "plan": "lifetime",
+      "name": "Sovereign Messenger (Ghvst Sovereign Gang) - Lifetime",
+      "description": "one payment, never expires.",
+      "price": 149.0,
+      "currency": "USD",
+      "days": 0,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/Q5WLM3CUTN9DE",
+      "hosted_id": "Q5WLM3CUTN9DE",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/sovereignmessenger-standard-lifetime.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/Q5WLM3CUTN9DE",
+        "sha256": "3eaa5795ddb49cb2b4e74ab25a006c6e64c61ab02ba24eba4c64d3cec56e5065"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/sovereignmessenger-standard-lifetime.html",
+        "hosted_id": "Q5WLM3CUTN9DE",
+        "kind": "stacked",
+        "sha256": "350693929590597e2e176a9aaf1334536579896dcd668cde2142462604a570de"
+      },
+      "button_single": {
+        "file": "buttons/single/sovereignmessenger-standard-lifetime.html",
+        "hosted_id": "Q5WLM3CUTN9DE",
+        "kind": "single",
+        "sha256": "ff7c3e8e4539a4047e7ec5517f7a31ed8b382d7e7e6a84ac9f4b69561e2a713c"
+      },
+      "license_days": 0
+    },
+    {
+      "slug": "roxvault-standard-monthly",
+      "product_id": "RoxVault",
+      "tier": "",
+      "plan": "monthly",
+      "name": "RoxVault - Roblox Account Manager - Monthly",
+      "description": "30-day licence - renew any time.",
+      "price": 25.0,
+      "currency": "USD",
+      "days": 30,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/JVFPD3JFRCWUG",
+      "hosted_id": "JVFPD3JFRCWUG",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/roxvault-standard-monthly.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/JVFPD3JFRCWUG",
+        "sha256": "5f71f84969549d6ffed2c074a01fb68c61dc9080476222fa7174bab65e2d2f90"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/roxvault-standard-monthly.html",
+        "hosted_id": "JVFPD3JFRCWUG",
+        "kind": "stacked",
+        "sha256": "aa8c562bd03cb0919db89b9246dba77d95e402e5dcbae7ba05880fe1c85a5f51"
+      },
+      "button_single": {
+        "file": "buttons/single/roxvault-standard-monthly.html",
+        "hosted_id": "JVFPD3JFRCWUG",
+        "kind": "single",
+        "sha256": "10c6c2d9535f553695c953dc813e7b30e9057994fa461cbf8af4be3247b7f40f"
+      },
+      "license_days": 30
+    },
+    {
+      "slug": "roxvault-standard-annual",
+      "product_id": "RoxVault",
+      "tier": "",
+      "plan": "annual",
+      "name": "RoxVault - Roblox Account Manager - Annual",
+      "description": "2 months free - 365-day licence, renew any time.",
+      "price": 199.0,
+      "currency": "USD",
+      "days": 365,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/Z39S9YZD6GL4A",
+      "hosted_id": "Z39S9YZD6GL4A",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/roxvault-standard-annual.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/Z39S9YZD6GL4A",
+        "sha256": "541867a7bb24ff5a8dc81a1ccfed8ca3723cb2f0825cde31aa59b3b25a90b089"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/roxvault-standard-annual.html",
+        "hosted_id": "Z39S9YZD6GL4A",
+        "kind": "stacked",
+        "sha256": "88392fd38a595e936cc844d6e25724ac5e8780babdf8f7f6e4aba5c8370d1a0b"
+      },
+      "button_single": {
+        "file": "buttons/single/roxvault-standard-annual.html",
+        "hosted_id": "Z39S9YZD6GL4A",
+        "kind": "single",
+        "sha256": "a2e22359f0491771cdd8acd846db0fae731c2089fd8faeeb8b072f67d239dba1"
+      },
+      "license_days": 365
+    },
+    {
+      "slug": "roxvault-standard-lifetime",
+      "product_id": "RoxVault",
+      "tier": "",
+      "plan": "lifetime",
+      "name": "RoxVault - Roblox Account Manager - Lifetime",
+      "description": "one payment, never expires.",
+      "price": 499.0,
+      "currency": "USD",
+      "days": 0,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/V4PRY4TFPU2AU",
+      "hosted_id": "V4PRY4TFPU2AU",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/roxvault-standard-lifetime.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/V4PRY4TFPU2AU",
+        "sha256": "a173a16006065ef5dd770a00caabd09a4112bddfb8c4e341398d41303c3a6f5c"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/roxvault-standard-lifetime.html",
+        "hosted_id": "V4PRY4TFPU2AU",
+        "kind": "stacked",
+        "sha256": "4bae7740aa501258ba05103176252bc2224845a823ef71bae9e80af319d2494d"
+      },
+      "button_single": {
+        "file": "buttons/single/roxvault-standard-lifetime.html",
+        "hosted_id": "V4PRY4TFPU2AU",
+        "kind": "single",
+        "sha256": "f7485a0c0febab54a28f42ec75e1fd71d703af055248e93a57e0639eeb5e10d9"
+      },
+      "license_days": 0
+    },
+    {
+      "slug": "ghvstallapps-standard-monthly",
+      "product_id": "GhvstAllApps",
+      "tier": "",
+      "plan": "monthly",
+      "name": "GHOST Apps Licence - every Ghvst app - Monthly",
+      "description": "every Ghvst app - 30-day licence, renew any time.",
+      "price": 29.0,
+      "currency": "USD",
+      "days": 30,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/7XJF5B2FARRG6",
+      "hosted_id": "7XJF5B2FARRG6",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/ghvstallapps-standard-monthly.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/7XJF5B2FARRG6",
+        "sha256": "d69d5341d9096476b4d9b007ce4539dc863425f3c072579fa14db44e4f49af4c"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/ghvstallapps-standard-monthly.html",
+        "hosted_id": "7XJF5B2FARRG6",
+        "kind": "stacked",
+        "sha256": "86b53869987922ce72cb93188ce4d11a0fd5a8f408edeaf499a8ad15ec542c87"
+      },
+      "button_single": {
+        "file": "buttons/single/ghvstallapps-standard-monthly.html",
+        "hosted_id": "7XJF5B2FARRG6",
+        "kind": "single",
+        "sha256": "1e664b6c45eba9c2ab5dec5b666db528289a5b785bee9e5967a2afeb51ee7d91"
+      },
+      "license_days": 30
+    },
+    {
+      "slug": "ghvstallapps-standard-annual",
+      "product_id": "GhvstAllApps",
+      "tier": "",
+      "plan": "annual",
+      "name": "GHOST Apps Licence - every Ghvst app - Annual",
+      "description": "2.5 months free - 365-day licence, renew any time.",
+      "price": 249.0,
+      "currency": "USD",
+      "days": 365,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/UW7LV8BZL2FMA",
+      "hosted_id": "UW7LV8BZL2FMA",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/ghvstallapps-standard-annual.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/UW7LV8BZL2FMA",
+        "sha256": "cbb061115d2e52f5131d13d077d15d89139301fcd3091645e89851b1af23eb30"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/ghvstallapps-standard-annual.html",
+        "hosted_id": "UW7LV8BZL2FMA",
+        "kind": "stacked",
+        "sha256": "def8a70a631a83acabfd9528960f24d5e9e60562150210bbd3909ecf6dce8db8"
+      },
+      "button_single": {
+        "file": "buttons/single/ghvstallapps-standard-annual.html",
+        "hosted_id": "UW7LV8BZL2FMA",
+        "kind": "single",
+        "sha256": "8458ab1a0e068f5b57a4c2211acd069e0e431ab5a3ad3c0198c514946506db1b"
+      },
+      "license_days": 365
+    },
+    {
+      "slug": "ghvstallapps-standard-lifetime",
+      "product_id": "GhvstAllApps",
+      "tier": "",
+      "plan": "lifetime",
+      "name": "GHOST Apps Licence - every Ghvst app - Lifetime",
+      "description": "one payment, never expires.",
+      "price": 499.0,
+      "currency": "USD",
+      "days": 0,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/UVFX98243BBHS",
+      "hosted_id": "UVFX98243BBHS",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/ghvstallapps-standard-lifetime.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/UVFX98243BBHS",
+        "sha256": "1e0fe0d7e1cd08b1ec859193261d5a84ecb81a527ddd08899bd6cf5cf0aa1fdc"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/ghvstallapps-standard-lifetime.html",
+        "hosted_id": "UVFX98243BBHS",
+        "kind": "stacked",
+        "sha256": "df1f7ba3ed51190b2a12637154423715796b1ffa6aa9da0084003870680d7f50"
+      },
+      "button_single": {
+        "file": "buttons/single/ghvstallapps-standard-lifetime.html",
+        "hosted_id": "UVFX98243BBHS",
+        "kind": "single",
+        "sha256": "9d5a5c20fbd126085ebaa18d2b8d08d7bd979b230d40afd2583bc05888b39875"
+      },
+      "license_days": 0
+    },
+    {
+      "slug": "ghvstcapture-standard-monthly",
+      "product_id": "GhvstCapture",
+      "tier": "",
+      "plan": "monthly",
+      "name": "GHVST Capture - screen + camera evidence engine with offline AI - Monthly",
+      "description": "PROFESSIONAL CAPTURE RIG + AI. Screen recorder, camera evidence engine, image editor, video editor, offline Jenny neural voice, on-device AI assistant with markdown bulletins and a live model catalogue. Priced above the browser because it is a different job: evidence, not browsing. 30-day licence - renew any time.",
+      "price": 19.0,
+      "currency": "USD",
+      "days": 30,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/MNPDLYNLHTYJA",
+      "hosted_id": "MNPDLYNLHTYJA",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/ghvstcapture-standard-monthly.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/MNPDLYNLHTYJA",
+        "sha256": "c77f94be74c2d410e4ca23e935949cc7823e4117ac0746ad0f946d2449ed11d5"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/ghvstcapture-standard-monthly.html",
+        "hosted_id": "MNPDLYNLHTYJA",
+        "kind": "stacked",
+        "sha256": "3776bfb6e58c12ea20dd38bd07948354b244c22897d54826950772ecd9e8d793"
+      },
+      "button_single": {
+        "file": "buttons/single/ghvstcapture-standard-monthly.html",
+        "hosted_id": "MNPDLYNLHTYJA",
+        "kind": "single",
+        "sha256": "73417db1324f6d87b8353fbdad8e148bfcc2ef010a94c30b08433ade4e8e7147"
+      },
+      "license_days": 30
+    },
+    {
+      "slug": "ghvstcapture-standard-annual",
+      "product_id": "GhvstCapture",
+      "tier": "",
+      "plan": "annual",
+      "name": "GHVST Capture - screen + camera evidence engine with offline AI - Annual",
+      "description": "PROFESSIONAL CAPTURE RIG + AI. Screen recorder, camera evidence engine, image editor, video editor, offline Jenny neural voice, on-device AI assistant with markdown bulletins and a live model catalogue. Priced above the browser because it is a different job: evidence, not browsing. 2 months free - 365-day licence, renew any time.",
+      "price": 149.0,
+      "currency": "USD",
+      "days": 365,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/TFBBSZ57FTM58",
+      "hosted_id": "TFBBSZ57FTM58",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/ghvstcapture-standard-annual.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/TFBBSZ57FTM58",
+        "sha256": "e0cad8eb138f5ef35d9329cc489daf4937d757db24f468f54d4ee92c0427def4"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/ghvstcapture-standard-annual.html",
+        "hosted_id": "TFBBSZ57FTM58",
+        "kind": "stacked",
+        "sha256": "f96cd250e4ca3f5de1323ef541860596941d43f60def7bc99e3254b4717ddf29"
+      },
+      "button_single": {
+        "file": "buttons/single/ghvstcapture-standard-annual.html",
+        "hosted_id": "TFBBSZ57FTM58",
+        "kind": "single",
+        "sha256": "122af7c8cc716b214a2c3bb7c2dfc59d8a5238195775ac6d6efa8778be411ee9"
+      },
+      "license_days": 365
+    },
+    {
+      "slug": "ghvstcapture-standard-lifetime",
+      "product_id": "GhvstCapture",
+      "tier": "",
+      "plan": "lifetime",
+      "name": "GHVST Capture - screen + camera evidence engine with offline AI - Lifetime",
+      "description": "PROFESSIONAL CAPTURE RIG + AI. Screen recorder, camera evidence engine, image editor, video editor, offline Jenny neural voice, on-device AI assistant with markdown bulletins and a live model catalogue. Priced above the browser because it is a different job: evidence, not browsing. one payment, never expires.",
+      "price": 399.0,
+      "currency": "USD",
+      "days": 0,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/8AKFFXJUKRTRS",
+      "hosted_id": "8AKFFXJUKRTRS",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/ghvstcapture-standard-lifetime.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/8AKFFXJUKRTRS",
+        "sha256": "291ac9ba42df3f2baa84031cc49f498483a1c9d15dc9131ee13af34a3bba34ee"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/ghvstcapture-standard-lifetime.html",
+        "hosted_id": "8AKFFXJUKRTRS",
+        "kind": "stacked",
+        "sha256": "4d95eaabb9dcadc95bd2c156d202f4cede3fb09ee9928c247017bc7fb5dff7de"
+      },
+      "button_single": {
+        "file": "buttons/single/ghvstcapture-standard-lifetime.html",
+        "hosted_id": "8AKFFXJUKRTRS",
+        "kind": "single",
+        "sha256": "908fa42439c475b5f58520e74ea36fbeed607d2a8c15d4ae2507ae86552c9b01"
+      },
+      "license_days": 0
+    },
+    {
+      "slug": "ghvstdevkit-standard-monthly",
+      "product_id": "GhvstDevKit",
+      "tier": "",
+      "plan": "monthly",
+      "name": "GHVST DevKit - the on-device development workstation - Monthly",
+      "description": "A REAL TERMINAL ON THE PHONE. App-private rootfs, toybox applet suite, installable packs, files + editor + terminal + package manager + agent bridge, survives reboot and alarms. It runs the whole developer workflow on a cheap Android phone with no laptop. 30-day licence - renew any time.",
+      "price": 29.0,
+      "currency": "USD",
+      "days": 30,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/FLQJDSLNDB4P8",
+      "hosted_id": "FLQJDSLNDB4P8",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/ghvstdevkit-standard-monthly.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/FLQJDSLNDB4P8",
+        "sha256": "27d367d11f48eebe086d9fc16441a84e5471f6a295c70b172cedc7211892b572"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/ghvstdevkit-standard-monthly.html",
+        "hosted_id": "FLQJDSLNDB4P8",
+        "kind": "stacked",
+        "sha256": "bb7af3bbfd840f8533f4896bbc2d892ebedb50787ae11c4274e65cc7868196f5"
+      },
+      "button_single": {
+        "file": "buttons/single/ghvstdevkit-standard-monthly.html",
+        "hosted_id": "FLQJDSLNDB4P8",
+        "kind": "single",
+        "sha256": "ffa01aacd04eb5522e32073f8cec6bc83159946c3b5852ecd77eae193c0dc64e"
+      },
+      "license_days": 30
+    },
+    {
+      "slug": "ghvstdevkit-standard-annual",
+      "product_id": "GhvstDevKit",
+      "tier": "",
+      "plan": "annual",
+      "name": "GHVST DevKit - the on-device development workstation - Annual",
+      "description": "A REAL TERMINAL ON THE PHONE. App-private rootfs, toybox applet suite, installable packs, files + editor + terminal + package manager + agent bridge, survives reboot and alarms. It runs the whole developer workflow on a cheap Android phone with no laptop. 2 months free - 365-day licence, renew any time.",
+      "price": 219.0,
+      "currency": "USD",
+      "days": 365,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/XRYZ4FPTTXABY",
+      "hosted_id": "XRYZ4FPTTXABY",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/ghvstdevkit-standard-annual.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/XRYZ4FPTTXABY",
+        "sha256": "5376caa319bb0d2f79fa6db89eae3f7c793e06852c9c6bfd51f8dab008cdaaa4"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/ghvstdevkit-standard-annual.html",
+        "hosted_id": "XRYZ4FPTTXABY",
+        "kind": "stacked",
+        "sha256": "f3802a3ae28620155aabd2eb67408e503f46a3ceb8853aeae461213aa08f7a10"
+      },
+      "button_single": {
+        "file": "buttons/single/ghvstdevkit-standard-annual.html",
+        "hosted_id": "XRYZ4FPTTXABY",
+        "kind": "single",
+        "sha256": "a98bed4e2b084c44d6dd4e3c306d543084e3c0e0e8b9417dc1a3a9edcb27263a"
+      },
+      "license_days": 365
+    },
+    {
+      "slug": "ghvstdevkit-standard-lifetime",
+      "product_id": "GhvstDevKit",
+      "tier": "",
+      "plan": "lifetime",
+      "name": "GHVST DevKit - the on-device development workstation - Lifetime",
+      "description": "A REAL TERMINAL ON THE PHONE. App-private rootfs, toybox applet suite, installable packs, files + editor + terminal + package manager + agent bridge, survives reboot and alarms. It runs the whole developer workflow on a cheap Android phone with no laptop. one payment, never expires.",
+      "price": 549.0,
+      "currency": "USD",
+      "days": 0,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/JEPEW9MVKAZ2Y",
+      "hosted_id": "JEPEW9MVKAZ2Y",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/ghvstdevkit-standard-lifetime.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/JEPEW9MVKAZ2Y",
+        "sha256": "a9755d6231ca78609cab581099e200221c6ebe7fffd21d013b68ccdc73d94d86"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/ghvstdevkit-standard-lifetime.html",
+        "hosted_id": "JEPEW9MVKAZ2Y",
+        "kind": "stacked",
+        "sha256": "afba100cac887d1b29c90c7be44378ef96fb129c6249fd635941b79d0ed64aa7"
+      },
+      "button_single": {
+        "file": "buttons/single/ghvstdevkit-standard-lifetime.html",
+        "hosted_id": "JEPEW9MVKAZ2Y",
+        "kind": "single",
+        "sha256": "af1e8f5e9036c52293268bd3826d51bb4dab8532a7421b044d8c80518500a8bb"
+      },
+      "license_days": 0
+    },
+    {
+      "slug": "ghvstcapturesuite-standard-monthly",
+      "product_id": "GhvstCaptureSuite",
+      "tier": "",
+      "plan": "monthly",
+      "name": "GHVST Capture Suite - Capture + DevKit together - Monthly",
+      "description": "Both tools, one licence. The suite price is less than buying them separately, so nobody is charged twice for the same work. Capture + DevKit - 30-day licence, renew any time.",
+      "price": 39.0,
+      "currency": "USD",
+      "days": 30,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/B4YZLRPMAPMNW",
+      "hosted_id": "B4YZLRPMAPMNW",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/ghvstcapturesuite-standard-monthly.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/B4YZLRPMAPMNW",
+        "sha256": "1b03de066002993e4b73e20078778b9430f7f64b4a36825fa541d4d94a51b553"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/ghvstcapturesuite-standard-monthly.html",
+        "hosted_id": "B4YZLRPMAPMNW",
+        "kind": "stacked",
+        "sha256": "16b57a6c5964541edf4349d44726fed54acb2cc73a294ebbb8c650194c5feb7f"
+      },
+      "button_single": {
+        "file": "buttons/single/ghvstcapturesuite-standard-monthly.html",
+        "hosted_id": "B4YZLRPMAPMNW",
+        "kind": "single",
+        "sha256": "209fc70af48bdeedf870562839dd57141d64fdde088ae296652b814ae85d47fe"
+      },
+      "license_days": 30
+    },
+    {
+      "slug": "ghvstcapturesuite-standard-annual",
+      "product_id": "GhvstCaptureSuite",
+      "tier": "",
+      "plan": "annual",
+      "name": "GHVST Capture Suite - Capture + DevKit together - Annual",
+      "description": "Both tools, one licence. The suite price is less than buying them separately, so nobody is charged twice for the same work. Capture + DevKit, 2 months free - 365-day licence, renew any time.",
+      "price": 299.0,
+      "currency": "USD",
+      "days": 365,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/TTZS4L3BCBXBA",
+      "hosted_id": "TTZS4L3BCBXBA",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/ghvstcapturesuite-standard-annual.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/TTZS4L3BCBXBA",
+        "sha256": "133ed51b418bd33a647bc6fdee3468c75f8b4cad155beaa9f77f684565b2c2b1"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/ghvstcapturesuite-standard-annual.html",
+        "hosted_id": "TTZS4L3BCBXBA",
+        "kind": "stacked",
+        "sha256": "87987d04c08083547388cd43f5dcbd1f56fda38a72a3937844c5c92c0680b0b7"
+      },
+      "button_single": {
+        "file": "buttons/single/ghvstcapturesuite-standard-annual.html",
+        "hosted_id": "TTZS4L3BCBXBA",
+        "kind": "single",
+        "sha256": "e1042e817887e37950a0e81bbd59721f2d12d4ab05c89bed2827081604e132ee"
+      },
+      "license_days": 365
+    },
+    {
+      "slug": "ghvstcapturesuite-standard-lifetime",
+      "product_id": "GhvstCaptureSuite",
+      "tier": "",
+      "plan": "lifetime",
+      "name": "GHVST Capture Suite - Capture + DevKit together - Lifetime",
+      "description": "Both tools, one licence. The suite price is less than buying them separately, so nobody is charged twice for the same work. one payment, never expires.",
+      "price": 799.0,
+      "currency": "USD",
+      "days": 0,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/7R3JC67FXZ3H4",
+      "hosted_id": "7R3JC67FXZ3H4",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/ghvstcapturesuite-standard-lifetime.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/7R3JC67FXZ3H4",
+        "sha256": "aef82c283c6717035f98bdbb1600bc7d2c7f08263d5e5111aabdaf2d4366ceda"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/ghvstcapturesuite-standard-lifetime.html",
+        "hosted_id": "7R3JC67FXZ3H4",
+        "kind": "stacked",
+        "sha256": "a3957bf5d07eda19aab21964a364bbf37da1e8b4232e39c7f8ce51ad6ab5a4a9"
+      },
+      "button_single": {
+        "file": "buttons/single/ghvstcapturesuite-standard-lifetime.html",
+        "hosted_id": "7R3JC67FXZ3H4",
+        "kind": "single",
+        "sha256": "54c194d8d96187f08772231e2ebdd215bb81301de3ad0647268c6c467eb40a9b"
+      },
+      "license_days": 0
+    },
+    {
+      "slug": "ghvstteam-standard-monthly",
+      "product_id": "GhvstTeam",
+      "tier": "",
+      "plan": "monthly",
+      "name": "GHOST Team Licence - Team monthly",
+      "description": "5 seats, $12 each - 30-day licence, renew any time.",
+      "price": 60.0,
+      "currency": "USD",
+      "days": 30,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/U5EAJJNUN6MD6",
+      "hosted_id": "U5EAJJNUN6MD6",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/ghvstteam-standard-monthly.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/U5EAJJNUN6MD6",
+        "sha256": "e5bc0a8faf601efd391a19f3cb40294c2990bd77b2ab0d1305dbe8ba5ea5b0a3"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/ghvstteam-standard-monthly.html",
+        "hosted_id": "U5EAJJNUN6MD6",
+        "kind": "stacked",
+        "sha256": "5503d4105b7576bfd41f3ceff6cf5f3685a248a802e6d7118cebbc58d30f6806"
+      },
+      "button_single": {
+        "file": "buttons/single/ghvstteam-standard-monthly.html",
+        "hosted_id": "U5EAJJNUN6MD6",
+        "kind": "single",
+        "sha256": "a323f108e2c1c6df81472856e844427d5197cf182750de2a93cb7d073e96dab2"
+      },
+      "license_days": 30
+    },
+    {
+      "slug": "ghvstteam-standard-annual",
+      "product_id": "GhvstTeam",
+      "tier": "",
+      "plan": "annual",
+      "name": "GHOST Team Licence - Team annual",
+      "description": "5 seats, 2 months free - 365-day licence, renew any time.",
+      "price": 600.0,
+      "currency": "USD",
+      "days": 365,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/Q3A4X3AHUDMU8",
+      "hosted_id": "Q3A4X3AHUDMU8",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/ghvstteam-standard-annual.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/Q3A4X3AHUDMU8",
+        "sha256": "05265d78673152e0828a1d3fb8cfd57a2e348d812e694f66793adfd8d7661393"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/ghvstteam-standard-annual.html",
+        "hosted_id": "Q3A4X3AHUDMU8",
+        "kind": "stacked",
+        "sha256": "58a9571579cf9f1627d1b9129a42382a4ef14ebd180453ede753016747ad10ca"
+      },
+      "button_single": {
+        "file": "buttons/single/ghvstteam-standard-annual.html",
+        "hosted_id": "Q3A4X3AHUDMU8",
+        "kind": "single",
+        "sha256": "c2407292a9d962c52ae5edb0dd4e611d4b7514b72b778d3655fc7a11acafa0b2"
+      },
+      "license_days": 365
+    },
+    {
+      "slug": "rdx-workspace-standard-monthly",
+      "product_id": "rdx-workspace",
+      "tier": "standard",
+      "plan": "monthly",
+      "name": "RDX Workspace - the AI engineering cockpit for Windows - RDX Workspace Standard - Monthly",
+      "description": "the full desktop cockpit on 1 machine 30 days - the low-cost way in - 30-day licence, renew any time.",
+      "price": 29.0,
+      "currency": "USD",
+      "days": 30,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/8YXFNZYC7TYEG",
+      "hosted_id": "8YXFNZYC7TYEG",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/rdx-workspace-standard-monthly.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/8YXFNZYC7TYEG",
+        "sha256": "8cec24d3110737227085b96caeb9a10e0bcd2022501a73dac4f49c6a8756f5a3"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/rdx-workspace-standard-monthly.html",
+        "hosted_id": "8YXFNZYC7TYEG",
+        "kind": "stacked",
+        "sha256": "6a0937939f6d87cbe353f78957ac12fb921b3d97b3a6360f0d848b694a7b7ccc"
+      },
+      "button_single": {
+        "file": "buttons/single/rdx-workspace-standard-monthly.html",
+        "hosted_id": "8YXFNZYC7TYEG",
+        "kind": "single",
+        "sha256": "0e60da342a7908e298ddaa80c3357df773430875f76696b911e7db12f7c992ec"
+      },
+      "license_days": 30
+    },
+    {
+      "slug": "rdx-workspace-standard-annual",
+      "product_id": "rdx-workspace",
+      "tier": "standard",
+      "plan": "annual",
+      "name": "RDX Workspace - the AI engineering cockpit for Windows - RDX Workspace Standard - Annual",
+      "description": "the full desktop cockpit on 1 machine one payment, one year of every release - 365-day licence, renew any time.",
+      "price": 199.0,
+      "currency": "USD",
+      "days": 365,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/FRLV3WPVMJF3S",
+      "hosted_id": "FRLV3WPVMJF3S",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/rdx-workspace-standard-annual.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/FRLV3WPVMJF3S",
+        "sha256": "4ac2782e1bc554ad078acb26b385150937462282e9b85b64f738ce11bef08a47"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/rdx-workspace-standard-annual.html",
+        "hosted_id": "FRLV3WPVMJF3S",
+        "kind": "stacked",
+        "sha256": "9c122e43d688bdee2fb24b56bedffed6d395bbedf3d9d4a185243a8fca16a79d"
+      },
+      "button_single": {
+        "file": "buttons/single/rdx-workspace-standard-annual.html",
+        "hosted_id": "FRLV3WPVMJF3S",
+        "kind": "single",
+        "sha256": "d4876919b793bd71106980b94e2f4ab125b58c64e1c78c5505633cd64de6dd00"
+      },
+      "license_days": 365
+    },
+    {
+      "slug": "rdx-workspace-standard-lifetime",
+      "product_id": "rdx-workspace",
+      "tier": "standard",
+      "plan": "lifetime",
+      "name": "RDX Workspace - the AI engineering cockpit for Windows - RDX Workspace Standard - Perpetual",
+      "description": "the full desktop cockpit on 1 machine one payment, never expires - the headline licence.",
+      "price": 499.0,
+      "currency": "USD",
+      "days": 0,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/UYDKHF9CPDCB6",
+      "hosted_id": "UYDKHF9CPDCB6",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/rdx-workspace-standard-lifetime.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/UYDKHF9CPDCB6",
+        "sha256": "28b2c1fd3beb777b4ccbad1c0c00ae46837393405a1834ff4f71984aeb629e2a"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/rdx-workspace-standard-lifetime.html",
+        "hosted_id": "UYDKHF9CPDCB6",
+        "kind": "stacked",
+        "sha256": "e97c48ebc59d1b73338ce842d0036b739c8201293272c6ae50b67af137a0b6a7"
+      },
+      "button_single": {
+        "file": "buttons/single/rdx-workspace-standard-lifetime.html",
+        "hosted_id": "UYDKHF9CPDCB6",
+        "kind": "single",
+        "sha256": "b0551839f62c4d7c1dedbbed6df88ddc3f92503d9c8ae5acfd53dc4716677bd3"
+      },
+      "license_days": 0
+    },
+    {
+      "slug": "rdx-workspace-mythic-lifetime",
+      "product_id": "rdx-workspace",
+      "tier": "mythic",
+      "plan": "lifetime",
+      "name": "RDX Workspace - the AI engineering cockpit for Windows - RDX Workspace MYTHIC - MYTHIC lifetime",
+      "description": "everything in Standard, permanently, plus every future release of RDX for life - the forever tier one payment, never expires - every future release included.",
+      "price": 999.0,
+      "currency": "USD",
+      "days": 0,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/7DWT76LM4ZKBY",
+      "hosted_id": "7DWT76LM4ZKBY",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/rdx-workspace-mythic-lifetime.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/7DWT76LM4ZKBY",
+        "sha256": "7f9fb29fb464695925f88682a6281fc0592d2163d81619cecb0b21603c266520"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/rdx-workspace-mythic-lifetime.html",
+        "hosted_id": "7DWT76LM4ZKBY",
+        "kind": "stacked",
+        "sha256": "1c22265a95cf5bc603ffb75fc20e49749eebc38b35bb5fa64dd752e11b64e1e4"
+      },
+      "button_single": {
+        "file": "buttons/single/rdx-workspace-mythic-lifetime.html",
+        "hosted_id": "7DWT76LM4ZKBY",
+        "kind": "single",
+        "sha256": "3ce3c5024e2c74b3c6d1884a5a2fc9fe33cb737d15bc8aef3976b904d5d92295"
+      },
+      "license_days": 0
+    },
+    {
+      "slug": "rdx-workspace-pro-annual",
+      "product_id": "rdx-workspace",
+      "tier": "pro",
+      "plan": "annual",
+      "name": "RDX Workspace - the AI engineering cockpit for Windows - RDX Workspace Pro - Pro annual",
+      "description": "Standard plus 3 machines, priority support and every new release for the term 3 machines, priority support, every release for a year - 365-day licence, renew any time.",
+      "price": 1499.0,
+      "currency": "USD",
+      "days": 365,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/5YVRDVF8A644J",
+      "hosted_id": "5YVRDVF8A644J",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/rdx-workspace-pro-annual.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/5YVRDVF8A644J",
+        "sha256": "f3a05fc9572c9deb541c71525ce2855c921c6b0fc28a061adccd12694a21fa55"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/rdx-workspace-pro-annual.html",
+        "hosted_id": "5YVRDVF8A644J",
+        "kind": "stacked",
+        "sha256": "9c3388e90fc2d565c7b13c926a0214a91b044c9100de8609fe904065ebebbbf8"
+      },
+      "button_single": {
+        "file": "buttons/single/rdx-workspace-pro-annual.html",
+        "hosted_id": "5YVRDVF8A644J",
+        "kind": "single",
+        "sha256": "869f1f2645d33c7dcce601ca3ae711260aa425d1dd0b94f8b5310c036d51a645"
+      },
+      "license_days": 365
+    },
+    {
+      "slug": "rdx-workspace-pro-lifetime",
+      "product_id": "rdx-workspace",
+      "tier": "pro",
+      "plan": "lifetime",
+      "name": "RDX Workspace - the AI engineering cockpit for Windows - RDX Workspace Pro - Pro perpetual",
+      "description": "Standard plus 3 machines, priority support and every new release for the term 3 machines, never expires - 2.5 years of Pro annual paid once.",
+      "price": 3749.0,
+      "currency": "USD",
+      "days": 0,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/H27R4W7W8W8U6",
+      "hosted_id": "H27R4W7W8W8U6",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/rdx-workspace-pro-lifetime.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/H27R4W7W8W8U6",
+        "sha256": "b9473f3cc38b1be819c0a093ee7e67fdfcd2fec6b2af1752a3d3d150d1eee07f"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/rdx-workspace-pro-lifetime.html",
+        "hosted_id": "H27R4W7W8W8U6",
+        "kind": "stacked",
+        "sha256": "48031aef201cb636e9cd3f3d12f28c28c904db4f8a66df9ed84992224819299c"
+      },
+      "button_single": {
+        "file": "buttons/single/rdx-workspace-pro-lifetime.html",
+        "hosted_id": "H27R4W7W8W8U6",
+        "kind": "single",
+        "sha256": "b4ba1e82629c313b4a5e8309b4adbfd8eb6f83b236b5ee7b68ec76fbb35ab187"
+      },
+      "license_days": 0
+    },
+    {
+      "slug": "rdx-workspace-enterprise-annual",
+      "product_id": "rdx-workspace",
+      "tier": "enterprise",
+      "plan": "annual",
+      "name": "RDX Workspace - the AI engineering cockpit for Windows - RDX Workspace Enterprise - Enterprise annual",
+      "description": "site licence on the customer's own infrastructure, named support, source escrow on request site licence on the customer's own infrastructure - priced by scope from $9,000 to $25,000, invoiced - 365-day licence, renew any time.",
+      "price": 12000.0,
+      "currency": "USD",
+      "days": 365,
+      "billing_type": "contract",
+      "checkout_url": "https://www.paypal.com/ncp/payment/DF46F5VAT7HAJ",
+      "hosted_id": "DF46F5VAT7HAJ",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/rdx-workspace-enterprise-annual.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/DF46F5VAT7HAJ",
+        "sha256": "9575aa31d0916f14013285071234da4d5602cba60196ceba96fa4a88b5ac2c86"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/rdx-workspace-enterprise-annual.html",
+        "hosted_id": "DF46F5VAT7HAJ",
+        "kind": "stacked",
+        "sha256": "adc72ee2efde52236d59a4195089b8c9cbede62d6ea27e90c045c28a40b9a38b"
+      },
+      "button_single": {
+        "file": "buttons/single/rdx-workspace-enterprise-annual.html",
+        "hosted_id": "DF46F5VAT7HAJ",
+        "kind": "single",
+        "sha256": "d6c9e11aebb644d13a6483c507a1c3b9df5f4197dfe84d822af210669063b9be"
+      },
+      "license_days": 365
+    },
+    {
+      "slug": "ghvstbrowserpc-standard-lifetime",
+      "product_id": "GhvstBrowserPC",
+      "tier": "",
+      "plan": "lifetime",
+      "name": "Ghvst Browser - PC - Lifetime",
+      "description": "The Windows build of Ghvst Browser: the WebView2 engine, extension loading, the Accounts control centre and RoxVault inside it. One payment, one key, it never expires. one payment, never expires.",
+      "price": 79.0,
+      "currency": "USD",
+      "days": 0,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/K3QPTFJQYFYK2",
+      "hosted_id": "K3QPTFJQYFYK2",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/ghvstbrowserpc-standard-lifetime.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/K3QPTFJQYFYK2",
+        "sha256": "7d2d3082e227c44601e923d167230fdcb88d994a69ecca99623ad69ecbbe266f"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/ghvstbrowserpc-standard-lifetime.html",
+        "hosted_id": "K3QPTFJQYFYK2",
+        "kind": "stacked",
+        "sha256": "2e277e5f6b37c99a3a84f32a5a2bbca69972fa3288d53e46f7b589c896728dc2"
+      },
+      "button_single": {
+        "file": "buttons/single/ghvstbrowserpc-standard-lifetime.html",
+        "hosted_id": "K3QPTFJQYFYK2",
+        "kind": "single",
+        "sha256": "094f3140feb565b0639fb72019085d0bc8ffa100ff50de121a039d2e5f19e1fe"
+      },
+      "license_days": 0
+    },
+    {
+      "slug": "mvrkstudio-standard-lifetime",
+      "product_id": "MVRKStudio",
+      "tier": "",
+      "plan": "lifetime",
+      "name": "MVRK Studio - Lifetime",
+      "description": "The creation suite: the motion, audio and assembly pipeline behind the animations. One payment, one key, it never expires. one payment, never expires.",
+      "price": 59.0,
+      "currency": "USD",
+      "days": 0,
+      "billing_type": "one_time",
+      "checkout_url": "https://www.paypal.com/ncp/payment/6G23LVV9URXPQ",
+      "hosted_id": "6G23LVV9URXPQ",
+      "paypal_plan_id": null,
+      "frequency": "none",
+      "qr": {
+        "file": "qr/mvrkstudio-standard-lifetime.png",
+        "decoded_payload": "https://www.paypal.com/ncp/payment/6G23LVV9URXPQ",
+        "sha256": "672c94573026ed49573f0fac9da21a09b5cbc3cc2b0a7104ef8c7cf97b1df68a"
+      },
+      "button_stacked": {
+        "file": "buttons/stacked/mvrkstudio-standard-lifetime.html",
+        "hosted_id": "6G23LVV9URXPQ",
+        "kind": "stacked",
+        "sha256": "8a9cf3d4f710782398ed2cb90ef4edbc2e82bdbaeca3c185d61ddf19235629a4"
+      },
+      "button_single": {
+        "file": "buttons/single/mvrkstudio-standard-lifetime.html",
+        "hosted_id": "6G23LVV9URXPQ",
+        "kind": "single",
+        "sha256": "7f98b5cb03e79ea6424f005e452a1e7a5085c17846236438c4f7846a147e9d76"
+      },
+      "license_days": 0
+    }
+  ]
+}

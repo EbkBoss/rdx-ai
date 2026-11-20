@@ -1,0 +1,49 @@
+{
+  "at": "2026-11-20T16:57:03Z",
+  "results": [
+    {
+      "slug": "ghvstbrowserandroid-standard-monthly",
+      "hosted_id": "XGZUY2SV9XYNJ",
+      "from": 12.0,
+      "to": 15.0,
+      "copy_from": "30-day licence - renew any time.",
+      "copy_to": "30-day licence - renew any time.",
+      "ok": true,
+      "read_back_amount": "15.00",
+      "read_back_copy": "30-day licence - renew any time."
+    },
+    {
+      "slug": "ghvstbrowserandroid-standard-annual",
+      "hosted_id": "U36JU7BR93GCU",
+      "from": 99.0,
+      "to": 119.0,
+      "copy_from": "save $61 - 365-day licence, renew any time.",
+      "copy_to": "save $61 - 365-day licence, renew any time.",
+      "ok": true,
+      "read_back_amount": "119.00",
+      "read_back_copy": "save $61 - 365-day licence, renew any time."
+    },
+    {
+      "slug": "ghvstbrowserandroid-standard-lifetime",
+      "hosted_id": "F6YU5SSZGQBQ6",
+      "from": 249.0,
+      "to": 299.0,
+      "copy_from": "one payment, never expires.",
+      "copy_to": "one payment, never expires.",
+      "ok": true,
+      "read_back_amount": "299.00",
+      "read_back_copy": "one payment, never expires."
+    },
+    {
+      "slug": "ghvstbrowserpc-standard-lifetime",
+      "hosted_id": "K3QPTFJQYFYK2",
+      "from": 49.0,
+      "to": 79.0,
+      "copy_from": "The Windows build of Ghvst Browser: the WebView2 engine, extension loading, the Accounts control centre and RoxVault inside it. One payment, one key, it never expires. one payment, never expires.",
+      "copy_to": "The Windows build of Ghvst Browser: the WebView2 engine, extension loading, the Accounts control centre and RoxVault inside it. One payment, one key, it never expires. one payment, never expires.",
+      "ok": true,
+      "read_back_amount": "79.00",
+      "read_back_copy": "The Windows build of Ghvst Browser: the WebView2 engine, extension loading, the Accounts control centre and RoxVault inside it. One payment, one key, it never expires. one payment, never expires."
+    }
+  ]
+}

@@ -1,0 +1,324 @@
+{
+  "plans": {
+    "GhvstAllApps||annual": {
+      "billing_type": "subscription",
+      "currency": "USD",
+      "description": "2.5 months free 365-day licence.",
+      "frequency": "annual",
+      "name": "GHOST Apps Licence - every Ghvst app - Annual",
+      "plan_id": "P-90U88441XV8582625NL4QSDI",
+      "price": 249.0,
+      "product_id": "PROD-0TU78041A6893173N",
+      "status": "ACTIVE"
+    },
+    "GhvstAllApps||monthly": {
+      "billing_type": "subscription",
+      "currency": "USD",
+      "description": "every Ghvst app 30-day licence.",
+      "frequency": "monthly",
+      "name": "GHOST Apps Licence - every Ghvst app - Monthly",
+      "plan_id": "P-88D02303M9030025JNL4QSDA",
+      "price": 29.0,
+      "product_id": "PROD-0TU78041A6893173N",
+      "status": "ACTIVE"
+    },
+    "GhvstBrowserAndroid||annual": {
+      "billing_type": "subscription",
+      "currency": "USD",
+      "description": "2.5 months free 365-day licence.",
+      "frequency": "annual",
+      "name": "Ghvst Browser for Android - Annual",
+      "plan_id": "P-97S062017Y585241DNL4QSBY",
+      "price": 99.0,
+      "product_id": "PROD-6VL70167HX434352U",
+      "status": "ACTIVE"
+    },
+    "GhvstBrowserAndroid||monthly": {
+      "billing_type": "subscription",
+      "currency": "USD",
+      "description": "billed every month 30-day licence.",
+      "frequency": "monthly",
+      "name": "Ghvst Browser for Android - Monthly",
+      "plan_id": "P-13W41122WL3105805NL4QSBQ",
+      "price": 12.0,
+      "product_id": "PROD-6VL70167HX434352U",
+      "status": "ACTIVE"
+    },
+    "GhvstCaptureSuite||annual": {
+      "billing_type": "subscription",
+      "currency": "USD",
+      "description": "Both tools, one licence. The suite price is less than buying them separately, so nobody is charged twice for the same work. Capture + DevKit, 2 months free 365-day licence.",
+      "frequency": "annual",
+      "name": "GHVST Capture Suite - Capture + DevKit together - Annual",
+      "plan_id": "P-62165312WM2475200NL4Q2UA",
+      "price": 299.0,
+      "product_id": "PROD-6W68110471930060T",
+      "status": "ACTIVE"
+    },
+    "GhvstCaptureSuite||monthly": {
+      "billing_type": "subscription",
+      "currency": "USD",
+      "description": "Both tools, one licence. The suite price is less than buying them separately, so nobody is charged twice for the same work. Capture + DevKit 30-day licence.",
+      "frequency": "monthly",
+      "name": "GHVST Capture Suite - Capture + DevKit together - Monthly",
+      "plan_id": "P-6AT286167T824662WNL4Q2TY",
+      "price": 39.0,
+      "product_id": "PROD-6W68110471930060T",
+      "status": "ACTIVE"
+    },
+    "GhvstCapture||annual": {
+      "billing_type": "subscription",
+      "currency": "USD",
+      "description": "PROFESSIONAL CAPTURE RIG + AI. Screen recorder, camera evidence engine, image editor, video editor, offline Jenny neural voice, on-device AI assistant with markdown bulletins and a live model catalogue. Priced above the browser because it is a different job: evidence, not browsing. 2 months free 365-day licence.",
+      "frequency": "annual",
+      "name": "GHVST Capture - screen + camera evidence engine with offline AI - Annual",
+      "plan_id": "P-3TF996530E442481ANL4Q2TA",
+      "price": 149.0,
+      "product_id": "PROD-9XV47759G9389254D",
+      "status": "ACTIVE"
+    },
+    "GhvstCapture||monthly": {
+      "billing_type": "subscription",
+      "currency": "USD",
+      "description": "PROFESSIONAL CAPTURE RIG + AI. Screen recorder, camera evidence engine, image editor, video editor, offline Jenny neural voice, on-device AI assistant with markdown bulletins and a live model catalogue. Priced above the browser because it is a different job: evidence, not browsing. billed every month 30-day licence.",
+      "frequency": "monthly",
+      "name": "GHVST Capture - screen + camera evidence engine with offline AI - Monthly",
+      "plan_id": "P-8T228556KD122090GNL4Q2SY",
+      "price": 19.0,
+      "product_id": "PROD-9XV47759G9389254D",
+      "status": "ACTIVE"
+    },
+    "GhvstDevKit||annual": {
+      "billing_type": "subscription",
+      "currency": "USD",
+      "description": "A REAL TERMINAL ON THE PHONE. App-private rootfs, toybox applet suite, installable packs, files + editor + terminal + package manager + agent bridge, survives reboot and alarms. It runs the whole developer workflow on a cheap Android phone with no laptop. 2 months free 365-day licence.",
+      "frequency": "annual",
+      "name": "GHVST DevKit - the on-device development workstation - Annual",
+      "plan_id": "P-44T52584AL0465042NL4Q2TQ",
+      "price": 219.0,
+      "product_id": "PROD-5R87364558744840R",
+      "status": "ACTIVE"
+    },
+    "GhvstDevKit||monthly": {
+      "billing_type": "subscription",
+      "currency": "USD",
+      "description": "A REAL TERMINAL ON THE PHONE. App-private rootfs, toybox applet suite, installable packs, files + editor + terminal + package manager + agent bridge, survives reboot and alarms. It runs the whole developer workflow on a cheap Android phone with no laptop. billed every month 30-day licence.",
+      "frequency": "monthly",
+      "name": "GHVST DevKit - the on-device development workstation - Monthly",
+      "plan_id": "P-51094631UB634612BNL4Q2TI",
+      "price": 29.0,
+      "product_id": "PROD-5R87364558744840R",
+      "status": "ACTIVE"
+    },
+    "GhvstTeam||annual": {
+      "billing_type": "subscription",
+      "currency": "USD",
+      "description": "5 seats, 2 months free 365-day licence.",
+      "frequency": "annual",
+      "name": "GHOST Team Licence - Team annual",
+      "plan_id": "P-1H053729K0375381HNL4QSFQ",
+      "price": 600.0,
+      "product_id": "PROD-8HM510778D150623R",
+      "status": "ACTIVE"
+    },
+    "GhvstTeam||monthly": {
+      "billing_type": "subscription",
+      "currency": "USD",
+      "description": "5 seats, $12 each 30-day licence.",
+      "frequency": "monthly",
+      "name": "GHOST Team Licence - Team monthly",
+      "plan_id": "P-2J158273XV4332609NL4QSFQ",
+      "price": 60.0,
+      "product_id": "PROD-8HM510778D150623R",
+      "status": "ACTIVE"
+    },
+    "GhvstTerminalAndroid|pro|annual": {
+      "billing_type": "subscription",
+      "currency": "USD",
+      "description": "48-step agent, toolchain auto-provision, APK build and install, fast hosted models 2 months free 365-day licence.",
+      "frequency": "annual",
+      "name": "Ghvst Terminal - the AI operator for your phone - Ghvst PRO - PRO annual",
+      "plan_id": "P-5H899731D4364121DNL4QSAA",
+      "price": 150.0,
+      "product_id": "PROD-3K2863475E715424Y",
+      "status": "ACTIVE"
+    },
+    "GhvstTerminalAndroid|pro|monthly": {
+      "billing_type": "subscription",
+      "currency": "USD",
+      "description": "48-step agent, toolchain auto-provision, APK build and install, fast hosted models billed every month 30-day licence.",
+      "frequency": "monthly",
+      "name": "Ghvst Terminal - the AI operator for your phone - Ghvst PRO - PRO monthly",
+      "plan_id": "P-1PK19084KD050834UNL4QR7Y",
+      "price": 15.0,
+      "product_id": "PROD-3K2863475E715424Y",
+      "status": "ACTIVE"
+    },
+    "GhvstTerminalAndroid|titan|annual": {
+      "billing_type": "subscription",
+      "currency": "USD",
+      "description": "160 steps, big models, multi-device console, long-running jobs 2 months free 365-day licence.",
+      "frequency": "annual",
+      "name": "Ghvst Terminal - the AI operator for your phone - Ghvst TITAN - TITAN annual",
+      "plan_id": "P-9M3684326T162372TNL4QSAY",
+      "price": 790.0,
+      "product_id": "PROD-3K2863475E715424Y",
+      "status": "ACTIVE"
+    },
+    "GhvstTerminalAndroid|titan|monthly": {
+      "billing_type": "subscription",
+      "currency": "USD",
+      "description": "160 steps, big models, multi-device console, long-running jobs billed every month 30-day licence.",
+      "frequency": "monthly",
+      "name": "Ghvst Terminal - the AI operator for your phone - Ghvst TITAN - TITAN monthly",
+      "plan_id": "P-9JN91362KB786643YNL4QSAQ",
+      "price": 79.0,
+      "product_id": "PROD-3K2863475E715424Y",
+      "status": "ACTIVE"
+    },
+    "GhvstTerminalAndroid|vip|annual": {
+      "billing_type": "subscription",
+      "currency": "USD",
+      "description": "96 steps, reasoning models, God's Eye live feeds, full skills and MCP packs, vision repair 2 months free 365-day licence.",
+      "frequency": "annual",
+      "name": "Ghvst Terminal - the AI operator for your phone - Ghvst VIP - VIP annual",
+      "plan_id": "P-5UV962754U8441849NL4QSAQ",
+      "price": 290.0,
+      "product_id": "PROD-3K2863475E715424Y",
+      "status": "ACTIVE"
+    },
+    "GhvstTerminalAndroid|vip|monthly": {
+      "billing_type": "subscription",
+      "currency": "USD",
+      "description": "96 steps, reasoning models, God's Eye live feeds, full skills and MCP packs, vision repair billed every month 30-day licence.",
+      "frequency": "monthly",
+      "name": "Ghvst Terminal - the AI operator for your phone - Ghvst VIP - VIP monthly",
+      "plan_id": "P-8JN57360XN529844CNL4QSAI",
+      "price": 29.0,
+      "product_id": "PROD-3K2863475E715424Y",
+      "status": "ACTIVE"
+    },
+    "RoxVault||annual": {
+      "billing_type": "subscription",
+      "currency": "USD",
+      "description": "2 months free 365-day licence.",
+      "frequency": "annual",
+      "name": "RoxVault - Roblox Account Manager - Annual",
+      "plan_id": "P-6YW0366804644231LNL4QSCY",
+      "price": 199.0,
+      "product_id": "PROD-3V07382801182370B",
+      "status": "ACTIVE"
+    },
+    "RoxVault||monthly": {
+      "billing_type": "subscription",
+      "currency": "USD",
+      "description": "billed every month 30-day licence.",
+      "frequency": "monthly",
+      "name": "RoxVault - Roblox Account Manager - Monthly",
+      "plan_id": "P-7CK38022G9822273BNL4QSCQ",
+      "price": 25.0,
+      "product_id": "PROD-3V07382801182370B",
+      "status": "ACTIVE"
+    },
+    "SovereignMessenger||annual": {
+      "billing_type": "subscription",
+      "currency": "USD",
+      "description": "2 months free 365-day licence.",
+      "frequency": "annual",
+      "name": "Sovereign Messenger (Ghvst Sovereign Gang) - Annual",
+      "plan_id": "P-4AL102611G086102ENL4QSCI",
+      "price": 59.0,
+      "product_id": "PROD-63W3456261288754P",
+      "status": "ACTIVE"
+    },
+    "SovereignMessenger||monthly": {
+      "billing_type": "subscription",
+      "currency": "USD",
+      "description": "billed every month 30-day licence.",
+      "frequency": "monthly",
+      "name": "Sovereign Messenger (Ghvst Sovereign Gang) - Monthly",
+      "plan_id": "P-41T46320RM743335NNL4QSCI",
+      "price": 7.0,
+      "product_id": "PROD-63W3456261288754P",
+      "status": "ACTIVE"
+    },
+    "rdx-workspace|pro|annual": {
+      "billing_type": "subscription",
+      "currency": "USD",
+      "description": "Standard plus 3 machines, priority support and every new release for the term 3 machines, priority support, every release for a year 365-day licence.",
+      "frequency": "annual",
+      "name": "RDX Workspace - the AI engineering cockpit for Windows - RDX Workspace Pro - Pro annual",
+      "plan_id": "P-8BC95436E7516321NNL4Q2VA",
+      "price": 1499.0,
+      "product_id": "PROD-08F57036AT699972X",
+      "status": "ACTIVE"
+    },
+    "rdx-workspace|standard|annual": {
+      "billing_type": "subscription",
+      "currency": "USD",
+      "description": "the full desktop cockpit on 1 machine one payment, one year of every release 365-day licence.",
+      "frequency": "annual",
+      "name": "RDX Workspace - the AI engineering cockpit for Windows - RDX Workspace Standard - Annual",
+      "plan_id": "P-85283174YY5114628NL4QSGA",
+      "price": 199.0,
+      "product_id": "PROD-08F57036AT699972X",
+      "status": "ACTIVE"
+    },
+    "rdx-workspace|standard|monthly": {
+      "billing_type": "subscription",
+      "currency": "USD",
+      "description": "the full desktop cockpit on 1 machine 30 days - the low-cost way in 30-day licence.",
+      "frequency": "monthly",
+      "name": "RDX Workspace - the AI engineering cockpit for Windows - RDX Workspace Standard - Monthly",
+      "plan_id": "P-2K524448AE5010430NL4QSFY",
+      "price": 29.0,
+      "product_id": "PROD-08F57036AT699972X",
+      "status": "ACTIVE"
+    }
+  },
+  "products": {
+    "GhvstAllApps": {
+      "name": "GHOST Apps Licence - every Ghvst app",
+      "product_id": "PROD-0TU78041A6893173N"
+    },
+    "GhvstBrowserAndroid": {
+      "name": "Ghvst Browser for Android",
+      "product_id": "PROD-6VL70167HX434352U"
+    },
+    "GhvstCapture": {
+      "name": "GHVST Capture - screen + camera evidence engine with offline AI",
+      "product_id": "PROD-9XV47759G9389254D"
+    },
+    "GhvstCaptureSuite": {
+      "name": "GHVST Capture Suite - Capture + DevKit together",
+      "product_id": "PROD-6W68110471930060T"
+    },
+    "GhvstDevKit": {
+      "name": "GHVST DevKit - the on-device development workstation",
+      "product_id": "PROD-5R87364558744840R"
+    },
+    "GhvstTeam": {
+      "name": "GHOST Team Licence",
+      "product_id": "PROD-8HM510778D150623R"
+    },
+    "GhvstTerminalAndroid": {
+      "name": "Ghvst Terminal - the AI operator for your phone",
+      "product_id": "PROD-3K2863475E715424Y"
+    },
+    "RoxVault": {
+      "name": "RoxVault - Roblox Account Manager",
+      "product_id": "PROD-3V07382801182370B"
+    },
+    "SovereignMessenger": {
+      "name": "Sovereign Messenger (Ghvst Sovereign Gang)",
+      "product_id": "PROD-63W3456261288754P"
+    },
+    "rdx-workspace": {
+      "name": "RDX Workspace - the AI engineering cockpit for Windows",
+      "product_id": "PROD-08F57036AT699972X"
+    }
+  },
+  "recurring_complete": 25,
+  "recurring_expected": 25,
+  "version": 1
+}

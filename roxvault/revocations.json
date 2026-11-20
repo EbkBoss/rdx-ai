@@ -1,0 +1,10 @@
+{
+  "payload": {
+    "format": "roxvault-revocations",
+    "v": 1,
+    "updatedAt": "2026-10-31T00:01:38.343Z",
+    "revoked": [],
+    "notes": {}
+  },
+  "signature": "ReYFju3GqoZgcPGvXIYEMmFh3PxNV1McN6lXuIWUpnbp9FfFQZADF9qidbYr7Fs0loWEDhZFRtXU8oAiAgxHew=="
+}
