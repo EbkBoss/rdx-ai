@@ -5,6 +5,45 @@
     {
       "product": "GhvstBrowserAndroid",
       "name": "Ghvst Browser (Android)",
+      "version": "1.4.16",
+      "date": "2026-11-20",
+      "status": "shipped",
+      "headline": "The Wifi Scanner is on the phone, PayPal is one tap away, and the assistant now answers in rich markdown with emojis and full HTML pages",
+      "fixed": [
+        "EVERY NETWORK IN RANGE, ON ONE SCREEN, OFFLINE: name, security, band, channel, signal and the exact state - CONNECTED NOW / SAVED ON THIS PHONE / NOT CONNECTED - strongest first, from a tile on the home page.",
+        "NOTHING CONNECTS ON ITS OWN. No auto-connect, no auto-reconnect, no saving keys: the scanner opens Android's own WiFi panel and builds a correctly escaped WIFI: join code for a key you type in once.",
+        "THE HONEST LIMIT IS ON THE SCREEN: a network this phone has never saved has no password stored on it, and Android gives no app the key of a saved one on an unrooted phone. No invented passwords, ever.",
+        "PAYPAL AND X ARE ONE TAP ON THE HOME PAGE, and both sit in the shield's payment-and-login allowlist so the tracker shield and the data saver cannot break a checkout or a sign-in.",
+        "THE ASSISTANT NOW ANSWERS IN RICH MARKDOWN WITH EMOJIS and writes complete HTML documents whenever a visual answer helps - rendered as live preview cards with Copy and Open."
+      ],
+      "proof": [
+        "assembleRelease - BUILD SUCCESSFUL in 2m 51s (53 tasks), 2026-11-20.",
+        "testReleaseUnitTest - 423 tests / 0 failures / 0 errors / 0 skipped (416 before this cut, 7 new Wifi Scanner contract tests).",
+        "The new tests pin the badge wording, security read-off, band and channel maths, signal percentage, quoted-SSID unwrapping and the join-code escaping - an SSID with a semicolon can no longer produce a code that joins the wrong network.",
+        "apksigner re-run on all three SHIP artifacts: v2 true, v3 true, rc=0. No nvapi- bytes in any shipped APK."
+      ],
+      "files": [
+        {
+          "name": "Ghvst_Browser_Android_1.4.16_arm64-v8a.apk",
+          "bytes": 32327908,
+          "sha256": "2CE38E009186D13B4D2A554DC2C23C6991DB9C624738D408469B91DCB03CCD35"
+        },
+        {
+          "name": "Ghvst_Browser_Android_1.4.16_armeabi-v7a.apk",
+          "bytes": 22678249,
+          "sha256": "537E56B8B703F1264E891336977B497EFDF555EEF944194047E3E365A13E7D95"
+        },
+        {
+          "name": "Ghvst_Browser_Android_1.4.16_x86_64.apk",
+          "bytes": 36542022,
+          "sha256": "997101E2F194B0FD367CBAD581AE4BC0F5A3A490175895F1C4A0EF0D0A4CEFD5"
+        }
+      ],
+      "note": "On-device acceptance of 1.4.16 was not run (build + 423 JVM unit tests only) - named as a risk rather than claimed. The scan list needs location permission because Android treats a nearby SSID as a location clue. Customer APKs stay DRAFT on GitHub; delivery is issuer-side behind a signed paid ticket."
+    },
+    {
+      "product": "GhvstBrowserAndroid",
+      "name": "Ghvst Browser (Android)",
       "version": "1.4.15",
       "date": "2026-11-20",
       "status": "shipped",
