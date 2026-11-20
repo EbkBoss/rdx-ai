@@ -5,6 +5,45 @@
     {
       "product": "GhvstBrowserAndroid",
       "name": "Ghvst Browser (Android)",
+      "version": "1.4.17",
+      "date": "2026-11-20",
+      "status": "shipped",
+      "headline": "The price went up - and the app, the store and PayPal all charge the same new amount, proven by reading it back",
+      "fixed": [
+        "NEW PRICES: Android monthly $15, annual $119 (save $61 against twelve months), lifetime $299. The Windows lifetime licence is $79.",
+        "NOTHING WAS HAND-TYPED: the catalogue changed first, the four PayPal hosted links were edited and read back, and this APK's price sheet was generated from the rebuilt 40-option manifest.",
+        "THE ANNUAL PLAN NOW SAYS EXACTLY WHAT IT SAVES instead of a vague 'months free' line.",
+        "THE STORE PAGE PRINTS PRICES LIKE A SHOP, not like a spreadsheet: $15 instead of $15.0, and $9.78/mo instead of a fourteen-decimal monthly equivalent.",
+        "Everything 1.4.16 added is still here: the Wifi Scanner, one-tap PayPal and X, and the rich assistant with emojis and full HTML previews."
+      ],
+      "proof": [
+        "PayPal read-back: 15.00 / 119.00 / 299.00 / 79.00 in the reopened editors (pp_set_amount.py PASS).",
+        "build_payment_items_manifest.py assembled 40 items with 0 problems; commerce_manifest.py verify: CONSUMABLE.",
+        "assembleRelease - BUILD SUCCESSFUL in 2m 24s (53 tasks); testReleaseUnitTest - 423 tests / 0 failures / 0 errors.",
+        "apksigner re-run on all three SHIP artifacts: v2 true, v3 true, rc=0. No nvapi- bytes in any shipped APK."
+      ],
+      "files": [
+        {
+          "name": "Ghvst_Browser_Android_1.4.17_arm64-v8a.apk",
+          "bytes": 32327898,
+          "sha256": "DA3F9D487532AE5C3A65709A587A0DE72574A2D74B13DA37A7B4B67248D9ABC8"
+        },
+        {
+          "name": "Ghvst_Browser_Android_1.4.17_armeabi-v7a.apk",
+          "bytes": 22678244,
+          "sha256": "701ED2BB1E4A6D2BF55335D68602792BD56836441B51458EF591A35CD748732C"
+        },
+        {
+          "name": "Ghvst_Browser_Android_1.4.17_x86_64.apk",
+          "bytes": 36542019,
+          "sha256": "B9521E390C6315AC11D54A6FF6D37F57BB7C81D3263918E56B875A419758C836"
+        }
+      ],
+      "note": "A customer on 1.4.16 still sees the old prices until they update - the price sheet is generated at build time; the checkout itself always charges the manifest amount. Customer APKs stay DRAFT on GitHub; delivery is issuer-side behind a signed paid ticket."
+    },
+    {
+      "product": "GhvstBrowserAndroid",
+      "name": "Ghvst Browser (Android)",
       "version": "1.4.16",
       "date": "2026-11-20",
       "status": "shipped",
@@ -90,7 +129,7 @@
       "fixed": [
         "CHECKOUT IS MANIFEST-DRIVEN AND FAILS CLOSED. Every price row in the app's own sheet is generated from the canonical 40-option PayPal manifest at build time, and the build refuses to produce a price sheet without it - so a hand-typed link can never reach a buyer again.",
         "ONLY CANONICAL NAMED LINKS ARE ACCEPTED: https://www.paypal.com/ncp/payment/<ID>. A legacy amount-based checkout row is skipped instead of being offered as a button that takes the money and goes nowhere.",
-        "THE THREE BROWSER LINKS WERE VERIFIED IN THE SHIPPED ASSET, not in a note: 30-day $12 (XGZUY2SV9XYNJ), 365-day $99 (U36JU7BR93GCU), perpetual $249 (F6YU5SSZGQBQ6) inside assets/ghvst_pricing.txt.",
+        "THE THREE BROWSER LINKS WERE VERIFIED IN THE SHIPPED ASSET, not in a note: the 30-day, 365-day and perpetual options inside assets/ghvst_pricing.txt, each with its own canonical hosted id (XGZUY2SV9XYNJ / U36JU7BR93GCU / F6YU5SSZGQBQ6). Prices shown there are the ones in force on the day the build shipped; today's prices are on the store page.",
         "PRICING UNIT TESTS EXTENDED: a test now proves a canonical named link is accepted and a second test proves a legacy checkout link is never offered, so the fix cannot silently regress."
       ],
       "proof": [
