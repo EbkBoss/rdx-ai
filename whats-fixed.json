@@ -65,6 +65,28 @@
     {
       "product": "SovereignMessenger",
       "name": "Sovereign Messenger",
+      "version": "1.7.38",
+      "date": "2026-11-21",
+      "status": "shipped",
+      "headline": "Real Android/Termux coding pipeline and reliable model-specific Kimi defaults",
+      "fixed": [
+        "Android builder opens Termux setup and permission screens, runs a live toolchain audit and reports missing grants honestly. termux_run and termux_shell execute real programs and return stdout, stderr and the real exit code.",
+        "The audit executes JDK, Git, Python, Node, Clang, CMake, Ninja, Make, FFmpeg, Gradle, zipalign and apksigner. Built APK installation uses Android PackageInstaller with consent."
+      ],
+      "proof": [
+        "The release workstream sealed versionCode 56; the buyer core is v3-signed, 557300 bytes, SHA-256 7EF738DB05E90210525C437AF12C90C6938BB5D4C36185200101AF7413EBA7A5. The customer release stays DRAFT and delivery is issuer-side behind a signed paid ticket."
+      ],
+      "files": [
+        {
+          "name": "Ghvst_Sovereign_Messenger_1.7.38_core.apk",
+          "bytes": 557300,
+          "sha256": "7EF738DB05E90210525C437AF12C90C6938BB5D4C36185200101AF7413EBA7A5"
+        }
+      ]
+    },
+    {
+      "product": "SovereignMessenger",
+      "name": "Sovereign Messenger",
       "version": "1.7.37",
       "date": "2026-11-21",
       "status": "shipped",
