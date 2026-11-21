@@ -70,6 +70,28 @@
   .foot{margin-top:26px;color:var(--muted);font-size:13px;text-align:center}
   .foot a{color:var(--violet)}
   .copied{color:var(--green);font-weight:700;font-size:13px;margin-left:10px;display:none}
+  .sovereign-reveal{display:none;position:relative;isolation:isolate;overflow:hidden;margin:20px 0;
+    border:1px solid rgba(246,199,106,.28);border-radius:22px;background:#09050f;
+    box-shadow:0 32px 80px rgba(0,0,0,.58)}
+  .sovereign-reveal .reveal-stage{position:relative;padding:10px;background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.015));
+    backdrop-filter:blur(14px);transition:opacity .65s ease,transform .65s ease}
+  .receipt-curtain{position:absolute;z-index:5;top:0;bottom:0;width:51%;pointer-events:none;
+    background:repeating-linear-gradient(90deg,rgba(255,255,255,.06) 0,rgba(255,255,255,0) 12%,rgba(0,0,0,.16) 24%),
+      linear-gradient(180deg,#a81738,#650e28 62%,#350716);transition:transform 1.05s cubic-bezier(.77,0,.18,1)}
+  .receipt-curtain.left{left:0;border-right:1px solid rgba(246,199,106,.4)}
+  .receipt-curtain.right{right:0;border-left:1px solid rgba(246,199,106,.4)}
+  .reveal-lock{position:absolute;z-index:6;left:50%;top:50%;transform:translate(-50%,-50%);width:min(360px,84%);text-align:center;
+    padding:18px;border:1px solid rgba(246,199,106,.38);border-radius:16px;background:rgba(15,6,18,.9);
+    transition:opacity .35s ease,visibility .35s ease}
+  .reveal-lock b{display:block;color:var(--gold);font-size:19px}.reveal-lock span{display:block;margin-top:6px;color:var(--muted);font-size:12.5px}
+  .sovereign-reveal.unlocked .receipt-curtain.left{transform:translateX(-102%)}
+  .sovereign-reveal.unlocked .receipt-curtain.right{transform:translateX(102%)}
+  .sovereign-reveal.unlocked .reveal-lock{opacity:0;visibility:hidden}
+  .sovereign-reveal.unlocked .reveal-stage{animation:glass-dissolve .85s ease both}
+  .sovereign-reveal .reveal-blessing{display:none;margin:0 0 10px;text-align:center;color:var(--gold);font-size:12px;letter-spacing:.18em;text-transform:uppercase}
+  .sovereign-reveal.unlocked .reveal-blessing{display:block}
+  @keyframes glass-dissolve{0%{filter:blur(8px);opacity:.25;transform:scale(.975)}100%{filter:blur(0);opacity:1;transform:scale(1)}}
+  @media(prefers-reduced-motion:reduce){.receipt-curtain,.sovereign-reveal .reveal-stage,.reveal-lock{transition:none;animation:none}}
 </style>
 <style>
 .rea-ban{position:relative;z-index:60;margin:10px auto 0;max-width:1180px;padding:9px 16px;
@@ -85,15 +107,15 @@
 <div class="rea-ban" role="note">NO REVERSE ENGINEERING &middot; NO AI SCRAPING &middot; NO AGENT TRAFFIC.
 Every product, build and byte here is the owner's work. Automated access is refused, logged and reported.</div>
 
-  <div class="kicker">RDX · payment received</div>
-  <h1>Your payment <span class="em">landed</span>.</h1>
-  <p class="sub">Keep this page. Your transaction ID is below — it is the fastest way to get your build.</p>
+  <div class="kicker">RDX · Sovereign delivery</div>
+  <h1 id="receipt-title">Your product is <span class="em">waiting</span>.</h1>
+  <p class="sub" id="receipt-sub">Pay on PayPal, paste your transaction ID, and the curtains open on your licence and downloads.</p>
 
   <div class="card">
     <div class="row"><span>Product</span><span id="r-product">—</span></div>
     <div class="row"><span>Amount</span><span id="r-amount">—</span></div>
     <div class="row"><span>Plan</span><span id="r-plan">—</span></div>
-    <div class="row"><span>Status</span><span id="r-status">Confirmed by PayPal</span></div>
+    <div class="row"><span>Status</span><span id="r-status">Not verified yet</span></div>
   </div>
 
   <div class="card" id="tx-card">
@@ -133,15 +155,23 @@ Every product, build and byte here is the owner's work. Automated access is refu
     <p class="note" id="claim-msg" style="margin:10px 0 0;display:none"></p>
   </div>
 
-  <div class="card" id="deliver-card" style="display:none">
-    <span class="kicker" style="font-size:11px">Your licence</span>
-    <div class="txbox" id="lic-key" style="word-break:break-all">—</div>
-    <div class="rowbtns">
-      <button class="btn" id="copy-lic" type="button">Copy licence key</button>
-      <span class="copied" id="copied-lic">Copied</span>
+  <div class="sovereign-reveal" id="sovereign-reveal" aria-live="polite">
+    <p class="reveal-blessing">Payment verified · your product is revealed</p>
+    <div class="reveal-stage">
+      <div class="card" id="deliver-card" style="display:none">
+        <span class="kicker" style="font-size:11px">Your licence</span>
+        <div class="txbox" id="lic-key" style="word-break:break-all">—</div>
+        <div class="rowbtns">
+          <button class="btn" id="copy-lic" type="button">Copy licence key</button>
+          <span class="copied" id="copied-lic">Copied</span>
+        </div>
+        <p class="note" id="lic-meta" style="margin:10px 0 0"></p>
+        <div id="dl-list" style="margin-top:14px"></div>
+      </div>
     </div>
-    <p class="note" id="lic-meta" style="margin:10px 0 0"></p>
-    <div id="dl-list" style="margin-top:14px"></div>
+    <div class="receipt-curtain left" aria-hidden="true"></div>
+    <div class="receipt-curtain right" aria-hidden="true"></div>
+    <div class="reveal-lock"><b>Payment verified.</b><span>The Sovereign glass is opening. Your product is next.</span></div>
   </div>
 
   <div class="card">
@@ -222,8 +252,8 @@ Every product, build and byte here is the owner's work. Automated access is refu
     'GhvstTeam': 'GHOST Team Licence'
   };
 
-  // The plan tells the seller WHICH licence to issue. A $25 RoxVault payment is a month;
-  // the same product at $499 is for life. The order message must carry that.
+  // The plan tells the seller WHICH licence term to issue. Current sales are monthly
+  // or annual subscriptions; the lifetime label remains only for already-issued legacy keys.
   var PLAN_NAMES = {
     'monthly': 'Monthly',
     'annual': 'Annual',
@@ -276,12 +306,14 @@ Every product, build and byte here is the owner's work. Automated access is refu
     }
   } else if (tx) {
     elTx.textContent = tx;
-    elStatus.textContent = 'Confirmed by PayPal';
+    elStatus.textContent = 'Transaction ID received - verifying with the issuer';
+    document.getElementById('receipt-title').innerHTML = 'Your transaction is <span class="em">here</span>.';
+    document.getElementById('receipt-sub').textContent = 'The issuer is checking it now. The curtains open only after verification.';
   } else {
     elTx.textContent = 'Not in this link';
     document.getElementById('tx-card').style.display = 'none';
     document.getElementById('no-tx').style.display = 'block';
-    elStatus.textContent = 'Paid — transaction ID in your PayPal email';
+    elStatus.textContent = 'Complete PayPal checkout, then paste your transaction ID';
   }
 
   // The message carries the order. The builder never has to match a screenshot to a payment.
@@ -357,6 +389,9 @@ Every product, build and byte here is the owner's work. Automated access is refu
   }
 
   function renderDelivery(payload) {
+    elStatus.textContent = 'Payment verified by issuer';
+    document.getElementById('receipt-title').innerHTML = 'Your product is <span class="em">revealed</span>.';
+    document.getElementById('receipt-sub').textContent = 'Payment verified. Your signed licence and downloads are below.';
     document.getElementById('deliver-card').style.display = 'block';
     var keyBox = document.getElementById('lic-key');
     keyBox.textContent = payload.license || '(no key returned)';
@@ -391,6 +426,19 @@ Every product, build and byte here is the owner's work. Automated access is refu
       }
     });
 
+    // The reveal is a DELIVERY EFFECT, not the thing being sold. It runs only
+    // after the issuer has verified the payment and returned this product.
+    var reveal = document.getElementById('sovereign-reveal');
+    reveal.style.display = 'block';
+    if (window.requestAnimationFrame) {
+      window.requestAnimationFrame(function () {
+        window.requestAnimationFrame(function () { reveal.classList.add('unlocked'); });
+      });
+    } else { reveal.classList.add('unlocked'); }
+    if (reveal.scrollIntoView) {
+      try { reveal.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {}
+    }
+
     document.getElementById('copy-lic').onclick = function () {
       var box = document.getElementById('copied-lic');
       var done = function () {
@@ -411,6 +459,7 @@ Every product, build and byte here is the owner's work. Automated access is refu
     say('Checking your payment…', false);
     window.GHVST_GUARD.findIssuer().then(function (base) {
       if (!base) {
+        elStatus.textContent = 'Issuer unreachable - not verified';
         say('The licence service is unreachable right now. Send the transaction ID on ' +
             'WhatsApp and it is delivered by hand.', true);
         return;
@@ -436,20 +485,24 @@ Every product, build and byte here is the owner's work. Automated access is refu
           return;
         }
         if (result.status === 402) {
+          elStatus.textContent = 'Payment not verified';
           say(body.reason || 'That payment is not verified yet. If you just paid, wait a ' +
               'minute and try again, or send the ID on WhatsApp.', true);
           return;
         }
         if (result.status === 409) {
+          elStatus.textContent = 'Payment already claimed';
           var spent = body.licenseId ? (' (key id ' + body.licenseId + ')') : '';
           say('That payment already issued its one licence' + spent + '. ' +
               (body.recover || 'Send the transaction ID on WhatsApp and the same key is sent back — you are not charged again.'), true);
           return;
         }
+        elStatus.textContent = 'Transaction not verified';
         say(body.reason || body.error || 'That transaction ID could not be verified. Check ' +
             'it, or send it on WhatsApp.', true);
       });
     }).catch(function () {
+      elStatus.textContent = 'Claim failed - not verified';
       say('The claim could not be completed. Send the transaction ID on WhatsApp.', true);
     }).then(function () {
       btn.disabled = false;

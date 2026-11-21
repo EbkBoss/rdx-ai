@@ -1,7 +1,137 @@
 {
   "schema": 1,
-  "updated": "2026-11-20",
+  "updated": "2026-11-21",
   "releases": [
+    {
+      "product": "GhvstCapture",
+      "name": "GHVST Capture",
+      "version": "2.5.10",
+      "date": "2026-11-21",
+      "status": "shipped",
+      "headline": "A cleaner Capture with the same automatic paid licence delivery - every rebuilt APK is scanned and sealed",
+      "fixed": [
+        "The extra engine-task runner, its command routes, prompt instructions and generated-output path are removed from the product; the ordinary development toolchain remains.",
+        "The automatic PayPal claim, offline licence verification, persistent artifact library, offline narration and public work folders are carried forward unchanged."
+      ],
+      "proof": [
+        "22 JVM tests passed; all six Capture APKs contain zero removed-surface references after decompression scanning.",
+        "Buyer arm64 is v2-signed, zipaligned and secret-scanned. Director 2.5.10 installed successfully on the reference phone. Live PREVIEW and PROOF returned the same 81,218-byte GIF and SHA-256.",
+        "All three customer APKs are uploaded to the v2.5.10 DRAFT release; server-side sizes and SHA-256 digests match disk exactly."
+      ],
+      "files": [
+        {
+          "name": "Ghvst_Capture_2.5.10_arm64-v8a.apk",
+          "bytes": 37911940,
+          "sha256": "5AA33AFD4AC5EA548C3A16C6877C52A86F64BC1E75F3FD69D2CDA13BA9A7D1A3"
+        },
+        {
+          "name": "Ghvst_Capture_2.5.10_armeabi-v7a.apk",
+          "bytes": 28262280,
+          "sha256": "2EA48239319C404988815C744DCB2C6B071E9137BF774628C7F459D6ABE7C09D"
+        },
+        {
+          "name": "Ghvst_Capture_2.5.10_x86_64.apk",
+          "bytes": 42126064,
+          "sha256": "94CC88BA99BCEF323228D8FB1DF7C58355E7CC9764904C9E05232592BB0CFFC6"
+        }
+      ],
+      "note": "The customer GitHub release is DRAFT by design. Delivery is issuer-side behind a signed paid ticket. No free tier, no lifetime sale and no grace period."
+    },
+    {
+      "product": "GhvstDevKit",
+      "name": "GHVST DevKit",
+      "version": "2.4.9",
+      "date": "2026-11-21",
+      "status": "shipped",
+      "headline": "A cleaner DevKit with automatic paid licence delivery, 50 passing tests and a 185-check release gate",
+      "fixed": [
+        "The extra engine-task runner, its tool registration, command routes, prompt instructions and generated-output path are removed from the product; the ordinary development toolchain remains.",
+        "Automatic PayPal-verified licence claims remain device-bound and offline-verified after activation. Monthly and annual subscriptions are the only plans."
+      ],
+      "proof": [
+        "50 JVM tests passed; both rebuilt APKs contain zero removed-surface references after decompression scanning.",
+        "The independent release gate passed 185 checks: hashes, identity, permissions, signatures, secrets, private mappings and buyer files.",
+        "Director 2.4.9 installed successfully on the reference phone. The devkit-v2.4.9 customer release is DRAFT and its server-side SHA-256 matches disk."
+      ],
+      "files": [
+        {
+          "name": "Ghvst_DevKit_2.4.9.apk",
+          "bytes": 128072391,
+          "sha256": "E40976016E35088E0D70DAD2065B151B30B11FA23DD622E02367555C0FE10B0F"
+        }
+      ],
+      "note": "The customer GitHub release is DRAFT by design. Delivery is issuer-side behind a signed paid ticket. No free tier, no lifetime sale and no grace period."
+    },
+    {
+      "product": "SovereignMessenger",
+      "name": "Sovereign Messenger",
+      "version": "1.7.37",
+      "date": "2026-11-21",
+      "status": "shipped",
+      "headline": "Real friend requests by username and one-tap space invitations, with no code",
+      "fixed": [
+        "Me -> Add people & invite them now asks only for your friend username, so a friend request or space invitation no longer depends on a code."
+      ],
+      "proof": [
+        "The release workstream sealed versionCode 55; the buyer core is v3-signed, 544859 bytes, SHA-256 155F14A0BBE4D9581FD2BEF60DED54A2760FE55F97D466B0F441401074EE3757. The customer release stays DRAFT and delivery is issuer-side behind a signed paid ticket."
+      ],
+      "files": [
+        {
+          "name": "Ghvst_Sovereign_Messenger_1.7.37_core.apk",
+          "bytes": 544859,
+          "sha256": "155F14A0BBE4D9581FD2BEF60DED54A2760FE55F97D466B0F441401074EE3757"
+        }
+      ]
+    },
+    {
+      "product": "SovereignMessenger",
+      "name": "Sovereign Messenger",
+      "version": "1.7.36",
+      "date": "2026-11-21",
+      "status": "shipped",
+      "headline": "Live model choice, honest provider errors and team HTML rendered inside the chat",
+      "fixed": [
+        "The live NIM picker is searchable, Kimi K3.1 Pro is verified live, and JSON, SSE and reasoning-only responses recover instead of leaving an empty answer.",
+        "Team spaces show the real provider error, and team HTML renders inside the conversation instead of appearing as source text."
+      ],
+      "proof": [
+        "The release workstream passed 16/16 team tests and 40/40 Android gates; all three tiers are reproducible.",
+        "The buyer core is v3-signed, 540692 bytes, versionCode 54, SHA-256 B3A06AA8A2939E5947E08B266B7B595ABB08EC40B99405C9E70CAB1C845C327B. The customer release stays DRAFT and delivery is issuer-side behind a signed paid ticket."
+      ],
+      "files": [
+        {
+          "name": "Ghvst_Sovereign_Messenger_1.7.36_core.apk",
+          "bytes": 540692,
+          "sha256": "B3A06AA8A2939E5947E08B266B7B595ABB08EC40B99405C9E70CAB1C845C327B"
+        }
+      ]
+    },
+    {
+      "product": "SovereignMessenger",
+      "name": "Sovereign Messenger",
+      "version": "1.7.35",
+      "date": "2026-11-21",
+      "status": "shipped",
+      "headline": "Six themes, six accents and real reading controls - the whole Messenger now looks the way you want it",
+      "fixed": [
+        "A REAL APPEARANCE PANEL: Midnight, Obsidian, Ocean, Violet, Ember and Daylight, each with a live two-bubble chat preview; the selected theme also switches the native light and dark controls.",
+        "SIX ACCENT COLOURS plus four text sizes, three chat densities and three bubble shapes apply to the real interface and messages immediately, without a reload, account or network request.",
+        "EVERY CHOICE STAYS ON THIS PHONE: preferences survive restarts, corrupt storage falls back safely to Midnight, unknown values are rejected, and Reset to Midnight restores the original appearance in one tap."
+      ],
+      "proof": [
+        "Appearance contract gate: 21 passed, 0 failed. Android contract gate: PASS 36 / FAIL 0.",
+        "The buyer APK is release-signed (v3 verified), android:debuggable=false, R8-shrunk/obfuscated, 536520 bytes, SHA-256 E7BE89BE08B8844DD05ADB3578F277F963A599098D6EDE5919B6DE3400C7CE6B.",
+        "All three tiers are byte-reproducible. The Director 1.7.35 build is installed on the attached phone; the customer release remains a DRAFT and delivery stays issuer-side behind a signed paid ticket."
+      ],
+      "files": [
+        {
+          "name": "Ghvst_Sovereign_Messenger_1.7.35_core.apk",
+          "bytes": 536520,
+          "sha256": "E7BE89BE08B8844DD05ADB3578F277F963A599098D6EDE5919B6DE3400C7CE6B"
+        }
+      ],
+      "note": "The customer GitHub release is DRAFT by design. No free tier, no lifetime sale and no grace period."
+    },
     {
       "product": "Commerce",
       "name": "Commerce",
@@ -20,36 +150,6 @@
       ],
       "files": [],
       "note": "Already-issued perpetual licences remain valid. The protected historical RoxVault buyer ZIP was not rebuilt; its old lifetime checkout is dead and a future real buyer package will contain only subscriptions."
-    },
-    {
-      "product": "GHVST Capture",
-      "name": "GHVST Capture",
-      "version": "2.5.9",
-      "date": "2026-11-20",
-      "status": "shipped",
-      "headline": "Pay once, paste the receipt, and the signed key arrives already locked to that phone - plus the sharpened Egyptian owl and persistent artifact library",
-      "fixed": [
-        "The app now verifies the PayPal transaction through the issuer automatically instead of making the buyer send a manual claim first. Rejected, pending, empty and forged answers never unlock; manual WhatsApp/email claiming remains only as the offline fallback."
-      ],
-      "proof": [
-        "16 JVM tests pass; the real issuer rejects a nonexistent transaction with HTTP 402 and no key; all six APKs hash-match; the Director 2.5.9 build is installed on the phone."
-      ],
-      "files": []
-    },
-    {
-      "product": "GHVST DevKit",
-      "name": "GHVST DevKit",
-      "version": "2.4.8",
-      "date": "2026-11-20",
-      "status": "shipped",
-      "headline": "Automatic PayPal-verified licence claims, locked to one phone, with offline verification after activation",
-      "fixed": [
-        "CLAIM MY KEY now calls the issuer and applies the returned signed key through License.apply. The manual claim line is only the offline fallback. No rejected or unreachable claim can unlock the app."
-      ],
-      "proof": [
-        "43 JVM tests pass; both flavours build and scan clean; the Director 2.4.8 build is installed on the phone; the real issuer rejects a nonexistent transaction with HTTP 402 and no key."
-      ],
-      "files": []
     },
     {
       "product": "GhvstBrowserAndroid",

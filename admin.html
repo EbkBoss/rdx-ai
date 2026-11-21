@@ -179,13 +179,8 @@ Every product, build and byte here is the owner's work. Automated access is refu
   document.getElementById('token').addEventListener('keydown', function (ev) {
     if (ev.key === 'Enter') run();
   });
-  try {
-    var saved = window.localStorage.getItem('ghvst.adminToken');
-    if (saved) document.getElementById('token').value = saved;
-    document.getElementById('go').addEventListener('click', function () {
-      try { window.localStorage.setItem('ghvst.adminToken', document.getElementById('token').value.trim()); } catch (e) {}
-    });
-  } catch (e) {}
+  // The owner token is never persisted in browser storage. The private PC
+  // console reads it directly from the ACL-locked local secure store instead.
 })();
 </script>
 <div class="rea-ban rea-ban-bottom" role="note">Hands off. No decompiling, no unpacking, no hooking, no
