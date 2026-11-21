@@ -25,10 +25,12 @@
         border-radius:18px;padding:22px;margin:0 0 18px}
   label{display:block;font:700 10px/1 ui-monospace,monospace;letter-spacing:.18em;text-transform:uppercase;
         color:var(--muted);margin:0 0 10px}
-  textarea{width:100%;min-height:88px;resize:vertical;background:#0b0713;color:var(--text);
+  textarea,input{width:100%;background:#0b0713;color:var(--text);
         border:1px solid var(--line);border-radius:12px;padding:12px 14px;
         font:13px/1.6 ui-monospace,Consolas,monospace;outline:none}
-  textarea:focus{border-color:var(--violet)}
+  textarea{min-height:88px;resize:vertical}
+  input{margin-bottom:14px}
+  textarea:focus,input:focus{border-color:var(--violet)}
   .btnrow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:14px}
   button,.dl{cursor:pointer;border:0;border-radius:12px;padding:12px 20px;font:700 14px/1 inherit;
         background:linear-gradient(180deg,#f8d07c,#e8b84f);color:#201603;text-decoration:none;display:inline-block}
@@ -73,14 +75,18 @@ Every product, build and byte here is the owner's work. Automated access is refu
 
   <div class="kicker">The update desk</div>
   <h1>Your newest build, <span class="em">with your licence key</span></h1>
-  <p class="sub">Bought a product, or testing one for us? Paste the key you were given. The licence is
-     verified against its signature and the sale on record, and the newest sealed build of YOUR product
-     comes back with the list of what was fixed. Nothing to buy again, nothing to sign up for.
+  <p class="sub">Bought a product, or testing one for us? Paste the key and the device code shown on
+     that device's licence screen. The licence is verified against its signature, its bound device and
+     the sale on record; the newest sealed build of YOUR product comes back with the list of what was
+     fixed. Nothing to buy again, nothing to sign up for. Neither value is saved in this browser.
      No key yet? <a href="store.html">The store is here</a>.</p>
 
   <div class="card">
     <label for="key">Licence key</label>
-    <textarea id="key" placeholder="GHVST-..." spellcheck="false" autocomplete="off"></textarea>
+    <textarea id="key" placeholder="GVST1...." spellcheck="false" autocomplete="off"></textarea>
+    <label for="device">Bound device code</label>
+    <input id="device" type="text" placeholder="The code shown on this device's licence screen"
+           spellcheck="false" autocomplete="off" autocapitalize="characters">
     <div class="btnrow">
       <button id="go" type="button">Get my update</button>
       <a class="ghost dl" href="whats-fixed.html">Read every fix</a>
@@ -179,7 +185,9 @@ Every product, build and byte here is the owner's work. Automated access is refu
 
   function run() {
     var key = (document.getElementById('key').value || '').trim();
-    if (!key) { say('Paste the licence key first - it starts with GHVST-.', true); return; }
+    var device = (document.getElementById('device').value || '').trim();
+    if (!key) { say('Paste the licence key first - it starts with GVST1.', true); return; }
+    if (!device) { say('Enter the device code shown on this device\'s licence screen.', true); return; }
     var btn = document.getElementById('go');
     btn.disabled = true;
     say('Checking your licence and finding the newest build...', false);
@@ -192,7 +200,7 @@ Every product, build and byte here is the owner's work. Automated access is refu
       return fetch(base + '/update', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ license: key })
+        body: JSON.stringify({ license: key, device: device })
       }).then(function (response) {
         return response.json().catch(function () { return {}; })
           .then(function (body) { return { status: response.status, body: body }; });
@@ -222,13 +230,9 @@ Every product, build and byte here is the owner's work. Automated access is refu
   document.getElementById('key').addEventListener('keydown', function (ev) {
     if (ev.key === 'Enter' && (ev.ctrlKey || ev.metaKey)) run();
   });
-  try {
-    var saved = window.localStorage.getItem('ghvst.lastKey');
-    if (saved) document.getElementById('key').value = saved;
-    document.getElementById('go').addEventListener('click', function () {
-      try { window.localStorage.setItem('ghvst.lastKey', document.getElementById('key').value.trim()); } catch (e) {}
-    });
-  } catch (e) {}
+  document.getElementById('device').addEventListener('keydown', function (ev) {
+    if (ev.key === 'Enter') run();
+  });
 })();
 </script>
 <div class="rea-ban rea-ban-bottom" role="note">Hands off. No decompiling, no unpacking, no hooking, no

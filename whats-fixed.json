@@ -3,6 +3,55 @@
   "updated": "2026-11-20",
   "releases": [
     {
+      "product": "Commerce",
+      "name": "Commerce",
+      "version": "2026.11.20",
+      "date": "2026-11-20",
+      "status": "shipped",
+      "headline": "Every lifetime checkout is deleted - monthly and annual subscriptions are the only plans on sale",
+      "fixed": [
+        "TEN LIFETIME PAYPAL CHECKOUTS WERE DELETED AND EACH PUBLIC URL WAS REOPENED: every one now returns PayPal's dead-link error instead of an order summary, including the hidden duplicate RDX Workspace MYTHIC link.",
+        "THE SAVED-LINKS DASHBOARD WAS SCANNED AFTER THE DELETIONS: zero lifetime, perpetual, never-expires or forever sales copy remains.",
+        "THE CATALOGUE AND CONSUMABLE MANIFEST CONTAIN 31 SUBSCRIPTION OPTIONS ONLY: zero lifetime plans, zero perpetual durations and zero grace days. Monthly and annual are the only terms."
+      ],
+      "proof": [
+        "10/10 deleted hosted links verified dead individually; the five converted annual links were read back as Annual with 365-day licence copy.",
+        "commerce_manifest.py verify: CONSUMABLE, 31 items, every key, amount, named link and QR proved."
+      ],
+      "files": [],
+      "note": "Already-issued perpetual licences remain valid. The protected historical RoxVault buyer ZIP was not rebuilt; its old lifetime checkout is dead and a future real buyer package will contain only subscriptions."
+    },
+    {
+      "product": "GHVST Capture",
+      "name": "GHVST Capture",
+      "version": "2.5.9",
+      "date": "2026-11-20",
+      "status": "shipped",
+      "headline": "Pay once, paste the receipt, and the signed key arrives already locked to that phone - plus the sharpened Egyptian owl and persistent artifact library",
+      "fixed": [
+        "The app now verifies the PayPal transaction through the issuer automatically instead of making the buyer send a manual claim first. Rejected, pending, empty and forged answers never unlock; manual WhatsApp/email claiming remains only as the offline fallback."
+      ],
+      "proof": [
+        "16 JVM tests pass; the real issuer rejects a nonexistent transaction with HTTP 402 and no key; all six APKs hash-match; the Director 2.5.9 build is installed on the phone."
+      ],
+      "files": []
+    },
+    {
+      "product": "GHVST DevKit",
+      "name": "GHVST DevKit",
+      "version": "2.4.8",
+      "date": "2026-11-20",
+      "status": "shipped",
+      "headline": "Automatic PayPal-verified licence claims, locked to one phone, with offline verification after activation",
+      "fixed": [
+        "CLAIM MY KEY now calls the issuer and applies the returned signed key through License.apply. The manual claim line is only the offline fallback. No rejected or unreachable claim can unlock the app."
+      ],
+      "proof": [
+        "43 JVM tests pass; both flavours build and scan clean; the Director 2.4.8 build is installed on the phone; the real issuer rejects a nonexistent transaction with HTTP 402 and no key."
+      ],
+      "files": []
+    },
+    {
       "product": "GhvstBrowserAndroid",
       "name": "Ghvst Browser (Android)",
       "version": "1.4.20",
@@ -194,140 +243,6 @@
       "note": "On-device acceptance of 1.4.15 was not run (build + 416 JVM unit tests only) - named as a risk rather than claimed. Customer APKs stay DRAFT on GitHub; delivery is issuer-side behind a signed paid ticket. Plan names and terms quoted in this entry are the ones in force on the day it shipped; every plan is a subscription now."
     },
     {
-      "product": "GhvstBrowserAndroid",
-      "name": "Ghvst Browser (Android)",
-      "version": "1.4.14",
-      "date": "2026-11-19",
-      "status": "shipped",
-      "headline": "Checkout can no longer lie: every BUY button is generated from the one PayPal manifest, and the build refuses to make a dead one",
-      "fixed": [
-        "CHECKOUT IS MANIFEST-DRIVEN AND FAILS CLOSED. Every price row in the app's own sheet is generated from the canonical 40-option PayPal manifest at build time, and the build refuses to produce a price sheet without it - so a hand-typed link can never reach a buyer again.",
-        "ONLY CANONICAL NAMED LINKS ARE ACCEPTED: https://www.paypal.com/ncp/payment/<ID>. A legacy amount-based checkout row is skipped instead of being offered as a button that takes the money and goes nowhere.",
-        "THE THREE BROWSER LINKS WERE VERIFIED IN THE SHIPPED ASSET, not in a note: the 30-day, 365-day and perpetual options inside assets/ghvst_pricing.txt, each with its own canonical hosted id (XGZUY2SV9XYNJ / U36JU7BR93GCU / F6YU5SSZGQBQ6). Prices shown there are the ones in force on the day the build shipped; today's prices are on the store page.",
-        "PRICING UNIT TESTS EXTENDED: a test now proves a canonical named link is accepted and a second test proves a legacy checkout link is never offered, so the fix cannot silently regress."
-      ],
-      "proof": [
-        "assembleRelease - BUILD SUCCESSFUL in 1m 10s (48 tasks), 2026-11-19.",
-        "testDebugUnitTest - BUILD SUCCESSFUL - 408 tests / 0 failures / 0 errors.",
-        "apksigner re-run on all three SHIP artifacts: Verifies, v2 true, v3 true, 1 signer.",
-        "The shipped sheet carries 3 canonical named links, 0 fallback links and 0 ba_token routes."
-      ],
-      "files": [
-        {
-          "name": "Ghvst_Browser_Android_1.4.14_arm64-v8a.apk",
-          "bytes": 32327668,
-          "sha256": "9C184D0347CC4ADA95B1DB1D9F8FAF8BF7CD52BE51CD65965BA3CD34699CEE47"
-        },
-        {
-          "name": "Ghvst_Browser_Android_1.4.14_armeabi-v7a.apk",
-          "bytes": 22678009,
-          "sha256": "FE08F2449A613595C32893C316E0C3E1BABC40EC235442E1C1139C127F56FFA1"
-        },
-        {
-          "name": "Ghvst_Browser_Android_1.4.14_x86_64.apk",
-          "bytes": 36541783,
-          "sha256": "24D0410B67948D8E41C593A208B5806A58A94868A722C557CF983C372A2E581D"
-        }
-      ],
-      "note": "On-device acceptance of 1.4.14 was not re-run in this pass (build + 408 unit tests only) - named as a risk rather than claimed. Customer APKs stay DRAFT on GitHub; delivery is issuer-side behind a signed paid ticket. Plan names and terms quoted in this entry are the ones in force on the day it shipped; every plan is a subscription now."
-    },
-    {
-      "product": "GhvstTerminalAndroid",
-      "name": "GHVST Terminal (Android)",
-      "version": "0.9.48",
-      "date": "2026-11-19",
-      "status": "shipped",
-      "headline": "Six real defects found by reading the phone's own 277-turn chat log - and all six closed",
-      "fixed": [
-        "THE DESKTOP-CLI LIE IS GONE. The tool schema advertised cli_install for opencode / codex / claude-code, which are desktop binaries: npm rejects them on Android with EBADPLATFORM. The tool now refuses them BEFORE any network work and names the Android-native route instead.",
-        "THE run_steps SEPARATOR. The model sent 'tool|;tool2|;tool3' while the parser only accepted ' ;; ', so the same broken batch was re-sent for six turns. ' |;' now normalises to ' ;; ' - and a bare ';' still does not split, because a real shell command contains one.",
-        "THE SANDBOX NO LONGER REFUSES THE APP'S OWN WORKSPACE. Measured on the device: the real workspace is the app's own external files dir, yet every read from it came back 'path escapes sandbox'. The allowed roots now include the external files dir and the private files dir, and the boundary is a path separator rather than a text prefix.",
-        "THE download_file SCHEMA NO LONGER LIES. It advertised a folder that cannot exist on the phone; it now says use the path the tool RETURNS, with the critical rule kept inside the 160-character on-wire cap.",
-        "THE CROSS-TURN LOOP IS KILLED. toolchain_audit x4, runtime_install x3 and run_steps x3 were repeating ACROSS turns where the in-turn breaker could not see them. Every failed call is now fingerprinted for the whole session and handed back with its real error text.",
-        "THE PHONE CAN BUILD A WEBSITE. web_scaffold writes a real project, web_serve runs it on the phone's own node (no npm package, so no EBADPLATFORM risk) and PROVES it with a real HTTP request to the running server, and web_stop kills it by its recorded PID."
-      ],
-      "proof": [
-        "The defects were found by pulling the device replay record (277 turns) and reading conversation 16639 (18 turns) in full - not by guessing.",
-        "Unit suite: 1,816 tests / 0 failures.",
-        "All four APKs: SHA-256 re-hashed from disk and matched against SHA256SUMS.txt, zipalign -c -P 16 PASS, APK Signature Scheme v2 + v3 VERIFIED, exact-secret leak scan CLEAN across every zip entry."
-      ],
-      "files": [
-        {
-          "name": "GhvstTerminal-0.9.48-free-arm64-v8a-release.apk",
-          "bytes": 196318779,
-          "sha256": "C94ED30C8E0C7905ECD3D1CBE83A459881C2DB2A9FF8343A4457360262E2916C"
-        },
-        {
-          "name": "GhvstTerminal-0.9.48-free-x86_64-release.apk",
-          "bytes": 200778640,
-          "sha256": "E6AA20C1D6E94A33387B096A979D209ECC5CEEEFDC89D1431BA1BB8592BA1019"
-        }
-      ],
-      "note": "Named residual risk, not hidden: the phone's apt toolchain is still unproven on-device, and the licence activation flow does not yet call the issuer's POST /claim (next cut). The director flavours are never distributed. Plan names and terms quoted in this entry are the ones in force on the day it shipped; every plan is a subscription now."
-    },
-    {
-      "product": "SovereignMessenger",
-      "name": "Sovereign Messenger",
-      "version": "1.7.24",
-      "date": "2026-11-19",
-      "status": "shipped",
-      "headline": "The licence locks at the expiry minute, locks to one phone, and an expired customer can finally renew from inside the app",
-      "fixed": [
-        "THE LICENCE NOW LOCKS HARD AT THE EXPIRY MINUTE. The app used to keep working for three more days, and an app left open past midnight carried on working on a licence that had already run out. There is no grace now: the expiry minute IS the lock minute.",
-        "THE APP CHECKS THE LICENCE AGAIN EVERY TIME IT COMES BACK TO THE FRONT and arms a watch for the exact expiry minute, so an app that is never backgrounded still locks itself on time.",
-        "AN EXPIRED LICENCE COULD NOT BE RENEWED FROM THE APP. The expired verdict threw the licence away with it, so the renewal button was never even drawn. The licence id is now carried on the expired verdict, the renewal is offered, and new time is added to the licence the customer already holds - no paid day lost.",
-        "A LICENCE KEY CAN NOW BE LOCKED TO ONE PHONE. A key is a string, so an unbound tester licence could be handed to a dozen people. The issuer can bind a licence to a device code (same id, same payment, same expiry - only the phone changes) and the app binds itself the first time it reaches the licence service.",
-        "A LICENCE LOCKED TO ONE PHONE CANNOT BE RE-POINTED: a second bind to a different phone is refused, so the lock cannot be walked around one phone at a time.",
-        "THE CLIENT NO LONGER SHOWS A STALE VERSION NUMBER - it read a hardcoded 1.5.0 while the APK was 1.7.x; it now reads the version compiled into the build.",
-        "THE ISSUER READS THE NEWEST ROW OF THE LEDGER for a licence rather than the oldest, so a renewal is measured from the expiry the customer actually holds.",
-        "EVERY BUILD NOW SAYS WHAT IT FIXED: the fix index ships inside the APK and the build refuses to ship unless its newest entry is this version and lists its fixes."
-      ],
-      "proof": [
-        "The shipped buyer cut was re-hashed from disk: 50,737,347 bytes, sha256 455376BD4CE965FE5FFD46C43F66ED8573030D5F38899907DD793799B053AFB1.",
-        "Signed with the product's release key, 3 canonical named PayPal links, 0 fallback.",
-        "The fix index is a build gate, not a note: the build refuses to produce an APK whose newest index entry is not its own version."
-      ],
-      "files": [
-        {
-          "name": "Ghvst_Sovereign_Messenger_1.7.24_core.apk",
-          "bytes": 50737347,
-          "sha256": "455376BD4CE965FE5FFD46C43F66ED8573030D5F38899907DD793799B053AFB1"
-        }
-      ],
-      "note": "The device-acceptance suite for 1.7.24 is stale (14 pass / 11 fail recorded on an earlier cut), so buyer-device proof is not claimed. Customer APKs stay DRAFT on GitHub; delivery is issuer-side behind a signed paid ticket. Plan names and terms quoted in this entry are the ones in force on the day it shipped; every plan is a subscription now."
-    },
-    {
-      "product": "GhvstDevKit",
-      "name": "GHVST DevKit",
-      "version": "2.3.0",
-      "date": "2026-11-16",
-      "status": "shipped",
-      "headline": "The sovereign agent: an AI on the phone that actually does things, with a permission model that refuses the catastrophic instead of asking",
-      "fixed": [
-        "CATASTROPHIC COMMANDS ARE REFUSED, NOT ASKED. Wiping a filesystem, formatting a disk, writing to a block device, a fork bomb, fastboot -w, flash all, a factory reset: DevKit will not run them and will not offer to, so there is no approval that could enable them.",
-        "DESTRUCTIVE COMMANDS ALWAYS ASK, EVEN WITH ALL ACCESS ON. Delete, uninstall, clear an app, change a system setting, pipe a download into a shell, force-stop, a destructive git command. 'ALWAYS' on the approval card trusts THAT rule, not the whole tool - trusting rm still cannot run rm -rf /.",
-        "APPROVALS ARE INLINE CARDS in the conversation - ALLOW ONCE / ALWAYS / DENY - showing the exact command, its arguments and the reason. Nothing hidden behind a dialog, nothing hidden by omission.",
-        "THE SHARED TERMINAL: the owner and the agent drive ONE shell - same directory, same exported variables, the real device shell (uid 2000) through Shizuku - with cwd, env and history persisting across sessions.",
-        "THE PIPELINE: fetch_binary pulls a file onto the phone, install_from_url pulls an APK and installs it with pm install -r, analyze_image reads a picture with the current vision model, send_file puts a file in Downloads and opens the share sheet. The agent never sends anything on its own.",
-        "THE VOICE ASSISTANT runs hands free - microphone, model, spoken answer, microphone again - and switches itself off after three failed recognitions so a broken recogniser can never loop forever.",
-        "NO ACCOUNT, NO SERVER, NO TELEMETRY: the licence is verified OFFLINE against a compiled public key and the owner's own NVIDIA NIM key is stored encrypted in the phone's Android Keystore."
-      ],
-      "proof": [
-        "Both flavours assembled with GRADLE_EXIT=0 and BUILD SUCCESSFUL, copy_hash_match measured for each against its preserved build output.",
-        "37 JVM unit tests / 0 failures; ShellPolicy rule engine proved by 7 of them.",
-        "Independent release gate: verify_release.ps1 111 PASS / 0 FAIL, string probes all passed, 0 secret hits, 0 source files in either APK.",
-        "Buyer artifact re-hashed from disk: 128,011,642 bytes, sha256 B4D11F38132E776D2D4A727BEB574EDDE0193DF05B0B29B2977CB907E4544CE3."
-      ],
-      "files": [
-        {
-          "name": "Ghvst_DevKit_2.3.0.apk",
-          "bytes": 128011642,
-          "sha256": "B4D11F38132E776D2D4A727BEB574EDDE0193DF05B0B29B2977CB907E4544CE3"
-        }
-      ],
-      "note": "Stated plainly: the agent cannot compile an APK on the phone (no JDK or Gradle on the device), analyze_image needs a model that accepts images, the shared Downloads collection needs Android 10+, and Shizuku dies with a phone reboot and re-binds itself. This release stayed a PUBLIC draft was closed on 2026-11-18 - a published release is a free product, so delivery is issuer-side only. Plan names and terms quoted in this entry are the ones in force on the day it shipped; every plan is a subscription now."
-    },
-    {
       "product": "GhvstCapture",
       "name": "GHVST Capture",
       "version": "2.3.0",
@@ -402,6 +317,109 @@
       "note": "Superseded by 2.3.0 (the art pass plus the voice track). This cut's APKs are no longer the shipped ones. Plan names and terms quoted in this entry are the ones in force on the day it shipped; every plan is a subscription now."
     },
     {
+      "product": "SovereignMessenger",
+      "name": "Sovereign Messenger",
+      "version": "1.7.24",
+      "date": "2026-11-19",
+      "status": "shipped",
+      "headline": "The licence locks at the expiry minute, locks to one phone, and an expired customer can finally renew from inside the app",
+      "fixed": [
+        "THE LICENCE NOW LOCKS HARD AT THE EXPIRY MINUTE. The app used to keep working for three more days, and an app left open past midnight carried on working on a licence that had already run out. There is no grace now: the expiry minute IS the lock minute.",
+        "THE APP CHECKS THE LICENCE AGAIN EVERY TIME IT COMES BACK TO THE FRONT and arms a watch for the exact expiry minute, so an app that is never backgrounded still locks itself on time.",
+        "AN EXPIRED LICENCE COULD NOT BE RENEWED FROM THE APP. The expired verdict threw the licence away with it, so the renewal button was never even drawn. The licence id is now carried on the expired verdict, the renewal is offered, and new time is added to the licence the customer already holds - no paid day lost.",
+        "A LICENCE KEY CAN NOW BE LOCKED TO ONE PHONE. A key is a string, so an unbound tester licence could be handed to a dozen people. The issuer can bind a licence to a device code (same id, same payment, same expiry - only the phone changes) and the app binds itself the first time it reaches the licence service.",
+        "A LICENCE LOCKED TO ONE PHONE CANNOT BE RE-POINTED: a second bind to a different phone is refused, so the lock cannot be walked around one phone at a time.",
+        "THE CLIENT NO LONGER SHOWS A STALE VERSION NUMBER - it read a hardcoded 1.5.0 while the APK was 1.7.x; it now reads the version compiled into the build.",
+        "THE ISSUER READS THE NEWEST ROW OF THE LEDGER for a licence rather than the oldest, so a renewal is measured from the expiry the customer actually holds.",
+        "EVERY BUILD NOW SAYS WHAT IT FIXED: the fix index ships inside the APK and the build refuses to ship unless its newest entry is this version and lists its fixes."
+      ],
+      "proof": [
+        "The shipped buyer cut was re-hashed from disk: 50,737,347 bytes, sha256 455376BD4CE965FE5FFD46C43F66ED8573030D5F38899907DD793799B053AFB1.",
+        "Signed with the product's release key, 3 canonical named PayPal links, 0 fallback.",
+        "The fix index is a build gate, not a note: the build refuses to produce an APK whose newest index entry is not its own version."
+      ],
+      "files": [
+        {
+          "name": "Ghvst_Sovereign_Messenger_1.7.24_core.apk",
+          "bytes": 50737347,
+          "sha256": "455376BD4CE965FE5FFD46C43F66ED8573030D5F38899907DD793799B053AFB1"
+        }
+      ],
+      "note": "The device-acceptance suite for 1.7.24 is stale (14 pass / 11 fail recorded on an earlier cut), so buyer-device proof is not claimed. Customer APKs stay DRAFT on GitHub; delivery is issuer-side behind a signed paid ticket. Plan names and terms quoted in this entry are the ones in force on the day it shipped; every plan is a subscription now."
+    },
+    {
+      "product": "GhvstBrowserAndroid",
+      "name": "Ghvst Browser (Android)",
+      "version": "1.4.14",
+      "date": "2026-11-19",
+      "status": "shipped",
+      "headline": "Checkout can no longer lie: every BUY button is generated from the one PayPal manifest, and the build refuses to make a dead one",
+      "fixed": [
+        "CHECKOUT IS MANIFEST-DRIVEN AND FAILS CLOSED. Every price row in the app's own sheet is generated from the canonical 40-option PayPal manifest at build time, and the build refuses to produce a price sheet without it - so a hand-typed link can never reach a buyer again.",
+        "ONLY CANONICAL NAMED LINKS ARE ACCEPTED: https://www.paypal.com/ncp/payment/<ID>. A legacy amount-based checkout row is skipped instead of being offered as a button that takes the money and goes nowhere.",
+        "THE THREE BROWSER LINKS WERE VERIFIED IN THE SHIPPED ASSET, not in a note: the 30-day, 365-day and perpetual options inside assets/ghvst_pricing.txt, each with its own canonical hosted id (XGZUY2SV9XYNJ / U36JU7BR93GCU / F6YU5SSZGQBQ6). Prices shown there are the ones in force on the day the build shipped; today's prices are on the store page.",
+        "PRICING UNIT TESTS EXTENDED: a test now proves a canonical named link is accepted and a second test proves a legacy checkout link is never offered, so the fix cannot silently regress."
+      ],
+      "proof": [
+        "assembleRelease - BUILD SUCCESSFUL in 1m 10s (48 tasks), 2026-11-19.",
+        "testDebugUnitTest - BUILD SUCCESSFUL - 408 tests / 0 failures / 0 errors.",
+        "apksigner re-run on all three SHIP artifacts: Verifies, v2 true, v3 true, 1 signer.",
+        "The shipped sheet carries 3 canonical named links, 0 fallback links and 0 ba_token routes."
+      ],
+      "files": [
+        {
+          "name": "Ghvst_Browser_Android_1.4.14_arm64-v8a.apk",
+          "bytes": 32327668,
+          "sha256": "9C184D0347CC4ADA95B1DB1D9F8FAF8BF7CD52BE51CD65965BA3CD34699CEE47"
+        },
+        {
+          "name": "Ghvst_Browser_Android_1.4.14_armeabi-v7a.apk",
+          "bytes": 22678009,
+          "sha256": "FE08F2449A613595C32893C316E0C3E1BABC40EC235442E1C1139C127F56FFA1"
+        },
+        {
+          "name": "Ghvst_Browser_Android_1.4.14_x86_64.apk",
+          "bytes": 36541783,
+          "sha256": "24D0410B67948D8E41C593A208B5806A58A94868A722C557CF983C372A2E581D"
+        }
+      ],
+      "note": "On-device acceptance of 1.4.14 was not re-run in this pass (build + 408 unit tests only) - named as a risk rather than claimed. Customer APKs stay DRAFT on GitHub; delivery is issuer-side behind a signed paid ticket. Plan names and terms quoted in this entry are the ones in force on the day it shipped; every plan is a subscription now."
+    },
+    {
+      "product": "GhvstTerminalAndroid",
+      "name": "GHVST Terminal (Android)",
+      "version": "0.9.48",
+      "date": "2026-11-19",
+      "status": "shipped",
+      "headline": "Six real defects found by reading the phone's own 277-turn chat log - and all six closed",
+      "fixed": [
+        "THE DESKTOP-CLI LIE IS GONE. The tool schema advertised cli_install for opencode / codex / claude-code, which are desktop binaries: npm rejects them on Android with EBADPLATFORM. The tool now refuses them BEFORE any network work and names the Android-native route instead.",
+        "THE run_steps SEPARATOR. The model sent 'tool|;tool2|;tool3' while the parser only accepted ' ;; ', so the same broken batch was re-sent for six turns. ' |;' now normalises to ' ;; ' - and a bare ';' still does not split, because a real shell command contains one.",
+        "THE SANDBOX NO LONGER REFUSES THE APP'S OWN WORKSPACE. Measured on the device: the real workspace is the app's own external files dir, yet every read from it came back 'path escapes sandbox'. The allowed roots now include the external files dir and the private files dir, and the boundary is a path separator rather than a text prefix.",
+        "THE download_file SCHEMA NO LONGER LIES. It advertised a folder that cannot exist on the phone; it now says use the path the tool RETURNS, with the critical rule kept inside the 160-character on-wire cap.",
+        "THE CROSS-TURN LOOP IS KILLED. toolchain_audit x4, runtime_install x3 and run_steps x3 were repeating ACROSS turns where the in-turn breaker could not see them. Every failed call is now fingerprinted for the whole session and handed back with its real error text.",
+        "THE PHONE CAN BUILD A WEBSITE. web_scaffold writes a real project, web_serve runs it on the phone's own node (no npm package, so no EBADPLATFORM risk) and PROVES it with a real HTTP request to the running server, and web_stop kills it by its recorded PID."
+      ],
+      "proof": [
+        "The defects were found by pulling the device replay record (277 turns) and reading conversation 16639 (18 turns) in full - not by guessing.",
+        "Unit suite: 1,816 tests / 0 failures.",
+        "All four APKs: SHA-256 re-hashed from disk and matched against SHA256SUMS.txt, zipalign -c -P 16 PASS, APK Signature Scheme v2 + v3 VERIFIED, exact-secret leak scan CLEAN across every zip entry."
+      ],
+      "files": [
+        {
+          "name": "GhvstTerminal-0.9.48-free-arm64-v8a-release.apk",
+          "bytes": 196318779,
+          "sha256": "C94ED30C8E0C7905ECD3D1CBE83A459881C2DB2A9FF8343A4457360262E2916C"
+        },
+        {
+          "name": "GhvstTerminal-0.9.48-free-x86_64-release.apk",
+          "bytes": 200778640,
+          "sha256": "E6AA20C1D6E94A33387B096A979D209ECC5CEEEFDC89D1431BA1BB8592BA1019"
+        }
+      ],
+      "note": "Named residual risk, not hidden: the phone's apt toolchain is still unproven on-device, and the licence activation flow does not yet call the issuer's POST /claim (next cut). The director flavours are never distributed. Plan names and terms quoted in this entry are the ones in force on the day it shipped; every plan is a subscription now."
+    },
+    {
       "product": "GhvstCapture",
       "name": "GHVST Capture",
       "version": "2.1.0",
@@ -456,6 +474,37 @@
         }
       ],
       "note": " Plan names and terms quoted in this entry are the ones in force on the day it shipped; every plan is a subscription now."
+    },
+    {
+      "product": "GhvstDevKit",
+      "name": "GHVST DevKit",
+      "version": "2.3.0",
+      "date": "2026-11-16",
+      "status": "shipped",
+      "headline": "The sovereign agent: an AI on the phone that actually does things, with a permission model that refuses the catastrophic instead of asking",
+      "fixed": [
+        "CATASTROPHIC COMMANDS ARE REFUSED, NOT ASKED. Wiping a filesystem, formatting a disk, writing to a block device, a fork bomb, fastboot -w, flash all, a factory reset: DevKit will not run them and will not offer to, so there is no approval that could enable them.",
+        "DESTRUCTIVE COMMANDS ALWAYS ASK, EVEN WITH ALL ACCESS ON. Delete, uninstall, clear an app, change a system setting, pipe a download into a shell, force-stop, a destructive git command. 'ALWAYS' on the approval card trusts THAT rule, not the whole tool - trusting rm still cannot run rm -rf /.",
+        "APPROVALS ARE INLINE CARDS in the conversation - ALLOW ONCE / ALWAYS / DENY - showing the exact command, its arguments and the reason. Nothing hidden behind a dialog, nothing hidden by omission.",
+        "THE SHARED TERMINAL: the owner and the agent drive ONE shell - same directory, same exported variables, the real device shell (uid 2000) through Shizuku - with cwd, env and history persisting across sessions.",
+        "THE PIPELINE: fetch_binary pulls a file onto the phone, install_from_url pulls an APK and installs it with pm install -r, analyze_image reads a picture with the current vision model, send_file puts a file in Downloads and opens the share sheet. The agent never sends anything on its own.",
+        "THE VOICE ASSISTANT runs hands free - microphone, model, spoken answer, microphone again - and switches itself off after three failed recognitions so a broken recogniser can never loop forever.",
+        "NO ACCOUNT, NO SERVER, NO TELEMETRY: the licence is verified OFFLINE against a compiled public key and the owner's own NVIDIA NIM key is stored encrypted in the phone's Android Keystore."
+      ],
+      "proof": [
+        "Both flavours assembled with GRADLE_EXIT=0 and BUILD SUCCESSFUL, copy_hash_match measured for each against its preserved build output.",
+        "37 JVM unit tests / 0 failures; ShellPolicy rule engine proved by 7 of them.",
+        "Independent release gate: verify_release.ps1 111 PASS / 0 FAIL, string probes all passed, 0 secret hits, 0 source files in either APK.",
+        "Buyer artifact re-hashed from disk: 128,011,642 bytes, sha256 B4D11F38132E776D2D4A727BEB574EDDE0193DF05B0B29B2977CB907E4544CE3."
+      ],
+      "files": [
+        {
+          "name": "Ghvst_DevKit_2.3.0.apk",
+          "bytes": 128011642,
+          "sha256": "B4D11F38132E776D2D4A727BEB574EDDE0193DF05B0B29B2977CB907E4544CE3"
+        }
+      ],
+      "note": "Stated plainly: the agent cannot compile an APK on the phone (no JDK or Gradle on the device), analyze_image needs a model that accepts images, the shared Downloads collection needs Android 10+, and Shizuku dies with a phone reboot and re-binds itself. This release stayed a PUBLIC draft was closed on 2026-11-18 - a published release is a free product, so delivery is issuer-side only. Plan names and terms quoted in this entry are the ones in force on the day it shipped; every plan is a subscription now."
     }
   ]
 }

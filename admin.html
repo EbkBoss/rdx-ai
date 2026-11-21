@@ -84,6 +84,13 @@ Every product, build and byte here is the owner's work. Automated access is refu
     </div>
     <div class="card"><div class="kicker">By product</div><div class="chips" id="products"></div></div>
     <div class="card">
+      <div class="kicker">Visitors - same person coming back?</div>
+      <table>
+        <thead><tr><th>IP</th><th>Events</th><th>Status</th><th>First seen</th><th>Last seen</th><th>Looked at</th><th>Device / browser</th></tr></thead>
+        <tbody id="visitors"></tbody>
+      </table>
+    </div>
+    <div class="card">
       <div class="kicker">Newest first</div>
       <table>
         <thead><tr><th>When</th><th>IP</th><th>Kind</th><th>Product</th><th>Licence</th><th>Agent</th></tr></thead>
@@ -132,6 +139,19 @@ Every product, build and byte here is the owner's work. Automated access is refu
     });
     document.getElementById('rows').innerHTML = rows ||
       '<tr><td colspan="6">No visits recorded yet.</td></tr>';
+
+    var people = '';
+    (body.visitors || []).forEach(function (v) {
+      var looked = (v.pages || []).slice(0, 3).join(', ');
+      if ((v.products || []).length) looked += ' ' + v.products.join(', ');
+      people += '<tr><td class="ip">' + esc(v.ip) + '</td><td>' + esc(v.events) + '</td>' +
+        '<td>' + (v.returning ? '<span style="color:var(--green)">RETURNING</span>' : '<span style="color:var(--muted)">new</span>') + '</td>' +
+        '<td>' + esc(when(v.first)) + '</td><td>' + esc(when(v.last)) + '</td>' +
+        '<td>' + esc(looked || '-') + '</td>' +
+        '<td class="agent" title="' + esc(v.agent || '') + '">' + esc(v.agent || '') + '</td></tr>';
+    });
+    document.getElementById('visitors').innerHTML = people ||
+      '<tr><td colspan="7">No visitors recorded yet.</td></tr>';
   }
 
   function run() {
