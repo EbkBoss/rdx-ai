@@ -4,7 +4,7 @@
       "id": "GhvstTerminalAndroid",
       "slug": "ghvst-terminal",
       "card": "p-ghvst-terminal",
-      "name": "Ghvst Terminal - the AI operator for your phone",
+      "name": "GHVST - the AI operator for your phone",
       "note": "The flagship operator product: a real agent that ACTS on the phone (device scan, files, open apps, tap and type, calls, SMS, speaker voice, web, code) with an offline signed licence. Tier picks the capability set, plan picks the term and the price. Every tier is a subscription: PRO, VIP and TITAN sell monthly and annual terms; PHANTOM and MYTHIC sell annual terms. Renewing adds time to the current expiry.",
       "app": "GHVST_TERMINAL",
       "glyph": "▲",
@@ -629,7 +629,7 @@
     }
   ],
   "issuer": "https://license.ghvst.dev",
-  "generated_at": "2026-11-21T22:10:51+00:00",
+  "generated_at": "2026-11-22T00:31:58+00:00",
   "mythic_bundle": {
     "mythic_price": 899.0,
     "items": [
@@ -638,7 +638,7 @@
         "price": 199.0
       },
       {
-        "name": "Ghvst Terminal — PHANTOM",
+        "name": "GHVST — PHANTOM",
         "price": 499.0
       },
       {
