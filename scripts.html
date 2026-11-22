@@ -6,7 +6,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>MVRK Script Store</title>
 <meta name="description" content="Named Luau scripts, validated in the MVRK runtime and pinned by SHA-256.">
-<link rel="stylesheet" href="siteguard.css">
 <script src="siteguard.js"></script>
 <style>
 :root{color-scheme:dark}
@@ -36,12 +35,16 @@ h1{font-size:34px;margin:10px 0 6px;color:#f2f0f6;letter-spacing:-.01em}
 .topnav{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:22px;padding-bottom:14px;border-bottom:1px solid #1c1c25}
 .topnav a{color:#9a97a8;text-decoration:none;font-size:12px;border:1px solid #262633;border-radius:999px;padding:4px 12px}
 .topnav a:hover{color:#f2f0f6;border-color:#3a3a49}
+@media(max-width:600px){
+  .wrap{padding:28px 14px 56px}
+  .grid{grid-template-columns:minmax(0,1fr)}
+}
 </style>
 </head>
 <body>
 <div class="wrap">
   <nav class="topnav">
-    <a href="index.html">&larr; RDX</a>
+    <a href="index.html">&larr; GHVST</a>
     <a href="store.html">Price list</a>
     <a href="policy.html">Policy</a>
   </nav>

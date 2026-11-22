@@ -1,0 +1,71 @@
+{
+  "source": "catalog.json",
+  "catalogSha256": "224C811A382671B8E260851D7090784B19B8F0AB3FEC3F716454A3150252BF42",
+  "products": [
+    {
+      "id": "GhvstTerminalAndroid",
+      "slug": "ghvst-terminal",
+      "page": "products/ghvst-terminal.html"
+    },
+    {
+      "id": "rdx-workspace",
+      "slug": "rdx-workspace",
+      "page": "products/rdx-workspace.html"
+    },
+    {
+      "id": "GhvstBrowserAndroid",
+      "slug": "ghvst-android",
+      "page": "products/ghvst-android.html"
+    },
+    {
+      "id": "GhvstCapture",
+      "slug": "capture",
+      "page": "products/capture.html"
+    },
+    {
+      "id": "GhvstDevKit",
+      "slug": "devkit",
+      "page": "products/devkit.html"
+    },
+    {
+      "id": "RoxVault",
+      "slug": "roxvault",
+      "page": "products/roxvault.html"
+    },
+    {
+      "id": "SovereignMessenger",
+      "slug": "sovereign",
+      "page": "products/sovereign.html"
+    },
+    {
+      "id": "GhvstAllApps",
+      "slug": "ghvst-allapps",
+      "page": "products/ghvst-allapps.html"
+    },
+    {
+      "id": "GhvstCaptureSuite",
+      "slug": "suite",
+      "page": "products/suite.html"
+    },
+    {
+      "id": "GhvstTeam",
+      "slug": "team",
+      "page": "products/team.html"
+    },
+    {
+      "id": "GhvstBrowserPC",
+      "slug": "ghvst-pc",
+      "page": "products/ghvst-pc.html"
+    },
+    {
+      "id": "MVRKStudio",
+      "slug": "mvrk",
+      "page": "products/mvrk.html"
+    }
+  ],
+  "paidOptions": 31,
+  "proof": {
+    "commerceAssertions": 75,
+    "issuerSandboxAssertions": 49
+  }
+}

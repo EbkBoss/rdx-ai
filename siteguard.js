@@ -108,7 +108,7 @@
       '<div style="max-width:640px;margin:12vh auto;padding:32px;line-height:1.7">' +
       '<h1 style="font-size:22px;margin:0 0 14px">This page is not available to automated agents.</h1>' +
       '<p style="font-size:15px;color:#a9b0c6">You are reading this with an automated crawler. ' +
-      'The RDX storefront publishes real prices, real features and real download links for paid ' +
+      'The GHVST storefront publishes real prices, real features and real download links for paid ' +
       'software, and automated harvesting of it is not permitted.</p>' +
       '<p style="font-size:15px;color:#a9b0c6">If you are a person on a normal browser and you saw ' +
       'this by mistake, the products are still here - email or WhatsApp ' +
@@ -186,6 +186,28 @@
     }).catch(function () { return null; });
   }
 
+  /* ntfy's /json endpoint is NDJSON when more than one message exists, not a
+     JSON array. Parse all three real shapes (array, one object, NDJSON) and
+     ignore keepalive/malformed lines instead of losing issuer discovery. */
+  function parseDiscoveryMessages(raw) {
+    if (!raw) return [];
+    if (Object.prototype.toString.call(raw) === '[object Array]') return raw;
+    if (typeof raw === 'object') return [raw];
+    var text = String(raw).trim();
+    if (!text) return [];
+    try {
+      var parsed = JSON.parse(text);
+      return Object.prototype.toString.call(parsed) === '[object Array]' ? parsed : [parsed];
+    } catch (e) { /* the normal multi-message shape is NDJSON */ }
+    var messages = [];
+    text.split(/\r?\n/).forEach(function (line) {
+      line = line.trim();
+      if (!line) return;
+      try { messages.push(JSON.parse(line)); } catch (e) { /* ignore keepalives */ }
+    });
+    return messages;
+  }
+
   function alive(base, timeoutMs) {
     /* A health check with its own deadline. A tunnel that has died can hang on
        DNS for longer than a buyer is willing to wait, and a promise that never
@@ -256,24 +278,38 @@
           /* The signed ntfy list is the fallback, and the only one that survives
              a tunnel change without this page being rebuilt. */
           return fetch(DISCOVERY, { cache: 'no-store' })
-            .then(function (r) { return r.ok ? r.json() : []; })
-            .catch(function () { return []; })
-            .then(function (messages) {
-              var text = '';
-              for (var i = (messages || []).length - 1; i >= 0; i--) {
-                if (messages[i] && messages[i].message) { text = messages[i].message; break; }
-              }
-              if (!text) return null;
+            .then(function (r) { return r.ok ? r.text() : ''; })
+            .catch(function () { return ''; })
+            .then(function (raw) {
+              var messages = parseDiscoveryMessages(raw);
               return issuerKey().then(function (key) {
                 if (!key) return null;
-                return verifyList(text, key);
-              }).then(function (urls) {
-                return firstAlive(urls);
+                /* Try signed envelopes newest-first. A keepalive, an expired
+                   envelope or one dead tunnel must not hide an older usable
+                   announcement. */
+                function attempt(index) {
+                  if (index < 0) return Promise.resolve(null);
+                  var text = messages[index] && messages[index].message;
+                  if (!text) return attempt(index - 1);
+                  return verifyList(text, key).then(function (urls) {
+                    if (!urls) return attempt(index - 1);
+                    return firstAlive(urls).then(function (hit) {
+                      return hit || attempt(index - 1);
+                    });
+                  });
+                }
+                return attempt(messages.length - 1);
               });
             });
         });
     }).then(function (base) {
-      if (base) { try { window.localStorage.setItem(CACHED_ISSUER, base); } catch (e) {} }
+      if (base) {
+        try { window.localStorage.setItem(CACHED_ISSUER, base); } catch (e) {}
+      } else {
+        /* Do not cache an outage for the lifetime of the page. Pressing the
+           update/claim button again must perform a fresh discovery attempt. */
+        issuerPromise = null;
+      }
       return base;
     });
     return issuerPromise;
@@ -308,7 +344,8 @@
     isAgent: isAgent,
     wall: wall,
     findIssuer: findIssuer,
-    track: track
+    track: track,
+    _parseDiscoveryMessages: parseDiscoveryMessages
   };
 
   window.GHVST_GUARD = G;

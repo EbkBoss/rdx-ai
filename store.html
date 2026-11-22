@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The GHOST store - every licence, every price, one page</title>
+<title>The GHVST store - every licence, every price, one page</title>
 <meta name="description" content="Every Ghvst product with its real price. No free tier, no trial. Pay with PayPal, activate with your transaction ID, renew without losing a day.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23f6c76a'>G</text></svg>">
+<link rel="icon" href="assets/ghvst-logo-64.png">
 <!-- THE WALL RUNS FIRST. siteguard.js is loaded in the HEAD, before a single
      product card is parsed, so an automated agent never gets the price list. -->
 <script src="siteguard.js"></script>
@@ -59,11 +59,23 @@
   code{font-family:ui-monospace,Consolas,monospace;color:var(--green);font-size:13px}
   .foot{color:var(--muted);font-size:12.5px;margin-top:26px;text-align:center}
   a{color:var(--violet)}
+  @media(max-width:600px){
+    .wrap{padding:32px 16px 64px}
+    .grid{grid-template-columns:minmax(0,1fr)}
+    .prod{padding:18px 16px}
+    table.plans,table.plans tbody{display:block;width:100%}
+    table.plans tr{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 12px;
+                    padding:12px 0;border-top:1px solid rgba(255,255,255,.07)}
+    table.plans td{display:block;padding:0;border:0}
+    table.plans td.pl{grid-column:1/-1}
+    table.plans td.pr{grid-column:1;grid-row:2;font-size:20px}
+    table.plans td.act{grid-column:2;grid-row:2;align-self:center}
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="kicker">The GHOST store</div>
+  <div class="kicker">The GHVST store</div>
   <h1>Every product. <span class="em">Every price.</span><br>One page, one licence.</h1>
   <p class="note" style="max-width:720px">No free tier. No trial. Every price below is the price the
      licence issuer charges - this page is generated from the same catalogue the issuer reads, so the
@@ -75,13 +87,13 @@
     <ol class="steps">
       <li><b>Pay.</b> The button opens PayPal with the exact amount already filled in.</li>
       <li><b>Copy the transaction ID</b> from your PayPal receipt.</li>
-      <li><b>Paste it</b> into the app's licence screen - or send it to the seller and the key comes
-          straight back.</li>
+      <li><b>Paste it</b> on the receipt or app's activation screen. The issuer verifies the real
+          payment and returns the signed licence automatically.</li>
       <li><b>Renew any time:</b> pay again and paste the new transaction ID. The extra time is
           <b>added</b> to what you have left. You never lose a day you paid for, and your licence id
           never changes.</li>
     </ol>
-    <div class="live">The issuer is published at <code>https://license.ghvst.dev</code>.</div>
+    <div class="live">The receipt verifies the signed issuer discovery document and selects a live issuer; no rotating tunnel address is hardcoded.</div>
   </div>
 
   <div class="grid">
@@ -92,9 +104,10 @@
   
   <table class="plans"><tbody>
 <tr><td class="pl">Monthly <span class="badge">DEFAULT</span><div class="sub">every Ghvst app - 30-day licence, renew any time</div></td><td class="pr">$29<div class="sub">1 month <span class="eq">= $29/mo equivalent</span></div></td><td class="act"><a class="btn" href="https://www.paypal.com/ncp/payment/7XJF5B2FARRG6" rel="noopener" data-product="GhvstAllApps" data-plan="monthly">Pay $29</a></td></tr>
-<tr><td class="pl">Annual<div class="sub">2.5 months free - 365-day licence, renew any time</div></td><td class="pr">$249<div class="sub">12 months <span class="eq">= $20.47/mo equivalent</span></div></td><td class="act"><a class="btn" href="https://www.paypal.com/ncp/payment/UW7LV8BZL2FMA" rel="noopener" data-product="GhvstAllApps" data-plan="annual">Pay $249</a></td></tr>
+<tr><td class="pl">Annual<div class="sub">every Ghvst app - 365-day licence, renew any time</div></td><td class="pr">$249<div class="sub">12 months <span class="eq">= $20.47/mo equivalent</span></div></td><td class="act"><a class="btn" href="https://www.paypal.com/ncp/payment/UW7LV8BZL2FMA" rel="noopener" data-product="GhvstAllApps" data-plan="annual">Pay $249</a></td></tr>
   </tbody></table>
   
+  <p><a href="products/ghvst-allapps.html">Product details, proof, compatibility and privacy</a></p>
 </article>
 <article class="prod" id="p-GhvstBrowserAndroid">
   <h3>Ghvst Browser for Android</h3>
@@ -106,9 +119,10 @@
 <tr><td class="pl">Annual<div class="sub">365-day licence - renew any time</div></td><td class="pr">$119<div class="sub">12 months <span class="eq">= $9.78/mo equivalent</span></div></td><td class="act"><a class="btn" href="https://www.paypal.com/ncp/payment/U36JU7BR93GCU" rel="noopener" data-product="GhvstBrowserAndroid" data-plan="annual">Pay $119</a></td></tr>
   </tbody></table>
   
+  <p><a href="products/ghvst-android.html">Product details, proof, compatibility and privacy</a></p>
 </article>
 <article class="prod" id="p-GhvstTerminalAndroid">
-  <h3>Ghvst Terminal - the AI operator for your phone</h3>
+  <h3>GHVST - the AI operator for your phone</h3>
   <div class="app">GHVST_TERMINAL</div>
   <p class="note">The flagship operator product: a real agent that ACTS on the phone (device scan, files, open apps, tap and type, calls, SMS, speaker voice, web, code) with an offline signed licence. Tier picks the capability set, plan picks the term and the price. Every tier is a subscription: PRO, VIP and TITAN sell monthly and annual terms; PHANTOM and MYTHIC sell annual terms. Renewing adds time to the current expiry.</p>
   
@@ -117,6 +131,7 @@
 <tr><td class="pl">Annual<div class="sub">365-day licence - renew any time</div></td><td class="pr">$150<div class="sub">12 months <span class="eq">= $12.33/mo equivalent</span></div></td><td class="act"><a class="btn" href="https://www.paypal.com/ncp/payment/HB3LM3LQXVLSU" rel="noopener" data-product="GhvstTerminalAndroid" data-plan="annual">Pay $150</a></td></tr>
   </tbody></table>
   <div class="tiers"><h4>Tiers</h4><div class="tier"><div class="tier-h">Ghvst PRO</div><div class="tier-c">48-step agent, toolchain auto-provision, APK build and install, fast hosted models</div><ul class="tier-p"><li><b>$15</b> - PRO monthly <span class="sub">(1 month)</span> <a class="btn sm" href="https://www.paypal.com/ncp/payment/YT7PRZVY7EGSC" rel="noopener" data-product="GhvstTerminalAndroid" data-tier="pro" data-plan="monthly">Pay</a></li><li><b>$150</b> - PRO annual <span class="sub">(12 months)</span> <a class="btn sm" href="https://www.paypal.com/ncp/payment/HB3LM3LQXVLSU" rel="noopener" data-product="GhvstTerminalAndroid" data-tier="pro" data-plan="annual">Pay</a></li></ul></div><div class="tier"><div class="tier-h">Ghvst VIP</div><div class="tier-c">96 steps, reasoning models, God&#x27;s Eye live feeds, full skills and MCP packs, vision repair</div><ul class="tier-p"><li><b>$29</b> - VIP monthly <span class="sub">(1 month)</span> <a class="btn sm" href="https://www.paypal.com/ncp/payment/Y3TFFZ75M6FTU" rel="noopener" data-product="GhvstTerminalAndroid" data-tier="vip" data-plan="monthly">Pay</a></li><li><b>$290</b> - VIP annual <span class="sub">(12 months)</span> <a class="btn sm" href="https://www.paypal.com/ncp/payment/MXMH2RYQK8SR4" rel="noopener" data-product="GhvstTerminalAndroid" data-tier="vip" data-plan="annual">Pay</a></li></ul></div><div class="tier"><div class="tier-h">Ghvst TITAN</div><div class="tier-c">160 steps, big models, multi-device console, long-running jobs</div><ul class="tier-p"><li><b>$79</b> - TITAN monthly <span class="sub">(1 month)</span> <a class="btn sm" href="https://www.paypal.com/ncp/payment/ASNEPPFLRC65W" rel="noopener" data-product="GhvstTerminalAndroid" data-tier="titan" data-plan="monthly">Pay</a></li><li><b>$790</b> - TITAN annual <span class="sub">(12 months)</span> <a class="btn sm" href="https://www.paypal.com/ncp/payment/DUX296LGUPKWA" rel="noopener" data-product="GhvstTerminalAndroid" data-tier="titan" data-plan="annual">Pay</a></li></ul></div><div class="tier"><div class="tier-h">Ghvst PHANTOM</div><div class="tier-c">everything in TITAN, with an annual device-bound licence that survives reinstall</div><ul class="tier-p"><li><b>$499</b> - Annual <span class="sub">(12 months)</span> <a class="btn sm" href="https://www.paypal.com/ncp/payment/2VATAUJMWJZNA" rel="noopener" data-product="GhvstTerminalAndroid" data-tier="phantom" data-plan="annual">Pay</a></li></ul></div><div class="tier"><div class="tier-h">Ghvst MYTHIC</div><div class="tier-c">everything in PHANTOM: endpoint editor, GGUF scout and every feature released during the annual term</div><ul class="tier-p"><li><b>$899</b> - Annual <span class="sub">(12 months)</span> <a class="btn sm" href="https://www.paypal.com/ncp/payment/FDLTPZMER7T66" rel="noopener" data-product="GhvstTerminalAndroid" data-tier="mythic" data-plan="annual">Pay</a></li></ul></div></div>
+  <p><a href="products/ghvst-terminal.html">Product details, proof, compatibility and privacy</a></p>
 </article>
 <article class="prod" id="p-SovereignMessenger">
   <h3>Sovereign Messenger (Ghvst Sovereign Gang)</h3>
@@ -128,6 +143,7 @@
 <tr><td class="pl">Annual<div class="sub">365-day licence - renew any time</div></td><td class="pr">$59<div class="sub">12 months <span class="eq">= $4.85/mo equivalent</span></div></td><td class="act"><a class="btn" href="https://www.paypal.com/ncp/payment/Z2LULUHUAC5ZC" rel="noopener" data-product="SovereignMessenger" data-plan="annual">Pay $59</a></td></tr>
   </tbody></table>
   
+  <p><a href="products/sovereign.html">Product details, proof, compatibility and privacy</a></p>
 </article>
 <article class="prod" id="p-RoxVault">
   <h3>RoxVault - Roblox Account Manager</h3>
@@ -139,6 +155,7 @@
 <tr><td class="pl">Annual<div class="sub">365-day licence - renew any time</div></td><td class="pr">$199<div class="sub">12 months <span class="eq">= $16.36/mo equivalent</span></div></td><td class="act"><a class="btn" href="https://www.paypal.com/ncp/payment/Z39S9YZD6GL4A" rel="noopener" data-product="RoxVault" data-plan="annual">Pay $199</a></td></tr>
   </tbody></table>
   
+  <p><a href="products/roxvault.html">Product details, proof, compatibility and privacy</a></p>
 </article>
 <article class="prod" id="p-GhvstCapture">
   <h3>GHVST Capture - screen + camera evidence engine with offline AI</h3>
@@ -150,6 +167,7 @@
 <tr><td class="pl">Annual<div class="sub">365-day licence - renew any time</div></td><td class="pr">$149<div class="sub">12 months <span class="eq">= $12.25/mo equivalent</span></div></td><td class="act"><a class="btn" href="https://www.paypal.com/ncp/payment/TFBBSZ57FTM58" rel="noopener" data-product="GhvstCapture" data-plan="annual">Pay $149</a></td></tr>
   </tbody></table>
   
+  <p><a href="products/capture.html">Product details, proof, compatibility and privacy</a></p>
 </article>
 <article class="prod" id="p-GhvstDevKit">
   <h3>GHVST DevKit - the on-device development workstation</h3>
@@ -161,6 +179,7 @@
 <tr><td class="pl">Annual<div class="sub">365-day licence - renew any time</div></td><td class="pr">$219<div class="sub">12 months <span class="eq">= $18/mo equivalent</span></div></td><td class="act"><a class="btn" href="https://www.paypal.com/ncp/payment/XRYZ4FPTTXABY" rel="noopener" data-product="GhvstDevKit" data-plan="annual">Pay $219</a></td></tr>
   </tbody></table>
   
+  <p><a href="products/devkit.html">Product details, proof, compatibility and privacy</a></p>
 </article>
 <article class="prod" id="p-GhvstCaptureSuite">
   <h3>GHVST Capture Suite - Capture + DevKit together</h3>
@@ -172,6 +191,7 @@
 <tr><td class="pl">Annual<div class="sub">Capture + DevKit, 365-day licence - renew any time</div></td><td class="pr">$299<div class="sub">12 months <span class="eq">= $24.58/mo equivalent</span></div></td><td class="act"><a class="btn" href="https://www.paypal.com/ncp/payment/TTZS4L3BCBXBA" rel="noopener" data-product="GhvstCaptureSuite" data-plan="annual">Pay $299</a></td></tr>
   </tbody></table>
   
+  <p><a href="products/suite.html">Product details, proof, compatibility and privacy</a></p>
 </article>
 <article class="prod" id="p-GhvstTeam">
   <h3>GHOST Team Licence</h3>
@@ -183,17 +203,19 @@
 <tr><td class="pl">Team annual <span class="badge">DEFAULT</span><div class="sub">5 seats, 365-day licence - renew any time</div></td><td class="pr">$600<div class="sub">12 months <span class="eq">= $49.32/mo equivalent</span></div></td><td class="act"><a class="btn" href="https://www.paypal.com/ncp/payment/Q3A4X3AHUDMU8" rel="noopener" data-product="GhvstTeam" data-plan="annual">Pay $600</a></td></tr>
   </tbody></table>
   
+  <p><a href="products/team.html">Product details, proof, compatibility and privacy</a></p>
 </article>
 <article class="prod" id="p-rdx-workspace">
-  <h3>RDX Workspace - the AI engineering cockpit for Windows</h3>
-  <div class="app">RDX_DESKTOP</div>
+  <h3>GHVST Workspace - the AI engineering cockpit for Windows</h3>
+  <div class="app">Windows</div>
   <p class="note">The Windows engineering cockpit: a real OS-sandboxed agent, local GGUF support, a local semantic index, the MCP fleet, and an OFFLINE signed licence with no account, no server and no phone-home. One product id, four subscription tiers. The TIER is the capability set and goes into the signed payload; the PLAN is the paid term and the price. Standard is one machine. MYTHIC is the highest individual tier and includes every release during the paid subscription term. Pro is three machines with priority support. Enterprise is a site licence on the customer&#x27;s own infrastructure. Prices here are the ONLY source of truth - the app&#x27;s price sheet is GENERATED from this file.</p>
   
   <table class="plans"><tbody>
 <tr><td class="pl">Monthly <span class="badge">DEFAULT</span><div class="sub">30 days - the low-cost way in - 30-day licence, renew any time</div></td><td class="pr">$29<div class="sub">1 month <span class="eq">= $29/mo equivalent</span></div></td><td class="act"><a class="btn" href="https://www.paypal.com/ncp/payment/8YXFNZYC7TYEG" rel="noopener" data-product="rdx-workspace" data-plan="monthly">Pay $29</a></td></tr>
 <tr><td class="pl">Annual<div class="sub">one payment, one year of every release - 365-day licence, renew any time</div></td><td class="pr">$199<div class="sub">12 months <span class="eq">= $16.36/mo equivalent</span></div></td><td class="act"><a class="btn" href="https://www.paypal.com/ncp/payment/FRLV3WPVMJF3S" rel="noopener" data-product="rdx-workspace" data-plan="annual">Pay $199</a></td></tr>
   </tbody></table>
-  <div class="tiers"><h4>Tiers</h4><div class="tier"><div class="tier-h">RDX Workspace Standard</div><div class="tier-c">the full desktop cockpit on 1 machine</div><ul class="tier-p"><li><b>$29</b> - Monthly <span class="sub">(1 month)</span> <a class="btn sm" href="https://www.paypal.com/ncp/payment/8YXFNZYC7TYEG" rel="noopener" data-product="rdx-workspace" data-tier="standard" data-plan="monthly">Pay</a></li><li><b>$199</b> - Annual <span class="sub">(12 months)</span> <a class="btn sm" href="https://www.paypal.com/ncp/payment/FRLV3WPVMJF3S" rel="noopener" data-product="rdx-workspace" data-tier="standard" data-plan="annual">Pay</a></li></ul></div><div class="tier"><div class="tier-h">RDX Workspace MYTHIC</div><div class="tier-c">everything in Standard for the paid subscription term, plus every release included during that term</div><ul class="tier-p"><li><b>$999</b> - Annual <span class="sub">(12 months)</span> <a class="btn sm" href="https://www.paypal.com/ncp/payment/7DWT76LM4ZKBY" rel="noopener" data-product="rdx-workspace" data-tier="mythic" data-plan="annual">Pay</a></li></ul></div><div class="tier"><div class="tier-h">RDX Workspace Pro</div><div class="tier-c">Standard plus 3 machines, priority support and every new release for the term</div><ul class="tier-p"><li><b>$1499</b> - Pro annual <span class="sub">(12 months)</span> <a class="btn sm" href="https://www.paypal.com/ncp/payment/5YVRDVF8A644J" rel="noopener" data-product="rdx-workspace" data-tier="pro" data-plan="annual">Pay</a></li></ul></div><div class="tier"><div class="tier-h">RDX Workspace Enterprise</div><div class="tier-c">site licence on the customer&#x27;s own infrastructure, named support, source escrow on request</div><ul class="tier-p"><li><b>$12000</b> - Enterprise annual <span class="sub">(12 months)</span> <a class="btn sm" href="https://www.paypal.com/ncp/payment/DF46F5VAT7HAJ" rel="noopener" data-product="rdx-workspace" data-tier="enterprise" data-plan="annual">Pay</a></li></ul></div></div>
+  <div class="tiers"><h4>Tiers</h4><div class="tier"><div class="tier-h">GHVST Workspace Standard</div><div class="tier-c">the full desktop cockpit on 1 machine</div><ul class="tier-p"><li><b>$29</b> - Monthly <span class="sub">(1 month)</span> <a class="btn sm" href="https://www.paypal.com/ncp/payment/8YXFNZYC7TYEG" rel="noopener" data-product="rdx-workspace" data-tier="standard" data-plan="monthly">Pay</a></li><li><b>$199</b> - Annual <span class="sub">(12 months)</span> <a class="btn sm" href="https://www.paypal.com/ncp/payment/FRLV3WPVMJF3S" rel="noopener" data-product="rdx-workspace" data-tier="standard" data-plan="annual">Pay</a></li></ul></div><div class="tier"><div class="tier-h">GHVST Workspace MYTHIC</div><div class="tier-c">everything in Standard for the paid subscription term, plus every release included during that term</div><ul class="tier-p"><li><b>$999</b> - Annual <span class="sub">(12 months)</span> <a class="btn sm" href="https://www.paypal.com/ncp/payment/7DWT76LM4ZKBY" rel="noopener" data-product="rdx-workspace" data-tier="mythic" data-plan="annual">Pay</a></li></ul></div><div class="tier"><div class="tier-h">GHVST Workspace Pro</div><div class="tier-c">Standard plus 3 machines, priority support and every new release for the term</div><ul class="tier-p"><li><b>$1499</b> - Pro annual <span class="sub">(12 months)</span> <a class="btn sm" href="https://www.paypal.com/ncp/payment/5YVRDVF8A644J" rel="noopener" data-product="rdx-workspace" data-tier="pro" data-plan="annual">Pay</a></li></ul></div><div class="tier"><div class="tier-h">GHVST Workspace Enterprise</div><div class="tier-c">site licence on the customer&#x27;s own infrastructure, named support, source escrow on request</div><ul class="tier-p"><li><b>$12000</b> - Enterprise annual <span class="sub">(12 months)</span> <a class="btn sm" href="https://www.paypal.com/ncp/payment/DF46F5VAT7HAJ" rel="noopener" data-product="rdx-workspace" data-tier="enterprise" data-plan="annual">Pay</a></li></ul></div></div>
+  <p><a href="products/rdx-workspace.html">Product details, proof, compatibility and privacy</a></p>
 </article>
 <article class="prod" id="p-GhvstBrowserPC">
   <h3>Ghvst Browser - PC</h3>
@@ -204,6 +226,7 @@
 <tr><td class="pl">Annual <span class="badge">DEFAULT</span><div class="sub">365-day licence - renew any time</div></td><td class="pr">$79<div class="sub">12 months <span class="eq">= $6.49/mo equivalent</span></div></td><td class="act"><a class="btn" href="https://www.paypal.com/ncp/payment/K3QPTFJQYFYK2" rel="noopener" data-product="GhvstBrowserPC" data-plan="annual">Pay $79</a></td></tr>
   </tbody></table>
   
+  <p><a href="products/ghvst-pc.html">Product details, proof, compatibility and privacy</a></p>
 </article>
 <article class="prod" id="p-MVRKStudio">
   <h3>MVRK Studio</h3>
@@ -214,6 +237,7 @@
 <tr><td class="pl">Annual <span class="badge">DEFAULT</span><div class="sub">365-day licence - renew any time</div></td><td class="pr">$59<div class="sub">12 months <span class="eq">= $4.85/mo equivalent</span></div></td><td class="act"><a class="btn" href="https://www.paypal.com/ncp/payment/6G23LVV9URXPQ" rel="noopener" data-product="MVRKStudio" data-plan="annual">Pay $59</a></td></tr>
   </tbody></table>
   
+  <p><a href="products/mvrk.html">Product details, proof, compatibility and privacy</a></p>
 </article>
   </div>
 
@@ -229,8 +253,8 @@
     </ul>
   </div>
 
-  <div class="foot">Prices generated from the GHOST licence catalogue - the issuer charges exactly these.
-     <br>Licence key, transaction id and renewal rules: <code>license.ghvst.dev</code>
+  <div class="foot">Prices generated from the GHVST licence catalogue - the issuer charges exactly these.
+     <br>Licence and delivery use the signed issuer discovered by the receipt.
      <br><a href="policy.html">No scraping / no REA / no clones</a> &middot; <a href="whats-fixed.html">What's fixed</a> &middot; <a href="llms.txt">llms.txt</a></div>
 </div>
 </body>

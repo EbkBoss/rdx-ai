@@ -1,7 +1,326 @@
 {
   "schema": 1,
-  "updated": "2026-11-21",
+  "updated": "2026-11-22",
   "releases": [
+    {
+      "product": "GhvstCapture",
+      "name": "GHVST Capture",
+      "version": "2.5.13",
+      "date": "2026-11-22",
+      "status": "shipped",
+      "headline": "GOD'S EYE: the assistant can now see",
+      "fixed": [
+        "Real multimodal pipeline with EXIF and memory-safe scaling, multi-image on one request, structured OBSERVED/TEXT/UNCERTAIN/ACTIONABLE analysis, OCR and a full-screen zoom/pan viewer."
+      ],
+      "proof": [
+        "Kimi K3.1 Pro returned a complete structured analysis of a live Android screenshot on the reference phone; 47 JVM tests pass; buyer APKs signed and zipaligned."
+      ],
+      "files": [
+        {
+          "name": "Ghvst_Capture_2.5.13_arm64-v8a.apk",
+          "bytes": 37928380,
+          "sha256": "0ED84EB26F21413B62A28A9CF0477D225CE0DB35C8718333FFFF52ECAE89ABB1"
+        },
+        {
+          "name": "Ghvst_Capture_2.5.13_armeabi-v7a.apk",
+          "bytes": 28278720,
+          "sha256": "27785AEDA40CB6B09CC75D1664469AB8DE8474B1427D70A07320EE376164A118"
+        },
+        {
+          "name": "Ghvst_Capture_2.5.13_x86_64.apk",
+          "bytes": 42142504,
+          "sha256": "BA1A6DA02222A90C27A789D88550427F98A283E3AEBABC1AB5E218BCB1479D5B"
+        }
+      ]
+    },
+    {
+      "product": "GhvstDevKit",
+      "name": "GHVST DevKit",
+      "version": "2.4.12",
+      "date": "2026-11-22",
+      "status": "shipped",
+      "headline": "GOD'S EYE: multimodal vision in the workbench",
+      "fixed": [
+        "EYE button with thumbnails and full-screen zoom/pan, one structured analysis for up to four images, honest vision-model gating and copy-on-long-press."
+      ],
+      "proof": [
+        "Nemotron 3.5 Super VL read a live screenshot and named the real controls; a two-image comparison ran in one request; 75 JVM tests and release gate 247/247."
+      ],
+      "files": [
+        {
+          "name": "Ghvst_DevKit_2.4.12.apk",
+          "bytes": 128088807,
+          "sha256": "349CE224BB8CA42C0B1541B5521BDFFF9ECAE4449BCB7D5D9FF4757D8477DE6F"
+        }
+      ]
+    },
+    {
+      "product": "SovereignMessenger",
+      "name": "Sovereign Messenger",
+      "version": "1.7.40",
+      "date": "2026-11-22",
+      "status": "shipped",
+      "headline": "Real voice replies, live models and stronger team privacy",
+      "fixed": [
+        "Voice replies no longer say object Object: real speech and transcription now pass.",
+        "The model catalogue removed three retired NVIDIA IDs; Scout uses Nemotron 3.5 Super VL, model search shows all 33 live models, and Kimi filtering/selection works.",
+        "Team answers, per-user keys, private memory isolation and long encrypted messages are verified, alongside paid licensing, device binding and immediate expiry enforcement."
+      ],
+      "proof": [
+        "Release-sealed code 58; SHA-256 verified; commerce verify and drift are green; DRAFT delivery remains issuer-side."
+      ],
+      "files": [
+        {
+          "name": "Ghvst_Sovereign_Messenger_1.7.40_core.apk",
+          "bytes": 561474,
+          "sha256": "194E1826CF4730E447A564B214218159E80322F20875A0F5229D8EEC9A236978"
+        }
+      ]
+    },
+    {
+      "product": "GhvstCapture",
+      "name": "GHVST Capture",
+      "version": "2.5.12",
+      "date": "2026-11-22",
+      "status": "shipped",
+      "headline": "No more stuck Responding: the chat always recovers",
+      "fixed": [
+        "A model stream that stops sending data is now closed by a 150s idle watchdog with per-request sequence numbers; partial answers are saved and the composer reopens."
+      ],
+      "proof": [
+        "38 director JVM tests passed; director 2.5.12 installed on the reference phone; all three buyer APKs v2-signed and zipaligned."
+      ],
+      "files": [
+        {
+          "name": "Ghvst_Capture_2.5.12_arm64-v8a.apk",
+          "bytes": 37911968,
+          "sha256": "89713A5CAF3A64BF838C53F57D80767694A716F1A7B0ADA3B6327FB79D0A5BA4"
+        },
+        {
+          "name": "Ghvst_Capture_2.5.12_armeabi-v7a.apk",
+          "bytes": 28262308,
+          "sha256": "A5FB67E9A1A8A4738B41258760F7FA9B276833A5EAC6B9B5E8793D49D53774DE"
+        },
+        {
+          "name": "Ghvst_Capture_2.5.12_x86_64.apk",
+          "bytes": 42126092,
+          "sha256": "9A32869B2E131D38A2A5EE9EE819554807FE32E24F246BE7BD2FB8DB3BFE9548"
+        }
+      ]
+    },
+    {
+      "product": "GhvstDevKit",
+      "name": "GHVST DevKit",
+      "version": "2.4.11",
+      "date": "2026-11-22",
+      "status": "shipped",
+      "headline": "The chat can no longer hang on Responding",
+      "fixed": [
+        "Every model request carries a sequence number and a 150s idle watchdog; late callbacks are ignored, partial answers are kept, and Send plus the keyboard are re-enabled."
+      ],
+      "proof": [
+        "66 JVM tests passed; independent release gate 227/227; director 2.4.11 installed and the chat verified idle and usable."
+      ],
+      "files": [
+        {
+          "name": "Ghvst_DevKit_2.4.11.apk",
+          "bytes": 128088771,
+          "sha256": "1A971989FF58288570F0B6464C8202379D3A7D72052E73CCF211D3664F42B3FE"
+        }
+      ]
+    },
+    {
+      "product": "SovereignMessenger",
+      "name": "Sovereign Messenger",
+      "version": "1.7.39",
+      "date": "2026-11-22",
+      "status": "shipped",
+      "headline": "Model search opens at the top with the full NIM catalogue",
+      "fixed": [
+        "Search and model selection now open at the search bar, all 33 NIM models load, and searching Kimi selects the exact model without changing the previous choice silently."
+      ],
+      "proof": [
+        "50/50 Android contract plus licence, model, appearance, friend, team and builder gates passed; core signed and sealed; DRAFT asset digest matches disk."
+      ],
+      "files": [
+        {
+          "name": "Ghvst_Sovereign_Messenger_1.7.39_core.apk",
+          "bytes": 557378,
+          "sha256": "E4E658A24761712F054C341F60DBE56391CB702F1044FCDC0EAAA3BB4E293D74"
+        }
+      ]
+    },
+    {
+      "product": "GhvstBrowserPC",
+      "name": "GhvstBrowserPC",
+      "version": "1.4.24",
+      "date": "2026-11-22",
+      "status": "shipped",
+      "headline": "Real multi-frame GHVST application icon, visually verified",
+      "fixed": [
+        "Rebuilt every ICO frame at its true declared size; the previous file repeated a 256px DIB behind every size entry and caused Windows to show the generic application icon."
+      ],
+      "proof": [
+        "421/421 smoke checks and 1647/1647 live checksums passed. Binary ICO dimensions validated; live title bar, running taskbar button and embedded EXE icon visually show the GHVST eye."
+      ],
+      "files": [
+        {
+          "name": "Ghvst.Browser.exe",
+          "bytes": 535552,
+          "sha256": "62720F555A6A2414B61768EAB2FA2ED39B408C1B94279C48778F4458D2CD7F1C"
+        }
+      ]
+    },
+    {
+      "product": "GhvstBrowserPC",
+      "name": "GhvstBrowserPC",
+      "version": "1.4.23",
+      "date": "2026-11-22",
+      "status": "shipped",
+      "headline": "GHVST icon identity and completed X publishing safeguards",
+      "fixed": [
+        "Windows now receives the explicit GHVST.Browser AppUserModelID for correct taskbar and Alt-Tab icon resolution; Publisher and X-mute protections are preserved."
+      ],
+      "proof": [
+        "420/420 smoke checks and 1647/1647 live checksums passed; live window verified; X0065 confirmed at https://x.com/D4vdReece/status/2124487427016610225."
+      ],
+      "files": [
+        {
+          "name": "Ghvst.Browser.exe",
+          "bytes": 2055680,
+          "sha256": "01BE37E1C10E3EDBA40113588263185E3C66970867B2C71DBF5BB18D2EE7A2FB"
+        }
+      ]
+    },
+    {
+      "product": "GhvstBrowserAndroid",
+      "name": "Ghvst Browser",
+      "version": "1.4.22",
+      "date": "2026-11-22",
+      "status": "shipped",
+      "headline": "X videos stay on the post you chose, plus GHVST Publisher",
+      "fixed": [
+        "PiP pins the visible X video, pauses competing previews and stops auto-next until the floating window closes; mirror and transport controls use the same element.",
+        "Publisher adds NIM drafts, persistent scheduled X campaigns, safe cadence, proof media and mandatory readback."
+      ],
+      "proof": [
+        "439 release JVM tests passed; release-signed all three ABIs; Director verified X/PiP on the personal 1.4.22 build; DRAFT asset digests match disk."
+      ],
+      "files": [
+        {
+          "name": "Ghvst_Browser_Android_1.4.22_arm64-v8a.apk",
+          "bytes": 32344307,
+          "sha256": "1FAB79D1E282710D387A625BA506051E84FAAC4B7CE9B78C24646C75B525B5F0"
+        },
+        {
+          "name": "Ghvst_Browser_Android_1.4.22_armeabi-v7a.apk",
+          "bytes": 22694646,
+          "sha256": "9CCAC2334CC121CD1288BF3B35FA406B1682169FCA77C1C159775DAA3F6033D0"
+        },
+        {
+          "name": "Ghvst_Browser_Android_1.4.22_x86_64.apk",
+          "bytes": 36558418,
+          "sha256": "6C10EE85588BCCB88E59E542BAB80FA64E254D025D2A81525663528C49620010"
+        }
+      ]
+    },
+    {
+      "product": "GhvstBrowserPC",
+      "name": "GhvstBrowserPC",
+      "version": "1.4.22",
+      "date": "2026-11-22",
+      "status": "shipped",
+      "headline": "Combined current PC build with Publisher and X safeguards",
+      "fixed": [
+        "Carries the current RoxVault work together with the next-generation Publisher deck, X-mute defaults, worker recovery and the integrated X composer."
+      ],
+      "proof": [
+        "Live VERSION.txt and executable hash measured after the final build; earlier 419/419 smoke and 1647/1647 checksum gates passed; real Chromium X-mute behavior passed."
+      ],
+      "files": [
+        {
+          "name": "Ghvst.Browser.exe",
+          "bytes": 2055680,
+          "sha256": "8EFA1F5C2CB174A49930106A7430E622FF9BBDEA57BA11844097770611DA2521"
+        }
+      ]
+    },
+    {
+      "product": "GhvstBrowserPC",
+      "name": "GhvstBrowserPC",
+      "version": "1.4.21",
+      "date": "2026-11-22",
+      "status": "shipped",
+      "headline": "Combined RoxVault and Publisher release with X safety",
+      "fixed": [
+        "Carries the current Roblox signup and challenge handling together with Publisher, X-mute defaults, worker updates, crash recovery and the integrated X composer."
+      ],
+      "proof": [
+        "RoxVault 226/226 and native smoke 419/419; live package checksums verified; X composer and X-mute behavior exercised in Chromium."
+      ],
+      "files": [
+        {
+          "name": "Ghvst.Browser.exe",
+          "bytes": 2055680,
+          "sha256": "1F14EB6BBD43F809811BD4DC4100D5CFA106170823ECB6B92D7EA17A726E38D7"
+        }
+      ]
+    },
+    {
+      "product": "GhvstBrowserPC",
+      "name": "GhvstBrowserPC",
+      "version": "1.4.20",
+      "date": "2026-11-22",
+      "status": "shipped",
+      "headline": "X is silent by default and Publisher opens its composer correctly",
+      "fixed": [
+        "X autoplay, Play clicks and tab restores remain muted until explicit Sound on; Publisher opens only its own X composer through the integrated deferred NewWindow path.",
+        "Publisher has a next-generation responsive automation deck, first-post immediate scheduling, worker updates and honest crash recovery."
+      ],
+      "proof": [
+        "419/419 smoke checks and 1647/1647 live checksums passed; real Chromium X-mute behavior passed; live window verified responding."
+      ],
+      "files": [
+        {
+          "name": "Ghvst.Browser.exe",
+          "bytes": 2055680,
+          "sha256": "1F14EB6BBD43F809811BD4DC4100D5CFA106170823ECB6B92D7EA17A726E38D7"
+        }
+      ]
+    },
+    {
+      "product": "GhvstCapture",
+      "name": "GHVST Capture",
+      "version": "2.5.11",
+      "date": "2026-11-21",
+      "status": "shipped",
+      "headline": "Persistent rich previews and background-resilient chat",
+      "fixed": [
+        "HTML answers and restored chats show live inline previews without duplicated source lines; full-screen interaction remains available.",
+        "Keyboard Send works before the IME, and Home/launcher return preserves the assistant while model work completes and saves."
+      ],
+      "proof": [
+        "38 director and 38 buyer JVM tests passed; on-device Home test completed CAPTURE_OK and a persistent HTML counter, with full-screen Add one verified.",
+        "Real Pawn .pwn to .amx magic 0xf1e1 executed GHVST_PAWN_OK; toolchain audit 17/17 working; subscriptions remain monthly/annual only."
+      ],
+      "files": [
+        {
+          "name": "Ghvst_Capture_2.5.11_arm64-v8a.apk",
+          "bytes": 37911968,
+          "sha256": "66E1A92686C4C986949076263806D47BFCB7481BDB5A1C7DEF241F84807F8F88"
+        },
+        {
+          "name": "Ghvst_Capture_2.5.11_armeabi-v7a.apk",
+          "bytes": 28262308,
+          "sha256": "71B2B2602A5EB2B8BA6BFA8644C6BC4E2CED71E5A0AA5B0B5ACE4E326B318B86"
+        },
+        {
+          "name": "Ghvst_Capture_2.5.11_x86_64.apk",
+          "bytes": 42126092,
+          "sha256": "1DD0207AFD6551858CA762423591977FB203AABAA097040E9313892DE01BF512"
+        }
+      ]
+    },
     {
       "product": "GhvstCapture",
       "name": "GHVST Capture",
@@ -61,6 +380,28 @@
         }
       ],
       "note": "The customer GitHub release is DRAFT by design. Delivery is issuer-side behind a signed paid ticket. No free tier, no lifetime sale and no grace period."
+    },
+    {
+      "product": "GhvstDevKit",
+      "name": "GHVST DevKit",
+      "version": "2.4.10",
+      "date": "2026-11-21",
+      "status": "shipped",
+      "headline": "Persistent live previews and searchable chat history",
+      "fixed": [
+        "Restored chats reopen on live HTML previews without source lines; composer focus and keyboard Send are protected.",
+        "history_search finds earlier requests and worked/didnt-work verdicts; cold model routes retry the same selected engine once."
+      ],
+      "proof": [
+        "66 JVM tests passed; cold-start CHAT_OK, restored interactive Snake, history search, Pawn and 17/17 toolchain checks passed on the phone."
+      ],
+      "files": [
+        {
+          "name": "Ghvst_DevKit_2.4.10.apk",
+          "bytes": 128088771,
+          "sha256": "43786159EE1AEF57F83BD7D30C794821FFC65EF8D2D81C5C66462F7DD71FB0DD"
+        }
+      ]
     },
     {
       "product": "SovereignMessenger",
