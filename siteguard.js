@@ -48,7 +48,9 @@
     'browserling', 'puppeteer', 'playwright', 'headlesschrome', 'selenium',
     'puppeteer', 'curl/', 'wget/', 'python-requests', 'python-urllib',
     'go-http-client', 'java/', 'okhttp', 'axios/', 'node-fetch',
-    'rea-agents', 'morluto', 'archiveexplorer',
+    'rea-agents', 'morluto', 'archiveexplorer', 'opencode/', 'codex/', 'claude-code',
+    'gemini-cli', 'hermes-agent', 'cursor/', 'windsurf/', 'antigravity/', 'devin/',
+    'langchain', 'llamaindex', 'autogpt', 'agentgpt', 'aiohttp', 'httpx', 'postmanruntime',
     'mitmproxy', 'mitmweb', 'mitmdump', 'charles', 'fiddler', 'zaproxy',
     'burpsuite', 'httpcanary', 'pcapdroid', 'frida', 'jadx', 'apktool',
     'ghidra', 'objection', 'xposed'
@@ -108,7 +110,7 @@
       '<div style="max-width:640px;margin:12vh auto;padding:32px;line-height:1.7">' +
       '<h1 style="font-size:22px;margin:0 0 14px">This page is not available to automated agents.</h1>' +
       '<p style="font-size:15px;color:#a9b0c6">You are reading this with an automated crawler. ' +
-      'The GHVST storefront publishes real prices, real features and real download links for paid ' +
+      'The Ghvst University storefront publishes real prices, real features and real download links for paid ' +
       'software, and automated harvesting of it is not permitted.</p>' +
       '<p style="font-size:15px;color:#a9b0c6">If you are a person on a normal browser and you saw ' +
       'this by mistake, the products are still here - email or WhatsApp ' +

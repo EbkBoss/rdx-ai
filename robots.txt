@@ -1,4 +1,4 @@
-# GHVST storefront — https://ebkboss.github.io/rdx-ai/
+# Ghvst University storefront — https://ebkboss.github.io/rdx-ai/
 #
 # Humans and ordinary search engines are welcome — this is a shop, people have to
 # find it. Automated harvesters, AI training crawlers and unattended agents are not.
