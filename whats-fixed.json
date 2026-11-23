@@ -3,6 +3,29 @@
   "updated": "2026-11-23",
   "releases": [
     {
+      "product": "SovereignMessenger",
+      "name": "Sovereign Messenger",
+      "version": "1.7.41",
+      "date": "2026-11-23",
+      "status": "shipped",
+      "headline": "Visible Space Invite, real-account Discover and working Android friend requests",
+      "fixed": [
+        "Space headers now expose Invite directly, including accepted-friend invites, Share invite and Copy code.",
+        "Discover now separates deliberately published profiles from the owner-only registered-account/activity roster; test fixtures and invented users are removed.",
+        "Android friend and space relay traffic now uses the native HTTP bridge, fixing CORS failures before contacts could be saved or invited."
+      ],
+      "proof": [
+        "Release-signed subscription buyer build code 59; licence gate enabled; hardening, signature, leak and SHA-256 checks passed; DRAFT asset delivery remains issuer-side."
+      ],
+      "files": [
+        {
+          "name": "Ghvst_Sovereign_Messenger_1.7.41_core.apk",
+          "bytes": 573986,
+          "sha256": "3D72A65B3DF8EA3722E6C12172680E7774C2635BC41F48D3A7C0704A97DE49A6"
+        }
+      ]
+    },
+    {
       "product": "GhvstBrowserPC",
       "name": "GHVST Browser (PC)",
       "version": "1.4.25",
