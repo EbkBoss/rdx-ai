@@ -1,7 +1,64 @@
 {
   "schema": 1,
-  "updated": "2026-11-22",
+  "updated": "2026-11-23",
   "releases": [
+    {
+      "product": "GhvstBrowserPC",
+      "name": "GHVST Browser (PC)",
+      "version": "1.4.25",
+      "date": "2026-11-23",
+      "status": "shipped",
+      "headline": "Home tile now reads Ghvst University with the real emblem",
+      "fixed": [
+        "The new-tab tile still said RDX Site with the old red star; the tile label and its icon are corrected at source in home.html, not hidden with CSS, and the destination link is unchanged."
+      ],
+      "proof": [
+        "422/422 smoke checks and 1648/1648 live manifest checksums passed; the live 1.4.25 window visibly shows the Ghvst University tile and the GHVST emblem."
+      ],
+      "files": [
+        {
+          "name": "Ghvst.Browser.exe",
+          "bytes": 535552,
+          "sha256": "A5F9387D2D54BC3A953DF3F0D4A9176144AED9703355565705899D47E692D703"
+        },
+        {
+          "name": "Assets\\home.html",
+          "bytes": 143889,
+          "sha256": "AE8643F43F6EBA07827EB52037900CDA3012E21DAD065DA5A47DB27284B45B94"
+        }
+      ]
+    },
+    {
+      "product": "GHVST Capture",
+      "name": "GHVST Capture",
+      "version": "2.5.15",
+      "date": "2026-11-22",
+      "status": "shipped",
+      "headline": "Ghost Control, bounded git, tool registry, MCP/ACP, local diffusion route",
+      "fixed": [
+        "the absorption list was unimplemented: no accessibility automation, no git, no tool metadata, no MCP/ACP adapter, no offline render route"
+      ],
+      "proof": [
+        "v2 release-signed, zipalign PASS, DRAFT release digests match disk, GOD'S EYE + adult opt-in carried forward"
+      ],
+      "files": []
+    },
+    {
+      "product": "GHVST Capture",
+      "name": "GHVST Capture",
+      "version": "2.5.14",
+      "date": "2026-11-22",
+      "status": "shipped",
+      "headline": "Adult (18+) production route + no-filter gate",
+      "fixed": [
+        "licensed-stock search hardcoded mature=false, hiding adult-licensed stock"
+      ],
+      "proof": [
+        "53/53 JVM tests, ContentPassthroughTest 6/6, v2+v3 signed, zipalign PASS, DRAFT release digests match disk"
+      ],
+      "files": [],
+      "note": "prompt bytes, chat render and HTML artifacts are unfiltered; provider refusals are shown verbatim; mature is an explicit opt-in"
+    },
     {
       "product": "GhvstCapture",
       "name": "GHVST Capture",
@@ -30,50 +87,6 @@
           "name": "Ghvst_Capture_2.5.13_x86_64.apk",
           "bytes": 42142504,
           "sha256": "BA1A6DA02222A90C27A789D88550427F98A283E3AEBABC1AB5E218BCB1479D5B"
-        }
-      ]
-    },
-    {
-      "product": "GhvstDevKit",
-      "name": "GHVST DevKit",
-      "version": "2.4.12",
-      "date": "2026-11-22",
-      "status": "shipped",
-      "headline": "GOD'S EYE: multimodal vision in the workbench",
-      "fixed": [
-        "EYE button with thumbnails and full-screen zoom/pan, one structured analysis for up to four images, honest vision-model gating and copy-on-long-press."
-      ],
-      "proof": [
-        "Nemotron 3.5 Super VL read a live screenshot and named the real controls; a two-image comparison ran in one request; 75 JVM tests and release gate 247/247."
-      ],
-      "files": [
-        {
-          "name": "Ghvst_DevKit_2.4.12.apk",
-          "bytes": 128088807,
-          "sha256": "349CE224BB8CA42C0B1541B5521BDFFF9ECAE4449BCB7D5D9FF4757D8477DE6F"
-        }
-      ]
-    },
-    {
-      "product": "SovereignMessenger",
-      "name": "Sovereign Messenger",
-      "version": "1.7.40",
-      "date": "2026-11-22",
-      "status": "shipped",
-      "headline": "Real voice replies, live models and stronger team privacy",
-      "fixed": [
-        "Voice replies no longer say object Object: real speech and transcription now pass.",
-        "The model catalogue removed three retired NVIDIA IDs; Scout uses Nemotron 3.5 Super VL, model search shows all 33 live models, and Kimi filtering/selection works.",
-        "Team answers, per-user keys, private memory isolation and long encrypted messages are verified, alongside paid licensing, device binding and immediate expiry enforcement."
-      ],
-      "proof": [
-        "Release-sealed code 58; SHA-256 verified; commerce verify and drift are green; DRAFT delivery remains issuer-side."
-      ],
-      "files": [
-        {
-          "name": "Ghvst_Sovereign_Messenger_1.7.40_core.apk",
-          "bytes": 561474,
-          "sha256": "194E1826CF4730E447A564B214218159E80322F20875A0F5229D8EEC9A236978"
         }
       ]
     },
@@ -111,6 +124,27 @@
     {
       "product": "GhvstDevKit",
       "name": "GHVST DevKit",
+      "version": "2.4.12",
+      "date": "2026-11-22",
+      "status": "shipped",
+      "headline": "GOD'S EYE: multimodal vision in the workbench",
+      "fixed": [
+        "EYE button with thumbnails and full-screen zoom/pan, one structured analysis for up to four images, honest vision-model gating and copy-on-long-press."
+      ],
+      "proof": [
+        "Nemotron 3.5 Super VL read a live screenshot and named the real controls; a two-image comparison ran in one request; 75 JVM tests and release gate 247/247."
+      ],
+      "files": [
+        {
+          "name": "Ghvst_DevKit_2.4.12.apk",
+          "bytes": 128088807,
+          "sha256": "349CE224BB8CA42C0B1541B5521BDFFF9ECAE4449BCB7D5D9FF4757D8477DE6F"
+        }
+      ]
+    },
+    {
+      "product": "GhvstDevKit",
+      "name": "GHVST DevKit",
       "version": "2.4.11",
       "date": "2026-11-22",
       "status": "shipped",
@@ -126,6 +160,29 @@
           "name": "Ghvst_DevKit_2.4.11.apk",
           "bytes": 128088771,
           "sha256": "1A971989FF58288570F0B6464C8202379D3A7D72052E73CCF211D3664F42B3FE"
+        }
+      ]
+    },
+    {
+      "product": "SovereignMessenger",
+      "name": "Sovereign Messenger",
+      "version": "1.7.40",
+      "date": "2026-11-22",
+      "status": "shipped",
+      "headline": "Real voice replies, live models and stronger team privacy",
+      "fixed": [
+        "Voice replies no longer say object Object: real speech and transcription now pass.",
+        "The model catalogue removed three retired NVIDIA IDs; Scout uses Nemotron 3.5 Super VL, model search shows all 33 live models, and Kimi filtering/selection works.",
+        "Team answers, per-user keys, private memory isolation and long encrypted messages are verified, alongside paid licensing, device binding and immediate expiry enforcement."
+      ],
+      "proof": [
+        "Release-sealed code 58; SHA-256 verified; commerce verify and drift are green; DRAFT delivery remains issuer-side."
+      ],
+      "files": [
+        {
+          "name": "Ghvst_Sovereign_Messenger_1.7.40_core.apk",
+          "bytes": 561474,
+          "sha256": "194E1826CF4730E447A564B214218159E80322F20875A0F5229D8EEC9A236978"
         }
       ]
     },
