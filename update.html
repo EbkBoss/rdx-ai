@@ -75,19 +75,14 @@ Every product, build and byte here is the owner's work. Automated access is refu
 
   <div class="kicker">The update desk</div>
   <h1>Your newest build, <span class="em">with your licence key</span></h1>
-  <p class="sub">Bought a product, or testing one for us? Paste your key. Buyers also enter the device
-     code shown on that device's licence screen; <b>approved tester keys do not need a device code.</b>
+  <p class="sub">Bought a product, or testing one for us? <b>Paste your key. That's it.</b>
      The newest sealed build of YOUR product comes back with the list of what was fixed. Nothing to buy
-     again, nothing to sign up for. Neither value is saved in this browser.
+     again, nothing to sign up for, no device code to find. Your key is not saved in this browser.
      No key yet? <a href="store.html">The store is here</a>.</p>
 
   <div class="card">
     <label for="key">Licence key</label>
     <textarea id="key" placeholder="GVST1...." spellcheck="false" autocomplete="off"></textarea>
-    <label for="device">Device code - buyers only; testers leave blank</label>
-    <input id="device" type="text" placeholder="Tester? Leave blank. Buyer? Enter your device code."
-           spellcheck="false" autocomplete="off" autocapitalize="characters">
-    <p class="note" style="margin:-6px 0 4px">Using a 30-day tester key from Nicholas? Paste only your licence key above and leave this box empty.</p>
     <div class="btnrow">
       <button id="go" type="button">Get my update</button>
       <a class="ghost dl" href="whats-fixed.html">Read every fix</a>
@@ -186,11 +181,7 @@ Every product, build and byte here is the owner's work. Automated access is refu
 
   function run() {
     var key = (document.getElementById('key').value || '').trim();
-    var device = (document.getElementById('device').value || '').trim();
     if (!key) { say('Paste the licence key first - it starts with GVST1.', true); return; }
-    // The issuer decides whether this key needs a device. Customer keys stay
-    // device-bound; Director-approved unbound tester keys must not be blocked
-    // by the page before the request is even sent.
     var btn = document.getElementById('go');
     btn.disabled = true;
     say('Checking your licence and finding the newest build...', false);
@@ -203,7 +194,7 @@ Every product, build and byte here is the owner's work. Automated access is refu
       return fetch(base + '/update', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ license: key, device: device })
+        body: JSON.stringify({ license: key })
       }).then(function (response) {
         return response.json().catch(function () { return {}; })
           .then(function (body) { return { status: response.status, body: body }; });
@@ -232,9 +223,6 @@ Every product, build and byte here is the owner's work. Automated access is refu
   document.getElementById('go').addEventListener('click', run);
   document.getElementById('key').addEventListener('keydown', function (ev) {
     if (ev.key === 'Enter' && (ev.ctrlKey || ev.metaKey)) run();
-  });
-  document.getElementById('device').addEventListener('keydown', function (ev) {
-    if (ev.key === 'Enter') run();
   });
 })();
 </script>
