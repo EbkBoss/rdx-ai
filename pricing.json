@@ -149,7 +149,8 @@
           ]
         }
       ],
-      "seats": {}
+      "seats": {},
+      "bundle": null
     },
     {
       "id": "GhvstBrowserAndroid",
@@ -187,7 +188,8 @@
         }
       ],
       "tiers": [],
-      "seats": {}
+      "seats": {},
+      "bundle": null
     },
     {
       "id": "SovereignMessenger",
@@ -225,7 +227,8 @@
         }
       ],
       "tiers": [],
-      "seats": {}
+      "seats": {},
+      "bundle": null
     },
     {
       "id": "RoxVault",
@@ -263,20 +266,21 @@
         }
       ],
       "tiers": [],
-      "seats": {}
+      "seats": {},
+      "bundle": null
     },
     {
       "id": "GhvstAllApps",
       "slug": "ghvst-allapps",
       "card": "p-ghvst-allapps",
       "name": "GHOST Apps Licence - every Ghvst app",
-      "note": "",
+      "note": "One paid family order produces nine separate product-bound licences - one for each included application. Every key activates on one device; there is no shared master key. GHVST uses the PRO tier and GHVST Workspace uses Standard in this family bundle.",
       "app": "ALL",
       "glyph": "✦",
       "blurbs": [
-        "Every Ghvst app behind ONE licence key",
-        "Annual plan covers every app you add later",
-        "The cheapest way to buy the whole system"
+        "One paid family order, nine separate product-bound licence keys",
+        "Every included product key activates on one device - no shared master key",
+        "Monthly or annual family subscription at the canonical catalogue price"
       ],
       "plans": [
         {
@@ -285,7 +289,7 @@
           "price": 29.0,
           "days": 30,
           "term": "1 month",
-          "note": "every Ghvst app - 30-day licence, renew any time",
+          "note": "nine product licences - 30-day licence, renew any time",
           "paypal": "https://www.paypal.com/ncp/payment/7XJF5B2FARRG6",
           "default": true
         },
@@ -295,13 +299,14 @@
           "price": 249.0,
           "days": 365,
           "term": "12 months",
-          "note": "every Ghvst app - 365-day licence, renew any time",
+          "note": "nine product licences - 365-day licence, renew any time",
           "paypal": "https://www.paypal.com/ncp/payment/UW7LV8BZL2FMA",
           "default": false
         }
       ],
       "tiers": [],
-      "seats": {}
+      "seats": {},
+      "bundle": null
     },
     {
       "id": "GhvstCapture",
@@ -339,7 +344,8 @@
         }
       ],
       "tiers": [],
-      "seats": {}
+      "seats": {},
+      "bundle": null
     },
     {
       "id": "GhvstDevKit",
@@ -377,20 +383,21 @@
         }
       ],
       "tiers": [],
-      "seats": {}
+      "seats": {},
+      "bundle": null
     },
     {
       "id": "GhvstCaptureSuite",
       "slug": "suite",
       "card": "p-suite",
       "name": "GHVST Capture Suite - Capture + DevKit together",
-      "note": "Both tools, one licence. The suite price is less than buying them separately, so nobody is charged twice for the same work.",
+      "note": "One paid suite order produces two separate product-bound licences - one for Capture and one for DevKit. Each key activates on one device. The suite costs less than buying both products separately, and no shared master key exists.",
       "app": "GHVST_SUITE",
       "glyph": "◈◉",
       "blurbs": [
-        "Capture + DevKit together, one licence, less than buying them apart",
-        "Everything in both products, one key",
-        "Same rules: pay, paste the transaction ID, unlocked"
+        "One paid suite order, separate Capture and DevKit licence keys",
+        "Each product key activates on one device - no shared master key",
+        "Less than buying both products separately"
       ],
       "plans": [
         {
@@ -399,7 +406,7 @@
           "price": 39.0,
           "days": 30,
           "term": "1 month",
-          "note": "Capture + DevKit - 30-day licence, renew any time",
+          "note": "Capture + DevKit, two product licences - 30-day licence, renew any time",
           "paypal": "https://www.paypal.com/ncp/payment/B4YZLRPMAPMNW",
           "default": true
         },
@@ -409,26 +416,27 @@
           "price": 299.0,
           "days": 365,
           "term": "12 months",
-          "note": "Capture + DevKit, 365-day licence - renew any time",
+          "note": "Capture + DevKit, two product licences - 365-day licence, renew any time",
           "paypal": "https://www.paypal.com/ncp/payment/TTZS4L3BCBXBA",
           "default": false
         }
       ],
       "tiers": [],
-      "seats": {}
+      "seats": {},
+      "bundle": null
     },
     {
       "id": "GhvstTeam",
       "slug": "team",
       "card": "p-team",
       "name": "GHOST Team Licence",
-      "note": "",
+      "note": "One paid team order covers five seats. Each seat receives nine separate product-bound licences - one per included application - and every key activates on one device. That is 45 product keys per five-seat order, with no shared master key. GHVST uses PRO and Workspace uses Standard.",
       "app": "ALL",
       "glyph": "◆",
       "blurbs": [
-        "Every Ghvst app for your whole team, per seat",
-        "Five seat minimum - ask for more",
-        "Annual team plan covers 365 days"
+        "Five seats, nine separate product-bound licence keys per seat",
+        "45 product keys per order, each activated on one device",
+        "Monthly or annual team subscription - no shared master key"
       ],
       "plans": [
         {
@@ -437,7 +445,7 @@
           "price": 60.0,
           "days": 30,
           "term": "1 month",
-          "note": "5 seats, $12 each - 30-day licence, renew any time",
+          "note": "5 seats × nine product licences - 30-day licence, renew any time",
           "paypal": "https://www.paypal.com/ncp/payment/U5EAJJNUN6MD6",
           "default": false
         },
@@ -447,7 +455,7 @@
           "price": 600.0,
           "days": 365,
           "term": "12 months",
-          "note": "5 seats, 365-day licence - renew any time",
+          "note": "5 seats × nine product licences - 365-day licence, renew any time",
           "paypal": "https://www.paypal.com/ncp/payment/Q3A4X3AHUDMU8",
           "default": true
         }
@@ -457,7 +465,8 @@
         "price_per_seat": 12,
         "minimum_seats": 5,
         "currency": "USD"
-      }
+      },
+      "bundle": null
     },
     {
       "id": "rdx-workspace",
@@ -569,7 +578,8 @@
           ]
         }
       ],
-      "seats": {}
+      "seats": {},
+      "bundle": null
     },
     {
       "id": "GhvstBrowserPC",
@@ -597,7 +607,8 @@
         }
       ],
       "tiers": [],
-      "seats": {}
+      "seats": {},
+      "bundle": null
     },
     {
       "id": "MVRKStudio",
@@ -625,11 +636,12 @@
         }
       ],
       "tiers": [],
-      "seats": {}
+      "seats": {},
+      "bundle": null
     }
   ],
   "issuer": "https://license.ghvst.dev",
-  "generated_at": "2026-11-23T11:14:02+00:00",
+  "generated_at": "2026-11-25T10:43:26+00:00",
   "mythic_bundle": {
     "mythic_price": 899.0,
     "items": [

@@ -1,7 +1,137 @@
 {
   "schema": 1,
-  "updated": "2026-11-23",
+  "updated": "2026-11-24",
   "releases": [
+    {
+      "product": "GHVST Capture",
+      "name": "GHVST Capture",
+      "version": "2.5.17",
+      "date": "2026-11-24",
+      "status": "shipped",
+      "headline": "Unlimited turns - the chat stopped mid-task on a clock",
+      "fixed": [
+        "the 150-second idle watchdog closed a turn while a long tool run was working, and the tool-round cap stopped a real job after 4 rounds"
+      ],
+      "proof": [
+        "release gate green, DRAFT release digest matches disk, the watchdog is off, rounds are unlimited and the only guard is the no-progress breaker"
+      ],
+      "files": []
+    },
+    {
+      "product": "GHVST DevKit",
+      "name": "GHVST DevKit",
+      "version": "2.4.17",
+      "date": "2026-11-24",
+      "status": "shipped",
+      "headline": "DevKit builds a working mod menu for any game in one call",
+      "fixed": [
+        "building a mod menu still needed the model to supply screen coordinates by hand, and screenshot/tap needed Shizuku, so DevKit was not self-sufficient on the phone"
+      ],
+      "proof": [
+        "mod_build scaffolds, writes the config, checks, packages and reports the APK path + SHA-256 in one call; screen_points returns real pressable nodes as 0..1 coordinates and reports surfaceOnly honestly; screenshot and tap run through the mod engine with no device shell"
+      ],
+      "files": []
+    },
+    {
+      "product": "GHVST DevKit",
+      "name": "GHVST DevKit",
+      "version": "2.4.16",
+      "date": "2026-11-24",
+      "status": "shipped",
+      "headline": "DevKit builds a working mod menu for any game in one call",
+      "fixed": [
+        "building a mod menu still needed the model to supply screen coordinates by hand, and screenshot/tap needed Shizuku, so DevKit was not self-sufficient on the phone"
+      ],
+      "proof": [
+        "mod_build scaffolds, writes the config, checks, packages and reports the APK path + SHA-256 in one call; screen_points returns real pressable nodes as 0..1 coordinates and reports surfaceOnly honestly; screenshot and tap run through the mod engine with no device shell"
+      ],
+      "files": []
+    },
+    {
+      "product": "GHVST DevKit",
+      "name": "GHVST DevKit",
+      "version": "2.4.15",
+      "date": "2026-11-24",
+      "status": "shipped",
+      "headline": "The phone now builds a real floating game mod menu",
+      "fixed": [
+        "a mod menu built on the phone could draw itself over a game but could never touch it, because the gesture engine needed a compiled accessibility config that the resource-free on-device APK builder cannot write"
+      ],
+      "proof": [
+        "the engine moved into DevKit as one accessibility service behind a Forge-cert-gated provider, the template ships as two dex assets, the per-project modkit.json drives it, 6 JVM tests pin the manifest bytes"
+      ],
+      "files": []
+    },
+    {
+      "product": "GHVST Capture",
+      "name": "GHVST Capture",
+      "version": "2.5.16",
+      "date": "2026-11-23",
+      "status": "shipped",
+      "headline": "Authorized security research, APK work, device actions",
+      "fixed": [
+        "Capture had no authorized recon, APK analysis/install, or device contact actions"
+      ],
+      "proof": [
+        "v2 release-signed, zipalign PASS, DRAFT release digests match disk, GOD'S EYE + adult opt-in carried forward"
+      ],
+      "files": []
+    },
+    {
+      "product": "GHVST DevKit",
+      "name": "GHVST DevKit",
+      "version": "2.4.14",
+      "date": "2026-11-23",
+      "status": "shipped",
+      "headline": "Unlimited turns - the chat stopped mid-task on a clock",
+      "fixed": [
+        "the 150-second idle watchdog closed a turn while a long tool run was working, and the tool-call cap stopped a real job at 500 steps"
+      ],
+      "proof": [
+        "release gate PASS, DRAFT release digest matches disk, the watchdog is off, the cap is unlimited and the only guard is the no-progress breaker"
+      ],
+      "files": []
+    },
+    {
+      "product": "GHVST DevKit",
+      "name": "GHVST DevKit",
+      "version": "2.4.13",
+      "date": "2026-11-23",
+      "status": "shipped",
+      "headline": "Authorized security research in the agent's hands",
+      "fixed": [
+        "the agent had no real recon primitive (bounded port scan, DNS lookup, HTTP enumeration, artifact hashing)"
+      ],
+      "proof": [
+        "release gate 247/247 PASS, DRAFT release digest matches disk, SecurityTools is one implementation shared with GHVST Capture 2.5.16"
+      ],
+      "files": []
+    },
+    {
+      "product": "SovereignMessenger",
+      "name": "Sovereign Messenger",
+      "version": "1.7.42",
+      "date": "2026-11-23",
+      "status": "shipped",
+      "headline": "Game Mod Studio and repaired friend prekeys",
+      "fixed": [
+        "Space → AI team → Pipeline now opens Game Mod Studio: target scout, mod architect, builder, adversarial tester and release reviewer use the real Termux/APK toolchain and require measured footprint, artifact hash and honest residual risk.",
+        "A damaged stored friend-prekey signature is re-signed with the same identity key before publishing, fixing the observed rejection of the owner's friend request."
+      ],
+      "proof": [
+        "Installed on R5GL4114B4K as 1.7.42 (60); Game Mod Studio/team contract 18/18 and friend repair/space contract 18/18 pass.",
+        "Buyer APK in SHIP is 573986 bytes, SHA-256 BC3DE268755421CD1989F7FBE57C15B28DD9FF1C18EDA5E270CFA946BEB080B6; release-signed, R8, leak-scanned, commerce verify/drift green.",
+        "DRAFT release v1.7.42 carries the measured buyer asset; delivery remains issuer-side behind a paid signed ticket."
+      ],
+      "files": [
+        {
+          "name": "Ghvst_Sovereign_Messenger_1.7.42_core.apk",
+          "bytes": 573986,
+          "sha256": "BC3DE268755421CD1989F7FBE57C15B28DD9FF1C18EDA5E270CFA946BEB080B6"
+        }
+      ],
+      "note": "Buyer-device activation and the full two-way-message/WebRTC meeting remain UNVERIFIED after the public relay returned HTTP 429; the public relay rate limit is named rather than hidden."
+    },
     {
       "product": "SovereignMessenger",
       "name": "Sovereign Messenger",

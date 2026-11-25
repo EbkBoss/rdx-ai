@@ -1,6 +1,6 @@
 {
   "source": "catalog.json",
-  "catalogSha256": "906350CD8E1D9B475044DDA37E967900E8A9E628331FB8E6198D7739194E937B",
+  "catalogSha256": "BD47B5F245551C751A7AC5A4F4EA8078A3558DAC48FCF5F972CCF60A04ACEA4B",
   "products": [
     {
       "id": "GhvstTerminalAndroid",
@@ -66,6 +66,109 @@
   "paidOptions": 31,
   "proof": {
     "commerceAssertions": 75,
-    "issuerSandboxAssertions": 49
+    "issuerSandboxAssertions": 80
+  },
+  "bundles": {
+    "GhvstAllApps": {
+      "deliveryModel": "separate_product_licenses",
+      "maxDevicesPerLicence": 1,
+      "includedProducts": [
+        {
+          "id": "GhvstTerminalAndroid",
+          "name": "GHVST - the AI operator for your phone"
+        },
+        {
+          "id": "GhvstBrowserAndroid",
+          "name": "Ghvst Browser for Android"
+        },
+        {
+          "id": "SovereignMessenger",
+          "name": "Sovereign Messenger (Ghvst Sovereign Gang)"
+        },
+        {
+          "id": "RoxVault",
+          "name": "RoxVault - Roblox Account Manager"
+        },
+        {
+          "id": "GhvstCapture",
+          "name": "GHVST Capture - screen + camera evidence engine with offline AI"
+        },
+        {
+          "id": "GhvstDevKit",
+          "name": "GHVST DevKit - the on-device development workstation"
+        },
+        {
+          "id": "rdx-workspace",
+          "name": "GHVST Workspace - the AI engineering cockpit for Windows"
+        },
+        {
+          "id": "GhvstBrowserPC",
+          "name": "Ghvst Browser - PC"
+        },
+        {
+          "id": "MVRKStudio",
+          "name": "MVRK Studio"
+        }
+      ],
+      "seatCount": 1
+    },
+    "GhvstCaptureSuite": {
+      "deliveryModel": "separate_product_licenses",
+      "maxDevicesPerLicence": 1,
+      "includedProducts": [
+        {
+          "id": "GhvstCapture",
+          "name": "GHVST Capture - screen + camera evidence engine with offline AI"
+        },
+        {
+          "id": "GhvstDevKit",
+          "name": "GHVST DevKit - the on-device development workstation"
+        }
+      ],
+      "seatCount": 1
+    },
+    "GhvstTeam": {
+      "deliveryModel": "separate_product_licenses",
+      "maxDevicesPerLicence": 1,
+      "includedProducts": [
+        {
+          "id": "GhvstTerminalAndroid",
+          "name": "GHVST - the AI operator for your phone"
+        },
+        {
+          "id": "GhvstBrowserAndroid",
+          "name": "Ghvst Browser for Android"
+        },
+        {
+          "id": "SovereignMessenger",
+          "name": "Sovereign Messenger (Ghvst Sovereign Gang)"
+        },
+        {
+          "id": "RoxVault",
+          "name": "RoxVault - Roblox Account Manager"
+        },
+        {
+          "id": "GhvstCapture",
+          "name": "GHVST Capture - screen + camera evidence engine with offline AI"
+        },
+        {
+          "id": "GhvstDevKit",
+          "name": "GHVST DevKit - the on-device development workstation"
+        },
+        {
+          "id": "rdx-workspace",
+          "name": "GHVST Workspace - the AI engineering cockpit for Windows"
+        },
+        {
+          "id": "GhvstBrowserPC",
+          "name": "Ghvst Browser - PC"
+        },
+        {
+          "id": "MVRKStudio",
+          "name": "MVRK Studio"
+        }
+      ],
+      "seatCount": 5
+    }
   }
 }

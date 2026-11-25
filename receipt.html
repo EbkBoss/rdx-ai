@@ -148,6 +148,13 @@ Every product, build and byte here is the owner's work. Automated access is refu
       breath — automatically, no waiting for a human.</p>
     <input id="claim-tx" type="text" autocomplete="off" spellcheck="false" placeholder="PayPal transaction ID"
            style="width:100%;box-sizing:border-box;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);color:inherit;font:inherit;font-size:16px">
+    <div id="single-device-wrap" style="margin-top:12px">
+      <label for="claim-device" class="note" style="display:block;margin:0 0 6px">Device code from this product's activation screen</label>
+      <input id="claim-device" type="text" autocomplete="off" spellcheck="false" placeholder="Your device code"
+             style="width:100%;box-sizing:border-box;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);color:inherit;font:inherit;font-size:16px">
+    </div>
+    <div id="bundle-devices" style="margin-top:12px"></div>
+    <p class="note" id="device-help" style="margin:8px 0 0">Every new key is bound before it is returned. Use the code shown by the product itself - never an adb or shell device ID. Bundle orders need a separate code for each included product and seat.</p>
     <div class="rowbtns" style="margin-top:12px">
       <button class="btn gold" id="claim-go" type="button">Get my files</button>
       <span class="copied" id="claim-state"></span>
@@ -388,25 +395,19 @@ Every product, build and byte here is the owner's work. Automated access is refu
     return (mb >= 1 ? mb.toFixed(1) + ' MB' : Math.round(bytes / 1024) + ' KB');
   }
 
-  function renderDelivery(payload) {
-    elStatus.textContent = 'Payment verified by issuer';
-    document.getElementById('receipt-title').innerHTML = 'Your product is <span class="em">revealed</span>.';
-    document.getElementById('receipt-sub').textContent = 'Payment verified. Your signed licence and downloads are below.';
-    document.getElementById('deliver-card').style.display = 'block';
-    var keyBox = document.getElementById('lic-key');
-    keyBox.textContent = payload.license || '(no key returned)';
-    var meta = [];
-    if (payload.plan) meta.push((PLAN_NAMES[payload.plan] || payload.plan) + ' licence');
-    if (payload.expiresText) meta.push(payload.expiresText);
-    if (payload.renewal) meta.push('renews when you pay again');
-    document.getElementById('lic-meta').textContent = meta.join(' · ');
+  function copyText(text, done) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text || '').then(done, function () { fallbackCopy(text, done); });
+    } else { fallbackCopy(text, done); }
+  }
 
-    var list = document.getElementById('dl-list');
-    list.innerHTML = '';
-    var files = payload.downloads || [];
-    if (!files.length) {
-      list.innerHTML = '<p class="note" style="margin:0">This product is delivered by the ' +
-        'builder — send the transaction ID above and it is on its way.</p>';
+  function renderDownloads(list, files) {
+    if (!files || !files.length) {
+      var empty = document.createElement('p');
+      empty.className = 'note';
+      empty.textContent = 'No sealed artifact is registered for this product. Send the transaction ID to the builder; no download is invented.';
+      list.appendChild(empty);
+      return;
     }
     files.forEach(function (file) {
       var a = document.createElement('a');
@@ -425,6 +426,78 @@ Every product, build and byte here is the owner's work. Automated access is refu
         list.appendChild(p);
       }
     });
+  }
+
+  function renderDelivery(payload) {
+    elStatus.textContent = 'Payment verified by issuer';
+    document.getElementById('receipt-title').innerHTML = 'Your product is <span class="em">revealed</span>.';
+    document.getElementById('deliver-card').style.display = 'block';
+    var keyBox = document.getElementById('lic-key');
+    var list = document.getElementById('dl-list');
+    var copySingle = document.getElementById('copy-lic');
+    var licences = payload.licenses || [];
+    document.getElementById('receipt-sub').textContent = licences.length ?
+      'Payment verified. Your separate product licences and downloads are below.' :
+      'Payment verified. Your signed licence and downloads are below.';
+    list.innerHTML = '';
+
+    if (licences.length) {
+      keyBox.textContent = licences.length + ' separate product-bound licences';
+      copySingle.style.display = 'none';
+      document.getElementById('lic-meta').textContent =
+        'One paid order · ' + licences.length + ' product keys · one device per key · no shared master key';
+      licences.forEach(function (item) {
+        var card = document.createElement('section');
+        card.className = 'card';
+        card.style.margin = '0 0 14px';
+        var title = document.createElement('h3');
+        title.textContent = (PRODUCT_NAMES[item.product] || item.product) +
+          (item.seat ? ' · seat ' + item.seat : '');
+        card.appendChild(title);
+        var facts = document.createElement('p');
+        facts.className = 'note';
+        facts.textContent = (item.tier ? item.tier + ' · ' : '') +
+          (item.expiresText || '') + ' · bound to the supplied device';
+        card.appendChild(facts);
+        var key = document.createElement('div');
+        key.className = 'txbox';
+        key.style.wordBreak = 'break-all';
+        key.textContent = item.license || '(no key returned)';
+        card.appendChild(key);
+        var copy = document.createElement('button');
+        copy.className = 'btn';
+        copy.type = 'button';
+        copy.textContent = 'Copy this product key';
+        copy.onclick = function () {
+          copyText(item.license || '', function () {
+            copy.textContent = 'Copied';
+            setTimeout(function () { copy.textContent = 'Copy this product key'; }, 1800);
+          });
+        };
+        card.appendChild(copy);
+        var downloads = document.createElement('div');
+        downloads.style.marginTop = '14px';
+        renderDownloads(downloads, item.downloads || []);
+        card.appendChild(downloads);
+        list.appendChild(card);
+      });
+    } else {
+      keyBox.textContent = payload.license || '(no key returned)';
+      copySingle.style.display = '';
+      var meta = [];
+      if (payload.plan) meta.push((PLAN_NAMES[payload.plan] || payload.plan) + ' licence');
+      if (payload.expiresText) meta.push(payload.expiresText);
+      if (payload.renewal) meta.push('renews when you pay again');
+      document.getElementById('lic-meta').textContent = meta.join(' · ');
+      renderDownloads(list, payload.downloads || []);
+      copySingle.onclick = function () {
+        var box = document.getElementById('copied-lic');
+        copyText(payload.license || '', function () {
+          box.style.display = 'inline';
+          setTimeout(function () { box.style.display = 'none'; }, 2200);
+        });
+      };
+    }
 
     // The reveal is a DELIVERY EFFECT, not the thing being sold. It runs only
     // after the issuer has verified the payment and returned this product.
@@ -438,17 +511,95 @@ Every product, build and byte here is the owner's work. Automated access is refu
     if (reveal.scrollIntoView) {
       try { reveal.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {}
     }
+  }
 
-    document.getElementById('copy-lic').onclick = function () {
-      var box = document.getElementById('copied-lic');
-      var done = function () {
-        box.style.display = 'inline';
-        setTimeout(function () { box.style.display = 'none'; }, 2200);
-      };
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(payload.license || '').then(done, function () {});
-      }
+  var bundleInfo = null;
+  var bundleLoadError = null;
+  var devicePreparation = null;
+
+  function prepareDevices() {
+    if (devicePreparation) return devicePreparation;
+    devicePreparation = fetch('products/index.json', { cache: 'no-store' })
+      .then(function (response) {
+        if (!response.ok) throw new Error('The product delivery map could not be loaded.');
+        return response.json();
+      })
+      .then(function (data) {
+        var row = (data.products || []).find(function (item) {
+          return item.id === product || item.slug === product;
+        });
+        var canonical = row ? row.id : product;
+        bundleInfo = (data.bundles || {})[canonical] || null;
+        if (!bundleInfo) return;
+        document.getElementById('single-device-wrap').style.display = 'none';
+        var container = document.getElementById('bundle-devices');
+        container.innerHTML = '';
+        var seats = Math.max(1, parseInt(bundleInfo.seatCount || 1, 10));
+        for (var seat = 1; seat <= seats; seat += 1) {
+          var group = document.createElement(seats > 1 ? 'details' : 'div');
+          if (seats > 1) group.open = seat === 1;
+          if (seats > 1) {
+            var summary = document.createElement('summary');
+            summary.textContent = 'Seat ' + seat + ' device codes';
+            summary.style.cursor = 'pointer';
+            summary.style.margin = '0 0 10px';
+            group.appendChild(summary);
+          }
+          (bundleInfo.includedProducts || []).forEach(function (included) {
+            var label = document.createElement('label');
+            label.className = 'note';
+            label.style.display = 'block';
+            label.style.margin = '10px 0 5px';
+            label.textContent = included.name + ' - device code from its activation screen';
+            var input = document.createElement('input');
+            input.type = 'text';
+            input.autocomplete = 'off';
+            input.spellcheck = false;
+            input.setAttribute('data-product-device', included.id);
+            input.setAttribute('data-seat', String(seat));
+            input.style.cssText = 'width:100%;box-sizing:border-box;padding:11px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);color:inherit;font:inherit';
+            group.appendChild(label);
+            group.appendChild(input);
+          });
+          container.appendChild(group);
+        }
+      })
+      .catch(function (error) { bundleLoadError = error; });
+    return devicePreparation;
+  }
+
+  function claimPayload() {
+    var payload = {
+      txid: (document.getElementById('claim-tx').value || '').trim(),
+      product: product,
+      plan: plan,
+      tier: tier,
+      email: get('email') || get('payer_email') || ''
     };
+    if (!bundleInfo) {
+      if (bundleLoadError && /allapps|suite|team/i.test(product)) {
+        throw new Error('The bundle device list could not be loaded. Reload this page and try again.');
+      }
+      payload.device = (document.getElementById('claim-device').value || '').trim();
+      if (!payload.device) throw new Error('Enter the device code shown by this product before claiming.');
+      return payload;
+    }
+    var seats = Math.max(1, parseInt(bundleInfo.seatCount || 1, 10));
+    var seatRows = [];
+    for (var seat = 1; seat <= seats; seat += 1) {
+      var devices = {};
+      var missing = [];
+      Array.prototype.forEach.call(document.querySelectorAll('[data-seat="' + seat + '"]'), function (input) {
+        var value = (input.value || '').trim();
+        devices[input.getAttribute('data-product-device')] = value;
+        if (!value) missing.push(input.getAttribute('data-product-device'));
+      });
+      if (missing.length) throw new Error('Enter every included product device code for seat ' + seat + '.');
+      seatRows.push({ devices: devices });
+    }
+    if (seats === 1) payload.devices = seatRows[0].devices;
+    else payload.seats = seatRows;
+    return payload;
   }
 
   function claim(txn) {
@@ -457,53 +608,53 @@ Every product, build and byte here is the owner's work. Automated access is refu
     var btn = document.getElementById('claim-go');
     btn.disabled = true;
     say('Checking your payment…', false);
-    window.GHVST_GUARD.findIssuer().then(function (base) {
-      if (!base) {
-        elStatus.textContent = 'Issuer unreachable - not verified';
-        say('The licence service is unreachable right now. Send the transaction ID on ' +
-            'WhatsApp and it is delivered by hand.', true);
-        return;
-      }
-      return fetch(base + '/claim', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          txid: txn,
-          product: product,
-          plan: plan,
-          tier: tier,
-          email: get('email') || get('payer_email') || ''
-        })
-      }).then(function (response) {
+    prepareDevices().then(function () {
+      var payload = claimPayload();
+      return window.GHVST_GUARD.findIssuer().then(function (base) {
+        if (!base) {
+          elStatus.textContent = 'Issuer unreachable - not verified';
+          say('The licence service is unreachable right now. Send the transaction ID on ' +
+              'WhatsApp and it is delivered by hand.', true);
+          return null;
+        }
+        return fetch(base + '/claim', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        }).then(function (response) {
         return response.json().catch(function () { return {}; })
           .then(function (body) { return { status: response.status, body: body }; });
-      }).then(function (result) {
-        var body = result.body || {};
-        if (result.status === 200 && body.ok) {
-          say('Payment verified. Your key and your files are below.', false);
-          renderDelivery(body);
-          return;
-        }
-        if (result.status === 402) {
-          elStatus.textContent = 'Payment not verified';
-          say(body.reason || 'That payment is not verified yet. If you just paid, wait a ' +
-              'minute and try again, or send the ID on WhatsApp.', true);
-          return;
-        }
-        if (result.status === 409) {
-          elStatus.textContent = 'Payment already claimed';
-          var spent = body.licenseId ? (' (key id ' + body.licenseId + ')') : '';
-          say('That payment already issued its one licence' + spent + '. ' +
-              (body.recover || 'Send the transaction ID on WhatsApp and the same key is sent back — you are not charged again.'), true);
-          return;
-        }
-        elStatus.textContent = 'Transaction not verified';
-        say(body.reason || body.error || 'That transaction ID could not be verified. Check ' +
-            'it, or send it on WhatsApp.', true);
+        }).then(function (result) {
+          if (!result) return;
+          var body = result.body || {};
+          if (result.status === 200 && body.ok) {
+            say('Payment verified. Your key and your files are below.', false);
+            renderDelivery(body);
+            return;
+          }
+          if (result.status === 402) {
+            elStatus.textContent = 'Payment not verified';
+            say(body.reason || 'That payment is not verified yet. If you just paid, wait a ' +
+                'minute and try again, or send the ID on WhatsApp.', true);
+            return;
+          }
+          if (result.status === 409) {
+            elStatus.textContent = 'Payment already claimed';
+            var spent = body.licenseId ? (' (key id ' + body.licenseId + ')') : '';
+            var bundleSuffix = body.licenseIds && body.licenseIds.length ?
+              (' (' + body.licenseIds.length + ' product keys already issued)') : spent;
+            say('That payment already issued its licence order' + bundleSuffix + '. ' +
+                (body.recover || 'Send the transaction ID on WhatsApp and the existing keys are recovered - you are not charged again.'), true);
+            return;
+          }
+          elStatus.textContent = 'Transaction not verified';
+          say(body.reason || body.error || 'That transaction ID could not be verified. Check ' +
+              'it, or send it on WhatsApp.', true);
+        });
       });
-    }).catch(function () {
+    }).catch(function (error) {
       elStatus.textContent = 'Claim failed - not verified';
-      say('The claim could not be completed. Send the transaction ID on WhatsApp.', true);
+      say((error && error.message) || 'The claim could not be completed. Send the transaction ID on WhatsApp.', true);
     }).then(function () {
       btn.disabled = false;
     });
@@ -518,6 +669,7 @@ Every product, build and byte here is the owner's work. Automated access is refu
 
   // A buyer arriving from PayPal already has the id in the link, so the page
   // does the claim for them instead of asking them to copy it by hand.
+  prepareDevices();
   var input = document.getElementById('claim-tx');
   if (tx) {
     input.value = tx;
