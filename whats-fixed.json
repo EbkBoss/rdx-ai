@@ -1,7 +1,83 @@
 {
   "schema": 1,
-  "updated": "2026-11-24",
+  "updated": "2026-11-27",
   "releases": [
+    {
+      "product": "GhvstBrowserPC",
+      "name": "GhvstBrowserPC",
+      "version": "1.4.27",
+      "date": "2026-11-26",
+      "status": "shipped",
+      "headline": "Finished picture-in-picture and uninterrupted background playback",
+      "fixed": [
+        "Minimising no longer pauses or mutes every tab; video and audio continue in the background and the active tab sound is restored on return.",
+        "The PiP button and Ctrl+Shift+P float HTML5 video, with an always-on-top browser-player fallback that drags, restores and never reloads the page.",
+        "The Windows package is self-contained with the .NET runtime bundled, and the title and toolbar glyphs were repaired without changing the intended icons."
+      ],
+      "proof": [
+        "428/428 browser smoke checks pass; the deployed package contains coreclr.dll; the Director confirmed PiP is finished and working perfectly."
+      ],
+      "files": [
+        {
+          "name": "Ghvst.Browser.exe",
+          "bytes": 535552,
+          "sha256": "DC35B17C08F58CCD571A0B4DC95D3C2C2A3C3782817778892045EC5DC423E1AD"
+        },
+        {
+          "name": "Ghvst.Browser.dll",
+          "bytes": 1495040,
+          "sha256": "BB4E73969A8D65C88752D4DDE0454A0E3FDB9247DF40C22C5E62D56A24CE7950"
+        }
+      ]
+    },
+    {
+      "product": "GhvstBrowserPC",
+      "name": "GhvstBrowserPC",
+      "version": "1.4.26",
+      "date": "2026-11-26",
+      "status": "shipped",
+      "headline": "Covered-window video stutter fixed",
+      "fixed": [
+        "WebView2 backgrounding and timer-throttling switches keep video smooth when another window covers the browser."
+      ],
+      "proof": [
+        "422/422 smoke checks passed for this historical release; 1.4.27 supersedes its hidden-window media rule."
+      ],
+      "files": []
+    },
+    {
+      "product": "GhvstBrowserAndroid",
+      "name": "Ghvst Browser",
+      "version": "1.4.24",
+      "date": "2026-11-26",
+      "status": "shipped",
+      "headline": "Background play, visible downloads and compact sidebar chrome",
+      "fixed": [
+        "Background play defaults ON, so minimising no longer stops video or audio; switching it OFF restores the data-saving rule.",
+        "Downloads now appear with live progress in the slide-out sidebar, a header badge while active and tap-to-open when finished.",
+        "Compact browser chrome moves quick links and controls into an animated sidebar while Hide and picture-in-picture remain available."
+      ],
+      "proof": [
+        "All three buyer ABIs are release-signed, sealed and re-hashed; the compact chrome and working sidebar were accepted on the Director physical phone."
+      ],
+      "files": [
+        {
+          "name": "Ghvst_Browser_Android_1.4.24_arm64-v8a.apk",
+          "bytes": 32361887,
+          "sha256": "0F984CF85AF3AC5A2353D373B05F7305C2998E84835B27E10754865D6D1DFAFC"
+        },
+        {
+          "name": "Ghvst_Browser_Android_1.4.24_armeabi-v7a.apk",
+          "bytes": 22712218,
+          "sha256": "FCCB6A6F1D44F49FDF5B2A36435BF0758F48696DEB7F86D2AF696EF407A5680E"
+        },
+        {
+          "name": "Ghvst_Browser_Android_1.4.24_x86_64.apk",
+          "bytes": 36576006,
+          "sha256": "E8891C80B20544BF565EA181EB869908DB32AD9B8AC79DC1A7FE8DBC0A027784"
+        }
+      ]
+    },
     {
       "product": "GHVST Capture",
       "name": "GHVST Capture",
