@@ -1,7 +1,63 @@
 {
   "schema": 1,
-  "updated": "2026-11-27",
+  "updated": "2026-11-28",
   "releases": [
+    {
+      "product": "GhvstCapture",
+      "name": "GHVST Capture",
+      "version": "2.5.18",
+      "date": "2026-11-28",
+      "status": "shipped",
+      "headline": "Current licence-required Capture buyer build for all three ABIs",
+      "fixed": [
+        "Refreshed the buyer build with mandatory licence enforcement, canonical monthly and annual checkout, and no embedded provider credentials.",
+        "Carried forward the current capture, chat, media, security and offline-voice implementation through 2.5.18.",
+        "Every ABI now has a version-stamped sealed artifact plus a byte-identical current buyer copy and a complete checksum record."
+      ],
+      "proof": [
+        "53 JVM tests passed with zero failures, errors or skips; identity, release certificate, v2 signing, zipalign, pricing and secret-scan gates passed on all three ABIs."
+      ],
+      "files": [
+        {
+          "name": "Ghvst_Capture_2.5.18_arm64-v8a.apk",
+          "bytes": 37945704,
+          "sha256": "F14F35956C76C7A3867F14ECDC7E35CFE854A77D5E451FB7E4BBF5E1AD87DC45"
+        },
+        {
+          "name": "Ghvst_Capture_2.5.18_armeabi-v7a.apk",
+          "bytes": 28296044,
+          "sha256": "9ED89C1404EAC5510BC54D70B238DDB93479AE9DF6A6350DF53ED3C9F9FDF11B"
+        },
+        {
+          "name": "Ghvst_Capture_2.5.18_x86_64.apk",
+          "bytes": 42159828,
+          "sha256": "D4A0C36B2F52D177F4F48959CAFC8A883466B25E3E6F52461CB6F59613CB985B"
+        }
+      ]
+    },
+    {
+      "product": "GhvstDevKit",
+      "name": "GHVST DevKit",
+      "version": "2.4.35",
+      "date": "2026-11-28",
+      "status": "shipped",
+      "headline": "Real loopback MCP server and the current native DevKit toolchain",
+      "fixed": [
+        "DevKitService now auto-starts a loopback MCP 2025-03-26 / JSON-RPC 2.0 server with initialize, ping, tools/list and tools/call through the real AgentTools registry.",
+        "MCP listens on 127.0.0.1 only and uses a workspace bearer token; dangerous tools still return approval_required instead of bypassing the approval gate.",
+        "The release is a true buyer flavour: DIRECTOR_BUILD=false and ENFORCE_LICENSE=true, with the current native mod, APK installation and MCP toolchain."
+      ],
+      "proof": [
+        "86 JVM tests passed including five MCP server tests; the official release verifier passed 267 checks with zero failures. Physical-device MCP handshake remains UNVERIFIED in this release pass."
+      ],
+      "files": [
+        {
+          "name": "Ghvst_DevKit_2.4.35.apk",
+          "bytes": 65958645,
+          "sha256": "E536C0060FA1357DB243B9DE75017C55AC16D3101296720ED85367BF79E89B5E"
+        }
+      ]
+    },
     {
       "product": "GhvstBrowserPC",
       "name": "GhvstBrowserPC",
