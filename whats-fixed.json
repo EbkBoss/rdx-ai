@@ -59,6 +59,34 @@
       ]
     },
     {
+      "product": "rdx-workspace",
+      "name": "GHVST Workspace",
+      "version": "2.6.65",
+      "date": "2026-11-26",
+      "status": "shipped",
+      "headline": "Self-contained Workspace with hidden-audio protection",
+      "fixed": [
+        "The embedded browser now pauses and mutes every tab when the window is minimized or hidden, then restores only the active tab sound on return.",
+        "The Windows package is self-contained, so buyers do not need a separate .NET Desktop Runtime; WebView2 remains the only runtime prerequisite.",
+        "The release preserves existing data and Docs, keeps the canonical desktop shortcut identity, and verifies every packaged artifact hash."
+      ],
+      "proof": [
+        "1116 smoke checks passed with zero failures; 2437 payload artifacts were verified; one responsive v2.6.65 process ran from the canonical package."
+      ],
+      "files": [
+        {
+          "name": "RDX.Desktop.exe",
+          "bytes": 535552,
+          "sha256": "6729884AE453F5B83BF9AA25DD993C55F24BEF3F15CBDE576FAD86CD2D251E3E"
+        },
+        {
+          "name": "RDX.Desktop.dll",
+          "bytes": 7680000,
+          "sha256": "509FD4BEEF68D96FE839C4F24EC7D74D170D9E13B3EA4FEA8E5945B2E8D15F02"
+        }
+      ]
+    },
+    {
       "product": "GhvstBrowserPC",
       "name": "GhvstBrowserPC",
       "version": "1.4.27",
@@ -836,6 +864,34 @@
         }
       ],
       "note": "The customer GitHub release is DRAFT by design. No free tier, no lifetime sale and no grace period."
+    },
+    {
+      "product": "GhvstTerminalAndroid",
+      "name": "GHVST",
+      "version": "0.9.66",
+      "date": "2026-11-21",
+      "status": "shipped",
+      "headline": "Sealed subscription-only GHVST Terminal buyer APKs",
+      "fixed": [
+        "Both retail ABIs are sealed with monthly and annual subscriptions only: no free tier, no lifetime plan, and MYTHIC annual at the canonical $899 price.",
+        "The customer credential scan covers three artifacts and 1338 entries, so no provider key is baked into either package.",
+        "Delivery stays issuer-side behind a signed paid ticket rather than a public free APK link."
+      ],
+      "proof": [
+        "assembleFreeRelease BUILD SUCCESSFUL in 16m58s; 15 pricing tests passed; zipalign verification passed on both APKs; both hashes match the sealed release sheet. Full customer feature acceptance is not claimed by this manifest."
+      ],
+      "files": [
+        {
+          "name": "GhvstTerminal-0.9.66-free-arm64-v8a-release.apk",
+          "bytes": 864733934,
+          "sha256": "5E540D3BDE9160D04E39FF15309EFCDD2FE138CD4925D8B40EBC4815CB1DB831"
+        },
+        {
+          "name": "GhvstTerminal-0.9.66-free-x86_64-release.apk",
+          "bytes": 869193810,
+          "sha256": "3524D5D73179A4F701E0332A5B07E6D8B69A2DEA37A343B1C894FE63D08CA7AB"
+        }
+      ]
     },
     {
       "product": "Commerce",
