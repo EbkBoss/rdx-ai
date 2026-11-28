@@ -89,7 +89,11 @@
     // links on it.
     var wallUrl = 'wall.html';
     try {
-      wallUrl = new URL('wall.html', document.baseURI).href;
+      // Resolve beside THIS SCRIPT, not beside the page. Product pages load
+      // ../siteguard.js, so the wall belongs at the site root in both cases;
+      // document.baseURI sent nested pages to the non-existent products/wall.html.
+      var guardScript = document.currentScript;
+      wallUrl = new URL('wall.html', guardScript && guardScript.src ? guardScript.src : document.baseURI).href;
     } catch (e) { /* the relative path is the fallback */ }
 
     try { window.stop(); } catch (e) { /* no subresource loads after this */ }
